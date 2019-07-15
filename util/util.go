@@ -78,6 +78,11 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 	for _, key := range keys {
 		value := s[key]
 		id := SnakeCaseToCamelCase(key)
+
+		if value.Optional {
+			statements = append(statements, Comment("// +optional"))
+		}
+
 		switch value.Type {
 		case schema.TypeString:
 			statements = append(statements, Id(id).String().Tag(map[string]string{"json": key}))
