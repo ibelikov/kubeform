@@ -28,6 +28,10 @@ type ApisData struct {
 	StructName   []string
 }
 
+var execeptionList = map[string]string{
+	"ConfigConfigurationRecorderStatus": "ConfigConfigurationRecorderAwsStatus",
+}
+
 func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*schema.Schema, structNames []string) error {
 	templatePath := "templates"
 	goPath := os.Getenv("GOPATH")
@@ -45,6 +49,11 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 
 	for i, structName := range structNames {
 		var out string
+
+		if val, ok := execeptionList[structName]; ok {
+			structName = val
+			structNames[i] = val
+		}
 
 		TerraformSchemaToStruct(schmeas[i], structName+"Spec", &out)
 		typeData := TypeData{
