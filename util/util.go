@@ -78,9 +78,12 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 	for _, key := range keys {
 		value := s[key]
 		id := SnakeCaseToCamelCase(key)
+		ptr := ""
 
 		if value.Optional {
 			statements = append(statements, Comment("// +optional"))
+			key = key + ",omitempty"
+			ptr = "*"
 		}
 
 		switch value.Type {
@@ -125,10 +128,10 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 					statements = append(statements, Id(id).Index().String().Tag(map[string]string{"json": key}))
 				}
 			case *schema.Resource:
-				statements = append(statements, Id(id).Index().Id(structName).Tag(map[string]string{"json": key}))
+				statements = append(statements, Id(id).Id(ptr).Index().Id(structName).Tag(map[string]string{"json": key}))
 				TerraformSchemaToStruct(value.Elem.(*schema.Resource).Schema, structName+id, out)
 			default:
-				statements = append(statements, Id(id).Index().String().Tag(map[string]string{"json": key}))
+				statements = append(statements, Id(id).Id(ptr).Index().String().Tag(map[string]string{"json": key}))
 			}
 
 		}
