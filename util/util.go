@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -87,6 +88,10 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 			ptr = "*"
 		}
 
+		if value.Computed || value.Removed != "" {
+			continue
+		}
+
 		if value.MaxItems != 0 {
 			statements = append(statements, Comment("// +kubebuilder:validation:MaxItems="+strconv.Itoa(value.MaxItems)))
 		}
@@ -97,6 +102,14 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 
 		if value.Type == schema.TypeSet {
 			statements = append(statements, Comment("// +kubebuilder:validation:UniqueItems=true"))
+		}
+
+		if value.Sensitive {
+			log.Println(structName + " -> " + id + " is a sensitive value")
+		}
+
+		if value.Deprecated != "" {
+			statements = append(statements, Comment("// Deprecated"))
 		}
 
 		switch value.Type {
@@ -122,7 +135,6 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName string, out
 					statements = append(statements, Id(id).Map(String()).String().Tag(map[string]string{"json": key}))
 				}
 			case *schema.Resource:
-				fmt.Println(structName)
 				statements = append(statements, Id(id).Map(String()).Id(structName+id).Tag(map[string]string{"json": key}))
 				TerraformSchemaToStruct(value.Elem.(*schema.Resource).Schema, structName+id, out)
 			default:
