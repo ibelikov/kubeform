@@ -19,9 +19,8 @@ type Sshkey struct {
 }
 
 type SshkeySpec struct {
-	Label   string `json:"label"`
-	SshKey  string `json:"ssh_key"`
-	Created string `json:"created"`
+	Label  string `json:"label"`
+	SshKey string `json:"ssh_key"`
 }
 
 

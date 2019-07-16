@@ -19,11 +19,11 @@ type Token struct {
 }
 
 type TokenSpec struct {
-	Token   string `json:"token"`
-	Label   string `json:"label"`
-	Scopes  string `json:"scopes"`
-	Expiry  string `json:"expiry"`
-	Created string `json:"created"`
+	// +optional
+	Expiry string `json:"expiry,omitempty"`
+	// +optional
+	Label  string `json:"label,omitempty"`
+	Scopes string `json:"scopes"`
 }
 
 

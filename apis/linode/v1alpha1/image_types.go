@@ -19,18 +19,11 @@ type Image struct {
 }
 
 type ImageSpec struct {
-	Label       string `json:"label"`
-	Created     string `json:"created"`
-	Deprecated  bool   `json:"deprecated"`
-	Type        string `json:"type"`
-	Expiry      string `json:"expiry"`
+	// +optional
+	Description string `json:"description,omitempty"`
 	DiskId      int    `json:"disk_id"`
+	Label       string `json:"label"`
 	LinodeId    int    `json:"linode_id"`
-	Description string `json:"description"`
-	CreatedBy   string `json:"created_by"`
-	IsPublic    bool   `json:"is_public"`
-	Size        int    `json:"size"`
-	Vendor      string `json:"vendor"`
 }
 
 

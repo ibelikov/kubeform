@@ -18,23 +18,15 @@ type Nodebalancer struct {
 	Status            NodebalancerStatus `json:"status,omitempty"`
 }
 
-type NodebalancerSpecTransfer struct {
-	In    float64 `json:"in"`
-	Out   float64 `json:"out"`
-	Total float64 `json:"total"`
-}
-
 type NodebalancerSpec struct {
-	Label              string            `json:"label"`
-	Region             string            `json:"region"`
-	Hostname           string            `json:"hostname"`
-	Ipv4               string            `json:"ipv4"`
-	Ipv6               string            `json:"ipv6"`
-	Created            string            `json:"created"`
-	Transfer           map[string]string `json:"transfer"`
-	Tags               []string          `json:"tags"`
-	ClientConnThrottle int               `json:"client_conn_throttle"`
-	Updated            string            `json:"updated"`
+	// +optional
+	ClientConnThrottle int `json:"client_conn_throttle,omitempty"`
+	// +optional
+	Label  string `json:"label,omitempty"`
+	Region string `json:"region"`
+	// +optional
+	// +kubebuilder:validation:UniqueItems=true
+	Tags []string `json:"tags,omitempty"`
 }
 
 

@@ -19,19 +19,31 @@ type Domain struct {
 }
 
 type DomainSpec struct {
-	SoaEmail    string   `json:"soa_email"`
-	Tags        []string `json:"tags"`
-	Type        string   `json:"type"`
-	Group       string   `json:"group"`
-	Status      string   `json:"status"`
-	AxfrIps     []string `json:"axfr_ips"`
-	RefreshSec  int      `json:"refresh_sec"`
-	ExpireSec   int      `json:"expire_sec"`
-	Domain      string   `json:"domain"`
-	Description string   `json:"description"`
-	MasterIps   []string `json:"master_ips"`
-	TtlSec      int      `json:"ttl_sec"`
-	RetrySec    int      `json:"retry_sec"`
+	// +optional
+	// +kubebuilder:validation:UniqueItems=true
+	AxfrIps []string `json:"axfr_ips,omitempty"`
+	// +optional
+	Description string `json:"description,omitempty"`
+	Domain      string `json:"domain"`
+	// +optional
+	ExpireSec int `json:"expire_sec,omitempty"`
+	// +optional
+	Group string `json:"group,omitempty"`
+	// +optional
+	// +kubebuilder:validation:UniqueItems=true
+	MasterIps []string `json:"master_ips,omitempty"`
+	// +optional
+	RefreshSec int `json:"refresh_sec,omitempty"`
+	// +optional
+	RetrySec int `json:"retry_sec,omitempty"`
+	// +optional
+	SoaEmail string `json:"soa_email,omitempty"`
+	// +optional
+	// +kubebuilder:validation:UniqueItems=true
+	Tags []string `json:"tags,omitempty"`
+	// +optional
+	TtlSec int    `json:"ttl_sec,omitempty"`
+	Type   string `json:"type"`
 }
 
 

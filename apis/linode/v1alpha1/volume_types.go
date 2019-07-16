@@ -19,13 +19,11 @@ type Volume struct {
 }
 
 type VolumeSpec struct {
-	Tags           []string `json:"tags"`
-	Label          string   `json:"label"`
-	Status         string   `json:"status"`
-	Region         string   `json:"region"`
-	Size           int      `json:"size"`
-	LinodeId       int      `json:"linode_id"`
-	FilesystemPath string   `json:"filesystem_path"`
+	Label  string `json:"label"`
+	Region string `json:"region"`
+	// +optional
+	// +kubebuilder:validation:UniqueItems=true
+	Tags []string `json:"tags,omitempty"`
 }
 
 

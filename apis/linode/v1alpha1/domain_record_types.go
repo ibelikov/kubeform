@@ -19,17 +19,24 @@ type DomainRecord struct {
 }
 
 type DomainRecordSpec struct {
-	Target     string `json:"target"`
-	Priority   int    `json:"priority"`
-	Protocol   string `json:"protocol"`
-	Tag        string `json:"tag"`
-	Weight     int    `json:"weight"`
-	DomainId   int    `json:"domain_id"`
-	Name       string `json:"name"`
+	DomainId int    `json:"domain_id"`
+	Name     string `json:"name"`
+	// +optional
+	Port int `json:"port,omitempty"`
+	// +optional
+	Priority int `json:"priority,omitempty"`
+	// +optional
+	Protocol   string `json:"protocol,omitempty"`
 	RecordType string `json:"record_type"`
-	TtlSec     int    `json:"ttl_sec"`
-	Service    string `json:"service"`
-	Port       int    `json:"port"`
+	// +optional
+	Service string `json:"service,omitempty"`
+	// +optional
+	Tag    string `json:"tag,omitempty"`
+	Target string `json:"target"`
+	// +optional
+	TtlSec int `json:"ttl_sec,omitempty"`
+	// +optional
+	Weight int `json:"weight,omitempty"`
 }
 
 

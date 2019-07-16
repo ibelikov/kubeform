@@ -18,29 +18,15 @@ type Stackscript struct {
 	Status            StackscriptStatus `json:"status,omitempty"`
 }
 
-type StackscriptSpecUserDefinedFields struct {
-	ManyOf  string `json:"many_of"`
-	Default string `json:"default"`
-	Label   string `json:"label"`
-	Name    string `json:"name"`
-	Example string `json:"example"`
-	OneOf   string `json:"one_of"`
-}
-
 type StackscriptSpec struct {
-	RevNote           string            `json:"rev_note"`
-	DeploymentsActive int               `json:"deployments_active"`
-	DeploymentsTotal  int               `json:"deployments_total"`
-	Username          string            `json:"username"`
-	UserDefinedFields []StackscriptSpec `json:"user_defined_fields"`
-	Label             string            `json:"label"`
-	Description       string            `json:"description"`
-	Images            []string          `json:"images"`
-	UserGravatarId    string            `json:"user_gravatar_id"`
-	Created           string            `json:"created"`
-	Updated           string            `json:"updated"`
-	Script            string            `json:"script"`
-	IsPublic          bool              `json:"is_public"`
+	Description string   `json:"description"`
+	Images      []string `json:"images"`
+	// +optional
+	IsPublic bool   `json:"is_public,omitempty"`
+	Label    string `json:"label"`
+	// +optional
+	RevNote string `json:"rev_note,omitempty"`
+	Script  string `json:"script"`
 }
 
 
