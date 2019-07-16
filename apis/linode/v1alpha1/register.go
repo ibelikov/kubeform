@@ -38,41 +38,41 @@ func Resource(resource string) schema.GroupResource {
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
     
-        &LinodeNodebalancer{},
-        &LinodeNodebalancerList{},
+        &Image{},
+        &ImageList{},
     
-        &LinodeSshkey{},
-        &LinodeSshkeyList{},
+        &Instance{},
+        &InstanceList{},
     
-        &LinodeImage{},
-        &LinodeImageList{},
+        &Volume{},
+        &VolumeList{},
     
-        &LinodeInstance{},
-        &LinodeInstanceList{},
+        &Sshkey{},
+        &SshkeyList{},
     
-        &LinodeDomain{},
-        &LinodeDomainList{},
+        &Stackscript{},
+        &StackscriptList{},
     
-        &LinodeDomainRecord{},
-        &LinodeDomainRecordList{},
+        &Domain{},
+        &DomainList{},
     
-        &LinodeNodebalancerConfig{},
-        &LinodeNodebalancerConfigList{},
+        &DomainRecord{},
+        &DomainRecordList{},
     
-        &LinodeNodebalancerNode{},
-        &LinodeNodebalancerNodeList{},
+        &Nodebalancer{},
+        &NodebalancerList{},
     
-        &LinodeRdns{},
-        &LinodeRdnsList{},
+        &NodebalancerConfig{},
+        &NodebalancerConfigList{},
     
-        &LinodeStackscript{},
-        &LinodeStackscriptList{},
+        &NodebalancerNode{},
+        &NodebalancerNodeList{},
     
-        &LinodeToken{},
-        &LinodeTokenList{},
+        &Rdns{},
+        &RdnsList{},
     
-        &LinodeVolume{},
-        &LinodeVolumeList{},
+        &Token{},
+        &TokenList{},
     
 	)
 

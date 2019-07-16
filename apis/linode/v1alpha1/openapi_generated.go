@@ -33,358 +33,358 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"k8s.io/api/apps/v1.ControllerRevision":                                             schema_k8sio_api_apps_v1_ControllerRevision(ref),
-		"k8s.io/api/apps/v1.ControllerRevisionList":                                         schema_k8sio_api_apps_v1_ControllerRevisionList(ref),
-		"k8s.io/api/apps/v1.DaemonSet":                                                      schema_k8sio_api_apps_v1_DaemonSet(ref),
-		"k8s.io/api/apps/v1.DaemonSetCondition":                                             schema_k8sio_api_apps_v1_DaemonSetCondition(ref),
-		"k8s.io/api/apps/v1.DaemonSetList":                                                  schema_k8sio_api_apps_v1_DaemonSetList(ref),
-		"k8s.io/api/apps/v1.DaemonSetSpec":                                                  schema_k8sio_api_apps_v1_DaemonSetSpec(ref),
-		"k8s.io/api/apps/v1.DaemonSetStatus":                                                schema_k8sio_api_apps_v1_DaemonSetStatus(ref),
-		"k8s.io/api/apps/v1.DaemonSetUpdateStrategy":                                        schema_k8sio_api_apps_v1_DaemonSetUpdateStrategy(ref),
-		"k8s.io/api/apps/v1.Deployment":                                                     schema_k8sio_api_apps_v1_Deployment(ref),
-		"k8s.io/api/apps/v1.DeploymentCondition":                                            schema_k8sio_api_apps_v1_DeploymentCondition(ref),
-		"k8s.io/api/apps/v1.DeploymentList":                                                 schema_k8sio_api_apps_v1_DeploymentList(ref),
-		"k8s.io/api/apps/v1.DeploymentSpec":                                                 schema_k8sio_api_apps_v1_DeploymentSpec(ref),
-		"k8s.io/api/apps/v1.DeploymentStatus":                                               schema_k8sio_api_apps_v1_DeploymentStatus(ref),
-		"k8s.io/api/apps/v1.DeploymentStrategy":                                             schema_k8sio_api_apps_v1_DeploymentStrategy(ref),
-		"k8s.io/api/apps/v1.ReplicaSet":                                                     schema_k8sio_api_apps_v1_ReplicaSet(ref),
-		"k8s.io/api/apps/v1.ReplicaSetCondition":                                            schema_k8sio_api_apps_v1_ReplicaSetCondition(ref),
-		"k8s.io/api/apps/v1.ReplicaSetList":                                                 schema_k8sio_api_apps_v1_ReplicaSetList(ref),
-		"k8s.io/api/apps/v1.ReplicaSetSpec":                                                 schema_k8sio_api_apps_v1_ReplicaSetSpec(ref),
-		"k8s.io/api/apps/v1.ReplicaSetStatus":                                               schema_k8sio_api_apps_v1_ReplicaSetStatus(ref),
-		"k8s.io/api/apps/v1.RollingUpdateDaemonSet":                                         schema_k8sio_api_apps_v1_RollingUpdateDaemonSet(ref),
-		"k8s.io/api/apps/v1.RollingUpdateDeployment":                                        schema_k8sio_api_apps_v1_RollingUpdateDeployment(ref),
-		"k8s.io/api/apps/v1.RollingUpdateStatefulSetStrategy":                               schema_k8sio_api_apps_v1_RollingUpdateStatefulSetStrategy(ref),
-		"k8s.io/api/apps/v1.StatefulSet":                                                    schema_k8sio_api_apps_v1_StatefulSet(ref),
-		"k8s.io/api/apps/v1.StatefulSetCondition":                                           schema_k8sio_api_apps_v1_StatefulSetCondition(ref),
-		"k8s.io/api/apps/v1.StatefulSetList":                                                schema_k8sio_api_apps_v1_StatefulSetList(ref),
-		"k8s.io/api/apps/v1.StatefulSetSpec":                                                schema_k8sio_api_apps_v1_StatefulSetSpec(ref),
-		"k8s.io/api/apps/v1.StatefulSetStatus":                                              schema_k8sio_api_apps_v1_StatefulSetStatus(ref),
-		"k8s.io/api/apps/v1.StatefulSetUpdateStrategy":                                      schema_k8sio_api_apps_v1_StatefulSetUpdateStrategy(ref),
-		"k8s.io/api/core/v1.AWSElasticBlockStoreVolumeSource":                               schema_k8sio_api_core_v1_AWSElasticBlockStoreVolumeSource(ref),
-		"k8s.io/api/core/v1.Affinity":                                                       schema_k8sio_api_core_v1_Affinity(ref),
-		"k8s.io/api/core/v1.AttachedVolume":                                                 schema_k8sio_api_core_v1_AttachedVolume(ref),
-		"k8s.io/api/core/v1.AvoidPods":                                                      schema_k8sio_api_core_v1_AvoidPods(ref),
-		"k8s.io/api/core/v1.AzureDiskVolumeSource":                                          schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.AzureFilePersistentVolumeSource":                                schema_k8sio_api_core_v1_AzureFilePersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.AzureFileVolumeSource":                                          schema_k8sio_api_core_v1_AzureFileVolumeSource(ref),
-		"k8s.io/api/core/v1.Binding":                                                        schema_k8sio_api_core_v1_Binding(ref),
-		"k8s.io/api/core/v1.CSIPersistentVolumeSource":                                      schema_k8sio_api_core_v1_CSIPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.CSIVolumeSource":                                                schema_k8sio_api_core_v1_CSIVolumeSource(ref),
-		"k8s.io/api/core/v1.Capabilities":                                                   schema_k8sio_api_core_v1_Capabilities(ref),
-		"k8s.io/api/core/v1.CephFSPersistentVolumeSource":                                   schema_k8sio_api_core_v1_CephFSPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.CephFSVolumeSource":                                             schema_k8sio_api_core_v1_CephFSVolumeSource(ref),
-		"k8s.io/api/core/v1.CinderPersistentVolumeSource":                                   schema_k8sio_api_core_v1_CinderPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.CinderVolumeSource":                                             schema_k8sio_api_core_v1_CinderVolumeSource(ref),
-		"k8s.io/api/core/v1.ClientIPConfig":                                                 schema_k8sio_api_core_v1_ClientIPConfig(ref),
-		"k8s.io/api/core/v1.ComponentCondition":                                             schema_k8sio_api_core_v1_ComponentCondition(ref),
-		"k8s.io/api/core/v1.ComponentStatus":                                                schema_k8sio_api_core_v1_ComponentStatus(ref),
-		"k8s.io/api/core/v1.ComponentStatusList":                                            schema_k8sio_api_core_v1_ComponentStatusList(ref),
-		"k8s.io/api/core/v1.ConfigMap":                                                      schema_k8sio_api_core_v1_ConfigMap(ref),
-		"k8s.io/api/core/v1.ConfigMapEnvSource":                                             schema_k8sio_api_core_v1_ConfigMapEnvSource(ref),
-		"k8s.io/api/core/v1.ConfigMapKeySelector":                                           schema_k8sio_api_core_v1_ConfigMapKeySelector(ref),
-		"k8s.io/api/core/v1.ConfigMapList":                                                  schema_k8sio_api_core_v1_ConfigMapList(ref),
-		"k8s.io/api/core/v1.ConfigMapNodeConfigSource":                                      schema_k8sio_api_core_v1_ConfigMapNodeConfigSource(ref),
-		"k8s.io/api/core/v1.ConfigMapProjection":                                            schema_k8sio_api_core_v1_ConfigMapProjection(ref),
-		"k8s.io/api/core/v1.ConfigMapVolumeSource":                                          schema_k8sio_api_core_v1_ConfigMapVolumeSource(ref),
-		"k8s.io/api/core/v1.Container":                                                      schema_k8sio_api_core_v1_Container(ref),
-		"k8s.io/api/core/v1.ContainerImage":                                                 schema_k8sio_api_core_v1_ContainerImage(ref),
-		"k8s.io/api/core/v1.ContainerPort":                                                  schema_k8sio_api_core_v1_ContainerPort(ref),
-		"k8s.io/api/core/v1.ContainerState":                                                 schema_k8sio_api_core_v1_ContainerState(ref),
-		"k8s.io/api/core/v1.ContainerStateRunning":                                          schema_k8sio_api_core_v1_ContainerStateRunning(ref),
-		"k8s.io/api/core/v1.ContainerStateTerminated":                                       schema_k8sio_api_core_v1_ContainerStateTerminated(ref),
-		"k8s.io/api/core/v1.ContainerStateWaiting":                                          schema_k8sio_api_core_v1_ContainerStateWaiting(ref),
-		"k8s.io/api/core/v1.ContainerStatus":                                                schema_k8sio_api_core_v1_ContainerStatus(ref),
-		"k8s.io/api/core/v1.DaemonEndpoint":                                                 schema_k8sio_api_core_v1_DaemonEndpoint(ref),
-		"k8s.io/api/core/v1.DownwardAPIProjection":                                          schema_k8sio_api_core_v1_DownwardAPIProjection(ref),
-		"k8s.io/api/core/v1.DownwardAPIVolumeFile":                                          schema_k8sio_api_core_v1_DownwardAPIVolumeFile(ref),
-		"k8s.io/api/core/v1.DownwardAPIVolumeSource":                                        schema_k8sio_api_core_v1_DownwardAPIVolumeSource(ref),
-		"k8s.io/api/core/v1.EmptyDirVolumeSource":                                           schema_k8sio_api_core_v1_EmptyDirVolumeSource(ref),
-		"k8s.io/api/core/v1.EndpointAddress":                                                schema_k8sio_api_core_v1_EndpointAddress(ref),
-		"k8s.io/api/core/v1.EndpointPort":                                                   schema_k8sio_api_core_v1_EndpointPort(ref),
-		"k8s.io/api/core/v1.EndpointSubset":                                                 schema_k8sio_api_core_v1_EndpointSubset(ref),
-		"k8s.io/api/core/v1.Endpoints":                                                      schema_k8sio_api_core_v1_Endpoints(ref),
-		"k8s.io/api/core/v1.EndpointsList":                                                  schema_k8sio_api_core_v1_EndpointsList(ref),
-		"k8s.io/api/core/v1.EnvFromSource":                                                  schema_k8sio_api_core_v1_EnvFromSource(ref),
-		"k8s.io/api/core/v1.EnvVar":                                                         schema_k8sio_api_core_v1_EnvVar(ref),
-		"k8s.io/api/core/v1.EnvVarSource":                                                   schema_k8sio_api_core_v1_EnvVarSource(ref),
-		"k8s.io/api/core/v1.Event":                                                          schema_k8sio_api_core_v1_Event(ref),
-		"k8s.io/api/core/v1.EventList":                                                      schema_k8sio_api_core_v1_EventList(ref),
-		"k8s.io/api/core/v1.EventSeries":                                                    schema_k8sio_api_core_v1_EventSeries(ref),
-		"k8s.io/api/core/v1.EventSource":                                                    schema_k8sio_api_core_v1_EventSource(ref),
-		"k8s.io/api/core/v1.ExecAction":                                                     schema_k8sio_api_core_v1_ExecAction(ref),
-		"k8s.io/api/core/v1.FCVolumeSource":                                                 schema_k8sio_api_core_v1_FCVolumeSource(ref),
-		"k8s.io/api/core/v1.FlexPersistentVolumeSource":                                     schema_k8sio_api_core_v1_FlexPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.FlexVolumeSource":                                               schema_k8sio_api_core_v1_FlexVolumeSource(ref),
-		"k8s.io/api/core/v1.FlockerVolumeSource":                                            schema_k8sio_api_core_v1_FlockerVolumeSource(ref),
-		"k8s.io/api/core/v1.GCEPersistentDiskVolumeSource":                                  schema_k8sio_api_core_v1_GCEPersistentDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.GitRepoVolumeSource":                                            schema_k8sio_api_core_v1_GitRepoVolumeSource(ref),
-		"k8s.io/api/core/v1.GlusterfsPersistentVolumeSource":                                schema_k8sio_api_core_v1_GlusterfsPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.GlusterfsVolumeSource":                                          schema_k8sio_api_core_v1_GlusterfsVolumeSource(ref),
-		"k8s.io/api/core/v1.HTTPGetAction":                                                  schema_k8sio_api_core_v1_HTTPGetAction(ref),
-		"k8s.io/api/core/v1.HTTPHeader":                                                     schema_k8sio_api_core_v1_HTTPHeader(ref),
-		"k8s.io/api/core/v1.Handler":                                                        schema_k8sio_api_core_v1_Handler(ref),
-		"k8s.io/api/core/v1.HostAlias":                                                      schema_k8sio_api_core_v1_HostAlias(ref),
-		"k8s.io/api/core/v1.HostPathVolumeSource":                                           schema_k8sio_api_core_v1_HostPathVolumeSource(ref),
-		"k8s.io/api/core/v1.ISCSIPersistentVolumeSource":                                    schema_k8sio_api_core_v1_ISCSIPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.ISCSIVolumeSource":                                              schema_k8sio_api_core_v1_ISCSIVolumeSource(ref),
-		"k8s.io/api/core/v1.KeyToPath":                                                      schema_k8sio_api_core_v1_KeyToPath(ref),
-		"k8s.io/api/core/v1.Lifecycle":                                                      schema_k8sio_api_core_v1_Lifecycle(ref),
-		"k8s.io/api/core/v1.LimitRange":                                                     schema_k8sio_api_core_v1_LimitRange(ref),
-		"k8s.io/api/core/v1.LimitRangeItem":                                                 schema_k8sio_api_core_v1_LimitRangeItem(ref),
-		"k8s.io/api/core/v1.LimitRangeList":                                                 schema_k8sio_api_core_v1_LimitRangeList(ref),
-		"k8s.io/api/core/v1.LimitRangeSpec":                                                 schema_k8sio_api_core_v1_LimitRangeSpec(ref),
-		"k8s.io/api/core/v1.List":                                                           schema_k8sio_api_core_v1_List(ref),
-		"k8s.io/api/core/v1.LoadBalancerIngress":                                            schema_k8sio_api_core_v1_LoadBalancerIngress(ref),
-		"k8s.io/api/core/v1.LoadBalancerStatus":                                             schema_k8sio_api_core_v1_LoadBalancerStatus(ref),
-		"k8s.io/api/core/v1.LocalObjectReference":                                           schema_k8sio_api_core_v1_LocalObjectReference(ref),
-		"k8s.io/api/core/v1.LocalVolumeSource":                                              schema_k8sio_api_core_v1_LocalVolumeSource(ref),
-		"k8s.io/api/core/v1.NFSVolumeSource":                                                schema_k8sio_api_core_v1_NFSVolumeSource(ref),
-		"k8s.io/api/core/v1.Namespace":                                                      schema_k8sio_api_core_v1_Namespace(ref),
-		"k8s.io/api/core/v1.NamespaceList":                                                  schema_k8sio_api_core_v1_NamespaceList(ref),
-		"k8s.io/api/core/v1.NamespaceSpec":                                                  schema_k8sio_api_core_v1_NamespaceSpec(ref),
-		"k8s.io/api/core/v1.NamespaceStatus":                                                schema_k8sio_api_core_v1_NamespaceStatus(ref),
-		"k8s.io/api/core/v1.Node":                                                           schema_k8sio_api_core_v1_Node(ref),
-		"k8s.io/api/core/v1.NodeAddress":                                                    schema_k8sio_api_core_v1_NodeAddress(ref),
-		"k8s.io/api/core/v1.NodeAffinity":                                                   schema_k8sio_api_core_v1_NodeAffinity(ref),
-		"k8s.io/api/core/v1.NodeCondition":                                                  schema_k8sio_api_core_v1_NodeCondition(ref),
-		"k8s.io/api/core/v1.NodeConfigSource":                                               schema_k8sio_api_core_v1_NodeConfigSource(ref),
-		"k8s.io/api/core/v1.NodeConfigStatus":                                               schema_k8sio_api_core_v1_NodeConfigStatus(ref),
-		"k8s.io/api/core/v1.NodeDaemonEndpoints":                                            schema_k8sio_api_core_v1_NodeDaemonEndpoints(ref),
-		"k8s.io/api/core/v1.NodeList":                                                       schema_k8sio_api_core_v1_NodeList(ref),
-		"k8s.io/api/core/v1.NodeProxyOptions":                                               schema_k8sio_api_core_v1_NodeProxyOptions(ref),
-		"k8s.io/api/core/v1.NodeResources":                                                  schema_k8sio_api_core_v1_NodeResources(ref),
-		"k8s.io/api/core/v1.NodeSelector":                                                   schema_k8sio_api_core_v1_NodeSelector(ref),
-		"k8s.io/api/core/v1.NodeSelectorRequirement":                                        schema_k8sio_api_core_v1_NodeSelectorRequirement(ref),
-		"k8s.io/api/core/v1.NodeSelectorTerm":                                               schema_k8sio_api_core_v1_NodeSelectorTerm(ref),
-		"k8s.io/api/core/v1.NodeSpec":                                                       schema_k8sio_api_core_v1_NodeSpec(ref),
-		"k8s.io/api/core/v1.NodeStatus":                                                     schema_k8sio_api_core_v1_NodeStatus(ref),
-		"k8s.io/api/core/v1.NodeSystemInfo":                                                 schema_k8sio_api_core_v1_NodeSystemInfo(ref),
-		"k8s.io/api/core/v1.ObjectFieldSelector":                                            schema_k8sio_api_core_v1_ObjectFieldSelector(ref),
-		"k8s.io/api/core/v1.ObjectReference":                                                schema_k8sio_api_core_v1_ObjectReference(ref),
-		"k8s.io/api/core/v1.PersistentVolume":                                               schema_k8sio_api_core_v1_PersistentVolume(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaim":                                          schema_k8sio_api_core_v1_PersistentVolumeClaim(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimCondition":                                 schema_k8sio_api_core_v1_PersistentVolumeClaimCondition(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimList":                                      schema_k8sio_api_core_v1_PersistentVolumeClaimList(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimSpec":                                      schema_k8sio_api_core_v1_PersistentVolumeClaimSpec(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimStatus":                                    schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimVolumeSource":                              schema_k8sio_api_core_v1_PersistentVolumeClaimVolumeSource(ref),
-		"k8s.io/api/core/v1.PersistentVolumeList":                                           schema_k8sio_api_core_v1_PersistentVolumeList(ref),
-		"k8s.io/api/core/v1.PersistentVolumeSource":                                         schema_k8sio_api_core_v1_PersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.PersistentVolumeSpec":                                           schema_k8sio_api_core_v1_PersistentVolumeSpec(ref),
-		"k8s.io/api/core/v1.PersistentVolumeStatus":                                         schema_k8sio_api_core_v1_PersistentVolumeStatus(ref),
-		"k8s.io/api/core/v1.PhotonPersistentDiskVolumeSource":                               schema_k8sio_api_core_v1_PhotonPersistentDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.Pod":                                                            schema_k8sio_api_core_v1_Pod(ref),
-		"k8s.io/api/core/v1.PodAffinity":                                                    schema_k8sio_api_core_v1_PodAffinity(ref),
-		"k8s.io/api/core/v1.PodAffinityTerm":                                                schema_k8sio_api_core_v1_PodAffinityTerm(ref),
-		"k8s.io/api/core/v1.PodAntiAffinity":                                                schema_k8sio_api_core_v1_PodAntiAffinity(ref),
-		"k8s.io/api/core/v1.PodAttachOptions":                                               schema_k8sio_api_core_v1_PodAttachOptions(ref),
-		"k8s.io/api/core/v1.PodCondition":                                                   schema_k8sio_api_core_v1_PodCondition(ref),
-		"k8s.io/api/core/v1.PodDNSConfig":                                                   schema_k8sio_api_core_v1_PodDNSConfig(ref),
-		"k8s.io/api/core/v1.PodDNSConfigOption":                                             schema_k8sio_api_core_v1_PodDNSConfigOption(ref),
-		"k8s.io/api/core/v1.PodExecOptions":                                                 schema_k8sio_api_core_v1_PodExecOptions(ref),
-		"k8s.io/api/core/v1.PodList":                                                        schema_k8sio_api_core_v1_PodList(ref),
-		"k8s.io/api/core/v1.PodLogOptions":                                                  schema_k8sio_api_core_v1_PodLogOptions(ref),
-		"k8s.io/api/core/v1.PodPortForwardOptions":                                          schema_k8sio_api_core_v1_PodPortForwardOptions(ref),
-		"k8s.io/api/core/v1.PodProxyOptions":                                                schema_k8sio_api_core_v1_PodProxyOptions(ref),
-		"k8s.io/api/core/v1.PodReadinessGate":                                               schema_k8sio_api_core_v1_PodReadinessGate(ref),
-		"k8s.io/api/core/v1.PodSecurityContext":                                             schema_k8sio_api_core_v1_PodSecurityContext(ref),
-		"k8s.io/api/core/v1.PodSignature":                                                   schema_k8sio_api_core_v1_PodSignature(ref),
-		"k8s.io/api/core/v1.PodSpec":                                                        schema_k8sio_api_core_v1_PodSpec(ref),
-		"k8s.io/api/core/v1.PodStatus":                                                      schema_k8sio_api_core_v1_PodStatus(ref),
-		"k8s.io/api/core/v1.PodStatusResult":                                                schema_k8sio_api_core_v1_PodStatusResult(ref),
-		"k8s.io/api/core/v1.PodTemplate":                                                    schema_k8sio_api_core_v1_PodTemplate(ref),
-		"k8s.io/api/core/v1.PodTemplateList":                                                schema_k8sio_api_core_v1_PodTemplateList(ref),
-		"k8s.io/api/core/v1.PodTemplateSpec":                                                schema_k8sio_api_core_v1_PodTemplateSpec(ref),
-		"k8s.io/api/core/v1.PortworxVolumeSource":                                           schema_k8sio_api_core_v1_PortworxVolumeSource(ref),
-		"k8s.io/api/core/v1.PreferAvoidPodsEntry":                                           schema_k8sio_api_core_v1_PreferAvoidPodsEntry(ref),
-		"k8s.io/api/core/v1.PreferredSchedulingTerm":                                        schema_k8sio_api_core_v1_PreferredSchedulingTerm(ref),
-		"k8s.io/api/core/v1.Probe":                                                          schema_k8sio_api_core_v1_Probe(ref),
-		"k8s.io/api/core/v1.ProjectedVolumeSource":                                          schema_k8sio_api_core_v1_ProjectedVolumeSource(ref),
-		"k8s.io/api/core/v1.QuobyteVolumeSource":                                            schema_k8sio_api_core_v1_QuobyteVolumeSource(ref),
-		"k8s.io/api/core/v1.RBDPersistentVolumeSource":                                      schema_k8sio_api_core_v1_RBDPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.RBDVolumeSource":                                                schema_k8sio_api_core_v1_RBDVolumeSource(ref),
-		"k8s.io/api/core/v1.RangeAllocation":                                                schema_k8sio_api_core_v1_RangeAllocation(ref),
-		"k8s.io/api/core/v1.ReplicationController":                                          schema_k8sio_api_core_v1_ReplicationController(ref),
-		"k8s.io/api/core/v1.ReplicationControllerCondition":                                 schema_k8sio_api_core_v1_ReplicationControllerCondition(ref),
-		"k8s.io/api/core/v1.ReplicationControllerList":                                      schema_k8sio_api_core_v1_ReplicationControllerList(ref),
-		"k8s.io/api/core/v1.ReplicationControllerSpec":                                      schema_k8sio_api_core_v1_ReplicationControllerSpec(ref),
-		"k8s.io/api/core/v1.ReplicationControllerStatus":                                    schema_k8sio_api_core_v1_ReplicationControllerStatus(ref),
-		"k8s.io/api/core/v1.ResourceFieldSelector":                                          schema_k8sio_api_core_v1_ResourceFieldSelector(ref),
-		"k8s.io/api/core/v1.ResourceQuota":                                                  schema_k8sio_api_core_v1_ResourceQuota(ref),
-		"k8s.io/api/core/v1.ResourceQuotaList":                                              schema_k8sio_api_core_v1_ResourceQuotaList(ref),
-		"k8s.io/api/core/v1.ResourceQuotaSpec":                                              schema_k8sio_api_core_v1_ResourceQuotaSpec(ref),
-		"k8s.io/api/core/v1.ResourceQuotaStatus":                                            schema_k8sio_api_core_v1_ResourceQuotaStatus(ref),
-		"k8s.io/api/core/v1.ResourceRequirements":                                           schema_k8sio_api_core_v1_ResourceRequirements(ref),
-		"k8s.io/api/core/v1.SELinuxOptions":                                                 schema_k8sio_api_core_v1_SELinuxOptions(ref),
-		"k8s.io/api/core/v1.ScaleIOPersistentVolumeSource":                                  schema_k8sio_api_core_v1_ScaleIOPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.ScaleIOVolumeSource":                                            schema_k8sio_api_core_v1_ScaleIOVolumeSource(ref),
-		"k8s.io/api/core/v1.ScopeSelector":                                                  schema_k8sio_api_core_v1_ScopeSelector(ref),
-		"k8s.io/api/core/v1.ScopedResourceSelectorRequirement":                              schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref),
-		"k8s.io/api/core/v1.Secret":                                                         schema_k8sio_api_core_v1_Secret(ref),
-		"k8s.io/api/core/v1.SecretEnvSource":                                                schema_k8sio_api_core_v1_SecretEnvSource(ref),
-		"k8s.io/api/core/v1.SecretKeySelector":                                              schema_k8sio_api_core_v1_SecretKeySelector(ref),
-		"k8s.io/api/core/v1.SecretList":                                                     schema_k8sio_api_core_v1_SecretList(ref),
-		"k8s.io/api/core/v1.SecretProjection":                                               schema_k8sio_api_core_v1_SecretProjection(ref),
-		"k8s.io/api/core/v1.SecretReference":                                                schema_k8sio_api_core_v1_SecretReference(ref),
-		"k8s.io/api/core/v1.SecretVolumeSource":                                             schema_k8sio_api_core_v1_SecretVolumeSource(ref),
-		"k8s.io/api/core/v1.SecurityContext":                                                schema_k8sio_api_core_v1_SecurityContext(ref),
-		"k8s.io/api/core/v1.SerializedReference":                                            schema_k8sio_api_core_v1_SerializedReference(ref),
-		"k8s.io/api/core/v1.Service":                                                        schema_k8sio_api_core_v1_Service(ref),
-		"k8s.io/api/core/v1.ServiceAccount":                                                 schema_k8sio_api_core_v1_ServiceAccount(ref),
-		"k8s.io/api/core/v1.ServiceAccountList":                                             schema_k8sio_api_core_v1_ServiceAccountList(ref),
-		"k8s.io/api/core/v1.ServiceAccountTokenProjection":                                  schema_k8sio_api_core_v1_ServiceAccountTokenProjection(ref),
-		"k8s.io/api/core/v1.ServiceList":                                                    schema_k8sio_api_core_v1_ServiceList(ref),
-		"k8s.io/api/core/v1.ServicePort":                                                    schema_k8sio_api_core_v1_ServicePort(ref),
-		"k8s.io/api/core/v1.ServiceProxyOptions":                                            schema_k8sio_api_core_v1_ServiceProxyOptions(ref),
-		"k8s.io/api/core/v1.ServiceSpec":                                                    schema_k8sio_api_core_v1_ServiceSpec(ref),
-		"k8s.io/api/core/v1.ServiceStatus":                                                  schema_k8sio_api_core_v1_ServiceStatus(ref),
-		"k8s.io/api/core/v1.SessionAffinityConfig":                                          schema_k8sio_api_core_v1_SessionAffinityConfig(ref),
-		"k8s.io/api/core/v1.StorageOSPersistentVolumeSource":                                schema_k8sio_api_core_v1_StorageOSPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.StorageOSVolumeSource":                                          schema_k8sio_api_core_v1_StorageOSVolumeSource(ref),
-		"k8s.io/api/core/v1.Sysctl":                                                         schema_k8sio_api_core_v1_Sysctl(ref),
-		"k8s.io/api/core/v1.TCPSocketAction":                                                schema_k8sio_api_core_v1_TCPSocketAction(ref),
-		"k8s.io/api/core/v1.Taint":                                                          schema_k8sio_api_core_v1_Taint(ref),
-		"k8s.io/api/core/v1.Toleration":                                                     schema_k8sio_api_core_v1_Toleration(ref),
-		"k8s.io/api/core/v1.TopologySelectorLabelRequirement":                               schema_k8sio_api_core_v1_TopologySelectorLabelRequirement(ref),
-		"k8s.io/api/core/v1.TopologySelectorTerm":                                           schema_k8sio_api_core_v1_TopologySelectorTerm(ref),
-		"k8s.io/api/core/v1.TypedLocalObjectReference":                                      schema_k8sio_api_core_v1_TypedLocalObjectReference(ref),
-		"k8s.io/api/core/v1.Volume":                                                         schema_k8sio_api_core_v1_Volume(ref),
-		"k8s.io/api/core/v1.VolumeDevice":                                                   schema_k8sio_api_core_v1_VolumeDevice(ref),
-		"k8s.io/api/core/v1.VolumeMount":                                                    schema_k8sio_api_core_v1_VolumeMount(ref),
-		"k8s.io/api/core/v1.VolumeNodeAffinity":                                             schema_k8sio_api_core_v1_VolumeNodeAffinity(ref),
-		"k8s.io/api/core/v1.VolumeProjection":                                               schema_k8sio_api_core_v1_VolumeProjection(ref),
-		"k8s.io/api/core/v1.VolumeSource":                                                   schema_k8sio_api_core_v1_VolumeSource(ref),
-		"k8s.io/api/core/v1.VsphereVirtualDiskVolumeSource":                                 schema_k8sio_api_core_v1_VsphereVirtualDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.WeightedPodAffinityTerm":                                        schema_k8sio_api_core_v1_WeightedPodAffinityTerm(ref),
-		"k8s.io/api/rbac/v1.AggregationRule":                                                schema_k8sio_api_rbac_v1_AggregationRule(ref),
-		"k8s.io/api/rbac/v1.ClusterRole":                                                    schema_k8sio_api_rbac_v1_ClusterRole(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleBinding":                                             schema_k8sio_api_rbac_v1_ClusterRoleBinding(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleBindingList":                                         schema_k8sio_api_rbac_v1_ClusterRoleBindingList(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleList":                                                schema_k8sio_api_rbac_v1_ClusterRoleList(ref),
-		"k8s.io/api/rbac/v1.PolicyRule":                                                     schema_k8sio_api_rbac_v1_PolicyRule(ref),
-		"k8s.io/api/rbac/v1.Role":                                                           schema_k8sio_api_rbac_v1_Role(ref),
-		"k8s.io/api/rbac/v1.RoleBinding":                                                    schema_k8sio_api_rbac_v1_RoleBinding(ref),
-		"k8s.io/api/rbac/v1.RoleBindingList":                                                schema_k8sio_api_rbac_v1_RoleBindingList(ref),
-		"k8s.io/api/rbac/v1.RoleList":                                                       schema_k8sio_api_rbac_v1_RoleList(ref),
-		"k8s.io/api/rbac/v1.RoleRef":                                                        schema_k8sio_api_rbac_v1_RoleRef(ref),
-		"k8s.io/api/rbac/v1.Subject":                                                        schema_k8sio_api_rbac_v1_Subject(ref),
-		"k8s.io/apimachinery/pkg/api/resource.Quantity":                                     schema_apimachinery_pkg_api_resource_Quantity(ref),
-		"k8s.io/apimachinery/pkg/api/resource.int64Amount":                                  schema_apimachinery_pkg_api_resource_int64Amount(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                     schema_pkg_apis_meta_v1_APIGroup(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                                 schema_pkg_apis_meta_v1_APIGroupList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                  schema_pkg_apis_meta_v1_APIResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                              schema_pkg_apis_meta_v1_APIResourceList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                  schema_pkg_apis_meta_v1_APIVersions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                                schema_pkg_apis_meta_v1_CreateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                                schema_pkg_apis_meta_v1_DeleteOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                     schema_pkg_apis_meta_v1_Duration(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ExportOptions":                                schema_pkg_apis_meta_v1_ExportOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Fields":                                       schema_pkg_apis_meta_v1_Fields(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                   schema_pkg_apis_meta_v1_GetOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                    schema_pkg_apis_meta_v1_GroupKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                                schema_pkg_apis_meta_v1_GroupResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                                 schema_pkg_apis_meta_v1_GroupVersion(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                     schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                             schema_pkg_apis_meta_v1_GroupVersionKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                         schema_pkg_apis_meta_v1_GroupVersionResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializer":                                  schema_pkg_apis_meta_v1_Initializer(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializers":                                 schema_pkg_apis_meta_v1_Initializers(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                                schema_pkg_apis_meta_v1_InternalEvent(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                                schema_pkg_apis_meta_v1_LabelSelector(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                     schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                         schema_pkg_apis_meta_v1_List(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                     schema_pkg_apis_meta_v1_ListMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                  schema_pkg_apis_meta_v1_ListOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry":                           schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                    schema_pkg_apis_meta_v1_MicroTime(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                   schema_pkg_apis_meta_v1_ObjectMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                               schema_pkg_apis_meta_v1_OwnerReference(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                        schema_pkg_apis_meta_v1_Patch(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PatchOptions":                                 schema_pkg_apis_meta_v1_PatchOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                                schema_pkg_apis_meta_v1_Preconditions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                    schema_pkg_apis_meta_v1_RootPaths(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                    schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                       schema_pkg_apis_meta_v1_Status(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                  schema_pkg_apis_meta_v1_StatusCause(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                                schema_pkg_apis_meta_v1_StatusDetails(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                         schema_pkg_apis_meta_v1_Time(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                    schema_pkg_apis_meta_v1_Timestamp(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                     schema_pkg_apis_meta_v1_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                                schema_pkg_apis_meta_v1_UpdateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                   schema_pkg_apis_meta_v1_WatchEvent(ref),
-		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                      schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
-		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                          schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/runtime.Unknown":                                           schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
-		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                                   schema_apimachinery_pkg_util_intstr_IntOrString(ref),
-		"k8s.io/apimachinery/pkg/version.Info":                                              schema_k8sio_apimachinery_pkg_version_Info(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomain":                           schema_kubeform_apis_linode_v1alpha1_LinodeDomain(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainList":                       schema_kubeform_apis_linode_v1alpha1_LinodeDomainList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecord":                     schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecord(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordList":                 schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordSpec":                 schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordStatus":               schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainSpec":                       schema_kubeform_apis_linode_v1alpha1_LinodeDomainSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainStatus":                     schema_kubeform_apis_linode_v1alpha1_LinodeDomainStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImage":                            schema_kubeform_apis_linode_v1alpha1_LinodeImage(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageList":                        schema_kubeform_apis_linode_v1alpha1_LinodeImageList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageSpec":                        schema_kubeform_apis_linode_v1alpha1_LinodeImageSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageStatus":                      schema_kubeform_apis_linode_v1alpha1_LinodeImageStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstance":                         schema_kubeform_apis_linode_v1alpha1_LinodeInstance(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceList":                     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec":                     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecAlerts":               schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecAlerts(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecBackups":              schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackups(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecBackupsSchedule":      schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackupsSchedule(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfig":               schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfig(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices":        schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevices(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSda":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSda(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdb":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdb(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdc":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdc(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdd":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdd(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSde":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSde(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdf":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdf(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdg":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdg(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevicesSdh":     schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdh(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigHelpers":        schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigHelpers(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecDisk":                 schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecDisk(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecSpecs":                schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecSpecs(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceStatus":                   schema_kubeform_apis_linode_v1alpha1_LinodeInstanceStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancer":                     schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancer(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfig":               schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfig(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigList":           schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigSpec":           schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigSpecNodeStatus": schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpecNodeStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigStatus":         schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerList":                 schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNode":                 schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNode(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeList":             schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeSpec":             schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeStatus":           schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerSpec":                 schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerSpecTransfer":         schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpecTransfer(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerStatus":               schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdns":                             schema_kubeform_apis_linode_v1alpha1_LinodeRdns(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsList":                         schema_kubeform_apis_linode_v1alpha1_LinodeRdnsList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsSpec":                         schema_kubeform_apis_linode_v1alpha1_LinodeRdnsSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsStatus":                       schema_kubeform_apis_linode_v1alpha1_LinodeRdnsStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkey":                           schema_kubeform_apis_linode_v1alpha1_LinodeSshkey(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeyList":                       schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeySpec":                       schema_kubeform_apis_linode_v1alpha1_LinodeSshkeySpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeyStatus":                     schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscript":                      schema_kubeform_apis_linode_v1alpha1_LinodeStackscript(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptList":                  schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpec":                  schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpecUserDefinedFields": schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpecUserDefinedFields(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptStatus":                schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeToken":                            schema_kubeform_apis_linode_v1alpha1_LinodeToken(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenList":                        schema_kubeform_apis_linode_v1alpha1_LinodeTokenList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenSpec":                        schema_kubeform_apis_linode_v1alpha1_LinodeTokenSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenStatus":                      schema_kubeform_apis_linode_v1alpha1_LinodeTokenStatus(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolume":                           schema_kubeform_apis_linode_v1alpha1_LinodeVolume(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeList":                       schema_kubeform_apis_linode_v1alpha1_LinodeVolumeList(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeSpec":                       schema_kubeform_apis_linode_v1alpha1_LinodeVolumeSpec(ref),
-		"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeStatus":                     schema_kubeform_apis_linode_v1alpha1_LinodeVolumeStatus(ref),
+		"k8s.io/api/apps/v1.ControllerRevision":                                       schema_k8sio_api_apps_v1_ControllerRevision(ref),
+		"k8s.io/api/apps/v1.ControllerRevisionList":                                   schema_k8sio_api_apps_v1_ControllerRevisionList(ref),
+		"k8s.io/api/apps/v1.DaemonSet":                                                schema_k8sio_api_apps_v1_DaemonSet(ref),
+		"k8s.io/api/apps/v1.DaemonSetCondition":                                       schema_k8sio_api_apps_v1_DaemonSetCondition(ref),
+		"k8s.io/api/apps/v1.DaemonSetList":                                            schema_k8sio_api_apps_v1_DaemonSetList(ref),
+		"k8s.io/api/apps/v1.DaemonSetSpec":                                            schema_k8sio_api_apps_v1_DaemonSetSpec(ref),
+		"k8s.io/api/apps/v1.DaemonSetStatus":                                          schema_k8sio_api_apps_v1_DaemonSetStatus(ref),
+		"k8s.io/api/apps/v1.DaemonSetUpdateStrategy":                                  schema_k8sio_api_apps_v1_DaemonSetUpdateStrategy(ref),
+		"k8s.io/api/apps/v1.Deployment":                                               schema_k8sio_api_apps_v1_Deployment(ref),
+		"k8s.io/api/apps/v1.DeploymentCondition":                                      schema_k8sio_api_apps_v1_DeploymentCondition(ref),
+		"k8s.io/api/apps/v1.DeploymentList":                                           schema_k8sio_api_apps_v1_DeploymentList(ref),
+		"k8s.io/api/apps/v1.DeploymentSpec":                                           schema_k8sio_api_apps_v1_DeploymentSpec(ref),
+		"k8s.io/api/apps/v1.DeploymentStatus":                                         schema_k8sio_api_apps_v1_DeploymentStatus(ref),
+		"k8s.io/api/apps/v1.DeploymentStrategy":                                       schema_k8sio_api_apps_v1_DeploymentStrategy(ref),
+		"k8s.io/api/apps/v1.ReplicaSet":                                               schema_k8sio_api_apps_v1_ReplicaSet(ref),
+		"k8s.io/api/apps/v1.ReplicaSetCondition":                                      schema_k8sio_api_apps_v1_ReplicaSetCondition(ref),
+		"k8s.io/api/apps/v1.ReplicaSetList":                                           schema_k8sio_api_apps_v1_ReplicaSetList(ref),
+		"k8s.io/api/apps/v1.ReplicaSetSpec":                                           schema_k8sio_api_apps_v1_ReplicaSetSpec(ref),
+		"k8s.io/api/apps/v1.ReplicaSetStatus":                                         schema_k8sio_api_apps_v1_ReplicaSetStatus(ref),
+		"k8s.io/api/apps/v1.RollingUpdateDaemonSet":                                   schema_k8sio_api_apps_v1_RollingUpdateDaemonSet(ref),
+		"k8s.io/api/apps/v1.RollingUpdateDeployment":                                  schema_k8sio_api_apps_v1_RollingUpdateDeployment(ref),
+		"k8s.io/api/apps/v1.RollingUpdateStatefulSetStrategy":                         schema_k8sio_api_apps_v1_RollingUpdateStatefulSetStrategy(ref),
+		"k8s.io/api/apps/v1.StatefulSet":                                              schema_k8sio_api_apps_v1_StatefulSet(ref),
+		"k8s.io/api/apps/v1.StatefulSetCondition":                                     schema_k8sio_api_apps_v1_StatefulSetCondition(ref),
+		"k8s.io/api/apps/v1.StatefulSetList":                                          schema_k8sio_api_apps_v1_StatefulSetList(ref),
+		"k8s.io/api/apps/v1.StatefulSetSpec":                                          schema_k8sio_api_apps_v1_StatefulSetSpec(ref),
+		"k8s.io/api/apps/v1.StatefulSetStatus":                                        schema_k8sio_api_apps_v1_StatefulSetStatus(ref),
+		"k8s.io/api/apps/v1.StatefulSetUpdateStrategy":                                schema_k8sio_api_apps_v1_StatefulSetUpdateStrategy(ref),
+		"k8s.io/api/core/v1.AWSElasticBlockStoreVolumeSource":                         schema_k8sio_api_core_v1_AWSElasticBlockStoreVolumeSource(ref),
+		"k8s.io/api/core/v1.Affinity":                                                 schema_k8sio_api_core_v1_Affinity(ref),
+		"k8s.io/api/core/v1.AttachedVolume":                                           schema_k8sio_api_core_v1_AttachedVolume(ref),
+		"k8s.io/api/core/v1.AvoidPods":                                                schema_k8sio_api_core_v1_AvoidPods(ref),
+		"k8s.io/api/core/v1.AzureDiskVolumeSource":                                    schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.AzureFilePersistentVolumeSource":                          schema_k8sio_api_core_v1_AzureFilePersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.AzureFileVolumeSource":                                    schema_k8sio_api_core_v1_AzureFileVolumeSource(ref),
+		"k8s.io/api/core/v1.Binding":                                                  schema_k8sio_api_core_v1_Binding(ref),
+		"k8s.io/api/core/v1.CSIPersistentVolumeSource":                                schema_k8sio_api_core_v1_CSIPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.CSIVolumeSource":                                          schema_k8sio_api_core_v1_CSIVolumeSource(ref),
+		"k8s.io/api/core/v1.Capabilities":                                             schema_k8sio_api_core_v1_Capabilities(ref),
+		"k8s.io/api/core/v1.CephFSPersistentVolumeSource":                             schema_k8sio_api_core_v1_CephFSPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.CephFSVolumeSource":                                       schema_k8sio_api_core_v1_CephFSVolumeSource(ref),
+		"k8s.io/api/core/v1.CinderPersistentVolumeSource":                             schema_k8sio_api_core_v1_CinderPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.CinderVolumeSource":                                       schema_k8sio_api_core_v1_CinderVolumeSource(ref),
+		"k8s.io/api/core/v1.ClientIPConfig":                                           schema_k8sio_api_core_v1_ClientIPConfig(ref),
+		"k8s.io/api/core/v1.ComponentCondition":                                       schema_k8sio_api_core_v1_ComponentCondition(ref),
+		"k8s.io/api/core/v1.ComponentStatus":                                          schema_k8sio_api_core_v1_ComponentStatus(ref),
+		"k8s.io/api/core/v1.ComponentStatusList":                                      schema_k8sio_api_core_v1_ComponentStatusList(ref),
+		"k8s.io/api/core/v1.ConfigMap":                                                schema_k8sio_api_core_v1_ConfigMap(ref),
+		"k8s.io/api/core/v1.ConfigMapEnvSource":                                       schema_k8sio_api_core_v1_ConfigMapEnvSource(ref),
+		"k8s.io/api/core/v1.ConfigMapKeySelector":                                     schema_k8sio_api_core_v1_ConfigMapKeySelector(ref),
+		"k8s.io/api/core/v1.ConfigMapList":                                            schema_k8sio_api_core_v1_ConfigMapList(ref),
+		"k8s.io/api/core/v1.ConfigMapNodeConfigSource":                                schema_k8sio_api_core_v1_ConfigMapNodeConfigSource(ref),
+		"k8s.io/api/core/v1.ConfigMapProjection":                                      schema_k8sio_api_core_v1_ConfigMapProjection(ref),
+		"k8s.io/api/core/v1.ConfigMapVolumeSource":                                    schema_k8sio_api_core_v1_ConfigMapVolumeSource(ref),
+		"k8s.io/api/core/v1.Container":                                                schema_k8sio_api_core_v1_Container(ref),
+		"k8s.io/api/core/v1.ContainerImage":                                           schema_k8sio_api_core_v1_ContainerImage(ref),
+		"k8s.io/api/core/v1.ContainerPort":                                            schema_k8sio_api_core_v1_ContainerPort(ref),
+		"k8s.io/api/core/v1.ContainerState":                                           schema_k8sio_api_core_v1_ContainerState(ref),
+		"k8s.io/api/core/v1.ContainerStateRunning":                                    schema_k8sio_api_core_v1_ContainerStateRunning(ref),
+		"k8s.io/api/core/v1.ContainerStateTerminated":                                 schema_k8sio_api_core_v1_ContainerStateTerminated(ref),
+		"k8s.io/api/core/v1.ContainerStateWaiting":                                    schema_k8sio_api_core_v1_ContainerStateWaiting(ref),
+		"k8s.io/api/core/v1.ContainerStatus":                                          schema_k8sio_api_core_v1_ContainerStatus(ref),
+		"k8s.io/api/core/v1.DaemonEndpoint":                                           schema_k8sio_api_core_v1_DaemonEndpoint(ref),
+		"k8s.io/api/core/v1.DownwardAPIProjection":                                    schema_k8sio_api_core_v1_DownwardAPIProjection(ref),
+		"k8s.io/api/core/v1.DownwardAPIVolumeFile":                                    schema_k8sio_api_core_v1_DownwardAPIVolumeFile(ref),
+		"k8s.io/api/core/v1.DownwardAPIVolumeSource":                                  schema_k8sio_api_core_v1_DownwardAPIVolumeSource(ref),
+		"k8s.io/api/core/v1.EmptyDirVolumeSource":                                     schema_k8sio_api_core_v1_EmptyDirVolumeSource(ref),
+		"k8s.io/api/core/v1.EndpointAddress":                                          schema_k8sio_api_core_v1_EndpointAddress(ref),
+		"k8s.io/api/core/v1.EndpointPort":                                             schema_k8sio_api_core_v1_EndpointPort(ref),
+		"k8s.io/api/core/v1.EndpointSubset":                                           schema_k8sio_api_core_v1_EndpointSubset(ref),
+		"k8s.io/api/core/v1.Endpoints":                                                schema_k8sio_api_core_v1_Endpoints(ref),
+		"k8s.io/api/core/v1.EndpointsList":                                            schema_k8sio_api_core_v1_EndpointsList(ref),
+		"k8s.io/api/core/v1.EnvFromSource":                                            schema_k8sio_api_core_v1_EnvFromSource(ref),
+		"k8s.io/api/core/v1.EnvVar":                                                   schema_k8sio_api_core_v1_EnvVar(ref),
+		"k8s.io/api/core/v1.EnvVarSource":                                             schema_k8sio_api_core_v1_EnvVarSource(ref),
+		"k8s.io/api/core/v1.Event":                                                    schema_k8sio_api_core_v1_Event(ref),
+		"k8s.io/api/core/v1.EventList":                                                schema_k8sio_api_core_v1_EventList(ref),
+		"k8s.io/api/core/v1.EventSeries":                                              schema_k8sio_api_core_v1_EventSeries(ref),
+		"k8s.io/api/core/v1.EventSource":                                              schema_k8sio_api_core_v1_EventSource(ref),
+		"k8s.io/api/core/v1.ExecAction":                                               schema_k8sio_api_core_v1_ExecAction(ref),
+		"k8s.io/api/core/v1.FCVolumeSource":                                           schema_k8sio_api_core_v1_FCVolumeSource(ref),
+		"k8s.io/api/core/v1.FlexPersistentVolumeSource":                               schema_k8sio_api_core_v1_FlexPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.FlexVolumeSource":                                         schema_k8sio_api_core_v1_FlexVolumeSource(ref),
+		"k8s.io/api/core/v1.FlockerVolumeSource":                                      schema_k8sio_api_core_v1_FlockerVolumeSource(ref),
+		"k8s.io/api/core/v1.GCEPersistentDiskVolumeSource":                            schema_k8sio_api_core_v1_GCEPersistentDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.GitRepoVolumeSource":                                      schema_k8sio_api_core_v1_GitRepoVolumeSource(ref),
+		"k8s.io/api/core/v1.GlusterfsPersistentVolumeSource":                          schema_k8sio_api_core_v1_GlusterfsPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.GlusterfsVolumeSource":                                    schema_k8sio_api_core_v1_GlusterfsVolumeSource(ref),
+		"k8s.io/api/core/v1.HTTPGetAction":                                            schema_k8sio_api_core_v1_HTTPGetAction(ref),
+		"k8s.io/api/core/v1.HTTPHeader":                                               schema_k8sio_api_core_v1_HTTPHeader(ref),
+		"k8s.io/api/core/v1.Handler":                                                  schema_k8sio_api_core_v1_Handler(ref),
+		"k8s.io/api/core/v1.HostAlias":                                                schema_k8sio_api_core_v1_HostAlias(ref),
+		"k8s.io/api/core/v1.HostPathVolumeSource":                                     schema_k8sio_api_core_v1_HostPathVolumeSource(ref),
+		"k8s.io/api/core/v1.ISCSIPersistentVolumeSource":                              schema_k8sio_api_core_v1_ISCSIPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.ISCSIVolumeSource":                                        schema_k8sio_api_core_v1_ISCSIVolumeSource(ref),
+		"k8s.io/api/core/v1.KeyToPath":                                                schema_k8sio_api_core_v1_KeyToPath(ref),
+		"k8s.io/api/core/v1.Lifecycle":                                                schema_k8sio_api_core_v1_Lifecycle(ref),
+		"k8s.io/api/core/v1.LimitRange":                                               schema_k8sio_api_core_v1_LimitRange(ref),
+		"k8s.io/api/core/v1.LimitRangeItem":                                           schema_k8sio_api_core_v1_LimitRangeItem(ref),
+		"k8s.io/api/core/v1.LimitRangeList":                                           schema_k8sio_api_core_v1_LimitRangeList(ref),
+		"k8s.io/api/core/v1.LimitRangeSpec":                                           schema_k8sio_api_core_v1_LimitRangeSpec(ref),
+		"k8s.io/api/core/v1.List":                                                     schema_k8sio_api_core_v1_List(ref),
+		"k8s.io/api/core/v1.LoadBalancerIngress":                                      schema_k8sio_api_core_v1_LoadBalancerIngress(ref),
+		"k8s.io/api/core/v1.LoadBalancerStatus":                                       schema_k8sio_api_core_v1_LoadBalancerStatus(ref),
+		"k8s.io/api/core/v1.LocalObjectReference":                                     schema_k8sio_api_core_v1_LocalObjectReference(ref),
+		"k8s.io/api/core/v1.LocalVolumeSource":                                        schema_k8sio_api_core_v1_LocalVolumeSource(ref),
+		"k8s.io/api/core/v1.NFSVolumeSource":                                          schema_k8sio_api_core_v1_NFSVolumeSource(ref),
+		"k8s.io/api/core/v1.Namespace":                                                schema_k8sio_api_core_v1_Namespace(ref),
+		"k8s.io/api/core/v1.NamespaceList":                                            schema_k8sio_api_core_v1_NamespaceList(ref),
+		"k8s.io/api/core/v1.NamespaceSpec":                                            schema_k8sio_api_core_v1_NamespaceSpec(ref),
+		"k8s.io/api/core/v1.NamespaceStatus":                                          schema_k8sio_api_core_v1_NamespaceStatus(ref),
+		"k8s.io/api/core/v1.Node":                                                     schema_k8sio_api_core_v1_Node(ref),
+		"k8s.io/api/core/v1.NodeAddress":                                              schema_k8sio_api_core_v1_NodeAddress(ref),
+		"k8s.io/api/core/v1.NodeAffinity":                                             schema_k8sio_api_core_v1_NodeAffinity(ref),
+		"k8s.io/api/core/v1.NodeCondition":                                            schema_k8sio_api_core_v1_NodeCondition(ref),
+		"k8s.io/api/core/v1.NodeConfigSource":                                         schema_k8sio_api_core_v1_NodeConfigSource(ref),
+		"k8s.io/api/core/v1.NodeConfigStatus":                                         schema_k8sio_api_core_v1_NodeConfigStatus(ref),
+		"k8s.io/api/core/v1.NodeDaemonEndpoints":                                      schema_k8sio_api_core_v1_NodeDaemonEndpoints(ref),
+		"k8s.io/api/core/v1.NodeList":                                                 schema_k8sio_api_core_v1_NodeList(ref),
+		"k8s.io/api/core/v1.NodeProxyOptions":                                         schema_k8sio_api_core_v1_NodeProxyOptions(ref),
+		"k8s.io/api/core/v1.NodeResources":                                            schema_k8sio_api_core_v1_NodeResources(ref),
+		"k8s.io/api/core/v1.NodeSelector":                                             schema_k8sio_api_core_v1_NodeSelector(ref),
+		"k8s.io/api/core/v1.NodeSelectorRequirement":                                  schema_k8sio_api_core_v1_NodeSelectorRequirement(ref),
+		"k8s.io/api/core/v1.NodeSelectorTerm":                                         schema_k8sio_api_core_v1_NodeSelectorTerm(ref),
+		"k8s.io/api/core/v1.NodeSpec":                                                 schema_k8sio_api_core_v1_NodeSpec(ref),
+		"k8s.io/api/core/v1.NodeStatus":                                               schema_k8sio_api_core_v1_NodeStatus(ref),
+		"k8s.io/api/core/v1.NodeSystemInfo":                                           schema_k8sio_api_core_v1_NodeSystemInfo(ref),
+		"k8s.io/api/core/v1.ObjectFieldSelector":                                      schema_k8sio_api_core_v1_ObjectFieldSelector(ref),
+		"k8s.io/api/core/v1.ObjectReference":                                          schema_k8sio_api_core_v1_ObjectReference(ref),
+		"k8s.io/api/core/v1.PersistentVolume":                                         schema_k8sio_api_core_v1_PersistentVolume(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaim":                                    schema_k8sio_api_core_v1_PersistentVolumeClaim(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimCondition":                           schema_k8sio_api_core_v1_PersistentVolumeClaimCondition(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimList":                                schema_k8sio_api_core_v1_PersistentVolumeClaimList(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimSpec":                                schema_k8sio_api_core_v1_PersistentVolumeClaimSpec(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimStatus":                              schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimVolumeSource":                        schema_k8sio_api_core_v1_PersistentVolumeClaimVolumeSource(ref),
+		"k8s.io/api/core/v1.PersistentVolumeList":                                     schema_k8sio_api_core_v1_PersistentVolumeList(ref),
+		"k8s.io/api/core/v1.PersistentVolumeSource":                                   schema_k8sio_api_core_v1_PersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.PersistentVolumeSpec":                                     schema_k8sio_api_core_v1_PersistentVolumeSpec(ref),
+		"k8s.io/api/core/v1.PersistentVolumeStatus":                                   schema_k8sio_api_core_v1_PersistentVolumeStatus(ref),
+		"k8s.io/api/core/v1.PhotonPersistentDiskVolumeSource":                         schema_k8sio_api_core_v1_PhotonPersistentDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.Pod":                                                      schema_k8sio_api_core_v1_Pod(ref),
+		"k8s.io/api/core/v1.PodAffinity":                                              schema_k8sio_api_core_v1_PodAffinity(ref),
+		"k8s.io/api/core/v1.PodAffinityTerm":                                          schema_k8sio_api_core_v1_PodAffinityTerm(ref),
+		"k8s.io/api/core/v1.PodAntiAffinity":                                          schema_k8sio_api_core_v1_PodAntiAffinity(ref),
+		"k8s.io/api/core/v1.PodAttachOptions":                                         schema_k8sio_api_core_v1_PodAttachOptions(ref),
+		"k8s.io/api/core/v1.PodCondition":                                             schema_k8sio_api_core_v1_PodCondition(ref),
+		"k8s.io/api/core/v1.PodDNSConfig":                                             schema_k8sio_api_core_v1_PodDNSConfig(ref),
+		"k8s.io/api/core/v1.PodDNSConfigOption":                                       schema_k8sio_api_core_v1_PodDNSConfigOption(ref),
+		"k8s.io/api/core/v1.PodExecOptions":                                           schema_k8sio_api_core_v1_PodExecOptions(ref),
+		"k8s.io/api/core/v1.PodList":                                                  schema_k8sio_api_core_v1_PodList(ref),
+		"k8s.io/api/core/v1.PodLogOptions":                                            schema_k8sio_api_core_v1_PodLogOptions(ref),
+		"k8s.io/api/core/v1.PodPortForwardOptions":                                    schema_k8sio_api_core_v1_PodPortForwardOptions(ref),
+		"k8s.io/api/core/v1.PodProxyOptions":                                          schema_k8sio_api_core_v1_PodProxyOptions(ref),
+		"k8s.io/api/core/v1.PodReadinessGate":                                         schema_k8sio_api_core_v1_PodReadinessGate(ref),
+		"k8s.io/api/core/v1.PodSecurityContext":                                       schema_k8sio_api_core_v1_PodSecurityContext(ref),
+		"k8s.io/api/core/v1.PodSignature":                                             schema_k8sio_api_core_v1_PodSignature(ref),
+		"k8s.io/api/core/v1.PodSpec":                                                  schema_k8sio_api_core_v1_PodSpec(ref),
+		"k8s.io/api/core/v1.PodStatus":                                                schema_k8sio_api_core_v1_PodStatus(ref),
+		"k8s.io/api/core/v1.PodStatusResult":                                          schema_k8sio_api_core_v1_PodStatusResult(ref),
+		"k8s.io/api/core/v1.PodTemplate":                                              schema_k8sio_api_core_v1_PodTemplate(ref),
+		"k8s.io/api/core/v1.PodTemplateList":                                          schema_k8sio_api_core_v1_PodTemplateList(ref),
+		"k8s.io/api/core/v1.PodTemplateSpec":                                          schema_k8sio_api_core_v1_PodTemplateSpec(ref),
+		"k8s.io/api/core/v1.PortworxVolumeSource":                                     schema_k8sio_api_core_v1_PortworxVolumeSource(ref),
+		"k8s.io/api/core/v1.PreferAvoidPodsEntry":                                     schema_k8sio_api_core_v1_PreferAvoidPodsEntry(ref),
+		"k8s.io/api/core/v1.PreferredSchedulingTerm":                                  schema_k8sio_api_core_v1_PreferredSchedulingTerm(ref),
+		"k8s.io/api/core/v1.Probe":                                                    schema_k8sio_api_core_v1_Probe(ref),
+		"k8s.io/api/core/v1.ProjectedVolumeSource":                                    schema_k8sio_api_core_v1_ProjectedVolumeSource(ref),
+		"k8s.io/api/core/v1.QuobyteVolumeSource":                                      schema_k8sio_api_core_v1_QuobyteVolumeSource(ref),
+		"k8s.io/api/core/v1.RBDPersistentVolumeSource":                                schema_k8sio_api_core_v1_RBDPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.RBDVolumeSource":                                          schema_k8sio_api_core_v1_RBDVolumeSource(ref),
+		"k8s.io/api/core/v1.RangeAllocation":                                          schema_k8sio_api_core_v1_RangeAllocation(ref),
+		"k8s.io/api/core/v1.ReplicationController":                                    schema_k8sio_api_core_v1_ReplicationController(ref),
+		"k8s.io/api/core/v1.ReplicationControllerCondition":                           schema_k8sio_api_core_v1_ReplicationControllerCondition(ref),
+		"k8s.io/api/core/v1.ReplicationControllerList":                                schema_k8sio_api_core_v1_ReplicationControllerList(ref),
+		"k8s.io/api/core/v1.ReplicationControllerSpec":                                schema_k8sio_api_core_v1_ReplicationControllerSpec(ref),
+		"k8s.io/api/core/v1.ReplicationControllerStatus":                              schema_k8sio_api_core_v1_ReplicationControllerStatus(ref),
+		"k8s.io/api/core/v1.ResourceFieldSelector":                                    schema_k8sio_api_core_v1_ResourceFieldSelector(ref),
+		"k8s.io/api/core/v1.ResourceQuota":                                            schema_k8sio_api_core_v1_ResourceQuota(ref),
+		"k8s.io/api/core/v1.ResourceQuotaList":                                        schema_k8sio_api_core_v1_ResourceQuotaList(ref),
+		"k8s.io/api/core/v1.ResourceQuotaSpec":                                        schema_k8sio_api_core_v1_ResourceQuotaSpec(ref),
+		"k8s.io/api/core/v1.ResourceQuotaStatus":                                      schema_k8sio_api_core_v1_ResourceQuotaStatus(ref),
+		"k8s.io/api/core/v1.ResourceRequirements":                                     schema_k8sio_api_core_v1_ResourceRequirements(ref),
+		"k8s.io/api/core/v1.SELinuxOptions":                                           schema_k8sio_api_core_v1_SELinuxOptions(ref),
+		"k8s.io/api/core/v1.ScaleIOPersistentVolumeSource":                            schema_k8sio_api_core_v1_ScaleIOPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.ScaleIOVolumeSource":                                      schema_k8sio_api_core_v1_ScaleIOVolumeSource(ref),
+		"k8s.io/api/core/v1.ScopeSelector":                                            schema_k8sio_api_core_v1_ScopeSelector(ref),
+		"k8s.io/api/core/v1.ScopedResourceSelectorRequirement":                        schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref),
+		"k8s.io/api/core/v1.Secret":                                                   schema_k8sio_api_core_v1_Secret(ref),
+		"k8s.io/api/core/v1.SecretEnvSource":                                          schema_k8sio_api_core_v1_SecretEnvSource(ref),
+		"k8s.io/api/core/v1.SecretKeySelector":                                        schema_k8sio_api_core_v1_SecretKeySelector(ref),
+		"k8s.io/api/core/v1.SecretList":                                               schema_k8sio_api_core_v1_SecretList(ref),
+		"k8s.io/api/core/v1.SecretProjection":                                         schema_k8sio_api_core_v1_SecretProjection(ref),
+		"k8s.io/api/core/v1.SecretReference":                                          schema_k8sio_api_core_v1_SecretReference(ref),
+		"k8s.io/api/core/v1.SecretVolumeSource":                                       schema_k8sio_api_core_v1_SecretVolumeSource(ref),
+		"k8s.io/api/core/v1.SecurityContext":                                          schema_k8sio_api_core_v1_SecurityContext(ref),
+		"k8s.io/api/core/v1.SerializedReference":                                      schema_k8sio_api_core_v1_SerializedReference(ref),
+		"k8s.io/api/core/v1.Service":                                                  schema_k8sio_api_core_v1_Service(ref),
+		"k8s.io/api/core/v1.ServiceAccount":                                           schema_k8sio_api_core_v1_ServiceAccount(ref),
+		"k8s.io/api/core/v1.ServiceAccountList":                                       schema_k8sio_api_core_v1_ServiceAccountList(ref),
+		"k8s.io/api/core/v1.ServiceAccountTokenProjection":                            schema_k8sio_api_core_v1_ServiceAccountTokenProjection(ref),
+		"k8s.io/api/core/v1.ServiceList":                                              schema_k8sio_api_core_v1_ServiceList(ref),
+		"k8s.io/api/core/v1.ServicePort":                                              schema_k8sio_api_core_v1_ServicePort(ref),
+		"k8s.io/api/core/v1.ServiceProxyOptions":                                      schema_k8sio_api_core_v1_ServiceProxyOptions(ref),
+		"k8s.io/api/core/v1.ServiceSpec":                                              schema_k8sio_api_core_v1_ServiceSpec(ref),
+		"k8s.io/api/core/v1.ServiceStatus":                                            schema_k8sio_api_core_v1_ServiceStatus(ref),
+		"k8s.io/api/core/v1.SessionAffinityConfig":                                    schema_k8sio_api_core_v1_SessionAffinityConfig(ref),
+		"k8s.io/api/core/v1.StorageOSPersistentVolumeSource":                          schema_k8sio_api_core_v1_StorageOSPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.StorageOSVolumeSource":                                    schema_k8sio_api_core_v1_StorageOSVolumeSource(ref),
+		"k8s.io/api/core/v1.Sysctl":                                                   schema_k8sio_api_core_v1_Sysctl(ref),
+		"k8s.io/api/core/v1.TCPSocketAction":                                          schema_k8sio_api_core_v1_TCPSocketAction(ref),
+		"k8s.io/api/core/v1.Taint":                                                    schema_k8sio_api_core_v1_Taint(ref),
+		"k8s.io/api/core/v1.Toleration":                                               schema_k8sio_api_core_v1_Toleration(ref),
+		"k8s.io/api/core/v1.TopologySelectorLabelRequirement":                         schema_k8sio_api_core_v1_TopologySelectorLabelRequirement(ref),
+		"k8s.io/api/core/v1.TopologySelectorTerm":                                     schema_k8sio_api_core_v1_TopologySelectorTerm(ref),
+		"k8s.io/api/core/v1.TypedLocalObjectReference":                                schema_k8sio_api_core_v1_TypedLocalObjectReference(ref),
+		"k8s.io/api/core/v1.Volume":                                                   schema_k8sio_api_core_v1_Volume(ref),
+		"k8s.io/api/core/v1.VolumeDevice":                                             schema_k8sio_api_core_v1_VolumeDevice(ref),
+		"k8s.io/api/core/v1.VolumeMount":                                              schema_k8sio_api_core_v1_VolumeMount(ref),
+		"k8s.io/api/core/v1.VolumeNodeAffinity":                                       schema_k8sio_api_core_v1_VolumeNodeAffinity(ref),
+		"k8s.io/api/core/v1.VolumeProjection":                                         schema_k8sio_api_core_v1_VolumeProjection(ref),
+		"k8s.io/api/core/v1.VolumeSource":                                             schema_k8sio_api_core_v1_VolumeSource(ref),
+		"k8s.io/api/core/v1.VsphereVirtualDiskVolumeSource":                           schema_k8sio_api_core_v1_VsphereVirtualDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.WeightedPodAffinityTerm":                                  schema_k8sio_api_core_v1_WeightedPodAffinityTerm(ref),
+		"k8s.io/api/rbac/v1.AggregationRule":                                          schema_k8sio_api_rbac_v1_AggregationRule(ref),
+		"k8s.io/api/rbac/v1.ClusterRole":                                              schema_k8sio_api_rbac_v1_ClusterRole(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleBinding":                                       schema_k8sio_api_rbac_v1_ClusterRoleBinding(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleBindingList":                                   schema_k8sio_api_rbac_v1_ClusterRoleBindingList(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleList":                                          schema_k8sio_api_rbac_v1_ClusterRoleList(ref),
+		"k8s.io/api/rbac/v1.PolicyRule":                                               schema_k8sio_api_rbac_v1_PolicyRule(ref),
+		"k8s.io/api/rbac/v1.Role":                                                     schema_k8sio_api_rbac_v1_Role(ref),
+		"k8s.io/api/rbac/v1.RoleBinding":                                              schema_k8sio_api_rbac_v1_RoleBinding(ref),
+		"k8s.io/api/rbac/v1.RoleBindingList":                                          schema_k8sio_api_rbac_v1_RoleBindingList(ref),
+		"k8s.io/api/rbac/v1.RoleList":                                                 schema_k8sio_api_rbac_v1_RoleList(ref),
+		"k8s.io/api/rbac/v1.RoleRef":                                                  schema_k8sio_api_rbac_v1_RoleRef(ref),
+		"k8s.io/api/rbac/v1.Subject":                                                  schema_k8sio_api_rbac_v1_Subject(ref),
+		"k8s.io/apimachinery/pkg/api/resource.Quantity":                               schema_apimachinery_pkg_api_resource_Quantity(ref),
+		"k8s.io/apimachinery/pkg/api/resource.int64Amount":                            schema_apimachinery_pkg_api_resource_int64Amount(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                               schema_pkg_apis_meta_v1_APIGroup(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                           schema_pkg_apis_meta_v1_APIGroupList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                            schema_pkg_apis_meta_v1_APIResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                        schema_pkg_apis_meta_v1_APIResourceList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                            schema_pkg_apis_meta_v1_APIVersions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                          schema_pkg_apis_meta_v1_CreateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                          schema_pkg_apis_meta_v1_DeleteOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                               schema_pkg_apis_meta_v1_Duration(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ExportOptions":                          schema_pkg_apis_meta_v1_ExportOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Fields":                                 schema_pkg_apis_meta_v1_Fields(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                             schema_pkg_apis_meta_v1_GetOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                              schema_pkg_apis_meta_v1_GroupKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                          schema_pkg_apis_meta_v1_GroupResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                           schema_pkg_apis_meta_v1_GroupVersion(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":               schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                       schema_pkg_apis_meta_v1_GroupVersionKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                   schema_pkg_apis_meta_v1_GroupVersionResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializer":                            schema_pkg_apis_meta_v1_Initializer(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializers":                           schema_pkg_apis_meta_v1_Initializers(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                          schema_pkg_apis_meta_v1_InternalEvent(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                          schema_pkg_apis_meta_v1_LabelSelector(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":               schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                   schema_pkg_apis_meta_v1_List(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                               schema_pkg_apis_meta_v1_ListMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                            schema_pkg_apis_meta_v1_ListOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry":                     schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                              schema_pkg_apis_meta_v1_MicroTime(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                             schema_pkg_apis_meta_v1_ObjectMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                         schema_pkg_apis_meta_v1_OwnerReference(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                  schema_pkg_apis_meta_v1_Patch(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.PatchOptions":                           schema_pkg_apis_meta_v1_PatchOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                          schema_pkg_apis_meta_v1_Preconditions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                              schema_pkg_apis_meta_v1_RootPaths(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":              schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                 schema_pkg_apis_meta_v1_Status(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                            schema_pkg_apis_meta_v1_StatusCause(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                          schema_pkg_apis_meta_v1_StatusDetails(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                   schema_pkg_apis_meta_v1_Time(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                              schema_pkg_apis_meta_v1_Timestamp(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                               schema_pkg_apis_meta_v1_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                          schema_pkg_apis_meta_v1_UpdateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                             schema_pkg_apis_meta_v1_WatchEvent(ref),
+		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
+		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                    schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/runtime.Unknown":                                     schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
+		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                             schema_apimachinery_pkg_util_intstr_IntOrString(ref),
+		"k8s.io/apimachinery/pkg/version.Info":                                        schema_k8sio_apimachinery_pkg_version_Info(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Domain":                           schema_kubeform_apis_linode_v1alpha1_Domain(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainList":                       schema_kubeform_apis_linode_v1alpha1_DomainList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecord":                     schema_kubeform_apis_linode_v1alpha1_DomainRecord(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordList":                 schema_kubeform_apis_linode_v1alpha1_DomainRecordList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordSpec":                 schema_kubeform_apis_linode_v1alpha1_DomainRecordSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordStatus":               schema_kubeform_apis_linode_v1alpha1_DomainRecordStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainSpec":                       schema_kubeform_apis_linode_v1alpha1_DomainSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.DomainStatus":                     schema_kubeform_apis_linode_v1alpha1_DomainStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Image":                            schema_kubeform_apis_linode_v1alpha1_Image(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.ImageList":                        schema_kubeform_apis_linode_v1alpha1_ImageList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.ImageSpec":                        schema_kubeform_apis_linode_v1alpha1_ImageSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.ImageStatus":                      schema_kubeform_apis_linode_v1alpha1_ImageStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Instance":                         schema_kubeform_apis_linode_v1alpha1_Instance(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceList":                     schema_kubeform_apis_linode_v1alpha1_InstanceList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec":                     schema_kubeform_apis_linode_v1alpha1_InstanceSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecAlerts":               schema_kubeform_apis_linode_v1alpha1_InstanceSpecAlerts(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecBackups":              schema_kubeform_apis_linode_v1alpha1_InstanceSpecBackups(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecBackupsSchedule":      schema_kubeform_apis_linode_v1alpha1_InstanceSpecBackupsSchedule(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfig":               schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfig(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices":        schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevices(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSda":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSda(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdb":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdb(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdc":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdc(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdd":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdd(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSde":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSde(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdf":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdf(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdg":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdg(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevicesSdh":     schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdh(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigHelpers":        schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigHelpers(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecDisk":                 schema_kubeform_apis_linode_v1alpha1_InstanceSpecDisk(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecSpecs":                schema_kubeform_apis_linode_v1alpha1_InstanceSpecSpecs(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceStatus":                   schema_kubeform_apis_linode_v1alpha1_InstanceStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Nodebalancer":                     schema_kubeform_apis_linode_v1alpha1_Nodebalancer(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfig":               schema_kubeform_apis_linode_v1alpha1_NodebalancerConfig(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigList":           schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigSpec":           schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigSpecNodeStatus": schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigSpecNodeStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigStatus":         schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerList":                 schema_kubeform_apis_linode_v1alpha1_NodebalancerList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNode":                 schema_kubeform_apis_linode_v1alpha1_NodebalancerNode(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeList":             schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeSpec":             schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeStatus":           schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerSpec":                 schema_kubeform_apis_linode_v1alpha1_NodebalancerSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerSpecTransfer":         schema_kubeform_apis_linode_v1alpha1_NodebalancerSpecTransfer(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerStatus":               schema_kubeform_apis_linode_v1alpha1_NodebalancerStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Rdns":                             schema_kubeform_apis_linode_v1alpha1_Rdns(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsList":                         schema_kubeform_apis_linode_v1alpha1_RdnsList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsSpec":                         schema_kubeform_apis_linode_v1alpha1_RdnsSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsStatus":                       schema_kubeform_apis_linode_v1alpha1_RdnsStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Sshkey":                           schema_kubeform_apis_linode_v1alpha1_Sshkey(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeyList":                       schema_kubeform_apis_linode_v1alpha1_SshkeyList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeySpec":                       schema_kubeform_apis_linode_v1alpha1_SshkeySpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeyStatus":                     schema_kubeform_apis_linode_v1alpha1_SshkeyStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Stackscript":                      schema_kubeform_apis_linode_v1alpha1_Stackscript(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptList":                  schema_kubeform_apis_linode_v1alpha1_StackscriptList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpec":                  schema_kubeform_apis_linode_v1alpha1_StackscriptSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpecUserDefinedFields": schema_kubeform_apis_linode_v1alpha1_StackscriptSpecUserDefinedFields(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptStatus":                schema_kubeform_apis_linode_v1alpha1_StackscriptStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Token":                            schema_kubeform_apis_linode_v1alpha1_Token(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.TokenList":                        schema_kubeform_apis_linode_v1alpha1_TokenList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.TokenSpec":                        schema_kubeform_apis_linode_v1alpha1_TokenSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.TokenStatus":                      schema_kubeform_apis_linode_v1alpha1_TokenStatus(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.Volume":                           schema_kubeform_apis_linode_v1alpha1_Volume(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeList":                       schema_kubeform_apis_linode_v1alpha1_VolumeList(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeSpec":                       schema_kubeform_apis_linode_v1alpha1_VolumeSpec(ref),
+		"kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeStatus":                     schema_kubeform_apis_linode_v1alpha1_VolumeStatus(ref),
 	}
 }
 
@@ -14411,7 +14411,7 @@ func schema_k8sio_apimachinery_pkg_version_Info(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomain(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Domain(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -14438,27 +14438,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomain(ref common.ReferenceCallb
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.DomainSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.DomainStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.DomainSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.DomainStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeDomainList is a list of LinodeDomains",
+				Description: "DomainList is a list of Domains",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -14482,12 +14482,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainList(ref common.ReferenceC
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeDomain CRD objects",
+							Description: "Items is a list of Domain CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomain"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Domain"),
 									},
 								},
 							},
@@ -14497,11 +14497,11 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomain"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Domain"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecord(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainRecord(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -14528,27 +14528,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecord(ref common.Referenc
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecordStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecordStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainRecordList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeDomainRecordList is a list of LinodeDomainRecords",
+				Description: "DomainRecordList is a list of DomainRecords",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -14572,12 +14572,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordList(ref common.Refe
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeDomainRecord CRD objects",
+							Description: "Items is a list of DomainRecord CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecord"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecord"),
 									},
 								},
 							},
@@ -14587,32 +14587,26 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordList(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeDomainRecord"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.DomainRecord"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainRecordSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"domain_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"target": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
+						},
+					},
+					"priority": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
 						},
 					},
 					"protocol": {
@@ -14633,6 +14627,18 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordSpec(ref common.Refe
 							Format: "int32",
 						},
 					},
+					"domain_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"record_type": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -14640,12 +14646,6 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordSpec(ref common.Refe
 						},
 					},
 					"ttl_sec": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"priority": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
 							Format: "int32",
@@ -14664,13 +14664,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordSpec(ref common.Refe
 						},
 					},
 				},
-				Required: []string{"domain_id", "name", "target", "protocol", "tag", "weight", "record_type", "ttl_sec", "priority", "service", "port"},
+				Required: []string{"target", "priority", "protocol", "tag", "weight", "domain_id", "name", "record_type", "ttl_sec", "service", "port"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainRecordStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -14696,12 +14696,18 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainRecordStatus(ref common.Re
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"soa_email": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"tags": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
@@ -14716,6 +14722,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainSpec(ref common.ReferenceC
 						},
 					},
 					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"group": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -14740,31 +14752,19 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainSpec(ref common.ReferenceC
 							},
 						},
 					},
-					"expire_sec": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
 					"refresh_sec": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
 							Format: "int32",
 						},
 					},
-					"soa_email": {
+					"expire_sec": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Type:   []string{"integer"},
+							Format: "int32",
 						},
 					},
 					"domain": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"group": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -14802,13 +14802,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainSpec(ref common.ReferenceC
 						},
 					},
 				},
-				Required: []string{"tags", "type", "status", "axfr_ips", "expire_sec", "refresh_sec", "soa_email", "domain", "group", "description", "master_ips", "ttl_sec", "retry_sec"},
+				Required: []string{"soa_email", "tags", "type", "group", "status", "axfr_ips", "refresh_sec", "expire_sec", "domain", "description", "master_ips", "ttl_sec", "retry_sec"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeDomainStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_DomainStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -14834,7 +14834,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeDomainStatus(ref common.Referenc
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeImage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Image(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -14861,27 +14861,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImage(ref common.ReferenceCallba
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.ImageSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.ImageStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImageStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.ImageSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.ImageStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeImageList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_ImageList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeImageList is a list of LinodeImages",
+				Description: "ImageList is a list of Images",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -14905,12 +14905,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImageList(ref common.ReferenceCa
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeImage CRD objects",
+							Description: "Items is a list of Image CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImage"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Image"),
 									},
 								},
 							},
@@ -14920,41 +14920,29 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImageList(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeImage"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Image"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeImageSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_ImageSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"disk_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"description": {
+					"label": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
-					"created_by": {
+					"created": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
 					"deprecated": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"is_public": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",
@@ -14972,25 +14960,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImageSpec(ref common.ReferenceCa
 							Format: "",
 						},
 					},
-					"label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"vendor": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"created": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"size": {
+					"disk_id": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
 							Format: "int32",
@@ -15002,14 +14972,44 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImageSpec(ref common.ReferenceCa
 							Format: "int32",
 						},
 					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"created_by": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"is_public": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"size": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"vendor": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"disk_id", "description", "created_by", "deprecated", "is_public", "type", "expiry", "label", "vendor", "created", "size", "linode_id"},
+				Required: []string{"label", "created", "deprecated", "type", "expiry", "disk_id", "linode_id", "description", "created_by", "is_public", "size", "vendor"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeImageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_ImageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15035,7 +15035,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeImageStatus(ref common.Reference
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Instance(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15062,27 +15062,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstance(ref common.ReferenceCal
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeInstanceList is a list of LinodeInstances",
+				Description: "InstanceList is a list of Instances",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -15106,12 +15106,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceList(ref common.Referenc
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeInstance CRD objects",
+							Description: "Items is a list of Instance CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstance"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Instance"),
 									},
 								},
 							},
@@ -15121,17 +15121,23 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstance"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Instance"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
 					"image": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"label": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -15150,13 +15156,160 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpec(ref common.Referenc
 							},
 						},
 					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"private_ip": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ipv6": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"authorized_keys": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"ipv4": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"config": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
+									},
+								},
+							},
+						},
+					},
+					"backup_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"private_ip_address": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"authorized_users": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"stackscript_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
 					"region": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
-					"private_ip_address": {
+					"root_pass": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"swap_size": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"backups_enabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"alerts": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
+									},
+								},
+							},
+						},
+					},
+					"boot_config_label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"disk": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
+									},
+								},
+							},
+						},
+					},
+					"ip_address": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -15182,19 +15335,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpec(ref common.Referenc
 							},
 						},
 					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"specs": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
 									},
 								},
 							},
@@ -15206,169 +15353,22 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpec(ref common.Referenc
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
-									},
-								},
-							},
-						},
-					},
-					"group": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"ipv6": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"ipv4": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"swap_size": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"backups_enabled": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"backup_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"boot_config_label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"authorized_users": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"root_pass": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"alerts": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
-									},
-								},
-							},
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"private_ip": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"authorized_keys": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"stackscript_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"ip_address": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"config": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
-									},
-								},
-							},
-						},
-					},
-					"disk": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"),
 									},
 								},
 							},
 						},
 					},
 				},
-				Required: []string{"image", "tags", "region", "private_ip_address", "watchdog_enabled", "stackscript_data", "type", "specs", "backups", "group", "ipv6", "ipv4", "swap_size", "backups_enabled", "backup_id", "boot_config_label", "authorized_users", "root_pass", "alerts", "status", "label", "private_ip", "authorized_keys", "stackscript_id", "ip_address", "config", "disk"},
+				Required: []string{"image", "label", "tags", "type", "status", "private_ip", "group", "ipv6", "authorized_keys", "ipv4", "config", "backup_id", "private_ip_address", "authorized_users", "stackscript_id", "region", "root_pass", "swap_size", "backups_enabled", "alerts", "boot_config_label", "disk", "ip_address", "watchdog_enabled", "stackscript_data", "specs", "backups"},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpec"},
+			"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpec"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecAlerts(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecAlerts(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15411,7 +15411,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecAlerts(ref common.Re
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackups(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecBackups(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15429,7 +15429,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackups(ref common.R
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecBackups"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecBackups"),
 									},
 								},
 							},
@@ -15440,42 +15440,90 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackups(ref common.R
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecBackups"},
+			"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecBackups"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecBackupsSchedule(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecBackupsSchedule(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"window": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"day": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
+					"window": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"window", "day"},
+				Required: []string{"day", "window"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"memory_limit": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"devices": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfig"),
+									},
+								},
+							},
+						},
+					},
+					"kernel": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"virt_mode": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"helpers": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfig"),
+									},
+								},
+							},
+						},
+					},
+					"run_level": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -15493,148 +15541,28 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfig(ref common.Re
 							Format: "",
 						},
 					},
-					"label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"devices": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfig"),
-									},
-								},
-							},
-						},
-					},
-					"kernel": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"helpers": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfig"),
-									},
-								},
-							},
-						},
-					},
-					"run_level": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"memory_limit": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
 				},
-				Required: []string{"virt_mode", "root_device", "comments", "label", "devices", "kernel", "helpers", "run_level", "memory_limit"},
+				Required: []string{"memory_limit", "label", "devices", "kernel", "virt_mode", "helpers", "run_level", "root_device", "comments"},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfig"},
+			"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfig"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevices(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevices(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"sdh": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
-					"sda": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
-					"sdb": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
-					"sdc": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
-					"sdd": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
-					"sde": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
-									},
-								},
-							},
-						},
-					},
 					"sdf": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
 									},
 								},
 							},
@@ -15646,22 +15574,94 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevices(ref co
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sdh": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sda": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sdb": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sdc": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sdd": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
+									},
+								},
+							},
+						},
+					},
+					"sde": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"),
 									},
 								},
 							},
 						},
 					},
 				},
-				Required: []string{"sdh", "sda", "sdb", "sdc", "sdd", "sde", "sdf", "sdg"},
+				Required: []string{"sdf", "sdg", "sdh", "sda", "sdb", "sdc", "sdd", "sde"},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeInstanceSpecConfigDevices"},
+			"kubeform.dev/kubeform/apis/linode/v1alpha1.InstanceSpecConfigDevices"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSda(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSda(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15692,7 +15692,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSda(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdb(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdb(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15723,38 +15723,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdb(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdc(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"volume_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"disk_label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"disk_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-				},
-				Required: []string{"volume_id", "disk_label", "disk_id"},
-			},
-		},
-	}
-}
-
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdd(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdc(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15785,38 +15754,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdd(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSde(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"volume_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"disk_label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"disk_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-				},
-				Required: []string{"volume_id", "disk_label", "disk_id"},
-			},
-		},
-	}
-}
-
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdf(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdd(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15847,7 +15785,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdf(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdg(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSde(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15878,7 +15816,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdg(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdh(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdf(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15909,7 +15847,69 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigDevicesSdh(ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigHelpers(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdg(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"disk_label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"disk_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"volume_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+				},
+				Required: []string{"disk_label", "disk_id", "volume_id"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigDevicesSdh(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"disk_label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"disk_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"volume_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+				},
+				Required: []string{"disk_label", "disk_id", "volume_id"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecConfigHelpers(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -15952,34 +15952,23 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecConfigHelpers(ref co
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecDisk(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecDisk(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"id": {
+					"stackscript_id": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
 							Format: "int32",
 						},
 					},
-					"image": {
+					"stackscript_data": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"authorized_users": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Type:   []string{"string"},
@@ -15989,7 +15978,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecDisk(ref common.Refe
 							},
 						},
 					},
-					"size": {
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"id": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
 							Format: "int32",
@@ -16020,17 +16015,10 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecDisk(ref common.Refe
 							},
 						},
 					},
-					"stackscript_id": {
+					"authorized_users": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"stackscript_data": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Type:   []string{"string"},
@@ -16046,14 +16034,26 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecDisk(ref common.Refe
 							Format: "",
 						},
 					},
+					"size": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"label", "id", "image", "authorized_users", "size", "filesystem", "read_only", "authorized_keys", "stackscript_id", "stackscript_data", "root_pass"},
+				Required: []string{"stackscript_id", "stackscript_data", "label", "id", "filesystem", "read_only", "authorized_keys", "authorized_users", "root_pass", "size", "image"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecSpecs(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceSpecSpecs(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16090,7 +16090,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceSpecSpecs(ref common.Ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_InstanceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16116,7 +16116,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeInstanceStatus(ref common.Refere
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Nodebalancer(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16143,23 +16143,23 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancer(ref common.Referenc
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16186,27 +16186,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfig(ref common.Re
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfigStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfigStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeNodebalancerConfigList is a list of LinodeNodebalancerConfigs",
+				Description: "NodebalancerConfigList is a list of NodebalancerConfigs",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -16230,12 +16230,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigList(ref commo
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeNodebalancerConfig CRD objects",
+							Description: "Items is a list of NodebalancerConfig CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfig"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfig"),
 									},
 								},
 							},
@@ -16245,37 +16245,31 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigList(ref commo
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerConfig"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerConfig"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"check_attempts": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"stickiness": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"check_path": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"ssl_cert": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"check_body": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"check_passive": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
 							Format: "",
 						},
 					},
@@ -16285,58 +16279,10 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpec(ref commo
 							Format: "",
 						},
 					},
-					"ssl_fingerprint": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"check_timeout": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"check": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"stickiness": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"ssl_commonname": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
-						},
-					},
-					"nodebalancer_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"check_interval": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"check_attempts": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
 						},
 					},
 					"node_status": {
@@ -16365,20 +16311,74 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpec(ref commo
 							Format: "",
 						},
 					},
+					"check_body": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"check_passive": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"ssl_key": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
+					"nodebalancer_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"check_timeout": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"check_interval": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"check": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ssl_fingerprint": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ssl_cert": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"check_path", "ssl_cert", "check_body", "check_passive", "cipher_suite", "ssl_fingerprint", "port", "check_timeout", "check", "stickiness", "ssl_commonname", "nodebalancer_id", "check_interval", "check_attempts", "node_status", "protocol", "algorithm", "ssl_key"},
+				Required: []string{"check_attempts", "stickiness", "check_path", "cipher_suite", "ssl_commonname", "node_status", "protocol", "algorithm", "check_body", "check_passive", "ssl_key", "nodebalancer_id", "port", "check_timeout", "check_interval", "check", "ssl_fingerprint", "ssl_cert"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpecNodeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigSpecNodeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16403,7 +16403,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigSpecNodeStatus
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16429,11 +16429,11 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerConfigStatus(ref com
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeNodebalancerList is a list of LinodeNodebalancers",
+				Description: "NodebalancerList is a list of Nodebalancers",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -16457,12 +16457,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerList(ref common.Refe
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeNodebalancer CRD objects",
+							Description: "Items is a list of Nodebalancer CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancer"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Nodebalancer"),
 									},
 								},
 							},
@@ -16472,11 +16472,11 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerList(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancer"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Nodebalancer"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNode(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerNode(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16503,27 +16503,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNode(ref common.Refe
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNodeStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNodeStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeNodebalancerNodeList is a list of LinodeNodebalancerNodes",
+				Description: "NodebalancerNodeList is a list of NodebalancerNodes",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -16547,12 +16547,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeList(ref common.
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeNodebalancerNode CRD objects",
+							Description: "Items is a list of NodebalancerNode CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNode"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNode"),
 									},
 								},
 							},
@@ -16562,16 +16562,28 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeList(ref common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeNodebalancerNode"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.NodebalancerNode"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"nodebalancer_id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
 					"config_id": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"integer"},
@@ -16602,26 +16614,14 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeSpec(ref common.
 							Format: "",
 						},
 					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"nodebalancer_id": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
 				},
-				Required: []string{"config_id", "label", "weight", "mode", "address", "status", "nodebalancer_id"},
+				Required: []string{"status", "nodebalancer_id", "config_id", "label", "weight", "mode", "address"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerNodeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16647,7 +16647,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerNodeStatus(ref commo
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16657,39 +16657,6 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpec(ref common.Refe
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
-						},
-					},
-					"client_conn_throttle": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
-					"transfer": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"tags": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
 						},
 					},
 					"region": {
@@ -16722,6 +16689,39 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpec(ref common.Refe
 							Format: "",
 						},
 					},
+					"transfer": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"client_conn_throttle": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
 					"updated": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -16729,13 +16729,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpec(ref common.Refe
 						},
 					},
 				},
-				Required: []string{"label", "client_conn_throttle", "transfer", "tags", "region", "hostname", "ipv4", "ipv6", "created", "updated"},
+				Required: []string{"label", "region", "hostname", "ipv4", "ipv6", "created", "transfer", "tags", "client_conn_throttle", "updated"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpecTransfer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerSpecTransfer(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16766,7 +16766,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerSpecTransfer(ref com
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_NodebalancerStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16792,7 +16792,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeNodebalancerStatus(ref common.Re
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeRdns(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Rdns(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16819,27 +16819,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeRdns(ref common.ReferenceCallbac
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdnsStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.RdnsStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_RdnsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeRdnsList is a list of LinodeRdnss",
+				Description: "RdnsList is a list of Rdnss",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -16863,12 +16863,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsList(ref common.ReferenceCal
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeRdns CRD objects",
+							Description: "Items is a list of Rdns CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdns"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Rdns"),
 									},
 								},
 							},
@@ -16878,36 +16878,36 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsList(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeRdns"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Rdns"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_RdnsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"rdns": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"address": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
+					"rdns": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"rdns", "address"},
+				Required: []string{"address", "rdns"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_RdnsStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16933,7 +16933,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeRdnsStatus(ref common.ReferenceC
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeSshkey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Sshkey(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -16960,27 +16960,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeSshkey(ref common.ReferenceCallb
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeySpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeyStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeyStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeySpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkeyStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeySpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.SshkeyStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_SshkeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeSshkeyList is a list of LinodeSshkeys",
+				Description: "SshkeyList is a list of Sshkeys",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -17004,12 +17004,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyList(ref common.ReferenceC
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeSshkey CRD objects",
+							Description: "Items is a list of Sshkey CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkey"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Sshkey"),
 									},
 								},
 							},
@@ -17019,11 +17019,11 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeSshkey"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Sshkey"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_SshkeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17054,7 +17054,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeySpec(ref common.ReferenceC
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_SshkeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17080,7 +17080,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeSshkeyStatus(ref common.Referenc
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeStackscript(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Stackscript(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17107,27 +17107,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscript(ref common.Reference
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_StackscriptList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeStackscriptList is a list of LinodeStackscripts",
+				Description: "StackscriptList is a list of Stackscripts",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -17151,12 +17151,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptList(ref common.Refer
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeStackscript CRD objects",
+							Description: "Items is a list of Stackscript CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscript"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Stackscript"),
 									},
 								},
 							},
@@ -17166,17 +17166,35 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptList(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscript"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Stackscript"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_StackscriptSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"updated": {
+					"rev_note": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"deployments_active": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"deployments_total": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"username": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -17188,25 +17206,19 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpec"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpec"),
 									},
 								},
 							},
 						},
 					},
-					"script": {
+					"label": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
-					"rev_note": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"username": {
+					"description": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -17225,22 +17237,10 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref common.Refer
 							},
 						},
 					},
-					"deployments_active": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
-						},
-					},
 					"user_gravatar_id": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
-						},
-					},
-					"deployments_total": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
 						},
 					},
 					"created": {
@@ -17249,13 +17249,13 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref common.Refer
 							Format: "",
 						},
 					},
-					"label": {
+					"updated": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
-					"description": {
+					"script": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -17268,32 +17268,20 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpec(ref common.Refer
 						},
 					},
 				},
-				Required: []string{"updated", "user_defined_fields", "script", "rev_note", "username", "images", "deployments_active", "user_gravatar_id", "deployments_total", "created", "label", "description", "is_public"},
+				Required: []string{"rev_note", "deployments_active", "deployments_total", "username", "user_defined_fields", "label", "description", "images", "user_gravatar_id", "created", "updated", "script", "is_public"},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeStackscriptSpec"},
+			"kubeform.dev/kubeform/apis/linode/v1alpha1.StackscriptSpec"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpecUserDefinedFields(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_StackscriptSpecUserDefinedFields(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"example": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"one_of": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"many_of": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -17318,14 +17306,26 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptSpecUserDefinedFields
 							Format: "",
 						},
 					},
+					"example": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"one_of": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
-				Required: []string{"example", "one_of", "many_of", "default", "label", "name"},
+				Required: []string{"many_of", "default", "label", "name", "example", "one_of"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_StackscriptStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17351,7 +17351,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeStackscriptStatus(ref common.Ref
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Token(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17378,27 +17378,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeToken(ref common.ReferenceCallba
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.TokenSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.TokenStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeTokenStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.TokenSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.TokenStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_TokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeTokenList is a list of LinodeTokens",
+				Description: "TokenList is a list of Tokens",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -17422,12 +17422,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeTokenList(ref common.ReferenceCa
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeToken CRD objects",
+							Description: "Items is a list of Token CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeToken"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Token"),
 									},
 								},
 							},
@@ -17437,16 +17437,28 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeTokenList(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeToken"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Token"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_TokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"scopes": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -17465,26 +17477,14 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeTokenSpec(ref common.ReferenceCa
 							Format: "",
 						},
 					},
-					"token": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"label": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 				},
-				Required: []string{"scopes", "expiry", "created", "token", "label"},
+				Required: []string{"token", "label", "scopes", "expiry", "created"},
 			},
 		},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_TokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17510,7 +17510,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeTokenStatus(ref common.Reference
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeVolume(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_Volume(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17537,27 +17537,27 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeVolume(ref common.ReferenceCallb
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeSpec"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeStatus"),
+							Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolumeStatus"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeSpec", "kubeform.dev/kubeform/apis/linode/v1alpha1.VolumeStatus"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_VolumeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "LinodeVolumeList is a list of LinodeVolumes",
+				Description: "VolumeList is a list of Volumes",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -17581,12 +17581,12 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeList(ref common.ReferenceC
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Items is a list of LinodeVolume CRD objects",
+							Description: "Items is a list of Volume CRD objects",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolume"),
+										Ref: ref("kubeform.dev/kubeform/apis/linode/v1alpha1.Volume"),
 									},
 								},
 							},
@@ -17596,11 +17596,11 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.LinodeVolume"},
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/linode/v1alpha1.Volume"},
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_VolumeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -17662,7 +17662,7 @@ func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeSpec(ref common.ReferenceC
 	}
 }
 
-func schema_kubeform_apis_linode_v1alpha1_LinodeVolumeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kubeform_apis_linode_v1alpha1_VolumeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
