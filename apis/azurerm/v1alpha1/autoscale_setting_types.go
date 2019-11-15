@@ -34,127 +34,127 @@ import (
 
 type AutoscaleSetting struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutoscaleSettingSpec   `json:"spec,omitempty"`
-	Status            AutoscaleSettingStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutoscaleSettingSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutoscaleSettingStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutoscaleSettingSpecNotificationEmail struct {
 	// +optional
-	CustomEmails []string `json:"customEmails,omitempty" tf:"custom_emails,omitempty"`
+	CustomEmails []string `json:"customEmails,omitempty" tf:"custom_emails,omitempty" protobuf:"bytes,1,rep,name=customEmails"`
 	// +optional
-	SendToSubscriptionAdministrator bool `json:"sendToSubscriptionAdministrator,omitempty" tf:"send_to_subscription_administrator,omitempty"`
+	SendToSubscriptionAdministrator bool `json:"sendToSubscriptionAdministrator,omitempty" tf:"send_to_subscription_administrator,omitempty" protobuf:"varint,2,opt,name=sendToSubscriptionAdministrator"`
 	// +optional
-	SendToSubscriptionCoAdministrator bool `json:"sendToSubscriptionCoAdministrator,omitempty" tf:"send_to_subscription_co_administrator,omitempty"`
+	SendToSubscriptionCoAdministrator bool `json:"sendToSubscriptionCoAdministrator,omitempty" tf:"send_to_subscription_co_administrator,omitempty" protobuf:"varint,3,opt,name=sendToSubscriptionCoAdministrator"`
 }
 
 type AutoscaleSettingSpecNotificationWebhook struct {
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
-	ServiceURI string            `json:"serviceURI" tf:"service_uri"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,1,rep,name=properties"`
+	ServiceURI string            `json:"serviceURI" tf:"service_uri" protobuf:"bytes,2,opt,name=serviceURI"`
 }
 
 type AutoscaleSettingSpecNotification struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Email []AutoscaleSettingSpecNotificationEmail `json:"email,omitempty" tf:"email,omitempty"`
+	Email []AutoscaleSettingSpecNotificationEmail `json:"email,omitempty" tf:"email,omitempty" protobuf:"bytes,1,rep,name=email"`
 	// +optional
-	Webhook []AutoscaleSettingSpecNotificationWebhook `json:"webhook,omitempty" tf:"webhook,omitempty"`
+	Webhook []AutoscaleSettingSpecNotificationWebhook `json:"webhook,omitempty" tf:"webhook,omitempty" protobuf:"bytes,2,rep,name=webhook"`
 }
 
 type AutoscaleSettingSpecProfileCapacity struct {
-	Default int64 `json:"default" tf:"default"`
-	Maximum int64 `json:"maximum" tf:"maximum"`
-	Minimum int64 `json:"minimum" tf:"minimum"`
+	Default int64 `json:"default" tf:"default" protobuf:"varint,1,opt,name=default"`
+	Maximum int64 `json:"maximum" tf:"maximum" protobuf:"varint,2,opt,name=maximum"`
+	Minimum int64 `json:"minimum" tf:"minimum" protobuf:"varint,3,opt,name=minimum"`
 }
 
 type AutoscaleSettingSpecProfileFixedDate struct {
-	End   string `json:"end" tf:"end"`
-	Start string `json:"start" tf:"start"`
+	End   string `json:"end" tf:"end" protobuf:"bytes,1,opt,name=end"`
+	Start string `json:"start" tf:"start" protobuf:"bytes,2,opt,name=start"`
 	// +optional
-	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty" protobuf:"bytes,3,opt,name=timezone"`
 }
 
 type AutoscaleSettingSpecProfileRecurrence struct {
-	Days []string `json:"days" tf:"days"`
+	Days []string `json:"days" tf:"days" protobuf:"bytes,1,rep,name=days"`
 	// +kubebuilder:validation:MaxItems=1
-	Hours []int64 `json:"hours" tf:"hours"`
+	Hours []int64 `json:"hours" tf:"hours" protobuf:"varint,2,rep,name=hours"`
 	// +kubebuilder:validation:MaxItems=1
-	Minutes []int64 `json:"minutes" tf:"minutes"`
+	Minutes []int64 `json:"minutes" tf:"minutes" protobuf:"varint,3,rep,name=minutes"`
 	// +optional
-	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty" protobuf:"bytes,4,opt,name=timezone"`
 }
 
 type AutoscaleSettingSpecProfileRuleMetricTrigger struct {
-	MetricName       string  `json:"metricName" tf:"metric_name"`
-	MetricResourceID string  `json:"metricResourceID" tf:"metric_resource_id"`
-	Operator         string  `json:"operator" tf:"operator"`
-	Statistic        string  `json:"statistic" tf:"statistic"`
-	Threshold        float64 `json:"threshold" tf:"threshold"`
-	TimeAggregation  string  `json:"timeAggregation" tf:"time_aggregation"`
-	TimeGrain        string  `json:"timeGrain" tf:"time_grain"`
-	TimeWindow       string  `json:"timeWindow" tf:"time_window"`
+	MetricName       string  `json:"metricName" tf:"metric_name" protobuf:"bytes,1,opt,name=metricName"`
+	MetricResourceID string  `json:"metricResourceID" tf:"metric_resource_id" protobuf:"bytes,2,opt,name=metricResourceID"`
+	Operator         string  `json:"operator" tf:"operator" protobuf:"bytes,3,opt,name=operator"`
+	Statistic        string  `json:"statistic" tf:"statistic" protobuf:"bytes,4,opt,name=statistic"`
+	Threshold        float64 `json:"threshold" tf:"threshold" protobuf:"fixed64,5,opt,name=threshold"`
+	TimeAggregation  string  `json:"timeAggregation" tf:"time_aggregation" protobuf:"bytes,6,opt,name=timeAggregation"`
+	TimeGrain        string  `json:"timeGrain" tf:"time_grain" protobuf:"bytes,7,opt,name=timeGrain"`
+	TimeWindow       string  `json:"timeWindow" tf:"time_window" protobuf:"bytes,8,opt,name=timeWindow"`
 }
 
 type AutoscaleSettingSpecProfileRuleScaleAction struct {
-	Cooldown  string `json:"cooldown" tf:"cooldown"`
-	Direction string `json:"direction" tf:"direction"`
-	Type      string `json:"type" tf:"type"`
-	Value     int64  `json:"value" tf:"value"`
+	Cooldown  string `json:"cooldown" tf:"cooldown" protobuf:"bytes,1,opt,name=cooldown"`
+	Direction string `json:"direction" tf:"direction" protobuf:"bytes,2,opt,name=direction"`
+	Type      string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
+	Value     int64  `json:"value" tf:"value" protobuf:"varint,4,opt,name=value"`
 }
 
 type AutoscaleSettingSpecProfileRule struct {
 	// +kubebuilder:validation:MaxItems=1
-	MetricTrigger []AutoscaleSettingSpecProfileRuleMetricTrigger `json:"metricTrigger" tf:"metric_trigger"`
+	MetricTrigger []AutoscaleSettingSpecProfileRuleMetricTrigger `json:"metricTrigger" tf:"metric_trigger" protobuf:"bytes,1,rep,name=metricTrigger"`
 	// +kubebuilder:validation:MaxItems=1
-	ScaleAction []AutoscaleSettingSpecProfileRuleScaleAction `json:"scaleAction" tf:"scale_action"`
+	ScaleAction []AutoscaleSettingSpecProfileRuleScaleAction `json:"scaleAction" tf:"scale_action" protobuf:"bytes,2,rep,name=scaleAction"`
 }
 
 type AutoscaleSettingSpecProfile struct {
 	// +kubebuilder:validation:MaxItems=1
-	Capacity []AutoscaleSettingSpecProfileCapacity `json:"capacity" tf:"capacity"`
+	Capacity []AutoscaleSettingSpecProfileCapacity `json:"capacity" tf:"capacity" protobuf:"bytes,1,rep,name=capacity"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FixedDate []AutoscaleSettingSpecProfileFixedDate `json:"fixedDate,omitempty" tf:"fixed_date,omitempty"`
-	Name      string                                 `json:"name" tf:"name"`
+	FixedDate []AutoscaleSettingSpecProfileFixedDate `json:"fixedDate,omitempty" tf:"fixed_date,omitempty" protobuf:"bytes,2,rep,name=fixedDate"`
+	Name      string                                 `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Recurrence []AutoscaleSettingSpecProfileRecurrence `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
+	Recurrence []AutoscaleSettingSpecProfileRecurrence `json:"recurrence,omitempty" tf:"recurrence,omitempty" protobuf:"bytes,4,rep,name=recurrence"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=10
-	Rule []AutoscaleSettingSpecProfileRule `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule []AutoscaleSettingSpecProfileRule `json:"rule,omitempty" tf:"rule,omitempty" protobuf:"bytes,5,rep,name=rule"`
 }
 
 type AutoscaleSettingSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Enabled  bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	Enabled  bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,3,opt,name=enabled"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Notification []AutoscaleSettingSpecNotification `json:"notification,omitempty" tf:"notification,omitempty"`
+	Notification []AutoscaleSettingSpecNotification `json:"notification,omitempty" tf:"notification,omitempty" protobuf:"bytes,6,rep,name=notification"`
 	// +kubebuilder:validation:MaxItems=20
-	Profile           []AutoscaleSettingSpecProfile `json:"profile" tf:"profile"`
-	ResourceGroupName string                        `json:"resourceGroupName" tf:"resource_group_name"`
+	Profile           []AutoscaleSettingSpecProfile `json:"profile" tf:"profile" protobuf:"bytes,7,rep,name=profile"`
+	ResourceGroupName string                        `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Tags             map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	TargetResourceID string            `json:"targetResourceID" tf:"target_resource_id"`
+	Tags             map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
+	TargetResourceID string            `json:"targetResourceID" tf:"target_resource_id" protobuf:"bytes,10,opt,name=targetResourceID"`
 }
 
 type AutoscaleSettingStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutoscaleSettingSpec `json:"output,omitempty"`
+	Output *AutoscaleSettingSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -163,7 +163,7 @@ type AutoscaleSettingStatus struct {
 // AutoscaleSettingList is a list of AutoscaleSettings
 type AutoscaleSettingList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutoscaleSetting CRD objects
-	Items []AutoscaleSetting `json:"items,omitempty"`
+	Items []AutoscaleSetting `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

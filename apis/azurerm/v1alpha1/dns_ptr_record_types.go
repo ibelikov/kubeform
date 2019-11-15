@@ -34,35 +34,35 @@ import (
 
 type DnsPtrRecord struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DnsPtrRecordSpec   `json:"spec,omitempty"`
-	Status            DnsPtrRecordStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DnsPtrRecordSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DnsPtrRecordStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DnsPtrRecordSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Name              string   `json:"name" tf:"name"`
-	Records           []string `json:"records" tf:"records"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Records           []string `json:"records" tf:"records" protobuf:"bytes,4,rep,name=records"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 	// +optional
-	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Ttl      int64             `json:"ttl" tf:"ttl"`
-	ZoneName string            `json:"zoneName" tf:"zone_name"`
+	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,6,rep,name=tags"`
+	Ttl      int64             `json:"ttl" tf:"ttl" protobuf:"varint,7,opt,name=ttl"`
+	ZoneName string            `json:"zoneName" tf:"zone_name" protobuf:"bytes,8,opt,name=zoneName"`
 }
 
 type DnsPtrRecordStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DnsPtrRecordSpec `json:"output,omitempty"`
+	Output *DnsPtrRecordSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type DnsPtrRecordStatus struct {
 // DnsPtrRecordList is a list of DnsPtrRecords
 type DnsPtrRecordList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DnsPtrRecord CRD objects
-	Items []DnsPtrRecord `json:"items,omitempty"`
+	Items []DnsPtrRecord `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

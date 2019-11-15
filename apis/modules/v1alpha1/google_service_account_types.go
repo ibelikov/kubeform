@@ -34,90 +34,90 @@ import (
 
 type GoogleServiceAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GoogleServiceAccountSpec   `json:"spec,omitempty"`
-	Status            GoogleServiceAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              GoogleServiceAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            GoogleServiceAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type GoogleServiceAccountSpec struct {
 	// +optional
-	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
-	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,1,opt,name=secretRef"`
+	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-" protobuf:"bytes,2,opt,name=providerRef"`
 	// +optional
-	Source string `json:"source" tf:"source"`
+	Source string `json:"source" tf:"source" protobuf:"bytes,3,opt,name=source"`
 
 	// +optional
 	// If assigning billing role, specificy a billing account (default is to assign at the organizational level).
-	BillingAccountID string `json:"billingAccountID,omitempty" tf:"billing_account_id,omitempty"`
+	BillingAccountID string `json:"billingAccountID,omitempty" tf:"billing_account_id,omitempty" protobuf:"bytes,4,opt,name=billingAccountID"`
 	// +optional
 	// Generate keys for service accounts.
-	GenerateKeys bool `json:"generateKeys,omitempty" tf:"generate_keys,omitempty"`
+	GenerateKeys bool `json:"generateKeys,omitempty" tf:"generate_keys,omitempty" protobuf:"varint,5,opt,name=generateKeys"`
 	// +optional
 	// Grant billing user role.
-	GrantBillingRole bool `json:"grantBillingRole,omitempty" tf:"grant_billing_role,omitempty"`
+	GrantBillingRole bool `json:"grantBillingRole,omitempty" tf:"grant_billing_role,omitempty" protobuf:"varint,6,opt,name=grantBillingRole"`
 	// +optional
 	// Grant roles for shared VPC management.
-	GrantXpnRoles bool `json:"grantXpnRoles,omitempty" tf:"grant_xpn_roles,omitempty"`
+	GrantXpnRoles bool `json:"grantXpnRoles,omitempty" tf:"grant_xpn_roles,omitempty" protobuf:"varint,7,opt,name=grantXpnRoles"`
 	// +optional
 	// Names of the service accounts to create.
-	Names []string `json:"names,omitempty" tf:"names,omitempty"`
+	Names []string `json:"names,omitempty" tf:"names,omitempty" protobuf:"bytes,8,rep,name=names"`
 	// +optional
 	// Id of the organization for org-level roles.
-	OrgID string `json:"orgID,omitempty" tf:"org_id,omitempty"`
+	OrgID string `json:"orgID,omitempty" tf:"org_id,omitempty" protobuf:"bytes,9,opt,name=orgID"`
 	// +optional
 	// Prefix applied to service account names.
-	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty" protobuf:"bytes,10,opt,name=prefix"`
 	// +optional
 	// Project id where service account will be created.
-	ProjectID string `json:"projectID,omitempty" tf:"project_id,omitempty"`
+	ProjectID string `json:"projectID,omitempty" tf:"project_id,omitempty" protobuf:"bytes,11,opt,name=projectID"`
 	// +optional
 	// Common roles to apply to all service accounts, project=>role as elements.
-	ProjectRoles []string `json:"projectRoles,omitempty" tf:"project_roles,omitempty"`
+	ProjectRoles []string `json:"projectRoles,omitempty" tf:"project_roles,omitempty" protobuf:"bytes,12,rep,name=projectRoles"`
 }
 
 type GoogleServiceAccountOutput struct {
 	// Service account email (for single use).
 	// +optional
-	Email string `json:"email" tf:"email"`
+	Email string `json:"email" tf:"email" protobuf:"bytes,1,opt,name=email"`
 	// Service account emails.
 	// +optional
-	Emails string `json:"emails" tf:"emails"`
+	Emails string `json:"emails" tf:"emails" protobuf:"bytes,2,opt,name=emails"`
 	// Service account emails.
 	// +optional
-	EmailsList string `json:"emailsList" tf:"emails_list"`
+	EmailsList string `json:"emailsList" tf:"emails_list" protobuf:"bytes,3,opt,name=emailsList"`
 	// IAM-format service account email (for single use).
 	// +optional
-	IamEmail string `json:"iamEmail" tf:"iam_email"`
+	IamEmail string `json:"iamEmail" tf:"iam_email" protobuf:"bytes,4,opt,name=iamEmail"`
 	// IAM-format service account emails.
 	// +optional
-	IamEmails string `json:"iamEmails" tf:"iam_emails"`
+	IamEmails string `json:"iamEmails" tf:"iam_emails" protobuf:"bytes,5,opt,name=iamEmails"`
 	// IAM-format service account emails.
 	// +optional
-	IamEmailsList string `json:"iamEmailsList" tf:"iam_emails_list"`
+	IamEmailsList string `json:"iamEmailsList" tf:"iam_emails_list" protobuf:"bytes,6,opt,name=iamEmailsList"`
 	// Service account key (for single use).
 	// +optional
-	Key string `json:"key" tf:"key"`
+	Key string `json:"key" tf:"key" protobuf:"bytes,7,opt,name=key"`
 	// Map of service account keys.
 	// +optional
-	Keys string `json:"keys" tf:"keys"`
+	Keys string `json:"keys" tf:"keys" protobuf:"bytes,8,opt,name=keys"`
 	// Service account resource (for single use).
 	// +optional
-	ServiceAccount string `json:"serviceAccount" tf:"service_account"`
+	ServiceAccount string `json:"serviceAccount" tf:"service_account" protobuf:"bytes,9,opt,name=serviceAccount"`
 	// Service account resources.
 	// +optional
-	ServiceAccounts string `json:"serviceAccounts" tf:"service_accounts"`
+	ServiceAccounts string `json:"serviceAccounts" tf:"service_accounts" protobuf:"bytes,10,opt,name=serviceAccounts"`
 }
 
 type GoogleServiceAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *GoogleServiceAccountOutput `json:"output,omitempty"`
+	Output *GoogleServiceAccountOutput `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State string `json:"state,omitempty"`
+	State string `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -126,7 +126,7 @@ type GoogleServiceAccountStatus struct {
 // GoogleServiceAccountList is a list of GoogleServiceAccounts
 type GoogleServiceAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of GoogleServiceAccount CRD objects
-	Items []GoogleServiceAccount `json:"items,omitempty"`
+	Items []GoogleServiceAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,42 +34,42 @@ import (
 
 type Token struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TokenSpec   `json:"spec,omitempty"`
-	Status            TokenStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              TokenSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            TokenStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type TokenSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The date and time this token was created.
 	// +optional
-	Created string `json:"created,omitempty" tf:"created,omitempty"`
+	Created string `json:"created,omitempty" tf:"created,omitempty" protobuf:"bytes,3,opt,name=created"`
 	// When this token will expire. Personal Access Tokens cannot be renewed, so after this time the token will be completely unusable and a new token will need to be generated. Tokens may be created with 'null' as their expiry and will never expire unless revoked.
 	// +optional
-	Expiry string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+	Expiry string `json:"expiry,omitempty" tf:"expiry,omitempty" protobuf:"bytes,4,opt,name=expiry"`
 	// The label of the Linode Token.
 	// +optional
-	Label string `json:"label,omitempty" tf:"label,omitempty"`
+	Label string `json:"label,omitempty" tf:"label,omitempty" protobuf:"bytes,5,opt,name=label"`
 	// The scopes this token was created with. These define what parts of the Account the token can be used to access. Many command-line tools, such as the Linode CLI, require tokens with access to *. Tokens with more restrictive scopes are generally more secure.
-	Scopes string `json:"scopes" tf:"scopes"`
+	Scopes string `json:"scopes" tf:"scopes" protobuf:"bytes,6,opt,name=scopes"`
 	// The token used to access the API.
 	// +optional
-	Token string `json:"token,omitempty" tf:"token,omitempty"`
+	Token string `json:"token,omitempty" tf:"token,omitempty" protobuf:"bytes,7,opt,name=token"`
 }
 
 type TokenStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *TokenSpec `json:"output,omitempty"`
+	Output *TokenSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type TokenStatus struct {
 // TokenList is a list of Tokens
 type TokenList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Token CRD objects
-	Items []Token `json:"items,omitempty"`
+	Items []Token `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

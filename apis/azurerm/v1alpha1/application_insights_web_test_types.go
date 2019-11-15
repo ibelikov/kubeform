@@ -34,50 +34,50 @@ import (
 
 type ApplicationInsightsWebTest struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsWebTestSpec   `json:"spec,omitempty"`
-	Status            ApplicationInsightsWebTestStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApplicationInsightsWebTestSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApplicationInsightsWebTestStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApplicationInsightsWebTestSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApplicationInsightsID string `json:"applicationInsightsID" tf:"application_insights_id"`
-	Configuration         string `json:"configuration" tf:"configuration"`
+	ApplicationInsightsID string `json:"applicationInsightsID" tf:"application_insights_id" protobuf:"bytes,3,opt,name=applicationInsightsID"`
+	Configuration         string `json:"configuration" tf:"configuration" protobuf:"bytes,4,opt,name=configuration"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,6,opt,name=enabled"`
 	// +optional
-	Frequency int64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	Frequency int64 `json:"frequency,omitempty" tf:"frequency,omitempty" protobuf:"varint,7,opt,name=frequency"`
 	// +kubebuilder:validation:MinItems=1
-	GeoLocations      []string `json:"geoLocations" tf:"geo_locations"`
-	Kind              string   `json:"kind" tf:"kind"`
-	Location          string   `json:"location" tf:"location"`
-	Name              string   `json:"name" tf:"name"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	GeoLocations      []string `json:"geoLocations" tf:"geo_locations" protobuf:"bytes,8,rep,name=geoLocations"`
+	Kind              string   `json:"kind" tf:"kind" protobuf:"bytes,9,opt,name=kind"`
+	Location          string   `json:"location" tf:"location" protobuf:"bytes,10,opt,name=location"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,11,opt,name=name"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
 	// +optional
-	RetryEnabled bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
+	RetryEnabled bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty" protobuf:"varint,13,opt,name=retryEnabled"`
 	// +optional
-	SyntheticMonitorID string `json:"syntheticMonitorID,omitempty" tf:"synthetic_monitor_id,omitempty"`
+	SyntheticMonitorID string `json:"syntheticMonitorID,omitempty" tf:"synthetic_monitor_id,omitempty" protobuf:"bytes,14,opt,name=syntheticMonitorID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,15,rep,name=tags"`
 	// +optional
-	Timeout int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout int64 `json:"timeout,omitempty" tf:"timeout,omitempty" protobuf:"varint,16,opt,name=timeout"`
 }
 
 type ApplicationInsightsWebTestStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApplicationInsightsWebTestSpec `json:"output,omitempty"`
+	Output *ApplicationInsightsWebTestSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -86,7 +86,7 @@ type ApplicationInsightsWebTestStatus struct {
 // ApplicationInsightsWebTestList is a list of ApplicationInsightsWebTests
 type ApplicationInsightsWebTestList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApplicationInsightsWebTest CRD objects
-	Items []ApplicationInsightsWebTest `json:"items,omitempty"`
+	Items []ApplicationInsightsWebTest `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

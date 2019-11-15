@@ -34,46 +34,46 @@ import (
 
 type ComputeSSLCertificate struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeSSLCertificateSpec   `json:"spec,omitempty"`
-	Status            ComputeSSLCertificateStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeSSLCertificateSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeSSLCertificateStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeSSLCertificateSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	Certificate string `json:"-" sensitive:"true" tf:"certificate"`
 	// +optional
-	CertificateID int64 `json:"certificateID,omitempty" tf:"certificate_id,omitempty"`
+	CertificateID int64 `json:"certificateID,omitempty" tf:"certificate_id,omitempty" protobuf:"varint,4,opt,name=certificateID"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,5,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty" protobuf:"bytes,8,opt,name=namePrefix"`
 	PrivateKey string `json:"-" sensitive:"true" tf:"private_key"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,9,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,10,opt,name=selfLink"`
 }
 
 type ComputeSSLCertificateStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeSSLCertificateSpec `json:"output,omitempty"`
+	Output *ComputeSSLCertificateSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type ComputeSSLCertificateStatus struct {
 // ComputeSSLCertificateList is a list of ComputeSSLCertificates
 type ComputeSSLCertificateList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeSSLCertificate CRD objects
-	Items []ComputeSSLCertificate `json:"items,omitempty"`
+	Items []ComputeSSLCertificate `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

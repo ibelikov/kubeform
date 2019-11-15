@@ -34,63 +34,63 @@ import (
 
 type NetworkPacketCapture struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkPacketCaptureSpec   `json:"spec,omitempty"`
-	Status            NetworkPacketCaptureStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NetworkPacketCaptureSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NetworkPacketCaptureStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NetworkPacketCaptureSpecFilter struct {
 	// +optional
-	LocalIPAddress string `json:"localIPAddress,omitempty" tf:"local_ip_address,omitempty"`
+	LocalIPAddress string `json:"localIPAddress,omitempty" tf:"local_ip_address,omitempty" protobuf:"bytes,1,opt,name=localIPAddress"`
 	// +optional
-	LocalPort string `json:"localPort,omitempty" tf:"local_port,omitempty"`
-	Protocol  string `json:"protocol" tf:"protocol"`
+	LocalPort string `json:"localPort,omitempty" tf:"local_port,omitempty" protobuf:"bytes,2,opt,name=localPort"`
+	Protocol  string `json:"protocol" tf:"protocol" protobuf:"bytes,3,opt,name=protocol"`
 	// +optional
-	RemoteIPAddress string `json:"remoteIPAddress,omitempty" tf:"remote_ip_address,omitempty"`
+	RemoteIPAddress string `json:"remoteIPAddress,omitempty" tf:"remote_ip_address,omitempty" protobuf:"bytes,4,opt,name=remoteIPAddress"`
 	// +optional
-	RemotePort string `json:"remotePort,omitempty" tf:"remote_port,omitempty"`
+	RemotePort string `json:"remotePort,omitempty" tf:"remote_port,omitempty" protobuf:"bytes,5,opt,name=remotePort"`
 }
 
 type NetworkPacketCaptureSpecStorageLocation struct {
 	// +optional
-	FilePath string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+	FilePath string `json:"filePath,omitempty" tf:"file_path,omitempty" protobuf:"bytes,1,opt,name=filePath"`
 	// +optional
-	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty" protobuf:"bytes,2,opt,name=storageAccountID"`
 	// +optional
-	StoragePath string `json:"storagePath,omitempty" tf:"storage_path,omitempty"`
+	StoragePath string `json:"storagePath,omitempty" tf:"storage_path,omitempty" protobuf:"bytes,3,opt,name=storagePath"`
 }
 
 type NetworkPacketCaptureSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Filter []NetworkPacketCaptureSpecFilter `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter []NetworkPacketCaptureSpecFilter `json:"filter,omitempty" tf:"filter,omitempty" protobuf:"bytes,3,rep,name=filter"`
 	// +optional
-	MaximumBytesPerPacket int64 `json:"maximumBytesPerPacket,omitempty" tf:"maximum_bytes_per_packet,omitempty"`
+	MaximumBytesPerPacket int64 `json:"maximumBytesPerPacket,omitempty" tf:"maximum_bytes_per_packet,omitempty" protobuf:"varint,4,opt,name=maximumBytesPerPacket"`
 	// +optional
-	MaximumBytesPerSession int64 `json:"maximumBytesPerSession,omitempty" tf:"maximum_bytes_per_session,omitempty"`
+	MaximumBytesPerSession int64 `json:"maximumBytesPerSession,omitempty" tf:"maximum_bytes_per_session,omitempty" protobuf:"varint,5,opt,name=maximumBytesPerSession"`
 	// +optional
-	MaximumCaptureDuration int64  `json:"maximumCaptureDuration,omitempty" tf:"maximum_capture_duration,omitempty"`
-	Name                   string `json:"name" tf:"name"`
-	NetworkWatcherName     string `json:"networkWatcherName" tf:"network_watcher_name"`
-	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
+	MaximumCaptureDuration int64  `json:"maximumCaptureDuration,omitempty" tf:"maximum_capture_duration,omitempty" protobuf:"varint,6,opt,name=maximumCaptureDuration"`
+	Name                   string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	NetworkWatcherName     string `json:"networkWatcherName" tf:"network_watcher_name" protobuf:"bytes,8,opt,name=networkWatcherName"`
+	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	StorageLocation  []NetworkPacketCaptureSpecStorageLocation `json:"storageLocation" tf:"storage_location"`
-	TargetResourceID string                                    `json:"targetResourceID" tf:"target_resource_id"`
+	StorageLocation  []NetworkPacketCaptureSpecStorageLocation `json:"storageLocation" tf:"storage_location" protobuf:"bytes,10,rep,name=storageLocation"`
+	TargetResourceID string                                    `json:"targetResourceID" tf:"target_resource_id" protobuf:"bytes,11,opt,name=targetResourceID"`
 }
 
 type NetworkPacketCaptureStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NetworkPacketCaptureSpec `json:"output,omitempty"`
+	Output *NetworkPacketCaptureSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -99,7 +99,7 @@ type NetworkPacketCaptureStatus struct {
 // NetworkPacketCaptureList is a list of NetworkPacketCaptures
 type NetworkPacketCaptureList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NetworkPacketCapture CRD objects
-	Items []NetworkPacketCapture `json:"items,omitempty"`
+	Items []NetworkPacketCapture `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

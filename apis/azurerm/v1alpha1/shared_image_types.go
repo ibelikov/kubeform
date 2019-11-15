@@ -34,51 +34,51 @@ import (
 
 type SharedImage struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedImageSpec   `json:"spec,omitempty"`
-	Status            SharedImageStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SharedImageSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SharedImageStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SharedImageSpecIdentifier struct {
-	Offer     string `json:"offer" tf:"offer"`
-	Publisher string `json:"publisher" tf:"publisher"`
-	Sku       string `json:"sku" tf:"sku"`
+	Offer     string `json:"offer" tf:"offer" protobuf:"bytes,1,opt,name=offer"`
+	Publisher string `json:"publisher" tf:"publisher" protobuf:"bytes,2,opt,name=publisher"`
+	Sku       string `json:"sku" tf:"sku" protobuf:"bytes,3,opt,name=sku"`
 }
 
 type SharedImageSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
 	// +optional
-	Eula        string `json:"eula,omitempty" tf:"eula,omitempty"`
-	GalleryName string `json:"galleryName" tf:"gallery_name"`
+	Eula        string `json:"eula,omitempty" tf:"eula,omitempty" protobuf:"bytes,4,opt,name=eula"`
+	GalleryName string `json:"galleryName" tf:"gallery_name" protobuf:"bytes,5,opt,name=galleryName"`
 	// +kubebuilder:validation:MaxItems=1
-	Identifier []SharedImageSpecIdentifier `json:"identifier" tf:"identifier"`
-	Location   string                      `json:"location" tf:"location"`
-	Name       string                      `json:"name" tf:"name"`
-	OsType     string                      `json:"osType" tf:"os_type"`
+	Identifier []SharedImageSpecIdentifier `json:"identifier" tf:"identifier" protobuf:"bytes,6,rep,name=identifier"`
+	Location   string                      `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
+	Name       string                      `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
+	OsType     string                      `json:"osType" tf:"os_type" protobuf:"bytes,9,opt,name=osType"`
 	// +optional
-	PrivacyStatementURI string `json:"privacyStatementURI,omitempty" tf:"privacy_statement_uri,omitempty"`
+	PrivacyStatementURI string `json:"privacyStatementURI,omitempty" tf:"privacy_statement_uri,omitempty" protobuf:"bytes,10,opt,name=privacyStatementURI"`
 	// +optional
-	ReleaseNoteURI    string `json:"releaseNoteURI,omitempty" tf:"release_note_uri,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ReleaseNoteURI    string `json:"releaseNoteURI,omitempty" tf:"release_note_uri,omitempty" protobuf:"bytes,11,opt,name=releaseNoteURI"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 }
 
 type SharedImageStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SharedImageSpec `json:"output,omitempty"`
+	Output *SharedImageSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -87,7 +87,7 @@ type SharedImageStatus struct {
 // SharedImageList is a list of SharedImages
 type SharedImageList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SharedImage CRD objects
-	Items []SharedImage `json:"items,omitempty"`
+	Items []SharedImage `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

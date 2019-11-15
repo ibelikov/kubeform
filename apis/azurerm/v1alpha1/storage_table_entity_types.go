@@ -34,33 +34,33 @@ import (
 
 type StorageTableEntity struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageTableEntitySpec   `json:"spec,omitempty"`
-	Status            StorageTableEntityStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageTableEntitySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageTableEntityStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageTableEntitySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Entity             map[string]string `json:"entity" tf:"entity"`
-	PartitionKey       string            `json:"partitionKey" tf:"partition_key"`
-	RowKey             string            `json:"rowKey" tf:"row_key"`
-	StorageAccountName string            `json:"storageAccountName" tf:"storage_account_name"`
-	TableName          string            `json:"tableName" tf:"table_name"`
+	Entity             map[string]string `json:"entity" tf:"entity" protobuf:"bytes,3,rep,name=entity"`
+	PartitionKey       string            `json:"partitionKey" tf:"partition_key" protobuf:"bytes,4,opt,name=partitionKey"`
+	RowKey             string            `json:"rowKey" tf:"row_key" protobuf:"bytes,5,opt,name=rowKey"`
+	StorageAccountName string            `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,6,opt,name=storageAccountName"`
+	TableName          string            `json:"tableName" tf:"table_name" protobuf:"bytes,7,opt,name=tableName"`
 }
 
 type StorageTableEntityStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageTableEntitySpec `json:"output,omitempty"`
+	Output *StorageTableEntitySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -69,7 +69,7 @@ type StorageTableEntityStatus struct {
 // StorageTableEntityList is a list of StorageTableEntitys
 type StorageTableEntityList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageTableEntity CRD objects
-	Items []StorageTableEntity `json:"items,omitempty"`
+	Items []StorageTableEntity `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,86 +34,86 @@ import (
 
 type ContainerService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerServiceSpec   `json:"spec,omitempty"`
-	Status            ContainerServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ContainerServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ContainerServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ContainerServiceSpecAgentPoolProfile struct {
 	// +optional
-	Count     int64  `json:"count,omitempty" tf:"count,omitempty"`
-	DnsPrefix string `json:"dnsPrefix" tf:"dns_prefix"`
+	Count     int64  `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
+	DnsPrefix string `json:"dnsPrefix" tf:"dns_prefix" protobuf:"bytes,2,opt,name=dnsPrefix"`
 	// +optional
-	Fqdn   string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-	Name   string `json:"name" tf:"name"`
-	VmSize string `json:"vmSize" tf:"vm_size"`
+	Fqdn   string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,3,opt,name=fqdn"`
+	Name   string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	VmSize string `json:"vmSize" tf:"vm_size" protobuf:"bytes,5,opt,name=vmSize"`
 }
 
 type ContainerServiceSpecDiagnosticsProfile struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
+	Enabled bool `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
-	StorageURI string `json:"storageURI,omitempty" tf:"storage_uri,omitempty"`
+	StorageURI string `json:"storageURI,omitempty" tf:"storage_uri,omitempty" protobuf:"bytes,2,opt,name=storageURI"`
 }
 
 type ContainerServiceSpecLinuxProfileSshKey struct {
-	KeyData string `json:"keyData" tf:"key_data"`
+	KeyData string `json:"keyData" tf:"key_data" protobuf:"bytes,1,opt,name=keyData"`
 }
 
 type ContainerServiceSpecLinuxProfile struct {
-	AdminUsername string `json:"adminUsername" tf:"admin_username"`
+	AdminUsername string `json:"adminUsername" tf:"admin_username" protobuf:"bytes,1,opt,name=adminUsername"`
 	// +kubebuilder:validation:MaxItems=1
-	SshKey []ContainerServiceSpecLinuxProfileSshKey `json:"sshKey" tf:"ssh_key"`
+	SshKey []ContainerServiceSpecLinuxProfileSshKey `json:"sshKey" tf:"ssh_key" protobuf:"bytes,2,rep,name=sshKey"`
 }
 
 type ContainerServiceSpecMasterProfile struct {
 	// +optional
-	Count     int64  `json:"count,omitempty" tf:"count,omitempty"`
-	DnsPrefix string `json:"dnsPrefix" tf:"dns_prefix"`
+	Count     int64  `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
+	DnsPrefix string `json:"dnsPrefix" tf:"dns_prefix" protobuf:"bytes,2,opt,name=dnsPrefix"`
 	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,3,opt,name=fqdn"`
 }
 
 type ContainerServiceSpecServicePrincipal struct {
-	ClientID     string `json:"clientID" tf:"client_id"`
+	ClientID     string `json:"clientID" tf:"client_id" protobuf:"bytes,1,opt,name=clientID"`
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret"`
 }
 
 type ContainerServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +kubebuilder:validation:MaxItems=1
-	AgentPoolProfile []ContainerServiceSpecAgentPoolProfile `json:"agentPoolProfile" tf:"agent_pool_profile"`
+	AgentPoolProfile []ContainerServiceSpecAgentPoolProfile `json:"agentPoolProfile" tf:"agent_pool_profile" protobuf:"bytes,4,rep,name=agentPoolProfile"`
 	// +kubebuilder:validation:MaxItems=1
-	DiagnosticsProfile []ContainerServiceSpecDiagnosticsProfile `json:"diagnosticsProfile" tf:"diagnostics_profile"`
+	DiagnosticsProfile []ContainerServiceSpecDiagnosticsProfile `json:"diagnosticsProfile" tf:"diagnostics_profile" protobuf:"bytes,5,rep,name=diagnosticsProfile"`
 	// +kubebuilder:validation:MaxItems=1
-	LinuxProfile []ContainerServiceSpecLinuxProfile `json:"linuxProfile" tf:"linux_profile"`
-	Location     string                             `json:"location" tf:"location"`
+	LinuxProfile []ContainerServiceSpecLinuxProfile `json:"linuxProfile" tf:"linux_profile" protobuf:"bytes,6,rep,name=linuxProfile"`
+	Location     string                             `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
 	// +kubebuilder:validation:MaxItems=1
-	MasterProfile         []ContainerServiceSpecMasterProfile `json:"masterProfile" tf:"master_profile"`
-	Name                  string                              `json:"name" tf:"name"`
-	OrchestrationPlatform string                              `json:"orchestrationPlatform" tf:"orchestration_platform"`
-	ResourceGroupName     string                              `json:"resourceGroupName" tf:"resource_group_name"`
+	MasterProfile         []ContainerServiceSpecMasterProfile `json:"masterProfile" tf:"master_profile" protobuf:"bytes,8,rep,name=masterProfile"`
+	Name                  string                              `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	OrchestrationPlatform string                              `json:"orchestrationPlatform" tf:"orchestration_platform" protobuf:"bytes,10,opt,name=orchestrationPlatform"`
+	ResourceGroupName     string                              `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ServicePrincipal []ContainerServiceSpecServicePrincipal `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
+	ServicePrincipal []ContainerServiceSpecServicePrincipal `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty" protobuf:"bytes,12,rep,name=servicePrincipal"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 }
 
 type ContainerServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ContainerServiceSpec `json:"output,omitempty"`
+	Output *ContainerServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -122,7 +122,7 @@ type ContainerServiceStatus struct {
 // ContainerServiceList is a list of ContainerServices
 type ContainerServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ContainerService CRD objects
-	Items []ContainerService `json:"items,omitempty"`
+	Items []ContainerService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

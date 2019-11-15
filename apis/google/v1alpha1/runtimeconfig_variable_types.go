@@ -34,38 +34,38 @@ import (
 
 type RuntimeconfigVariable struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RuntimeconfigVariableSpec   `json:"spec,omitempty"`
-	Status            RuntimeconfigVariableStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RuntimeconfigVariableSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RuntimeconfigVariableStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RuntimeconfigVariableSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Name   string `json:"name" tf:"name"`
-	Parent string `json:"parent" tf:"parent"`
+	Name   string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Parent string `json:"parent" tf:"parent" protobuf:"bytes,4,opt,name=parent"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,5,opt,name=project"`
 	// +optional
-	Text string `json:"text,omitempty" tf:"text,omitempty"`
+	Text string `json:"text,omitempty" tf:"text,omitempty" protobuf:"bytes,6,opt,name=text"`
 	// +optional
-	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty"`
+	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty" protobuf:"bytes,7,opt,name=updateTime"`
 	// +optional
-	Value string `json:"value,omitempty" tf:"value,omitempty"`
+	Value string `json:"value,omitempty" tf:"value,omitempty" protobuf:"bytes,8,opt,name=value"`
 }
 
 type RuntimeconfigVariableStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RuntimeconfigVariableSpec `json:"output,omitempty"`
+	Output *RuntimeconfigVariableSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type RuntimeconfigVariableStatus struct {
 // RuntimeconfigVariableList is a list of RuntimeconfigVariables
 type RuntimeconfigVariableList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RuntimeconfigVariable CRD objects
-	Items []RuntimeconfigVariable `json:"items,omitempty"`
+	Items []RuntimeconfigVariable `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

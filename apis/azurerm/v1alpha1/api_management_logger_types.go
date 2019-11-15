@@ -34,9 +34,9 @@ import (
 
 type ApiManagementLogger struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementLoggerSpec   `json:"spec,omitempty"`
-	Status            ApiManagementLoggerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementLoggerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementLoggerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementLoggerSpecApplicationInsights struct {
@@ -45,41 +45,41 @@ type ApiManagementLoggerSpecApplicationInsights struct {
 
 type ApiManagementLoggerSpecEventhub struct {
 	ConnectionString string `json:"-" sensitive:"true" tf:"connection_string"`
-	Name             string `json:"name" tf:"name"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 }
 
 type ApiManagementLoggerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,4,opt,name=apiManagementName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ApplicationInsights []ApiManagementLoggerSpecApplicationInsights `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
+	ApplicationInsights []ApiManagementLoggerSpecApplicationInsights `json:"applicationInsights,omitempty" tf:"application_insights,omitempty" protobuf:"bytes,5,rep,name=applicationInsights"`
 	// +optional
-	Buffered bool `json:"buffered,omitempty" tf:"buffered,omitempty"`
+	Buffered bool `json:"buffered,omitempty" tf:"buffered,omitempty" protobuf:"varint,6,opt,name=buffered"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,7,opt,name=description"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Eventhub          []ApiManagementLoggerSpecEventhub `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
-	Name              string                            `json:"name" tf:"name"`
-	ResourceGroupName string                            `json:"resourceGroupName" tf:"resource_group_name"`
+	Eventhub          []ApiManagementLoggerSpecEventhub `json:"eventhub,omitempty" tf:"eventhub,omitempty" protobuf:"bytes,8,rep,name=eventhub"`
+	Name              string                            `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName string                            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 }
 
 type ApiManagementLoggerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementLoggerSpec `json:"output,omitempty"`
+	Output *ApiManagementLoggerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type ApiManagementLoggerStatus struct {
 // ApiManagementLoggerList is a list of ApiManagementLoggers
 type ApiManagementLoggerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementLogger CRD objects
-	Items []ApiManagementLogger `json:"items,omitempty"`
+	Items []ApiManagementLogger `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

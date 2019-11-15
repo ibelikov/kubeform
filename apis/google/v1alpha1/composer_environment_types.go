@@ -34,85 +34,85 @@ import (
 
 type ComposerEnvironment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComposerEnvironmentSpec   `json:"spec,omitempty"`
-	Status            ComposerEnvironmentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComposerEnvironmentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComposerEnvironmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComposerEnvironmentSpecConfigNodeConfig struct {
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,1,opt,name=diskSizeGb"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,2,opt,name=machineType"`
 	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,3,opt,name=network"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,4,rep,name=oauthScopes"`
 	// +optional
-	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,5,opt,name=serviceAccount"`
 	// +optional
-	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,6,opt,name=subnetwork"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,8,opt,name=zone"`
 }
 
 type ComposerEnvironmentSpecConfigSoftwareConfig struct {
 	// +optional
-	AirflowConfigOverrides map[string]string `json:"airflowConfigOverrides,omitempty" tf:"airflow_config_overrides,omitempty"`
+	AirflowConfigOverrides map[string]string `json:"airflowConfigOverrides,omitempty" tf:"airflow_config_overrides,omitempty" protobuf:"bytes,1,rep,name=airflowConfigOverrides"`
 	// +optional
-	EnvVariables map[string]string `json:"envVariables,omitempty" tf:"env_variables,omitempty"`
+	EnvVariables map[string]string `json:"envVariables,omitempty" tf:"env_variables,omitempty" protobuf:"bytes,2,rep,name=envVariables"`
 	// +optional
-	ImageVersion string `json:"imageVersion,omitempty" tf:"image_version,omitempty"`
+	ImageVersion string `json:"imageVersion,omitempty" tf:"image_version,omitempty" protobuf:"bytes,3,opt,name=imageVersion"`
 	// +optional
-	PypiPackages map[string]string `json:"pypiPackages,omitempty" tf:"pypi_packages,omitempty"`
+	PypiPackages map[string]string `json:"pypiPackages,omitempty" tf:"pypi_packages,omitempty" protobuf:"bytes,4,rep,name=pypiPackages"`
 }
 
 type ComposerEnvironmentSpecConfig struct {
 	// +optional
-	AirflowURI string `json:"airflowURI,omitempty" tf:"airflow_uri,omitempty"`
+	AirflowURI string `json:"airflowURI,omitempty" tf:"airflow_uri,omitempty" protobuf:"bytes,1,opt,name=airflowURI"`
 	// +optional
-	DagGcsPrefix string `json:"dagGcsPrefix,omitempty" tf:"dag_gcs_prefix,omitempty"`
+	DagGcsPrefix string `json:"dagGcsPrefix,omitempty" tf:"dag_gcs_prefix,omitempty" protobuf:"bytes,2,opt,name=dagGcsPrefix"`
 	// +optional
-	GkeCluster string `json:"gkeCluster,omitempty" tf:"gke_cluster,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	NodeConfig []ComposerEnvironmentSpecConfigNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
-	// +optional
-	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+	GkeCluster string `json:"gkeCluster,omitempty" tf:"gke_cluster,omitempty" protobuf:"bytes,3,opt,name=gkeCluster"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SoftwareConfig []ComposerEnvironmentSpecConfigSoftwareConfig `json:"softwareConfig,omitempty" tf:"software_config,omitempty"`
+	NodeConfig []ComposerEnvironmentSpecConfigNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty" protobuf:"bytes,4,rep,name=nodeConfig"`
+	// +optional
+	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty" protobuf:"varint,5,opt,name=nodeCount"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	SoftwareConfig []ComposerEnvironmentSpecConfigSoftwareConfig `json:"softwareConfig,omitempty" tf:"software_config,omitempty" protobuf:"bytes,6,rep,name=softwareConfig"`
 }
 
 type ComposerEnvironmentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Config []ComposerEnvironmentSpecConfig `json:"config,omitempty" tf:"config,omitempty"`
+	Config []ComposerEnvironmentSpecConfig `json:"config,omitempty" tf:"config,omitempty" protobuf:"bytes,3,rep,name=config"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,4,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,7,opt,name=region"`
 }
 
 type ComposerEnvironmentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComposerEnvironmentSpec `json:"output,omitempty"`
+	Output *ComposerEnvironmentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -121,7 +121,7 @@ type ComposerEnvironmentStatus struct {
 // ComposerEnvironmentList is a list of ComposerEnvironments
 type ComposerEnvironmentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComposerEnvironment CRD objects
-	Items []ComposerEnvironment `json:"items,omitempty"`
+	Items []ComposerEnvironment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

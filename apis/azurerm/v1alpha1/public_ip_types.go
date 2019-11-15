@@ -34,57 +34,57 @@ import (
 
 type PublicIP struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PublicIPSpec   `json:"spec,omitempty"`
-	Status            PublicIPStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PublicIPSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PublicIPStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PublicIPSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AllocationMethod string `json:"allocationMethod,omitempty" tf:"allocation_method,omitempty"`
+	AllocationMethod string `json:"allocationMethod,omitempty" tf:"allocation_method,omitempty" protobuf:"bytes,3,opt,name=allocationMethod"`
 	// +optional
-	DomainNameLabel string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
+	DomainNameLabel string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty" protobuf:"bytes,4,opt,name=domainNameLabel"`
 	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,5,opt,name=fqdn"`
 	// +optional
-	IdleTimeoutInMinutes int64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+	IdleTimeoutInMinutes int64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty" protobuf:"varint,6,opt,name=idleTimeoutInMinutes"`
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,7,opt,name=ipAddress"`
 	// +optional
-	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
-	Location  string `json:"location" tf:"location"`
-	Name      string `json:"name" tf:"name"`
+	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty" protobuf:"bytes,8,opt,name=ipVersion"`
+	Location  string `json:"location" tf:"location" protobuf:"bytes,9,opt,name=location"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
 	// Deprecated
-	PublicIPAddressAllocation string `json:"publicIPAddressAllocation,omitempty" tf:"public_ip_address_allocation,omitempty"`
+	PublicIPAddressAllocation string `json:"publicIPAddressAllocation,omitempty" tf:"public_ip_address_allocation,omitempty" protobuf:"bytes,11,opt,name=publicIPAddressAllocation"`
 	// +optional
-	PublicIPPrefixID  string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	PublicIPPrefixID  string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty" protobuf:"bytes,12,opt,name=publicIPPrefixID"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,13,opt,name=resourceGroupName"`
 	// +optional
-	ReverseFqdn string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
+	ReverseFqdn string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty" protobuf:"bytes,14,opt,name=reverseFqdn"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,15,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,16,rep,name=tags"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,17,rep,name=zones"`
 }
 
 type PublicIPStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PublicIPSpec `json:"output,omitempty"`
+	Output *PublicIPSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -93,7 +93,7 @@ type PublicIPStatus struct {
 // PublicIPList is a list of PublicIPs
 type PublicIPList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PublicIP CRD objects
-	Items []PublicIP `json:"items,omitempty"`
+	Items []PublicIP `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

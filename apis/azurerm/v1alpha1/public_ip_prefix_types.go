@@ -34,42 +34,42 @@ import (
 
 type PublicIPPrefix struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PublicIPPrefixSpec   `json:"spec,omitempty"`
-	Status            PublicIPPrefixStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PublicIPPrefixSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PublicIPPrefixStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PublicIPPrefixSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	IpPrefix string `json:"ipPrefix,omitempty" tf:"ip_prefix,omitempty"`
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	IpPrefix string `json:"ipPrefix,omitempty" tf:"ip_prefix,omitempty" protobuf:"bytes,3,opt,name=ipPrefix"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	PrefixLength      int64  `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	PrefixLength      int64  `json:"prefixLength,omitempty" tf:"prefix_length,omitempty" protobuf:"varint,6,opt,name=prefixLength"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,8,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,10,rep,name=zones"`
 }
 
 type PublicIPPrefixStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PublicIPPrefixSpec `json:"output,omitempty"`
+	Output *PublicIPPrefixSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type PublicIPPrefixStatus struct {
 // PublicIPPrefixList is a list of PublicIPPrefixs
 type PublicIPPrefixList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PublicIPPrefix CRD objects
-	Items []PublicIPPrefix `json:"items,omitempty"`
+	Items []PublicIPPrefix `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

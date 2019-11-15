@@ -34,215 +34,215 @@ import (
 
 type KubernetesCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KubernetesClusterSpec   `json:"spec,omitempty"`
-	Status            KubernetesClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KubernetesClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KubernetesClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KubernetesClusterSpecAddonProfileAciConnectorLinux struct {
-	Enabled    bool   `json:"enabled" tf:"enabled"`
-	SubnetName string `json:"subnetName" tf:"subnet_name"`
+	Enabled    bool   `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
+	SubnetName string `json:"subnetName" tf:"subnet_name" protobuf:"bytes,2,opt,name=subnetName"`
 }
 
 type KubernetesClusterSpecAddonProfileHttpApplicationRouting struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
+	Enabled bool `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
-	HttpApplicationRoutingZoneName string `json:"httpApplicationRoutingZoneName,omitempty" tf:"http_application_routing_zone_name,omitempty"`
+	HttpApplicationRoutingZoneName string `json:"httpApplicationRoutingZoneName,omitempty" tf:"http_application_routing_zone_name,omitempty" protobuf:"bytes,2,opt,name=httpApplicationRoutingZoneName"`
 }
 
 type KubernetesClusterSpecAddonProfileOmsAgent struct {
-	Enabled                 bool   `json:"enabled" tf:"enabled"`
-	LogAnalyticsWorkspaceID string `json:"logAnalyticsWorkspaceID" tf:"log_analytics_workspace_id"`
+	Enabled                 bool   `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
+	LogAnalyticsWorkspaceID string `json:"logAnalyticsWorkspaceID" tf:"log_analytics_workspace_id" protobuf:"bytes,2,opt,name=logAnalyticsWorkspaceID"`
 }
 
 type KubernetesClusterSpecAddonProfile struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AciConnectorLinux []KubernetesClusterSpecAddonProfileAciConnectorLinux `json:"aciConnectorLinux,omitempty" tf:"aci_connector_linux,omitempty"`
+	AciConnectorLinux []KubernetesClusterSpecAddonProfileAciConnectorLinux `json:"aciConnectorLinux,omitempty" tf:"aci_connector_linux,omitempty" protobuf:"bytes,1,rep,name=aciConnectorLinux"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HttpApplicationRouting []KubernetesClusterSpecAddonProfileHttpApplicationRouting `json:"httpApplicationRouting,omitempty" tf:"http_application_routing,omitempty"`
+	HttpApplicationRouting []KubernetesClusterSpecAddonProfileHttpApplicationRouting `json:"httpApplicationRouting,omitempty" tf:"http_application_routing,omitempty" protobuf:"bytes,2,rep,name=httpApplicationRouting"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	OmsAgent []KubernetesClusterSpecAddonProfileOmsAgent `json:"omsAgent,omitempty" tf:"oms_agent,omitempty"`
+	OmsAgent []KubernetesClusterSpecAddonProfileOmsAgent `json:"omsAgent,omitempty" tf:"oms_agent,omitempty" protobuf:"bytes,3,rep,name=omsAgent"`
 }
 
 type KubernetesClusterSpecAgentPoolProfile struct {
 	// +optional
-	AvailabilityZones []string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+	AvailabilityZones []string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty" protobuf:"bytes,1,rep,name=availabilityZones"`
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
-	// +optional
-	// Deprecated
-	DnsPrefix string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
-	// +optional
-	EnableAutoScaling bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,2,opt,name=count"`
 	// +optional
 	// Deprecated
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	DnsPrefix string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty" protobuf:"bytes,3,opt,name=dnsPrefix"`
 	// +optional
-	MaxCount int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+	EnableAutoScaling bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty" protobuf:"varint,4,opt,name=enableAutoScaling"`
 	// +optional
-	MaxPods int64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
+	// Deprecated
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,5,opt,name=fqdn"`
 	// +optional
-	MinCount int64  `json:"minCount,omitempty" tf:"min_count,omitempty"`
-	Name     string `json:"name" tf:"name"`
+	MaxCount int64 `json:"maxCount,omitempty" tf:"max_count,omitempty" protobuf:"varint,6,opt,name=maxCount"`
 	// +optional
-	NodeTaints []string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
+	MaxPods int64 `json:"maxPods,omitempty" tf:"max_pods,omitempty" protobuf:"varint,7,opt,name=maxPods"`
 	// +optional
-	OsDiskSizeGb int64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
+	MinCount int64  `json:"minCount,omitempty" tf:"min_count,omitempty" protobuf:"varint,8,opt,name=minCount"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
+	NodeTaints []string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty" protobuf:"bytes,10,rep,name=nodeTaints"`
 	// +optional
-	Type   string `json:"type,omitempty" tf:"type,omitempty"`
-	VmSize string `json:"vmSize" tf:"vm_size"`
+	OsDiskSizeGb int64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty" protobuf:"varint,11,opt,name=osDiskSizeGb"`
 	// +optional
-	VnetSubnetID string `json:"vnetSubnetID,omitempty" tf:"vnet_subnet_id,omitempty"`
+	OsType string `json:"osType,omitempty" tf:"os_type,omitempty" protobuf:"bytes,12,opt,name=osType"`
+	// +optional
+	Type   string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,13,opt,name=type"`
+	VmSize string `json:"vmSize" tf:"vm_size" protobuf:"bytes,14,opt,name=vmSize"`
+	// +optional
+	VnetSubnetID string `json:"vnetSubnetID,omitempty" tf:"vnet_subnet_id,omitempty" protobuf:"bytes,15,opt,name=vnetSubnetID"`
 }
 
 type KubernetesClusterSpecKubeAdminConfig struct {
 	// +optional
-	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
+	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty" protobuf:"bytes,1,opt,name=clientCertificate"`
 	// +optional
 	ClientKey string `json:"-" sensitive:"true" tf:"client_key,omitempty"`
 	// +optional
-	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty"`
+	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty" protobuf:"bytes,2,opt,name=clusterCaCertificate"`
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,3,opt,name=host"`
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,4,opt,name=username"`
 }
 
 type KubernetesClusterSpecKubeConfig struct {
 	// +optional
-	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
+	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty" protobuf:"bytes,1,opt,name=clientCertificate"`
 	// +optional
 	ClientKey string `json:"-" sensitive:"true" tf:"client_key,omitempty"`
 	// +optional
-	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty"`
+	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty" protobuf:"bytes,2,opt,name=clusterCaCertificate"`
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,3,opt,name=host"`
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,4,opt,name=username"`
 }
 
 type KubernetesClusterSpecLinuxProfileSshKey struct {
-	KeyData string `json:"keyData" tf:"key_data"`
+	KeyData string `json:"keyData" tf:"key_data" protobuf:"bytes,1,opt,name=keyData"`
 }
 
 type KubernetesClusterSpecLinuxProfile struct {
-	AdminUsername string `json:"adminUsername" tf:"admin_username"`
+	AdminUsername string `json:"adminUsername" tf:"admin_username" protobuf:"bytes,1,opt,name=adminUsername"`
 	// +kubebuilder:validation:MaxItems=1
-	SshKey []KubernetesClusterSpecLinuxProfileSshKey `json:"sshKey" tf:"ssh_key"`
+	SshKey []KubernetesClusterSpecLinuxProfileSshKey `json:"sshKey" tf:"ssh_key" protobuf:"bytes,2,rep,name=sshKey"`
 }
 
 type KubernetesClusterSpecNetworkProfile struct {
 	// +optional
-	DnsServiceIP string `json:"dnsServiceIP,omitempty" tf:"dns_service_ip,omitempty"`
+	DnsServiceIP string `json:"dnsServiceIP,omitempty" tf:"dns_service_ip,omitempty" protobuf:"bytes,1,opt,name=dnsServiceIP"`
 	// +optional
-	DockerBridgeCIDR string `json:"dockerBridgeCIDR,omitempty" tf:"docker_bridge_cidr,omitempty"`
+	DockerBridgeCIDR string `json:"dockerBridgeCIDR,omitempty" tf:"docker_bridge_cidr,omitempty" protobuf:"bytes,2,opt,name=dockerBridgeCIDR"`
 	// +optional
-	LoadBalancerSku string `json:"loadBalancerSku,omitempty" tf:"load_balancer_sku,omitempty"`
-	NetworkPlugin   string `json:"networkPlugin" tf:"network_plugin"`
+	LoadBalancerSku string `json:"loadBalancerSku,omitempty" tf:"load_balancer_sku,omitempty" protobuf:"bytes,3,opt,name=loadBalancerSku"`
+	NetworkPlugin   string `json:"networkPlugin" tf:"network_plugin" protobuf:"bytes,4,opt,name=networkPlugin"`
 	// +optional
-	NetworkPolicy string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+	NetworkPolicy string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty" protobuf:"bytes,5,opt,name=networkPolicy"`
 	// +optional
-	PodCIDR string `json:"podCIDR,omitempty" tf:"pod_cidr,omitempty"`
+	PodCIDR string `json:"podCIDR,omitempty" tf:"pod_cidr,omitempty" protobuf:"bytes,6,opt,name=podCIDR"`
 	// +optional
-	ServiceCIDR string `json:"serviceCIDR,omitempty" tf:"service_cidr,omitempty"`
+	ServiceCIDR string `json:"serviceCIDR,omitempty" tf:"service_cidr,omitempty" protobuf:"bytes,7,opt,name=serviceCIDR"`
 }
 
 type KubernetesClusterSpecRoleBasedAccessControlAzureActiveDirectory struct {
-	ClientAppID     string `json:"clientAppID" tf:"client_app_id"`
-	ServerAppID     string `json:"serverAppID" tf:"server_app_id"`
+	ClientAppID     string `json:"clientAppID" tf:"client_app_id" protobuf:"bytes,1,opt,name=clientAppID"`
+	ServerAppID     string `json:"serverAppID" tf:"server_app_id" protobuf:"bytes,2,opt,name=serverAppID"`
 	ServerAppSecret string `json:"-" sensitive:"true" tf:"server_app_secret"`
 	// +optional
-	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
+	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty" protobuf:"bytes,3,opt,name=tenantID"`
 }
 
 type KubernetesClusterSpecRoleBasedAccessControl struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AzureActiveDirectory []KubernetesClusterSpecRoleBasedAccessControlAzureActiveDirectory `json:"azureActiveDirectory,omitempty" tf:"azure_active_directory,omitempty"`
-	Enabled              bool                                                              `json:"enabled" tf:"enabled"`
+	AzureActiveDirectory []KubernetesClusterSpecRoleBasedAccessControlAzureActiveDirectory `json:"azureActiveDirectory,omitempty" tf:"azure_active_directory,omitempty" protobuf:"bytes,1,rep,name=azureActiveDirectory"`
+	Enabled              bool                                                              `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
 }
 
 type KubernetesClusterSpecServicePrincipal struct {
-	ClientID     string `json:"clientID" tf:"client_id"`
+	ClientID     string `json:"clientID" tf:"client_id" protobuf:"bytes,1,opt,name=clientID"`
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret"`
 }
 
 type KubernetesClusterSpecWindowsProfile struct {
 	// +optional
 	AdminPassword string `json:"-" sensitive:"true" tf:"admin_password,omitempty"`
-	AdminUsername string `json:"adminUsername" tf:"admin_username"`
+	AdminUsername string `json:"adminUsername" tf:"admin_username" protobuf:"bytes,1,opt,name=adminUsername"`
 }
 
 type KubernetesClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AddonProfile     []KubernetesClusterSpecAddonProfile     `json:"addonProfile,omitempty" tf:"addon_profile,omitempty"`
-	AgentPoolProfile []KubernetesClusterSpecAgentPoolProfile `json:"agentPoolProfile" tf:"agent_pool_profile"`
+	AddonProfile     []KubernetesClusterSpecAddonProfile     `json:"addonProfile,omitempty" tf:"addon_profile,omitempty" protobuf:"bytes,4,rep,name=addonProfile"`
+	AgentPoolProfile []KubernetesClusterSpecAgentPoolProfile `json:"agentPoolProfile" tf:"agent_pool_profile" protobuf:"bytes,5,rep,name=agentPoolProfile"`
 	// +optional
-	ApiServerAuthorizedIPRanges []string `json:"apiServerAuthorizedIPRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
-	DnsPrefix                   string   `json:"dnsPrefix" tf:"dns_prefix"`
+	ApiServerAuthorizedIPRanges []string `json:"apiServerAuthorizedIPRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty" protobuf:"bytes,6,rep,name=apiServerAuthorizedIPRanges"`
+	DnsPrefix                   string   `json:"dnsPrefix" tf:"dns_prefix" protobuf:"bytes,7,opt,name=dnsPrefix"`
 	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,8,opt,name=fqdn"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	KubeAdminConfig []KubernetesClusterSpecKubeAdminConfig `json:"kubeAdminConfig,omitempty" tf:"kube_admin_config,omitempty"`
+	KubeAdminConfig []KubernetesClusterSpecKubeAdminConfig `json:"kubeAdminConfig,omitempty" tf:"kube_admin_config,omitempty" protobuf:"bytes,9,rep,name=kubeAdminConfig"`
 	// +optional
 	KubeAdminConfigRaw string `json:"-" sensitive:"true" tf:"kube_admin_config_raw,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	KubeConfig []KubernetesClusterSpecKubeConfig `json:"kubeConfig,omitempty" tf:"kube_config,omitempty"`
+	KubeConfig []KubernetesClusterSpecKubeConfig `json:"kubeConfig,omitempty" tf:"kube_config,omitempty" protobuf:"bytes,10,rep,name=kubeConfig"`
 	// +optional
 	KubeConfigRaw string `json:"-" sensitive:"true" tf:"kube_config_raw,omitempty"`
 	// +optional
-	KubernetesVersion string `json:"kubernetesVersion,omitempty" tf:"kubernetes_version,omitempty"`
+	KubernetesVersion string `json:"kubernetesVersion,omitempty" tf:"kubernetes_version,omitempty" protobuf:"bytes,11,opt,name=kubernetesVersion"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LinuxProfile []KubernetesClusterSpecLinuxProfile `json:"linuxProfile,omitempty" tf:"linux_profile,omitempty"`
-	Location     string                              `json:"location" tf:"location"`
-	Name         string                              `json:"name" tf:"name"`
+	LinuxProfile []KubernetesClusterSpecLinuxProfile `json:"linuxProfile,omitempty" tf:"linux_profile,omitempty" protobuf:"bytes,12,rep,name=linuxProfile"`
+	Location     string                              `json:"location" tf:"location" protobuf:"bytes,13,opt,name=location"`
+	Name         string                              `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkProfile []KubernetesClusterSpecNetworkProfile `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
+	NetworkProfile []KubernetesClusterSpecNetworkProfile `json:"networkProfile,omitempty" tf:"network_profile,omitempty" protobuf:"bytes,15,rep,name=networkProfile"`
 	// +optional
-	NodeResourceGroup string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	RoleBasedAccessControl []KubernetesClusterSpecRoleBasedAccessControl `json:"roleBasedAccessControl,omitempty" tf:"role_based_access_control,omitempty"`
-	// +kubebuilder:validation:MaxItems=1
-	ServicePrincipal []KubernetesClusterSpecServicePrincipal `json:"servicePrincipal" tf:"service_principal"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	NodeResourceGroup string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty" protobuf:"bytes,16,opt,name=nodeResourceGroup"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,17,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	WindowsProfile []KubernetesClusterSpecWindowsProfile `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
+	RoleBasedAccessControl []KubernetesClusterSpecRoleBasedAccessControl `json:"roleBasedAccessControl,omitempty" tf:"role_based_access_control,omitempty" protobuf:"bytes,18,rep,name=roleBasedAccessControl"`
+	// +kubebuilder:validation:MaxItems=1
+	ServicePrincipal []KubernetesClusterSpecServicePrincipal `json:"servicePrincipal" tf:"service_principal" protobuf:"bytes,19,rep,name=servicePrincipal"`
+	// +optional
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,20,rep,name=tags"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	WindowsProfile []KubernetesClusterSpecWindowsProfile `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty" protobuf:"bytes,21,rep,name=windowsProfile"`
 }
 
 type KubernetesClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KubernetesClusterSpec `json:"output,omitempty"`
+	Output *KubernetesClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -251,7 +251,7 @@ type KubernetesClusterStatus struct {
 // KubernetesClusterList is a list of KubernetesClusters
 type KubernetesClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KubernetesCluster CRD objects
-	Items []KubernetesCluster `json:"items,omitempty"`
+	Items []KubernetesCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

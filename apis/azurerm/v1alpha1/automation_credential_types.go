@@ -34,37 +34,37 @@ import (
 
 type AutomationCredential struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutomationCredentialSpec   `json:"spec,omitempty"`
-	Status            AutomationCredentialStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutomationCredentialSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutomationCredentialStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutomationCredentialSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	AccountName string `json:"accountName" tf:"account_name"`
+	AccountName string `json:"accountName" tf:"account_name" protobuf:"bytes,4,opt,name=accountName"`
 	// +optional
-	Description       string `json:"description,omitempty" tf:"description,omitempty"`
-	Name              string `json:"name" tf:"name"`
+	Description       string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	Password          string `json:"-" sensitive:"true" tf:"password"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	Username          string `json:"username" tf:"username"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
+	Username          string `json:"username" tf:"username" protobuf:"bytes,8,opt,name=username"`
 }
 
 type AutomationCredentialStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutomationCredentialSpec `json:"output,omitempty"`
+	Output *AutomationCredentialSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type AutomationCredentialStatus struct {
 // AutomationCredentialList is a list of AutomationCredentials
 type AutomationCredentialList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutomationCredential CRD objects
-	Items []AutomationCredential `json:"items,omitempty"`
+	Items []AutomationCredential `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

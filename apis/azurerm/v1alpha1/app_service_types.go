@@ -34,289 +34,289 @@ import (
 
 type AppService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppServiceSpec   `json:"spec,omitempty"`
-	Status            AppServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AppServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AppServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AppServiceSpecAuthSettingsActiveDirectory struct {
 	// +optional
-	AllowedAudiences []string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-	ClientID         string   `json:"clientID" tf:"client_id"`
+	AllowedAudiences []string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty" protobuf:"bytes,1,rep,name=allowedAudiences"`
+	ClientID         string   `json:"clientID" tf:"client_id" protobuf:"bytes,2,opt,name=clientID"`
 	// +optional
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret,omitempty"`
 }
 
 type AppServiceSpecAuthSettingsFacebook struct {
-	AppID     string `json:"appID" tf:"app_id"`
+	AppID     string `json:"appID" tf:"app_id" protobuf:"bytes,1,opt,name=appID"`
 	AppSecret string `json:"-" sensitive:"true" tf:"app_secret"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,2,rep,name=oauthScopes"`
 }
 
 type AppServiceSpecAuthSettingsGoogle struct {
-	ClientID     string `json:"clientID" tf:"client_id"`
+	ClientID     string `json:"clientID" tf:"client_id" protobuf:"bytes,1,opt,name=clientID"`
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,2,rep,name=oauthScopes"`
 }
 
 type AppServiceSpecAuthSettingsMicrosoft struct {
-	ClientID     string `json:"clientID" tf:"client_id"`
+	ClientID     string `json:"clientID" tf:"client_id" protobuf:"bytes,1,opt,name=clientID"`
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,2,rep,name=oauthScopes"`
 }
 
 type AppServiceSpecAuthSettingsTwitter struct {
-	ConsumerKey    string `json:"consumerKey" tf:"consumer_key"`
+	ConsumerKey    string `json:"consumerKey" tf:"consumer_key" protobuf:"bytes,1,opt,name=consumerKey"`
 	ConsumerSecret string `json:"-" sensitive:"true" tf:"consumer_secret"`
 }
 
 type AppServiceSpecAuthSettings struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ActiveDirectory []AppServiceSpecAuthSettingsActiveDirectory `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+	ActiveDirectory []AppServiceSpecAuthSettingsActiveDirectory `json:"activeDirectory,omitempty" tf:"active_directory,omitempty" protobuf:"bytes,1,rep,name=activeDirectory"`
 	// +optional
-	AdditionalLoginParams map[string]string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
+	AdditionalLoginParams map[string]string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty" protobuf:"bytes,2,rep,name=additionalLoginParams"`
 	// +optional
-	AllowedExternalRedirectUrls []string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+	AllowedExternalRedirectUrls []string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty" protobuf:"bytes,3,rep,name=allowedExternalRedirectUrls"`
 	// +optional
-	DefaultProvider string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-	Enabled         bool   `json:"enabled" tf:"enabled"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Facebook []AppServiceSpecAuthSettingsFacebook `json:"facebook,omitempty" tf:"facebook,omitempty"`
+	DefaultProvider string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty" protobuf:"bytes,4,opt,name=defaultProvider"`
+	Enabled         bool   `json:"enabled" tf:"enabled" protobuf:"varint,5,opt,name=enabled"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Google []AppServiceSpecAuthSettingsGoogle `json:"google,omitempty" tf:"google,omitempty"`
-	// +optional
-	Issuer string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Facebook []AppServiceSpecAuthSettingsFacebook `json:"facebook,omitempty" tf:"facebook,omitempty" protobuf:"bytes,6,rep,name=facebook"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Microsoft []AppServiceSpecAuthSettingsMicrosoft `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+	Google []AppServiceSpecAuthSettingsGoogle `json:"google,omitempty" tf:"google,omitempty" protobuf:"bytes,7,rep,name=google"`
 	// +optional
-	RuntimeVersion string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-	// +optional
-	TokenRefreshExtensionHours float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-	// +optional
-	TokenStoreEnabled bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+	Issuer string `json:"issuer,omitempty" tf:"issuer,omitempty" protobuf:"bytes,8,opt,name=issuer"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Twitter []AppServiceSpecAuthSettingsTwitter `json:"twitter,omitempty" tf:"twitter,omitempty"`
+	Microsoft []AppServiceSpecAuthSettingsMicrosoft `json:"microsoft,omitempty" tf:"microsoft,omitempty" protobuf:"bytes,9,rep,name=microsoft"`
 	// +optional
-	UnauthenticatedClientAction string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+	RuntimeVersion string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty" protobuf:"bytes,10,opt,name=runtimeVersion"`
+	// +optional
+	TokenRefreshExtensionHours float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty" protobuf:"fixed64,11,opt,name=tokenRefreshExtensionHours"`
+	// +optional
+	TokenStoreEnabled bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty" protobuf:"varint,12,opt,name=tokenStoreEnabled"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	Twitter []AppServiceSpecAuthSettingsTwitter `json:"twitter,omitempty" tf:"twitter,omitempty" protobuf:"bytes,13,rep,name=twitter"`
+	// +optional
+	UnauthenticatedClientAction string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty" protobuf:"bytes,14,opt,name=unauthenticatedClientAction"`
 }
 
 type AppServiceSpecBackupSchedule struct {
-	FrequencyInterval int64  `json:"frequencyInterval" tf:"frequency_interval"`
-	FrequencyUnit     string `json:"frequencyUnit" tf:"frequency_unit"`
+	FrequencyInterval int64  `json:"frequencyInterval" tf:"frequency_interval" protobuf:"varint,1,opt,name=frequencyInterval"`
+	FrequencyUnit     string `json:"frequencyUnit" tf:"frequency_unit" protobuf:"bytes,2,opt,name=frequencyUnit"`
 	// +optional
-	KeepAtLeastOneBackup bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty"`
+	KeepAtLeastOneBackup bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty" protobuf:"varint,3,opt,name=keepAtLeastOneBackup"`
 	// +optional
-	RetentionPeriodInDays int64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty"`
+	RetentionPeriodInDays int64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty" protobuf:"varint,4,opt,name=retentionPeriodInDays"`
 	// +optional
-	StartTime string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime string `json:"startTime,omitempty" tf:"start_time,omitempty" protobuf:"bytes,5,opt,name=startTime"`
 }
 
 type AppServiceSpecBackup struct {
 	// +optional
-	Enabled bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Name    string `json:"name" tf:"name"`
+	Enabled bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,1,opt,name=enabled"`
+	Name    string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	Schedule          []AppServiceSpecBackupSchedule `json:"schedule" tf:"schedule"`
+	Schedule          []AppServiceSpecBackupSchedule `json:"schedule" tf:"schedule" protobuf:"bytes,3,rep,name=schedule"`
 	StorageAccountURL string                         `json:"-" sensitive:"true" tf:"storage_account_url"`
 }
 
 type AppServiceSpecConnectionString struct {
-	Name  string `json:"name" tf:"name"`
-	Type  string `json:"type" tf:"type"`
+	Name  string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 	Value string `json:"-" sensitive:"true" tf:"value"`
 }
 
 type AppServiceSpecIdentity struct {
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty" protobuf:"bytes,1,rep,name=identityIDS"`
 	// +optional
-	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
+	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,2,opt,name=principalID"`
 	// +optional
-	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
-	Type     string `json:"type" tf:"type"`
+	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty" protobuf:"bytes,3,opt,name=tenantID"`
+	Type     string `json:"type" tf:"type" protobuf:"bytes,4,opt,name=type"`
 }
 
 type AppServiceSpecLogsApplicationLogsAzureBlobStorage struct {
-	Level           string `json:"level" tf:"level"`
-	RetentionInDays int64  `json:"retentionInDays" tf:"retention_in_days"`
+	Level           string `json:"level" tf:"level" protobuf:"bytes,1,opt,name=level"`
+	RetentionInDays int64  `json:"retentionInDays" tf:"retention_in_days" protobuf:"varint,2,opt,name=retentionInDays"`
 	SasURL          string `json:"-" sensitive:"true" tf:"sas_url"`
 }
 
 type AppServiceSpecLogsApplicationLogs struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AzureBlobStorage []AppServiceSpecLogsApplicationLogsAzureBlobStorage `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
+	AzureBlobStorage []AppServiceSpecLogsApplicationLogsAzureBlobStorage `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty" protobuf:"bytes,1,rep,name=azureBlobStorage"`
 }
 
 type AppServiceSpecLogs struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ApplicationLogs []AppServiceSpecLogsApplicationLogs `json:"applicationLogs,omitempty" tf:"application_logs,omitempty"`
+	ApplicationLogs []AppServiceSpecLogsApplicationLogs `json:"applicationLogs,omitempty" tf:"application_logs,omitempty" protobuf:"bytes,1,rep,name=applicationLogs"`
 }
 
 type AppServiceSpecSiteConfigCors struct {
-	AllowedOrigins []string `json:"allowedOrigins" tf:"allowed_origins"`
+	AllowedOrigins []string `json:"allowedOrigins" tf:"allowed_origins" protobuf:"bytes,1,rep,name=allowedOrigins"`
 	// +optional
-	SupportCredentials bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+	SupportCredentials bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty" protobuf:"varint,2,opt,name=supportCredentials"`
 }
 
 type AppServiceSpecSiteConfigIpRestriction struct {
-	IpAddress string `json:"ipAddress" tf:"ip_address"`
+	IpAddress string `json:"ipAddress" tf:"ip_address" protobuf:"bytes,1,opt,name=ipAddress"`
 	// +optional
-	SubnetMask string `json:"subnetMask,omitempty" tf:"subnet_mask,omitempty"`
+	SubnetMask string `json:"subnetMask,omitempty" tf:"subnet_mask,omitempty" protobuf:"bytes,2,opt,name=subnetMask"`
 }
 
 type AppServiceSpecSiteConfig struct {
 	// +optional
-	AlwaysOn bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
+	AlwaysOn bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty" protobuf:"varint,1,opt,name=alwaysOn"`
 	// +optional
-	AppCommandLine string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+	AppCommandLine string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty" protobuf:"bytes,2,opt,name=appCommandLine"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Cors []AppServiceSpecSiteConfigCors `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors []AppServiceSpecSiteConfigCors `json:"cors,omitempty" tf:"cors,omitempty" protobuf:"bytes,3,rep,name=cors"`
 	// +optional
-	DefaultDocuments []string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+	DefaultDocuments []string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty" protobuf:"bytes,4,rep,name=defaultDocuments"`
 	// +optional
-	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
+	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty" protobuf:"bytes,5,opt,name=dotnetFrameworkVersion"`
 	// +optional
-	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty" protobuf:"bytes,6,opt,name=ftpsState"`
 	// +optional
-	Http2Enabled bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+	Http2Enabled bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty" protobuf:"varint,7,opt,name=http2Enabled"`
 	// +optional
-	IpRestriction []AppServiceSpecSiteConfigIpRestriction `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IpRestriction []AppServiceSpecSiteConfigIpRestriction `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty" protobuf:"bytes,8,rep,name=ipRestriction"`
 	// +optional
-	JavaContainer string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
+	JavaContainer string `json:"javaContainer,omitempty" tf:"java_container,omitempty" protobuf:"bytes,9,opt,name=javaContainer"`
 	// +optional
-	JavaContainerVersion string `json:"javaContainerVersion,omitempty" tf:"java_container_version,omitempty"`
+	JavaContainerVersion string `json:"javaContainerVersion,omitempty" tf:"java_container_version,omitempty" protobuf:"bytes,10,opt,name=javaContainerVersion"`
 	// +optional
-	JavaVersion string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
+	JavaVersion string `json:"javaVersion,omitempty" tf:"java_version,omitempty" protobuf:"bytes,11,opt,name=javaVersion"`
 	// +optional
-	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
+	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty" protobuf:"bytes,12,opt,name=linuxFxVersion"`
 	// +optional
-	LocalMysqlEnabled bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
+	LocalMysqlEnabled bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty" protobuf:"varint,13,opt,name=localMysqlEnabled"`
 	// +optional
-	ManagedPipelineMode string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+	ManagedPipelineMode string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty" protobuf:"bytes,14,opt,name=managedPipelineMode"`
 	// +optional
-	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty"`
+	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty" protobuf:"bytes,15,opt,name=minTLSVersion"`
 	// +optional
-	PhpVersion string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
+	PhpVersion string `json:"phpVersion,omitempty" tf:"php_version,omitempty" protobuf:"bytes,16,opt,name=phpVersion"`
 	// +optional
-	PythonVersion string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
+	PythonVersion string `json:"pythonVersion,omitempty" tf:"python_version,omitempty" protobuf:"bytes,17,opt,name=pythonVersion"`
 	// +optional
-	RemoteDebuggingEnabled bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+	RemoteDebuggingEnabled bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty" protobuf:"varint,18,opt,name=remoteDebuggingEnabled"`
 	// +optional
-	RemoteDebuggingVersion string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+	RemoteDebuggingVersion string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty" protobuf:"bytes,19,opt,name=remoteDebuggingVersion"`
 	// +optional
-	ScmType string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
+	ScmType string `json:"scmType,omitempty" tf:"scm_type,omitempty" protobuf:"bytes,20,opt,name=scmType"`
 	// +optional
-	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
+	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty" protobuf:"varint,21,opt,name=use32BitWorkerProcess"`
 	// +optional
-	VirtualNetworkName string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
+	VirtualNetworkName string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty" protobuf:"bytes,22,opt,name=virtualNetworkName"`
 	// +optional
-	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty" protobuf:"varint,23,opt,name=websocketsEnabled"`
 	// +optional
-	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
+	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty" protobuf:"bytes,24,opt,name=windowsFxVersion"`
 }
 
 type AppServiceSpecSiteCredential struct {
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,1,opt,name=username"`
 }
 
 type AppServiceSpecSourceControl struct {
 	// +optional
-	Branch string `json:"branch,omitempty" tf:"branch,omitempty"`
+	Branch string `json:"branch,omitempty" tf:"branch,omitempty" protobuf:"bytes,1,opt,name=branch"`
 	// +optional
-	RepoURL string `json:"repoURL,omitempty" tf:"repo_url,omitempty"`
+	RepoURL string `json:"repoURL,omitempty" tf:"repo_url,omitempty" protobuf:"bytes,2,opt,name=repoURL"`
 }
 
 type AppServiceSpecStorageAccount struct {
 	AccessKey   string `json:"-" sensitive:"true" tf:"access_key"`
-	AccountName string `json:"accountName" tf:"account_name"`
+	AccountName string `json:"accountName" tf:"account_name" protobuf:"bytes,1,opt,name=accountName"`
 	// +optional
-	MountPath string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
-	Name      string `json:"name" tf:"name"`
-	ShareName string `json:"shareName" tf:"share_name"`
-	Type      string `json:"type" tf:"type"`
+	MountPath string `json:"mountPath,omitempty" tf:"mount_path,omitempty" protobuf:"bytes,2,opt,name=mountPath"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	ShareName string `json:"shareName" tf:"share_name" protobuf:"bytes,4,opt,name=shareName"`
+	Type      string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 }
 
 type AppServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	AppServicePlanID string `json:"appServicePlanID" tf:"app_service_plan_id"`
+	AppServicePlanID string `json:"appServicePlanID" tf:"app_service_plan_id" protobuf:"bytes,4,opt,name=appServicePlanID"`
 	// +optional
-	AppSettings map[string]string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	AuthSettings []AppServiceSpecAuthSettings `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AppSettings map[string]string `json:"appSettings,omitempty" tf:"app_settings,omitempty" protobuf:"bytes,5,rep,name=appSettings"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Backup []AppServiceSpecBackup `json:"backup,omitempty" tf:"backup,omitempty"`
-	// +optional
-	ClientAffinityEnabled bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
-	// +optional
-	ClientCertEnabled bool `json:"clientCertEnabled,omitempty" tf:"client_cert_enabled,omitempty"`
-	// +optional
-	ConnectionString []AppServiceSpecConnectionString `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
-	// +optional
-	DefaultSiteHostname string `json:"defaultSiteHostname,omitempty" tf:"default_site_hostname,omitempty"`
-	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
-	HttpsOnly bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
+	AuthSettings []AppServiceSpecAuthSettings `json:"authSettings,omitempty" tf:"auth_settings,omitempty" protobuf:"bytes,6,rep,name=authSettings"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Identity []AppServiceSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
-	Location string                   `json:"location" tf:"location"`
+	Backup []AppServiceSpecBackup `json:"backup,omitempty" tf:"backup,omitempty" protobuf:"bytes,7,rep,name=backup"`
+	// +optional
+	ClientAffinityEnabled bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty" protobuf:"varint,8,opt,name=clientAffinityEnabled"`
+	// +optional
+	ClientCertEnabled bool `json:"clientCertEnabled,omitempty" tf:"client_cert_enabled,omitempty" protobuf:"varint,9,opt,name=clientCertEnabled"`
+	// +optional
+	ConnectionString []AppServiceSpecConnectionString `json:"connectionString,omitempty" tf:"connection_string,omitempty" protobuf:"bytes,10,rep,name=connectionString"`
+	// +optional
+	DefaultSiteHostname string `json:"defaultSiteHostname,omitempty" tf:"default_site_hostname,omitempty" protobuf:"bytes,11,opt,name=defaultSiteHostname"`
+	// +optional
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,12,opt,name=enabled"`
+	// +optional
+	HttpsOnly bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty" protobuf:"varint,13,opt,name=httpsOnly"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Logs []AppServiceSpecLogs `json:"logs,omitempty" tf:"logs,omitempty"`
-	Name string               `json:"name" tf:"name"`
-	// +optional
-	OutboundIPAddresses string `json:"outboundIPAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
-	// +optional
-	PossibleOutboundIPAddresses string `json:"possibleOutboundIPAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
-	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name"`
+	Identity []AppServiceSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,14,rep,name=identity"`
+	Location string                   `json:"location" tf:"location" protobuf:"bytes,15,opt,name=location"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SiteConfig []AppServiceSpecSiteConfig `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	Logs []AppServiceSpecLogs `json:"logs,omitempty" tf:"logs,omitempty" protobuf:"bytes,16,rep,name=logs"`
+	Name string               `json:"name" tf:"name" protobuf:"bytes,17,opt,name=name"`
+	// +optional
+	OutboundIPAddresses string `json:"outboundIPAddresses,omitempty" tf:"outbound_ip_addresses,omitempty" protobuf:"bytes,18,opt,name=outboundIPAddresses"`
+	// +optional
+	PossibleOutboundIPAddresses string `json:"possibleOutboundIPAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty" protobuf:"bytes,19,opt,name=possibleOutboundIPAddresses"`
+	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,20,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SiteCredential []AppServiceSpecSiteCredential `json:"siteCredential,omitempty" tf:"site_credential,omitempty"`
+	SiteConfig []AppServiceSpecSiteConfig `json:"siteConfig,omitempty" tf:"site_config,omitempty" protobuf:"bytes,21,rep,name=siteConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SourceControl []AppServiceSpecSourceControl `json:"sourceControl,omitempty" tf:"source_control,omitempty"`
+	SiteCredential []AppServiceSpecSiteCredential `json:"siteCredential,omitempty" tf:"site_credential,omitempty" protobuf:"bytes,22,rep,name=siteCredential"`
 	// +optional
-	StorageAccount []AppServiceSpecStorageAccount `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	SourceControl []AppServiceSpecSourceControl `json:"sourceControl,omitempty" tf:"source_control,omitempty" protobuf:"bytes,23,rep,name=sourceControl"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	StorageAccount []AppServiceSpecStorageAccount `json:"storageAccount,omitempty" tf:"storage_account,omitempty" protobuf:"bytes,24,rep,name=storageAccount"`
+	// +optional
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,25,rep,name=tags"`
 }
 
 type AppServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AppServiceSpec `json:"output,omitempty"`
+	Output *AppServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -325,7 +325,7 @@ type AppServiceStatus struct {
 // AppServiceList is a list of AppServices
 type AppServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AppService CRD objects
-	Items []AppService `json:"items,omitempty"`
+	Items []AppService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

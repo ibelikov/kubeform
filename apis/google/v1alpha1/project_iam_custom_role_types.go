@@ -34,41 +34,41 @@ import (
 
 type ProjectIamCustomRole struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProjectIamCustomRoleSpec   `json:"spec,omitempty"`
-	Status            ProjectIamCustomRoleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ProjectIamCustomRoleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ProjectIamCustomRoleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ProjectIamCustomRoleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// Deprecated
-	Deleted bool `json:"deleted,omitempty" tf:"deleted,omitempty"`
+	Deleted bool `json:"deleted,omitempty" tf:"deleted,omitempty" protobuf:"varint,3,opt,name=deleted"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +kubebuilder:validation:MinItems=1
-	Permissions []string `json:"permissions" tf:"permissions"`
+	Permissions []string `json:"permissions" tf:"permissions" protobuf:"bytes,5,rep,name=permissions"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	RoleID  string `json:"roleID" tf:"role_id"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
+	RoleID  string `json:"roleID" tf:"role_id" protobuf:"bytes,7,opt,name=roleID"`
 	// +optional
-	Stage string `json:"stage,omitempty" tf:"stage,omitempty"`
-	Title string `json:"title" tf:"title"`
+	Stage string `json:"stage,omitempty" tf:"stage,omitempty" protobuf:"bytes,8,opt,name=stage"`
+	Title string `json:"title" tf:"title" protobuf:"bytes,9,opt,name=title"`
 }
 
 type ProjectIamCustomRoleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ProjectIamCustomRoleSpec `json:"output,omitempty"`
+	Output *ProjectIamCustomRoleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -77,7 +77,7 @@ type ProjectIamCustomRoleStatus struct {
 // ProjectIamCustomRoleList is a list of ProjectIamCustomRoles
 type ProjectIamCustomRoleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ProjectIamCustomRole CRD objects
-	Items []ProjectIamCustomRole `json:"items,omitempty"`
+	Items []ProjectIamCustomRole `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,35 +34,35 @@ import (
 
 type LoggingBillingAccountExclusion struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoggingBillingAccountExclusionSpec   `json:"spec,omitempty"`
-	Status            LoggingBillingAccountExclusionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LoggingBillingAccountExclusionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LoggingBillingAccountExclusionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LoggingBillingAccountExclusionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	BillingAccount string `json:"billingAccount" tf:"billing_account"`
+	BillingAccount string `json:"billingAccount" tf:"billing_account" protobuf:"bytes,3,opt,name=billingAccount"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	Disabled bool   `json:"disabled,omitempty" tf:"disabled,omitempty"`
-	Filter   string `json:"filter" tf:"filter"`
-	Name     string `json:"name" tf:"name"`
+	Disabled bool   `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,5,opt,name=disabled"`
+	Filter   string `json:"filter" tf:"filter" protobuf:"bytes,6,opt,name=filter"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 }
 
 type LoggingBillingAccountExclusionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LoggingBillingAccountExclusionSpec `json:"output,omitempty"`
+	Output *LoggingBillingAccountExclusionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type LoggingBillingAccountExclusionStatus struct {
 // LoggingBillingAccountExclusionList is a list of LoggingBillingAccountExclusions
 type LoggingBillingAccountExclusionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LoggingBillingAccountExclusion CRD objects
-	Items []LoggingBillingAccountExclusion `json:"items,omitempty"`
+	Items []LoggingBillingAccountExclusion `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

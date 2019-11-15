@@ -34,73 +34,73 @@ import (
 
 type ApiManagementAPI struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementAPISpec   `json:"spec,omitempty"`
-	Status            ApiManagementAPIStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementAPISpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementAPIStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementAPISpecImportWsdlSelector struct {
-	EndpointName string `json:"endpointName" tf:"endpoint_name"`
-	ServiceName  string `json:"serviceName" tf:"service_name"`
+	EndpointName string `json:"endpointName" tf:"endpoint_name" protobuf:"bytes,1,opt,name=endpointName"`
+	ServiceName  string `json:"serviceName" tf:"service_name" protobuf:"bytes,2,opt,name=serviceName"`
 }
 
 type ApiManagementAPISpecImport struct {
-	ContentFormat string `json:"contentFormat" tf:"content_format"`
-	ContentValue  string `json:"contentValue" tf:"content_value"`
+	ContentFormat string `json:"contentFormat" tf:"content_format" protobuf:"bytes,1,opt,name=contentFormat"`
+	ContentValue  string `json:"contentValue" tf:"content_value" protobuf:"bytes,2,opt,name=contentValue"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	WsdlSelector []ApiManagementAPISpecImportWsdlSelector `json:"wsdlSelector,omitempty" tf:"wsdl_selector,omitempty"`
+	WsdlSelector []ApiManagementAPISpecImportWsdlSelector `json:"wsdlSelector,omitempty" tf:"wsdl_selector,omitempty" protobuf:"bytes,3,rep,name=wsdlSelector"`
 }
 
 type ApiManagementAPISpecSubscriptionKeyParameterNames struct {
-	Header string `json:"header" tf:"header"`
-	Query  string `json:"query" tf:"query"`
+	Header string `json:"header" tf:"header" protobuf:"bytes,1,opt,name=header"`
+	Query  string `json:"query" tf:"query" protobuf:"bytes,2,opt,name=query"`
 }
 
 type ApiManagementAPISpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,5,opt,name=displayName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Import []ApiManagementAPISpecImport `json:"import,omitempty" tf:"import,omitempty"`
+	Import []ApiManagementAPISpecImport `json:"import,omitempty" tf:"import,omitempty" protobuf:"bytes,6,rep,name=import"`
 	// +optional
-	IsCurrent bool `json:"isCurrent,omitempty" tf:"is_current,omitempty"`
+	IsCurrent bool `json:"isCurrent,omitempty" tf:"is_current,omitempty" protobuf:"varint,7,opt,name=isCurrent"`
 	// +optional
-	IsOnline          bool     `json:"isOnline,omitempty" tf:"is_online,omitempty"`
-	Name              string   `json:"name" tf:"name"`
-	Path              string   `json:"path" tf:"path"`
-	Protocols         []string `json:"protocols" tf:"protocols"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
-	Revision          string   `json:"revision" tf:"revision"`
+	IsOnline          bool     `json:"isOnline,omitempty" tf:"is_online,omitempty" protobuf:"varint,8,opt,name=isOnline"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	Path              string   `json:"path" tf:"path" protobuf:"bytes,10,opt,name=path"`
+	Protocols         []string `json:"protocols" tf:"protocols" protobuf:"bytes,11,rep,name=protocols"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
+	Revision          string   `json:"revision" tf:"revision" protobuf:"bytes,13,opt,name=revision"`
 	// +optional
-	ServiceURL string `json:"serviceURL,omitempty" tf:"service_url,omitempty"`
+	ServiceURL string `json:"serviceURL,omitempty" tf:"service_url,omitempty" protobuf:"bytes,14,opt,name=serviceURL"`
 	// +optional
-	SoapPassThrough bool `json:"soapPassThrough,omitempty" tf:"soap_pass_through,omitempty"`
+	SoapPassThrough bool `json:"soapPassThrough,omitempty" tf:"soap_pass_through,omitempty" protobuf:"varint,15,opt,name=soapPassThrough"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SubscriptionKeyParameterNames []ApiManagementAPISpecSubscriptionKeyParameterNames `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
+	SubscriptionKeyParameterNames []ApiManagementAPISpecSubscriptionKeyParameterNames `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty" protobuf:"bytes,16,rep,name=subscriptionKeyParameterNames"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,17,opt,name=version"`
 	// +optional
-	VersionSetID string `json:"versionSetID,omitempty" tf:"version_set_id,omitempty"`
+	VersionSetID string `json:"versionSetID,omitempty" tf:"version_set_id,omitempty" protobuf:"bytes,18,opt,name=versionSetID"`
 }
 
 type ApiManagementAPIStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementAPISpec `json:"output,omitempty"`
+	Output *ApiManagementAPISpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -109,7 +109,7 @@ type ApiManagementAPIStatus struct {
 // ApiManagementAPIList is a list of ApiManagementAPIs
 type ApiManagementAPIList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementAPI CRD objects
-	Items []ApiManagementAPI `json:"items,omitempty"`
+	Items []ApiManagementAPI `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

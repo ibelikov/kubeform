@@ -34,74 +34,74 @@ import (
 
 type CloudbuildTrigger struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CloudbuildTriggerSpec   `json:"spec,omitempty"`
-	Status            CloudbuildTriggerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CloudbuildTriggerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CloudbuildTriggerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CloudbuildTriggerSpecBuildStep struct {
 	// +optional
-	Args string `json:"args,omitempty" tf:"args,omitempty"`
+	Args string `json:"args,omitempty" tf:"args,omitempty" protobuf:"bytes,1,opt,name=args"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
 }
 
 type CloudbuildTriggerSpecBuild struct {
 	// +optional
-	Images []string `json:"images,omitempty" tf:"images,omitempty"`
+	Images []string `json:"images,omitempty" tf:"images,omitempty" protobuf:"bytes,1,rep,name=images"`
 	// +optional
-	Step []CloudbuildTriggerSpecBuildStep `json:"step,omitempty" tf:"step,omitempty"`
+	Step []CloudbuildTriggerSpecBuildStep `json:"step,omitempty" tf:"step,omitempty" protobuf:"bytes,2,rep,name=step"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,3,rep,name=tags"`
 }
 
 type CloudbuildTriggerSpecTriggerTemplate struct {
 	// +optional
-	BranchName string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+	BranchName string `json:"branchName,omitempty" tf:"branch_name,omitempty" protobuf:"bytes,1,opt,name=branchName"`
 	// +optional
-	CommitSha string `json:"commitSha,omitempty" tf:"commit_sha,omitempty"`
+	CommitSha string `json:"commitSha,omitempty" tf:"commit_sha,omitempty" protobuf:"bytes,2,opt,name=commitSha"`
 	// +optional
-	Dir string `json:"dir,omitempty" tf:"dir,omitempty"`
+	Dir string `json:"dir,omitempty" tf:"dir,omitempty" protobuf:"bytes,3,opt,name=dir"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,4,opt,name=project"`
 	// +optional
-	RepoName string `json:"repoName,omitempty" tf:"repo_name,omitempty"`
+	RepoName string `json:"repoName,omitempty" tf:"repo_name,omitempty" protobuf:"bytes,5,opt,name=repoName"`
 	// +optional
-	TagName string `json:"tagName,omitempty" tf:"tag_name,omitempty"`
+	TagName string `json:"tagName,omitempty" tf:"tag_name,omitempty" protobuf:"bytes,6,opt,name=tagName"`
 }
 
 type CloudbuildTriggerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// Contents of the build template.
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Build []CloudbuildTriggerSpecBuild `json:"build,omitempty" tf:"build,omitempty"`
+	Build []CloudbuildTriggerSpecBuild `json:"build,omitempty" tf:"build,omitempty" protobuf:"bytes,3,rep,name=build"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	Filename string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename string `json:"filename,omitempty" tf:"filename,omitempty" protobuf:"bytes,5,opt,name=filename"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
 	// +optional
-	Substitutions map[string]string `json:"substitutions,omitempty" tf:"substitutions,omitempty"`
+	Substitutions map[string]string `json:"substitutions,omitempty" tf:"substitutions,omitempty" protobuf:"bytes,7,rep,name=substitutions"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TriggerTemplate []CloudbuildTriggerSpecTriggerTemplate `json:"triggerTemplate,omitempty" tf:"trigger_template,omitempty"`
+	TriggerTemplate []CloudbuildTriggerSpecTriggerTemplate `json:"triggerTemplate,omitempty" tf:"trigger_template,omitempty" protobuf:"bytes,8,rep,name=triggerTemplate"`
 }
 
 type CloudbuildTriggerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CloudbuildTriggerSpec `json:"output,omitempty"`
+	Output *CloudbuildTriggerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -110,7 +110,7 @@ type CloudbuildTriggerStatus struct {
 // CloudbuildTriggerList is a list of CloudbuildTriggers
 type CloudbuildTriggerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CloudbuildTrigger CRD objects
-	Items []CloudbuildTrigger `json:"items,omitempty"`
+	Items []CloudbuildTrigger `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

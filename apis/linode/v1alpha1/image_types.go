@@ -34,61 +34,61 @@ import (
 
 type Image struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageSpec   `json:"spec,omitempty"`
-	Status            ImageStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ImageSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ImageStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ImageSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// When this Image was created.
 	// +optional
-	Created string `json:"created,omitempty" tf:"created,omitempty"`
+	Created string `json:"created,omitempty" tf:"created,omitempty" protobuf:"bytes,3,opt,name=created"`
 	// The name of the User who created this Image.
 	// +optional
-	CreatedBy string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
+	CreatedBy string `json:"createdBy,omitempty" tf:"created_by,omitempty" protobuf:"bytes,4,opt,name=createdBy"`
 	// Whether or not this Image is deprecated. Will only be True for deprecated public Images.
 	// +optional
-	Deprecated bool `json:"deprecated,omitempty" tf:"deprecated,omitempty"`
+	Deprecated bool `json:"deprecated,omitempty" tf:"deprecated,omitempty" protobuf:"varint,5,opt,name=deprecated"`
 	// A detailed description of this Image.
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// The ID of the Linode Disk that this Image will be created from.
-	DiskID int64 `json:"diskID" tf:"disk_id"`
+	DiskID int64 `json:"diskID" tf:"disk_id" protobuf:"varint,7,opt,name=diskID"`
 	// Only Images created automatically (from a deleted Linode; type=automatic) will expire.
 	// +optional
-	Expiry string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+	Expiry string `json:"expiry,omitempty" tf:"expiry,omitempty" protobuf:"bytes,8,opt,name=expiry"`
 	// True if the Image is public.
 	// +optional
-	IsPublic bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+	IsPublic bool `json:"isPublic,omitempty" tf:"is_public,omitempty" protobuf:"varint,9,opt,name=isPublic"`
 	// A short description of the Image. Labels cannot contain special characters.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,10,opt,name=label"`
 	// The ID of the Linode that this Image will be created from.
-	LinodeID int64 `json:"linodeID" tf:"linode_id"`
+	LinodeID int64 `json:"linodeID" tf:"linode_id" protobuf:"varint,11,opt,name=linodeID"`
 	// The minimum size this Image needs to deploy. Size is in MB.
 	// +optional
 	Size int64 `json:"size,omitempty" tf:"size,omitempty"`
 	// How the Image was created. 'Manual' Images can be created at any time. 'Automatic' images are created automatically from a deleted Linode.
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,13,opt,name=type"`
 	// The upstream distribution vendor. Nil for private Images.
 	// +optional
-	Vendor string `json:"vendor,omitempty" tf:"vendor,omitempty"`
+	Vendor string `json:"vendor,omitempty" tf:"vendor,omitempty" protobuf:"bytes,14,opt,name=vendor"`
 }
 
 type ImageStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ImageSpec `json:"output,omitempty"`
+	Output *ImageSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -97,7 +97,7 @@ type ImageStatus struct {
 // ImageList is a list of Images
 type ImageList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Image CRD objects
-	Items []Image `json:"items,omitempty"`
+	Items []Image `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

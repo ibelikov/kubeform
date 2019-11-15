@@ -34,52 +34,52 @@ import (
 
 type StorageBucketObject struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageBucketObjectSpec   `json:"spec,omitempty"`
-	Status            StorageBucketObjectStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageBucketObjectSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageBucketObjectStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageBucketObjectSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Bucket string `json:"bucket" tf:"bucket"`
+	Bucket string `json:"bucket" tf:"bucket" protobuf:"bytes,3,opt,name=bucket"`
 	// +optional
-	CacheControl string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+	CacheControl string `json:"cacheControl,omitempty" tf:"cache_control,omitempty" protobuf:"bytes,4,opt,name=cacheControl"`
 	// +optional
-	Content string `json:"content,omitempty" tf:"content,omitempty"`
+	Content string `json:"content,omitempty" tf:"content,omitempty" protobuf:"bytes,5,opt,name=content"`
 	// +optional
-	ContentDisposition string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
+	ContentDisposition string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty" protobuf:"bytes,6,opt,name=contentDisposition"`
 	// +optional
-	ContentEncoding string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty"`
+	ContentEncoding string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty" protobuf:"bytes,7,opt,name=contentEncoding"`
 	// +optional
-	ContentLanguage string `json:"contentLanguage,omitempty" tf:"content_language,omitempty"`
+	ContentLanguage string `json:"contentLanguage,omitempty" tf:"content_language,omitempty" protobuf:"bytes,8,opt,name=contentLanguage"`
 	// +optional
-	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty" protobuf:"bytes,9,opt,name=contentType"`
 	// +optional
-	Crc32c string `json:"crc32c,omitempty" tf:"crc32c,omitempty"`
+	Crc32c string `json:"crc32c,omitempty" tf:"crc32c,omitempty" protobuf:"bytes,10,opt,name=crc32c"`
 	// +optional
-	DetectMd5hash string `json:"detectMd5hash,omitempty" tf:"detect_md5hash,omitempty"`
+	DetectMd5hash string `json:"detectMd5hash,omitempty" tf:"detect_md5hash,omitempty" protobuf:"bytes,11,opt,name=detectMd5hash"`
 	// +optional
-	Md5hash string `json:"md5hash,omitempty" tf:"md5hash,omitempty"`
-	Name    string `json:"name" tf:"name"`
+	Md5hash string `json:"md5hash,omitempty" tf:"md5hash,omitempty" protobuf:"bytes,12,opt,name=md5hash"`
+	Name    string `json:"name" tf:"name" protobuf:"bytes,13,opt,name=name"`
 	// +optional
-	Source string `json:"source,omitempty" tf:"source,omitempty"`
+	Source string `json:"source,omitempty" tf:"source,omitempty" protobuf:"bytes,14,opt,name=source"`
 	// +optional
-	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty" protobuf:"bytes,15,opt,name=storageClass"`
 }
 
 type StorageBucketObjectStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageBucketObjectSpec `json:"output,omitempty"`
+	Output *StorageBucketObjectSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type StorageBucketObjectStatus struct {
 // StorageBucketObjectList is a list of StorageBucketObjects
 type StorageBucketObjectList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageBucketObject CRD objects
-	Items []StorageBucketObject `json:"items,omitempty"`
+	Items []StorageBucketObject `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

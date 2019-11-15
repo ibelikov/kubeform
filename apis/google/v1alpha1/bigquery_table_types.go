@@ -34,80 +34,80 @@ import (
 
 type BigqueryTable struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BigqueryTableSpec   `json:"spec,omitempty"`
-	Status            BigqueryTableStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BigqueryTableSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BigqueryTableStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BigqueryTableSpecTimePartitioning struct {
 	// +optional
-	ExpirationMs int64 `json:"expirationMs,omitempty" tf:"expiration_ms,omitempty"`
+	ExpirationMs int64 `json:"expirationMs,omitempty" tf:"expiration_ms,omitempty" protobuf:"varint,1,opt,name=expirationMs"`
 	// +optional
-	Field string `json:"field,omitempty" tf:"field,omitempty"`
-	Type  string `json:"type" tf:"type"`
+	Field string `json:"field,omitempty" tf:"field,omitempty" protobuf:"bytes,2,opt,name=field"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type BigqueryTableSpecView struct {
-	Query string `json:"query" tf:"query"`
+	Query string `json:"query" tf:"query" protobuf:"bytes,1,opt,name=query"`
 	// +optional
-	UseLegacySQL bool `json:"useLegacySQL,omitempty" tf:"use_legacy_sql,omitempty"`
+	UseLegacySQL bool `json:"useLegacySQL,omitempty" tf:"use_legacy_sql,omitempty" protobuf:"varint,2,opt,name=useLegacySQL"`
 }
 
 type BigqueryTableSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreationTime int64  `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
-	DatasetID    string `json:"datasetID" tf:"dataset_id"`
+	CreationTime int64  `json:"creationTime,omitempty" tf:"creation_time,omitempty" protobuf:"varint,3,opt,name=creationTime"`
+	DatasetID    string `json:"datasetID" tf:"dataset_id" protobuf:"bytes,4,opt,name=datasetID"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	Etag string `json:"etag,omitempty" tf:"etag,omitempty"`
+	Etag string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,6,opt,name=etag"`
 	// +optional
-	ExpirationTime int64 `json:"expirationTime,omitempty" tf:"expiration_time,omitempty"`
+	ExpirationTime int64 `json:"expirationTime,omitempty" tf:"expiration_time,omitempty" protobuf:"varint,7,opt,name=expirationTime"`
 	// +optional
-	FriendlyName string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
+	FriendlyName string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty" protobuf:"bytes,8,opt,name=friendlyName"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,9,rep,name=labels"`
 	// +optional
-	LastModifiedTime int64 `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty"`
+	LastModifiedTime int64 `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty" protobuf:"varint,10,opt,name=lastModifiedTime"`
 	// +optional
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,11,opt,name=location"`
 	// +optional
-	NumBytes int64 `json:"numBytes,omitempty" tf:"num_bytes,omitempty"`
+	NumBytes int64 `json:"numBytes,omitempty" tf:"num_bytes,omitempty" protobuf:"varint,12,opt,name=numBytes"`
 	// +optional
-	NumLongTermBytes int64 `json:"numLongTermBytes,omitempty" tf:"num_long_term_bytes,omitempty"`
+	NumLongTermBytes int64 `json:"numLongTermBytes,omitempty" tf:"num_long_term_bytes,omitempty" protobuf:"varint,13,opt,name=numLongTermBytes"`
 	// +optional
-	NumRows int64 `json:"numRows,omitempty" tf:"num_rows,omitempty"`
+	NumRows int64 `json:"numRows,omitempty" tf:"num_rows,omitempty" protobuf:"varint,14,opt,name=numRows"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,15,opt,name=project"`
 	// +optional
-	Schema string `json:"schema,omitempty" tf:"schema,omitempty"`
+	Schema string `json:"schema,omitempty" tf:"schema,omitempty" protobuf:"bytes,16,opt,name=schema"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	TableID  string `json:"tableID" tf:"table_id"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,17,opt,name=selfLink"`
+	TableID  string `json:"tableID" tf:"table_id" protobuf:"bytes,18,opt,name=tableID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TimePartitioning []BigqueryTableSpecTimePartitioning `json:"timePartitioning,omitempty" tf:"time_partitioning,omitempty"`
+	TimePartitioning []BigqueryTableSpecTimePartitioning `json:"timePartitioning,omitempty" tf:"time_partitioning,omitempty" protobuf:"bytes,19,rep,name=timePartitioning"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,20,opt,name=type"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	View []BigqueryTableSpecView `json:"view,omitempty" tf:"view,omitempty"`
+	View []BigqueryTableSpecView `json:"view,omitempty" tf:"view,omitempty" protobuf:"bytes,21,rep,name=view"`
 }
 
 type BigqueryTableStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BigqueryTableSpec `json:"output,omitempty"`
+	Output *BigqueryTableSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -116,7 +116,7 @@ type BigqueryTableStatus struct {
 // BigqueryTableList is a list of BigqueryTables
 type BigqueryTableList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BigqueryTable CRD objects
-	Items []BigqueryTable `json:"items,omitempty"`
+	Items []BigqueryTable `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

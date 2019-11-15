@@ -34,47 +34,47 @@ import (
 
 type NetworkProfile struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkProfileSpec   `json:"spec,omitempty"`
-	Status            NetworkProfileStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NetworkProfileSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NetworkProfileStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NetworkProfileSpecContainerNetworkInterfaceIpConfiguration struct {
-	Name     string `json:"name" tf:"name"`
-	SubnetID string `json:"subnetID" tf:"subnet_id"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	SubnetID string `json:"subnetID" tf:"subnet_id" protobuf:"bytes,2,opt,name=subnetID"`
 }
 
 type NetworkProfileSpecContainerNetworkInterface struct {
-	IpConfiguration []NetworkProfileSpecContainerNetworkInterfaceIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
-	Name            string                                                       `json:"name" tf:"name"`
+	IpConfiguration []NetworkProfileSpecContainerNetworkInterfaceIpConfiguration `json:"ipConfiguration" tf:"ip_configuration" protobuf:"bytes,1,rep,name=ipConfiguration"`
+	Name            string                                                       `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type NetworkProfileSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MaxItems=1
-	ContainerNetworkInterface []NetworkProfileSpecContainerNetworkInterface `json:"containerNetworkInterface" tf:"container_network_interface"`
+	ContainerNetworkInterface []NetworkProfileSpecContainerNetworkInterface `json:"containerNetworkInterface" tf:"container_network_interface" protobuf:"bytes,3,rep,name=containerNetworkInterface"`
 	// +optional
-	ContainerNetworkInterfaceIDS []string `json:"containerNetworkInterfaceIDS,omitempty" tf:"container_network_interface_ids,omitempty"`
-	Location                     string   `json:"location" tf:"location"`
-	Name                         string   `json:"name" tf:"name"`
-	ResourceGroupName            string   `json:"resourceGroupName" tf:"resource_group_name"`
+	ContainerNetworkInterfaceIDS []string `json:"containerNetworkInterfaceIDS,omitempty" tf:"container_network_interface_ids,omitempty" protobuf:"bytes,4,rep,name=containerNetworkInterfaceIDS"`
+	Location                     string   `json:"location" tf:"location" protobuf:"bytes,5,opt,name=location"`
+	Name                         string   `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName            string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
 }
 
 type NetworkProfileStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NetworkProfileSpec `json:"output,omitempty"`
+	Output *NetworkProfileSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type NetworkProfileStatus struct {
 // NetworkProfileList is a list of NetworkProfiles
 type NetworkProfileList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NetworkProfile CRD objects
-	Items []NetworkProfile `json:"items,omitempty"`
+	Items []NetworkProfile `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

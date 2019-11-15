@@ -34,98 +34,98 @@ import (
 
 type ComputeDisk struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeDiskSpec   `json:"spec,omitempty"`
-	Status            ComputeDiskStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeDiskSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeDiskStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeDiskSpecDiskEncryptionKey struct {
 	// +optional
-	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty"`
+	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty" protobuf:"bytes,1,opt,name=rawKey"`
 	// +optional
-	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty"`
+	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty" protobuf:"bytes,2,opt,name=sha256"`
 }
 
 type ComputeDiskSpecSourceImageEncryptionKey struct {
 	// +optional
-	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty"`
+	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty" protobuf:"bytes,1,opt,name=rawKey"`
 	// +optional
-	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty"`
+	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty" protobuf:"bytes,2,opt,name=sha256"`
 }
 
 type ComputeDiskSpecSourceSnapshotEncryptionKey struct {
 	// +optional
-	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty"`
+	RawKey string `json:"rawKey,omitempty" tf:"raw_key,omitempty" protobuf:"bytes,1,opt,name=rawKey"`
 	// +optional
-	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty"`
+	Sha256 string `json:"sha256,omitempty" tf:"sha256,omitempty" protobuf:"bytes,2,opt,name=sha256"`
 }
 
 type ComputeDiskSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskEncryptionKey []ComputeDiskSpecDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
+	DiskEncryptionKey []ComputeDiskSpecDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty" protobuf:"bytes,6,rep,name=diskEncryptionKey"`
 	// +optional
 	DiskEncryptionKeyRaw string `json:"-" sensitive:"true" tf:"disk_encryption_key_raw,omitempty"`
 	// +optional
 	// Deprecated
-	DiskEncryptionKeySha256 string `json:"diskEncryptionKeySha256,omitempty" tf:"disk_encryption_key_sha256,omitempty"`
+	DiskEncryptionKeySha256 string `json:"diskEncryptionKeySha256,omitempty" tf:"disk_encryption_key_sha256,omitempty" protobuf:"bytes,7,opt,name=diskEncryptionKeySha256"`
 	// +optional
-	Image string `json:"image,omitempty" tf:"image,omitempty"`
+	Image string `json:"image,omitempty" tf:"image,omitempty" protobuf:"bytes,8,opt,name=image"`
 	// +optional
-	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty"`
+	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty" protobuf:"bytes,9,opt,name=labelFingerprint"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,10,rep,name=labels"`
 	// +optional
-	LastAttachTimestamp string `json:"lastAttachTimestamp,omitempty" tf:"last_attach_timestamp,omitempty"`
+	LastAttachTimestamp string `json:"lastAttachTimestamp,omitempty" tf:"last_attach_timestamp,omitempty" protobuf:"bytes,11,opt,name=lastAttachTimestamp"`
 	// +optional
-	LastDetachTimestamp string `json:"lastDetachTimestamp,omitempty" tf:"last_detach_timestamp,omitempty"`
-	Name                string `json:"name" tf:"name"`
+	LastDetachTimestamp string `json:"lastDetachTimestamp,omitempty" tf:"last_detach_timestamp,omitempty" protobuf:"bytes,12,opt,name=lastDetachTimestamp"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,13,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,14,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,15,opt,name=selfLink"`
 	// +optional
 	Size int64 `json:"size,omitempty" tf:"size,omitempty"`
 	// +optional
-	Snapshot string `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
+	Snapshot string `json:"snapshot,omitempty" tf:"snapshot,omitempty" protobuf:"bytes,17,opt,name=snapshot"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SourceImageEncryptionKey []ComputeDiskSpecSourceImageEncryptionKey `json:"sourceImageEncryptionKey,omitempty" tf:"source_image_encryption_key,omitempty"`
+	SourceImageEncryptionKey []ComputeDiskSpecSourceImageEncryptionKey `json:"sourceImageEncryptionKey,omitempty" tf:"source_image_encryption_key,omitempty" protobuf:"bytes,18,rep,name=sourceImageEncryptionKey"`
 	// +optional
-	SourceImageID string `json:"sourceImageID,omitempty" tf:"source_image_id,omitempty"`
+	SourceImageID string `json:"sourceImageID,omitempty" tf:"source_image_id,omitempty" protobuf:"bytes,19,opt,name=sourceImageID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SourceSnapshotEncryptionKey []ComputeDiskSpecSourceSnapshotEncryptionKey `json:"sourceSnapshotEncryptionKey,omitempty" tf:"source_snapshot_encryption_key,omitempty"`
+	SourceSnapshotEncryptionKey []ComputeDiskSpecSourceSnapshotEncryptionKey `json:"sourceSnapshotEncryptionKey,omitempty" tf:"source_snapshot_encryption_key,omitempty" protobuf:"bytes,20,rep,name=sourceSnapshotEncryptionKey"`
 	// +optional
-	SourceSnapshotID string `json:"sourceSnapshotID,omitempty" tf:"source_snapshot_id,omitempty"`
+	SourceSnapshotID string `json:"sourceSnapshotID,omitempty" tf:"source_snapshot_id,omitempty" protobuf:"bytes,21,opt,name=sourceSnapshotID"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,22,opt,name=type"`
 	// +optional
-	Users []string `json:"users,omitempty" tf:"users,omitempty"`
+	Users []string `json:"users,omitempty" tf:"users,omitempty" protobuf:"bytes,23,rep,name=users"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,24,opt,name=zone"`
 }
 
 type ComputeDiskStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeDiskSpec `json:"output,omitempty"`
+	Output *ComputeDiskSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -134,7 +134,7 @@ type ComputeDiskStatus struct {
 // ComputeDiskList is a list of ComputeDisks
 type ComputeDiskList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeDisk CRD objects
-	Items []ComputeDisk `json:"items,omitempty"`
+	Items []ComputeDisk `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

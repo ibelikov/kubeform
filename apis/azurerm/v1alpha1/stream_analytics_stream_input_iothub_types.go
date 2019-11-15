@@ -34,48 +34,48 @@ import (
 
 type StreamAnalyticsStreamInputIothub struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamAnalyticsStreamInputIothubSpec   `json:"spec,omitempty"`
-	Status            StreamAnalyticsStreamInputIothubStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StreamAnalyticsStreamInputIothubSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StreamAnalyticsStreamInputIothubStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StreamAnalyticsStreamInputIothubSpecSerialization struct {
 	// +optional
-	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty" protobuf:"bytes,1,opt,name=encoding"`
 	// +optional
-	FieldDelimiter string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
-	Type           string `json:"type" tf:"type"`
+	FieldDelimiter string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty" protobuf:"bytes,2,opt,name=fieldDelimiter"`
+	Type           string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type StreamAnalyticsStreamInputIothubSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Endpoint                  string `json:"endpoint" tf:"endpoint"`
-	EventhubConsumerGroupName string `json:"eventhubConsumerGroupName" tf:"eventhub_consumer_group_name"`
-	IothubNamespace           string `json:"iothubNamespace" tf:"iothub_namespace"`
-	Name                      string `json:"name" tf:"name"`
-	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name"`
+	Endpoint                  string `json:"endpoint" tf:"endpoint" protobuf:"bytes,4,opt,name=endpoint"`
+	EventhubConsumerGroupName string `json:"eventhubConsumerGroupName" tf:"eventhub_consumer_group_name" protobuf:"bytes,5,opt,name=eventhubConsumerGroupName"`
+	IothubNamespace           string `json:"iothubNamespace" tf:"iothub_namespace" protobuf:"bytes,6,opt,name=iothubNamespace"`
+	Name                      string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	Serialization          []StreamAnalyticsStreamInputIothubSpecSerialization `json:"serialization" tf:"serialization"`
+	Serialization          []StreamAnalyticsStreamInputIothubSpecSerialization `json:"serialization" tf:"serialization" protobuf:"bytes,9,rep,name=serialization"`
 	SharedAccessPolicyKey  string                                              `json:"-" sensitive:"true" tf:"shared_access_policy_key"`
-	SharedAccessPolicyName string                                              `json:"sharedAccessPolicyName" tf:"shared_access_policy_name"`
-	StreamAnalyticsJobName string                                              `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name"`
+	SharedAccessPolicyName string                                              `json:"sharedAccessPolicyName" tf:"shared_access_policy_name" protobuf:"bytes,10,opt,name=sharedAccessPolicyName"`
+	StreamAnalyticsJobName string                                              `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name" protobuf:"bytes,11,opt,name=streamAnalyticsJobName"`
 }
 
 type StreamAnalyticsStreamInputIothubStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StreamAnalyticsStreamInputIothubSpec `json:"output,omitempty"`
+	Output *StreamAnalyticsStreamInputIothubSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -84,7 +84,7 @@ type StreamAnalyticsStreamInputIothubStatus struct {
 // StreamAnalyticsStreamInputIothubList is a list of StreamAnalyticsStreamInputIothubs
 type StreamAnalyticsStreamInputIothubList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StreamAnalyticsStreamInputIothub CRD objects
-	Items []StreamAnalyticsStreamInputIothub `json:"items,omitempty"`
+	Items []StreamAnalyticsStreamInputIothub `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

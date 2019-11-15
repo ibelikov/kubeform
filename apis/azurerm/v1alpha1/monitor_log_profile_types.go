@@ -34,45 +34,45 @@ import (
 
 type MonitorLogProfile struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorLogProfileSpec   `json:"spec,omitempty"`
-	Status            MonitorLogProfileStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitorLogProfileSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitorLogProfileStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitorLogProfileSpecRetentionPolicy struct {
 	// +optional
-	Days    int64 `json:"days,omitempty" tf:"days,omitempty"`
-	Enabled bool  `json:"enabled" tf:"enabled"`
+	Days    int64 `json:"days,omitempty" tf:"days,omitempty" protobuf:"varint,1,opt,name=days"`
+	Enabled bool  `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
 }
 
 type MonitorLogProfileSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MinItems=1
-	Categories []string `json:"categories" tf:"categories"`
+	Categories []string `json:"categories" tf:"categories" protobuf:"bytes,3,rep,name=categories"`
 	// +kubebuilder:validation:MinItems=1
-	Locations []string `json:"locations" tf:"locations"`
-	Name      string   `json:"name" tf:"name"`
+	Locations []string `json:"locations" tf:"locations" protobuf:"bytes,4,rep,name=locations"`
+	Name      string   `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	RetentionPolicy []MonitorLogProfileSpecRetentionPolicy `json:"retentionPolicy" tf:"retention_policy"`
+	RetentionPolicy []MonitorLogProfileSpecRetentionPolicy `json:"retentionPolicy" tf:"retention_policy" protobuf:"bytes,6,rep,name=retentionPolicy"`
 	// +optional
-	ServicebusRuleID string `json:"servicebusRuleID,omitempty" tf:"servicebus_rule_id,omitempty"`
+	ServicebusRuleID string `json:"servicebusRuleID,omitempty" tf:"servicebus_rule_id,omitempty" protobuf:"bytes,7,opt,name=servicebusRuleID"`
 	// +optional
-	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty" protobuf:"bytes,8,opt,name=storageAccountID"`
 }
 
 type MonitorLogProfileStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitorLogProfileSpec `json:"output,omitempty"`
+	Output *MonitorLogProfileSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type MonitorLogProfileStatus struct {
 // MonitorLogProfileList is a list of MonitorLogProfiles
 type MonitorLogProfileList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitorLogProfile CRD objects
-	Items []MonitorLogProfile `json:"items,omitempty"`
+	Items []MonitorLogProfile `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

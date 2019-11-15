@@ -34,52 +34,52 @@ import (
 
 type LbRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LbRuleSpec   `json:"spec,omitempty"`
-	Status            LbRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LbRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LbRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LbRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty"`
-	BackendPort          int64  `json:"backendPort" tf:"backend_port"`
+	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty" protobuf:"bytes,3,opt,name=backendAddressPoolID"`
+	BackendPort          int64  `json:"backendPort" tf:"backend_port" protobuf:"varint,4,opt,name=backendPort"`
 	// +optional
-	DisableOutboundSnat bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty"`
+	DisableOutboundSnat bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty" protobuf:"varint,5,opt,name=disableOutboundSnat"`
 	// +optional
-	EnableFloatingIP bool `json:"enableFloatingIP,omitempty" tf:"enable_floating_ip,omitempty"`
+	EnableFloatingIP bool `json:"enableFloatingIP,omitempty" tf:"enable_floating_ip,omitempty" protobuf:"varint,6,opt,name=enableFloatingIP"`
 	// +optional
-	FrontendIPConfigurationID   string `json:"frontendIPConfigurationID,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
-	FrontendIPConfigurationName string `json:"frontendIPConfigurationName" tf:"frontend_ip_configuration_name"`
-	FrontendPort                int64  `json:"frontendPort" tf:"frontend_port"`
+	FrontendIPConfigurationID   string `json:"frontendIPConfigurationID,omitempty" tf:"frontend_ip_configuration_id,omitempty" protobuf:"bytes,7,opt,name=frontendIPConfigurationID"`
+	FrontendIPConfigurationName string `json:"frontendIPConfigurationName" tf:"frontend_ip_configuration_name" protobuf:"bytes,8,opt,name=frontendIPConfigurationName"`
+	FrontendPort                int64  `json:"frontendPort" tf:"frontend_port" protobuf:"varint,9,opt,name=frontendPort"`
 	// +optional
-	IdleTimeoutInMinutes int64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+	IdleTimeoutInMinutes int64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty" protobuf:"varint,10,opt,name=idleTimeoutInMinutes"`
 	// +optional
-	LoadDistribution string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty"`
-	LoadbalancerID   string `json:"loadbalancerID" tf:"loadbalancer_id"`
+	LoadDistribution string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty" protobuf:"bytes,11,opt,name=loadDistribution"`
+	LoadbalancerID   string `json:"loadbalancerID" tf:"loadbalancer_id" protobuf:"bytes,12,opt,name=loadbalancerID"`
 	// +optional
 	// Deprecated
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
-	Name     string `json:"name" tf:"name"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,13,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
 	// +optional
-	ProbeID           string `json:"probeID,omitempty" tf:"probe_id,omitempty"`
-	Protocol          string `json:"protocol" tf:"protocol"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ProbeID           string `json:"probeID,omitempty" tf:"probe_id,omitempty" protobuf:"bytes,15,opt,name=probeID"`
+	Protocol          string `json:"protocol" tf:"protocol" protobuf:"bytes,16,opt,name=protocol"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,17,opt,name=resourceGroupName"`
 }
 
 type LbRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LbRuleSpec `json:"output,omitempty"`
+	Output *LbRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type LbRuleStatus struct {
 // LbRuleList is a list of LbRules
 type LbRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LbRule CRD objects
-	Items []LbRule `json:"items,omitempty"`
+	Items []LbRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,56 +34,56 @@ import (
 
 type Subnet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubnetSpec   `json:"spec,omitempty"`
-	Status            SubnetStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SubnetSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SubnetStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SubnetSpecDelegationServiceDelegation struct {
 	// +optional
-	Actions []string `json:"actions,omitempty" tf:"actions,omitempty"`
-	Name    string   `json:"name" tf:"name"`
+	Actions []string `json:"actions,omitempty" tf:"actions,omitempty" protobuf:"bytes,1,rep,name=actions"`
+	Name    string   `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type SubnetSpecDelegation struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	ServiceDelegation []SubnetSpecDelegationServiceDelegation `json:"serviceDelegation" tf:"service_delegation"`
+	ServiceDelegation []SubnetSpecDelegationServiceDelegation `json:"serviceDelegation" tf:"service_delegation" protobuf:"bytes,2,rep,name=serviceDelegation"`
 }
 
 type SubnetSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AddressPrefix string `json:"addressPrefix" tf:"address_prefix"`
+	AddressPrefix string `json:"addressPrefix" tf:"address_prefix" protobuf:"bytes,3,opt,name=addressPrefix"`
 	// +optional
-	Delegation []SubnetSpecDelegation `json:"delegation,omitempty" tf:"delegation,omitempty"`
+	Delegation []SubnetSpecDelegation `json:"delegation,omitempty" tf:"delegation,omitempty" protobuf:"bytes,4,rep,name=delegation"`
 	// +optional
-	IpConfigurations []string `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
-	Name             string   `json:"name" tf:"name"`
+	IpConfigurations []string `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty" protobuf:"bytes,5,rep,name=ipConfigurations"`
+	Name             string   `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
 	// Deprecated
-	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty"`
-	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
+	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty" protobuf:"bytes,7,opt,name=networkSecurityGroupID"`
+	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
 	// Deprecated
-	RouteTableID string `json:"routeTableID,omitempty" tf:"route_table_id,omitempty"`
+	RouteTableID string `json:"routeTableID,omitempty" tf:"route_table_id,omitempty" protobuf:"bytes,9,opt,name=routeTableID"`
 	// +optional
-	ServiceEndpoints   []string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
-	VirtualNetworkName string   `json:"virtualNetworkName" tf:"virtual_network_name"`
+	ServiceEndpoints   []string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty" protobuf:"bytes,10,rep,name=serviceEndpoints"`
+	VirtualNetworkName string   `json:"virtualNetworkName" tf:"virtual_network_name" protobuf:"bytes,11,opt,name=virtualNetworkName"`
 }
 
 type SubnetStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SubnetSpec `json:"output,omitempty"`
+	Output *SubnetSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -92,7 +92,7 @@ type SubnetStatus struct {
 // SubnetList is a list of Subnets
 type SubnetList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Subnet CRD objects
-	Items []Subnet `json:"items,omitempty"`
+	Items []Subnet `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

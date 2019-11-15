@@ -34,370 +34,370 @@ import (
 
 type ContainerCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerClusterSpec   `json:"spec,omitempty"`
-	Status            ContainerClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ContainerClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ContainerClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ContainerClusterSpecAddonsConfigHorizontalPodAutoscaling struct {
 	// +optional
-	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,1,opt,name=disabled"`
 }
 
 type ContainerClusterSpecAddonsConfigHttpLoadBalancing struct {
 	// +optional
-	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,1,opt,name=disabled"`
 }
 
 type ContainerClusterSpecAddonsConfigKubernetesDashboard struct {
 	// +optional
-	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,1,opt,name=disabled"`
 }
 
 type ContainerClusterSpecAddonsConfigNetworkPolicyConfig struct {
 	// +optional
-	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,1,opt,name=disabled"`
 }
 
 type ContainerClusterSpecAddonsConfig struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HorizontalPodAutoscaling []ContainerClusterSpecAddonsConfigHorizontalPodAutoscaling `json:"horizontalPodAutoscaling,omitempty" tf:"horizontal_pod_autoscaling,omitempty"`
+	HorizontalPodAutoscaling []ContainerClusterSpecAddonsConfigHorizontalPodAutoscaling `json:"horizontalPodAutoscaling,omitempty" tf:"horizontal_pod_autoscaling,omitempty" protobuf:"bytes,1,rep,name=horizontalPodAutoscaling"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HttpLoadBalancing []ContainerClusterSpecAddonsConfigHttpLoadBalancing `json:"httpLoadBalancing,omitempty" tf:"http_load_balancing,omitempty"`
+	HttpLoadBalancing []ContainerClusterSpecAddonsConfigHttpLoadBalancing `json:"httpLoadBalancing,omitempty" tf:"http_load_balancing,omitempty" protobuf:"bytes,2,rep,name=httpLoadBalancing"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	KubernetesDashboard []ContainerClusterSpecAddonsConfigKubernetesDashboard `json:"kubernetesDashboard,omitempty" tf:"kubernetes_dashboard,omitempty"`
+	KubernetesDashboard []ContainerClusterSpecAddonsConfigKubernetesDashboard `json:"kubernetesDashboard,omitempty" tf:"kubernetes_dashboard,omitempty" protobuf:"bytes,3,rep,name=kubernetesDashboard"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkPolicyConfig []ContainerClusterSpecAddonsConfigNetworkPolicyConfig `json:"networkPolicyConfig,omitempty" tf:"network_policy_config,omitempty"`
+	NetworkPolicyConfig []ContainerClusterSpecAddonsConfigNetworkPolicyConfig `json:"networkPolicyConfig,omitempty" tf:"network_policy_config,omitempty" protobuf:"bytes,4,rep,name=networkPolicyConfig"`
 }
 
 type ContainerClusterSpecIpAllocationPolicy struct {
 	// +optional
-	ClusterIpv4CIDRBlock string `json:"clusterIpv4CIDRBlock,omitempty" tf:"cluster_ipv4_cidr_block,omitempty"`
+	ClusterIpv4CIDRBlock string `json:"clusterIpv4CIDRBlock,omitempty" tf:"cluster_ipv4_cidr_block,omitempty" protobuf:"bytes,1,opt,name=clusterIpv4CIDRBlock"`
 	// +optional
-	ClusterSecondaryRangeName string `json:"clusterSecondaryRangeName,omitempty" tf:"cluster_secondary_range_name,omitempty"`
+	ClusterSecondaryRangeName string `json:"clusterSecondaryRangeName,omitempty" tf:"cluster_secondary_range_name,omitempty" protobuf:"bytes,2,opt,name=clusterSecondaryRangeName"`
 	// +optional
-	CreateSubnetwork bool `json:"createSubnetwork,omitempty" tf:"create_subnetwork,omitempty"`
+	CreateSubnetwork bool `json:"createSubnetwork,omitempty" tf:"create_subnetwork,omitempty" protobuf:"varint,3,opt,name=createSubnetwork"`
 	// +optional
-	ServicesIpv4CIDRBlock string `json:"servicesIpv4CIDRBlock,omitempty" tf:"services_ipv4_cidr_block,omitempty"`
+	ServicesIpv4CIDRBlock string `json:"servicesIpv4CIDRBlock,omitempty" tf:"services_ipv4_cidr_block,omitempty" protobuf:"bytes,4,opt,name=servicesIpv4CIDRBlock"`
 	// +optional
-	ServicesSecondaryRangeName string `json:"servicesSecondaryRangeName,omitempty" tf:"services_secondary_range_name,omitempty"`
+	ServicesSecondaryRangeName string `json:"servicesSecondaryRangeName,omitempty" tf:"services_secondary_range_name,omitempty" protobuf:"bytes,5,opt,name=servicesSecondaryRangeName"`
 	// +optional
-	SubnetworkName string `json:"subnetworkName,omitempty" tf:"subnetwork_name,omitempty"`
+	SubnetworkName string `json:"subnetworkName,omitempty" tf:"subnetwork_name,omitempty" protobuf:"bytes,6,opt,name=subnetworkName"`
 }
 
 type ContainerClusterSpecMaintenancePolicyDailyMaintenanceWindow struct {
 	// +optional
-	Duration  string `json:"duration,omitempty" tf:"duration,omitempty"`
-	StartTime string `json:"startTime" tf:"start_time"`
+	Duration  string `json:"duration,omitempty" tf:"duration,omitempty" protobuf:"bytes,1,opt,name=duration"`
+	StartTime string `json:"startTime" tf:"start_time" protobuf:"bytes,2,opt,name=startTime"`
 }
 
 type ContainerClusterSpecMaintenancePolicy struct {
 	// +kubebuilder:validation:MaxItems=1
-	DailyMaintenanceWindow []ContainerClusterSpecMaintenancePolicyDailyMaintenanceWindow `json:"dailyMaintenanceWindow" tf:"daily_maintenance_window"`
+	DailyMaintenanceWindow []ContainerClusterSpecMaintenancePolicyDailyMaintenanceWindow `json:"dailyMaintenanceWindow" tf:"daily_maintenance_window" protobuf:"bytes,1,rep,name=dailyMaintenanceWindow"`
 }
 
 type ContainerClusterSpecMasterAuthClientCertificateConfig struct {
-	IssueClientCertificate bool `json:"issueClientCertificate" tf:"issue_client_certificate"`
+	IssueClientCertificate bool `json:"issueClientCertificate" tf:"issue_client_certificate" protobuf:"varint,1,opt,name=issueClientCertificate"`
 }
 
 type ContainerClusterSpecMasterAuth struct {
 	// +optional
-	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
+	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty" protobuf:"bytes,1,opt,name=clientCertificate"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ClientCertificateConfig []ContainerClusterSpecMasterAuthClientCertificateConfig `json:"clientCertificateConfig,omitempty" tf:"client_certificate_config,omitempty"`
+	ClientCertificateConfig []ContainerClusterSpecMasterAuthClientCertificateConfig `json:"clientCertificateConfig,omitempty" tf:"client_certificate_config,omitempty" protobuf:"bytes,2,rep,name=clientCertificateConfig"`
 	// +optional
 	ClientKey string `json:"-" sensitive:"true" tf:"client_key,omitempty"`
 	// +optional
-	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty"`
+	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty" protobuf:"bytes,3,opt,name=clusterCaCertificate"`
 	Password             string `json:"-" sensitive:"true" tf:"password"`
-	Username             string `json:"username" tf:"username"`
+	Username             string `json:"username" tf:"username" protobuf:"bytes,4,opt,name=username"`
 }
 
 type ContainerClusterSpecMasterAuthorizedNetworksConfigCidrBlocks struct {
-	CidrBlock string `json:"cidrBlock" tf:"cidr_block"`
+	CidrBlock string `json:"cidrBlock" tf:"cidr_block" protobuf:"bytes,1,opt,name=cidrBlock"`
 	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,2,opt,name=displayName"`
 }
 
 type ContainerClusterSpecMasterAuthorizedNetworksConfig struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=20
-	CidrBlocks []ContainerClusterSpecMasterAuthorizedNetworksConfigCidrBlocks `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+	CidrBlocks []ContainerClusterSpecMasterAuthorizedNetworksConfigCidrBlocks `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty" protobuf:"bytes,1,rep,name=cidrBlocks"`
 }
 
 type ContainerClusterSpecNetworkPolicy struct {
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
-	Provider string `json:"provider,omitempty" tf:"provider,omitempty"`
+	Provider string `json:"provider,omitempty" tf:"provider,omitempty" protobuf:"bytes,2,opt,name=provider"`
 }
 
 type ContainerClusterSpecNodeConfigGuestAccelerator struct {
-	Count int64  `json:"count" tf:"count"`
-	Type  string `json:"type" tf:"type"`
+	Count int64  `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type ContainerClusterSpecNodeConfigTaint struct {
-	Effect string `json:"effect" tf:"effect"`
-	Key    string `json:"key" tf:"key"`
-	Value  string `json:"value" tf:"value"`
+	Effect string `json:"effect" tf:"effect" protobuf:"bytes,1,opt,name=effect"`
+	Key    string `json:"key" tf:"key" protobuf:"bytes,2,opt,name=key"`
+	Value  string `json:"value" tf:"value" protobuf:"bytes,3,opt,name=value"`
 }
 
 type ContainerClusterSpecNodeConfigWorkloadMetadataConfig struct {
-	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata"`
+	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata" protobuf:"bytes,1,opt,name=nodeMetadata"`
 }
 
 type ContainerClusterSpecNodeConfig struct {
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,1,opt,name=diskSizeGb"`
 	// +optional
-	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty" protobuf:"bytes,2,opt,name=diskType"`
 	// +optional
-	GuestAccelerator []ContainerClusterSpecNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty"`
+	GuestAccelerator []ContainerClusterSpecNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty" protobuf:"bytes,3,rep,name=guestAccelerator"`
 	// +optional
-	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty"`
+	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty" protobuf:"bytes,4,opt,name=imageType"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,5,rep,name=labels"`
 	// +optional
-	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
+	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty" protobuf:"varint,6,opt,name=localSsdCount"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,7,opt,name=machineType"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,8,rep,name=metadata"`
 	// +optional
-	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty"`
+	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty" protobuf:"bytes,9,opt,name=minCPUPlatform"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,10,rep,name=oauthScopes"`
 	// +optional
-	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
+	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty" protobuf:"varint,11,opt,name=preemptible"`
 	// +optional
-	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,12,opt,name=serviceAccount"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// +optional
 	// Deprecated
-	Taint []ContainerClusterSpecNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty"`
+	Taint []ContainerClusterSpecNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty" protobuf:"bytes,14,rep,name=taint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	WorkloadMetadataConfig []ContainerClusterSpecNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty"`
+	WorkloadMetadataConfig []ContainerClusterSpecNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty" protobuf:"bytes,15,rep,name=workloadMetadataConfig"`
 }
 
 type ContainerClusterSpecNodePoolAutoscaling struct {
-	MaxNodeCount int64 `json:"maxNodeCount" tf:"max_node_count"`
-	MinNodeCount int64 `json:"minNodeCount" tf:"min_node_count"`
+	MaxNodeCount int64 `json:"maxNodeCount" tf:"max_node_count" protobuf:"varint,1,opt,name=maxNodeCount"`
+	MinNodeCount int64 `json:"minNodeCount" tf:"min_node_count" protobuf:"varint,2,opt,name=minNodeCount"`
 }
 
 type ContainerClusterSpecNodePoolManagement struct {
 	// +optional
-	AutoRepair bool `json:"autoRepair,omitempty" tf:"auto_repair,omitempty"`
+	AutoRepair bool `json:"autoRepair,omitempty" tf:"auto_repair,omitempty" protobuf:"varint,1,opt,name=autoRepair"`
 	// +optional
-	AutoUpgrade bool `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty"`
+	AutoUpgrade bool `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty" protobuf:"varint,2,opt,name=autoUpgrade"`
 }
 
 type ContainerClusterSpecNodePoolNodeConfigGuestAccelerator struct {
-	Count int64  `json:"count" tf:"count"`
-	Type  string `json:"type" tf:"type"`
+	Count int64  `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type ContainerClusterSpecNodePoolNodeConfigTaint struct {
-	Effect string `json:"effect" tf:"effect"`
-	Key    string `json:"key" tf:"key"`
-	Value  string `json:"value" tf:"value"`
+	Effect string `json:"effect" tf:"effect" protobuf:"bytes,1,opt,name=effect"`
+	Key    string `json:"key" tf:"key" protobuf:"bytes,2,opt,name=key"`
+	Value  string `json:"value" tf:"value" protobuf:"bytes,3,opt,name=value"`
 }
 
 type ContainerClusterSpecNodePoolNodeConfigWorkloadMetadataConfig struct {
-	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata"`
+	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata" protobuf:"bytes,1,opt,name=nodeMetadata"`
 }
 
 type ContainerClusterSpecNodePoolNodeConfig struct {
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,1,opt,name=diskSizeGb"`
 	// +optional
-	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty" protobuf:"bytes,2,opt,name=diskType"`
 	// +optional
-	GuestAccelerator []ContainerClusterSpecNodePoolNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty"`
+	GuestAccelerator []ContainerClusterSpecNodePoolNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty" protobuf:"bytes,3,rep,name=guestAccelerator"`
 	// +optional
-	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty"`
+	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty" protobuf:"bytes,4,opt,name=imageType"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,5,rep,name=labels"`
 	// +optional
-	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
+	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty" protobuf:"varint,6,opt,name=localSsdCount"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,7,opt,name=machineType"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,8,rep,name=metadata"`
 	// +optional
-	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty"`
+	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty" protobuf:"bytes,9,opt,name=minCPUPlatform"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,10,rep,name=oauthScopes"`
 	// +optional
-	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
+	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty" protobuf:"varint,11,opt,name=preemptible"`
 	// +optional
-	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,12,opt,name=serviceAccount"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// +optional
 	// Deprecated
-	Taint []ContainerClusterSpecNodePoolNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty"`
+	Taint []ContainerClusterSpecNodePoolNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty" protobuf:"bytes,14,rep,name=taint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	WorkloadMetadataConfig []ContainerClusterSpecNodePoolNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty"`
+	WorkloadMetadataConfig []ContainerClusterSpecNodePoolNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty" protobuf:"bytes,15,rep,name=workloadMetadataConfig"`
 }
 
 type ContainerClusterSpecNodePool struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Autoscaling []ContainerClusterSpecNodePoolAutoscaling `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
+	Autoscaling []ContainerClusterSpecNodePoolAutoscaling `json:"autoscaling,omitempty" tf:"autoscaling,omitempty" protobuf:"bytes,1,rep,name=autoscaling"`
 	// +optional
-	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty"`
+	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty" protobuf:"varint,2,opt,name=initialNodeCount"`
 	// +optional
-	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Management []ContainerClusterSpecNodePoolManagement `json:"management,omitempty" tf:"management,omitempty"`
-	// +optional
-	// Deprecated
-	MaxPodsPerNode int64 `json:"maxPodsPerNode,omitempty" tf:"max_pods_per_node,omitempty"`
-	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
-	// +optional
-	// Deprecated
-	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty" protobuf:"bytes,3,rep,name=instanceGroupUrls"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NodeConfig []ContainerClusterSpecNodePoolNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+	Management []ContainerClusterSpecNodePoolManagement `json:"management,omitempty" tf:"management,omitempty" protobuf:"bytes,4,rep,name=management"`
 	// +optional
-	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+	// Deprecated
+	MaxPodsPerNode int64 `json:"maxPodsPerNode,omitempty" tf:"max_pods_per_node,omitempty" protobuf:"varint,5,opt,name=maxPodsPerNode"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,6,opt,name=name"`
+	// +optional
+	// Deprecated
+	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty" protobuf:"bytes,7,opt,name=namePrefix"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	NodeConfig []ContainerClusterSpecNodePoolNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty" protobuf:"bytes,8,rep,name=nodeConfig"`
+	// +optional
+	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty" protobuf:"varint,9,opt,name=nodeCount"`
+	// +optional
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,10,opt,name=version"`
 }
 
 type ContainerClusterSpecPodSecurityPolicyConfig struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
+	Enabled bool `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 }
 
 type ContainerClusterSpecPrivateClusterConfig struct {
 	// +optional
-	EnablePrivateEndpoint bool `json:"enablePrivateEndpoint,omitempty" tf:"enable_private_endpoint,omitempty"`
+	EnablePrivateEndpoint bool `json:"enablePrivateEndpoint,omitempty" tf:"enable_private_endpoint,omitempty" protobuf:"varint,1,opt,name=enablePrivateEndpoint"`
 	// +optional
-	EnablePrivateNodes bool `json:"enablePrivateNodes,omitempty" tf:"enable_private_nodes,omitempty"`
+	EnablePrivateNodes bool `json:"enablePrivateNodes,omitempty" tf:"enable_private_nodes,omitempty" protobuf:"varint,2,opt,name=enablePrivateNodes"`
 	// +optional
-	MasterIpv4CIDRBlock string `json:"masterIpv4CIDRBlock,omitempty" tf:"master_ipv4_cidr_block,omitempty"`
+	MasterIpv4CIDRBlock string `json:"masterIpv4CIDRBlock,omitempty" tf:"master_ipv4_cidr_block,omitempty" protobuf:"bytes,3,opt,name=masterIpv4CIDRBlock"`
 	// +optional
-	PrivateEndpoint string `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint string `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty" protobuf:"bytes,4,opt,name=privateEndpoint"`
 	// +optional
-	PublicEndpoint string `json:"publicEndpoint,omitempty" tf:"public_endpoint,omitempty"`
+	PublicEndpoint string `json:"publicEndpoint,omitempty" tf:"public_endpoint,omitempty" protobuf:"bytes,5,opt,name=publicEndpoint"`
 }
 
 type ContainerClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AdditionalZones []string `json:"additionalZones,omitempty" tf:"additional_zones,omitempty"`
+	AdditionalZones []string `json:"additionalZones,omitempty" tf:"additional_zones,omitempty" protobuf:"bytes,4,rep,name=additionalZones"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AddonsConfig []ContainerClusterSpecAddonsConfig `json:"addonsConfig,omitempty" tf:"addons_config,omitempty"`
+	AddonsConfig []ContainerClusterSpecAddonsConfig `json:"addonsConfig,omitempty" tf:"addons_config,omitempty" protobuf:"bytes,5,rep,name=addonsConfig"`
 	// +optional
-	ClusterIpv4CIDR string `json:"clusterIpv4CIDR,omitempty" tf:"cluster_ipv4_cidr,omitempty"`
+	ClusterIpv4CIDR string `json:"clusterIpv4CIDR,omitempty" tf:"cluster_ipv4_cidr,omitempty" protobuf:"bytes,6,opt,name=clusterIpv4CIDR"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,7,opt,name=description"`
 	// +optional
 	// Deprecated
-	EnableBinaryAuthorization bool `json:"enableBinaryAuthorization,omitempty" tf:"enable_binary_authorization,omitempty"`
+	EnableBinaryAuthorization bool `json:"enableBinaryAuthorization,omitempty" tf:"enable_binary_authorization,omitempty" protobuf:"varint,8,opt,name=enableBinaryAuthorization"`
 	// +optional
-	EnableKubernetesAlpha bool `json:"enableKubernetesAlpha,omitempty" tf:"enable_kubernetes_alpha,omitempty"`
+	EnableKubernetesAlpha bool `json:"enableKubernetesAlpha,omitempty" tf:"enable_kubernetes_alpha,omitempty" protobuf:"varint,9,opt,name=enableKubernetesAlpha"`
 	// +optional
-	EnableLegacyAbac bool `json:"enableLegacyAbac,omitempty" tf:"enable_legacy_abac,omitempty"`
-	// +optional
-	// Deprecated
-	EnableTpu bool `json:"enableTpu,omitempty" tf:"enable_tpu,omitempty"`
-	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-	// +optional
-	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty"`
-	// +optional
-	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	IpAllocationPolicy []ContainerClusterSpecIpAllocationPolicy `json:"ipAllocationPolicy,omitempty" tf:"ip_allocation_policy,omitempty"`
-	// +optional
-	LoggingService string `json:"loggingService,omitempty" tf:"logging_service,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	MaintenancePolicy []ContainerClusterSpecMaintenancePolicy `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	MasterAuth []ContainerClusterSpecMasterAuth `json:"masterAuth,omitempty" tf:"master_auth,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	MasterAuthorizedNetworksConfig []ContainerClusterSpecMasterAuthorizedNetworksConfig `json:"masterAuthorizedNetworksConfig,omitempty" tf:"master_authorized_networks_config,omitempty"`
+	EnableLegacyAbac bool `json:"enableLegacyAbac,omitempty" tf:"enable_legacy_abac,omitempty" protobuf:"varint,10,opt,name=enableLegacyAbac"`
 	// +optional
 	// Deprecated
-	MasterIpv4CIDRBlock string `json:"masterIpv4CIDRBlock,omitempty" tf:"master_ipv4_cidr_block,omitempty"`
+	EnableTpu bool `json:"enableTpu,omitempty" tf:"enable_tpu,omitempty" protobuf:"varint,11,opt,name=enableTpu"`
 	// +optional
-	MasterVersion string `json:"masterVersion,omitempty" tf:"master_version,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,12,opt,name=endpoint"`
 	// +optional
-	MinMasterVersion string `json:"minMasterVersion,omitempty" tf:"min_master_version,omitempty"`
+	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty" protobuf:"varint,13,opt,name=initialNodeCount"`
 	// +optional
-	MonitoringService string `json:"monitoringService,omitempty" tf:"monitoring_service,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty" protobuf:"bytes,14,rep,name=instanceGroupUrls"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkPolicy []ContainerClusterSpecNetworkPolicy `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+	IpAllocationPolicy []ContainerClusterSpecIpAllocationPolicy `json:"ipAllocationPolicy,omitempty" tf:"ip_allocation_policy,omitempty" protobuf:"bytes,15,rep,name=ipAllocationPolicy"`
+	// +optional
+	LoggingService string `json:"loggingService,omitempty" tf:"logging_service,omitempty" protobuf:"bytes,16,opt,name=loggingService"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NodeConfig []ContainerClusterSpecNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+	MaintenancePolicy []ContainerClusterSpecMaintenancePolicy `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty" protobuf:"bytes,17,rep,name=maintenancePolicy"`
 	// +optional
-	NodePool []ContainerClusterSpecNodePool `json:"nodePool,omitempty" tf:"node_pool,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	MasterAuth []ContainerClusterSpecMasterAuth `json:"masterAuth,omitempty" tf:"master_auth,omitempty" protobuf:"bytes,18,rep,name=masterAuth"`
 	// +optional
-	NodeVersion string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	MasterAuthorizedNetworksConfig []ContainerClusterSpecMasterAuthorizedNetworksConfig `json:"masterAuthorizedNetworksConfig,omitempty" tf:"master_authorized_networks_config,omitempty" protobuf:"bytes,19,rep,name=masterAuthorizedNetworksConfig"`
+	// +optional
+	// Deprecated
+	MasterIpv4CIDRBlock string `json:"masterIpv4CIDRBlock,omitempty" tf:"master_ipv4_cidr_block,omitempty" protobuf:"bytes,20,opt,name=masterIpv4CIDRBlock"`
+	// +optional
+	MasterVersion string `json:"masterVersion,omitempty" tf:"master_version,omitempty" protobuf:"bytes,21,opt,name=masterVersion"`
+	// +optional
+	MinMasterVersion string `json:"minMasterVersion,omitempty" tf:"min_master_version,omitempty" protobuf:"bytes,22,opt,name=minMasterVersion"`
+	// +optional
+	MonitoringService string `json:"monitoringService,omitempty" tf:"monitoring_service,omitempty" protobuf:"bytes,23,opt,name=monitoringService"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,24,opt,name=name"`
+	// +optional
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,25,opt,name=network"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	NetworkPolicy []ContainerClusterSpecNetworkPolicy `json:"networkPolicy,omitempty" tf:"network_policy,omitempty" protobuf:"bytes,26,rep,name=networkPolicy"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	NodeConfig []ContainerClusterSpecNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty" protobuf:"bytes,27,rep,name=nodeConfig"`
+	// +optional
+	NodePool []ContainerClusterSpecNodePool `json:"nodePool,omitempty" tf:"node_pool,omitempty" protobuf:"bytes,28,rep,name=nodePool"`
+	// +optional
+	NodeVersion string `json:"nodeVersion,omitempty" tf:"node_version,omitempty" protobuf:"bytes,29,opt,name=nodeVersion"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	PodSecurityPolicyConfig []ContainerClusterSpecPodSecurityPolicyConfig `json:"podSecurityPolicyConfig,omitempty" tf:"pod_security_policy_config,omitempty"`
+	PodSecurityPolicyConfig []ContainerClusterSpecPodSecurityPolicyConfig `json:"podSecurityPolicyConfig,omitempty" tf:"pod_security_policy_config,omitempty" protobuf:"bytes,30,rep,name=podSecurityPolicyConfig"`
 	// +optional
 	// Deprecated
-	PrivateCluster bool `json:"privateCluster,omitempty" tf:"private_cluster,omitempty"`
+	PrivateCluster bool `json:"privateCluster,omitempty" tf:"private_cluster,omitempty" protobuf:"varint,31,opt,name=privateCluster"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PrivateClusterConfig []ContainerClusterSpecPrivateClusterConfig `json:"privateClusterConfig,omitempty" tf:"private_cluster_config,omitempty"`
+	PrivateClusterConfig []ContainerClusterSpecPrivateClusterConfig `json:"privateClusterConfig,omitempty" tf:"private_cluster_config,omitempty" protobuf:"bytes,32,rep,name=privateClusterConfig"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,33,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,34,opt,name=region"`
 	// +optional
-	RemoveDefaultNodePool bool `json:"removeDefaultNodePool,omitempty" tf:"remove_default_node_pool,omitempty"`
+	RemoveDefaultNodePool bool `json:"removeDefaultNodePool,omitempty" tf:"remove_default_node_pool,omitempty" protobuf:"varint,35,opt,name=removeDefaultNodePool"`
 	// +optional
-	ResourceLabels map[string]string `json:"resourceLabels,omitempty" tf:"resource_labels,omitempty"`
+	ResourceLabels map[string]string `json:"resourceLabels,omitempty" tf:"resource_labels,omitempty" protobuf:"bytes,36,rep,name=resourceLabels"`
 	// +optional
-	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,37,opt,name=subnetwork"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,38,opt,name=zone"`
 }
 
 type ContainerClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ContainerClusterSpec `json:"output,omitempty"`
+	Output *ContainerClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -406,7 +406,7 @@ type ContainerClusterStatus struct {
 // ContainerClusterList is a list of ContainerClusters
 type ContainerClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ContainerCluster CRD objects
-	Items []ContainerCluster `json:"items,omitempty"`
+	Items []ContainerCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

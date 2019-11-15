@@ -34,80 +34,80 @@ import (
 
 type Firewall struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallSpec   `json:"spec,omitempty"`
-	Status            FirewallStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FirewallSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FirewallStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FirewallSpecInboundRule struct {
 	// +optional
-	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty"`
-	Protocol  string `json:"protocol" tf:"protocol"`
+	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty" protobuf:"bytes,1,opt,name=portRange"`
+	Protocol  string `json:"protocol" tf:"protocol" protobuf:"bytes,2,opt,name=protocol"`
 	// +optional
-	SourceAddresses []string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+	SourceAddresses []string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty" protobuf:"bytes,3,rep,name=sourceAddresses"`
 	// +optional
-	SourceDropletIDS []int64 `json:"sourceDropletIDS,omitempty" tf:"source_droplet_ids,omitempty"`
+	SourceDropletIDS []int64 `json:"sourceDropletIDS,omitempty" tf:"source_droplet_ids,omitempty" protobuf:"varint,4,rep,name=sourceDropletIDS"`
 	// +optional
-	SourceLoadBalancerUids []string `json:"sourceLoadBalancerUids,omitempty" tf:"source_load_balancer_uids,omitempty"`
+	SourceLoadBalancerUids []string `json:"sourceLoadBalancerUids,omitempty" tf:"source_load_balancer_uids,omitempty" protobuf:"bytes,5,rep,name=sourceLoadBalancerUids"`
 	// +optional
-	SourceTags []string `json:"sourceTags,omitempty" tf:"source_tags,omitempty"`
+	SourceTags []string `json:"sourceTags,omitempty" tf:"source_tags,omitempty" protobuf:"bytes,6,rep,name=sourceTags"`
 }
 
 type FirewallSpecOutboundRule struct {
 	// +optional
-	DestinationAddresses []string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+	DestinationAddresses []string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty" protobuf:"bytes,1,rep,name=destinationAddresses"`
 	// +optional
-	DestinationDropletIDS []int64 `json:"destinationDropletIDS,omitempty" tf:"destination_droplet_ids,omitempty"`
+	DestinationDropletIDS []int64 `json:"destinationDropletIDS,omitempty" tf:"destination_droplet_ids,omitempty" protobuf:"varint,2,rep,name=destinationDropletIDS"`
 	// +optional
-	DestinationLoadBalancerUids []string `json:"destinationLoadBalancerUids,omitempty" tf:"destination_load_balancer_uids,omitempty"`
+	DestinationLoadBalancerUids []string `json:"destinationLoadBalancerUids,omitempty" tf:"destination_load_balancer_uids,omitempty" protobuf:"bytes,3,rep,name=destinationLoadBalancerUids"`
 	// +optional
-	DestinationTags []string `json:"destinationTags,omitempty" tf:"destination_tags,omitempty"`
+	DestinationTags []string `json:"destinationTags,omitempty" tf:"destination_tags,omitempty" protobuf:"bytes,4,rep,name=destinationTags"`
 	// +optional
-	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty"`
-	Protocol  string `json:"protocol" tf:"protocol"`
+	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty" protobuf:"bytes,5,opt,name=portRange"`
+	Protocol  string `json:"protocol" tf:"protocol" protobuf:"bytes,6,opt,name=protocol"`
 }
 
 type FirewallSpecPendingChanges struct {
 	// +optional
-	DropletID int64 `json:"dropletID,omitempty" tf:"droplet_id,omitempty"`
+	DropletID int64 `json:"dropletID,omitempty" tf:"droplet_id,omitempty" protobuf:"varint,1,opt,name=dropletID"`
 	// +optional
-	Removing bool `json:"removing,omitempty" tf:"removing,omitempty"`
+	Removing bool `json:"removing,omitempty" tf:"removing,omitempty" protobuf:"varint,2,opt,name=removing"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FirewallSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,3,opt,name=createdAt"`
 	// +optional
-	DropletIDS []int64 `json:"dropletIDS,omitempty" tf:"droplet_ids,omitempty"`
+	DropletIDS []int64 `json:"dropletIDS,omitempty" tf:"droplet_ids,omitempty" protobuf:"varint,4,rep,name=dropletIDS"`
 	// +optional
-	InboundRule []FirewallSpecInboundRule `json:"inboundRule,omitempty" tf:"inbound_rule,omitempty"`
-	Name        string                    `json:"name" tf:"name"`
+	InboundRule []FirewallSpecInboundRule `json:"inboundRule,omitempty" tf:"inbound_rule,omitempty" protobuf:"bytes,5,rep,name=inboundRule"`
+	Name        string                    `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	OutboundRule []FirewallSpecOutboundRule `json:"outboundRule,omitempty" tf:"outbound_rule,omitempty"`
+	OutboundRule []FirewallSpecOutboundRule `json:"outboundRule,omitempty" tf:"outbound_rule,omitempty" protobuf:"bytes,7,rep,name=outboundRule"`
 	// +optional
-	PendingChanges []FirewallSpecPendingChanges `json:"pendingChanges,omitempty" tf:"pending_changes,omitempty"`
+	PendingChanges []FirewallSpecPendingChanges `json:"pendingChanges,omitempty" tf:"pending_changes,omitempty" protobuf:"bytes,8,rep,name=pendingChanges"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,9,opt,name=status"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type FirewallStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FirewallSpec `json:"output,omitempty"`
+	Output *FirewallSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -116,7 +116,7 @@ type FirewallStatus struct {
 // FirewallList is a list of Firewalls
 type FirewallList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Firewall CRD objects
-	Items []Firewall `json:"items,omitempty"`
+	Items []Firewall `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

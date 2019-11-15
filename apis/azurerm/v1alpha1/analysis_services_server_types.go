@@ -34,48 +34,48 @@ import (
 
 type AnalysisServicesServer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AnalysisServicesServerSpec   `json:"spec,omitempty"`
-	Status            AnalysisServicesServerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AnalysisServicesServerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AnalysisServicesServerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AnalysisServicesServerSpecIpv4FirewallRule struct {
-	Name       string `json:"name" tf:"name"`
-	RangeEnd   string `json:"rangeEnd" tf:"range_end"`
-	RangeStart string `json:"rangeStart" tf:"range_start"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	RangeEnd   string `json:"rangeEnd" tf:"range_end" protobuf:"bytes,2,opt,name=rangeEnd"`
+	RangeStart string `json:"rangeStart" tf:"range_start" protobuf:"bytes,3,opt,name=rangeStart"`
 }
 
 type AnalysisServicesServerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AdminUsers []string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
+	AdminUsers []string `json:"adminUsers,omitempty" tf:"admin_users,omitempty" protobuf:"bytes,3,rep,name=adminUsers"`
 	// +optional
-	EnablePowerBiService bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
+	EnablePowerBiService bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty" protobuf:"varint,4,opt,name=enablePowerBiService"`
 	// +optional
-	Ipv4FirewallRule []AnalysisServicesServerSpecIpv4FirewallRule `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
-	Location         string                                       `json:"location" tf:"location"`
-	Name             string                                       `json:"name" tf:"name"`
+	Ipv4FirewallRule []AnalysisServicesServerSpecIpv4FirewallRule `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty" protobuf:"bytes,5,rep,name=ipv4FirewallRule"`
+	Location         string                                       `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name             string                                       `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	QuerypoolConnectionMode string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
-	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku                     string `json:"sku" tf:"sku"`
+	QuerypoolConnectionMode string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty" protobuf:"bytes,8,opt,name=querypoolConnectionMode"`
+	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
+	Sku                     string `json:"sku" tf:"sku" protobuf:"bytes,10,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 }
 
 type AnalysisServicesServerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AnalysisServicesServerSpec `json:"output,omitempty"`
+	Output *AnalysisServicesServerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -84,7 +84,7 @@ type AnalysisServicesServerStatus struct {
 // AnalysisServicesServerList is a list of AnalysisServicesServers
 type AnalysisServicesServerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AnalysisServicesServer CRD objects
-	Items []AnalysisServicesServer `json:"items,omitempty"`
+	Items []AnalysisServicesServer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

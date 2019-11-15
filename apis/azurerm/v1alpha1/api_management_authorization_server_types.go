@@ -34,64 +34,64 @@ import (
 
 type ApiManagementAuthorizationServer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementAuthorizationServerSpec   `json:"spec,omitempty"`
-	Status            ApiManagementAuthorizationServerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementAuthorizationServerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementAuthorizationServerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementAuthorizationServerSpecTokenBodyParameter struct {
-	Name  string `json:"name" tf:"name"`
-	Value string `json:"value" tf:"value"`
+	Name  string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Value string `json:"value" tf:"value" protobuf:"bytes,2,opt,name=value"`
 }
 
 type ApiManagementAuthorizationServerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	ApiManagementName     string   `json:"apiManagementName" tf:"api_management_name"`
-	AuthorizationEndpoint string   `json:"authorizationEndpoint" tf:"authorization_endpoint"`
-	AuthorizationMethods  []string `json:"authorizationMethods" tf:"authorization_methods"`
+	ApiManagementName     string   `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,4,opt,name=apiManagementName"`
+	AuthorizationEndpoint string   `json:"authorizationEndpoint" tf:"authorization_endpoint" protobuf:"bytes,5,opt,name=authorizationEndpoint"`
+	AuthorizationMethods  []string `json:"authorizationMethods" tf:"authorization_methods" protobuf:"bytes,6,rep,name=authorizationMethods"`
 	// +optional
-	BearerTokenSendingMethods []string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
+	BearerTokenSendingMethods []string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty" protobuf:"bytes,7,rep,name=bearerTokenSendingMethods"`
 	// +optional
-	ClientAuthenticationMethod []string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
-	ClientID                   string   `json:"clientID" tf:"client_id"`
-	ClientRegistrationEndpoint string   `json:"clientRegistrationEndpoint" tf:"client_registration_endpoint"`
+	ClientAuthenticationMethod []string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty" protobuf:"bytes,8,rep,name=clientAuthenticationMethod"`
+	ClientID                   string   `json:"clientID" tf:"client_id" protobuf:"bytes,9,opt,name=clientID"`
+	ClientRegistrationEndpoint string   `json:"clientRegistrationEndpoint" tf:"client_registration_endpoint" protobuf:"bytes,10,opt,name=clientRegistrationEndpoint"`
 	// +optional
 	ClientSecret string `json:"-" sensitive:"true" tf:"client_secret,omitempty"`
 	// +optional
-	DefaultScope string `json:"defaultScope,omitempty" tf:"default_scope,omitempty"`
+	DefaultScope string `json:"defaultScope,omitempty" tf:"default_scope,omitempty" protobuf:"bytes,11,opt,name=defaultScope"`
 	// +optional
-	Description       string   `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName       string   `json:"displayName" tf:"display_name"`
-	GrantTypes        []string `json:"grantTypes" tf:"grant_types"`
-	Name              string   `json:"name" tf:"name"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	Description       string   `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,12,opt,name=description"`
+	DisplayName       string   `json:"displayName" tf:"display_name" protobuf:"bytes,13,opt,name=displayName"`
+	GrantTypes        []string `json:"grantTypes" tf:"grant_types" protobuf:"bytes,14,rep,name=grantTypes"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,15,opt,name=name"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,16,opt,name=resourceGroupName"`
 	// +optional
 	ResourceOwnerPassword string `json:"-" sensitive:"true" tf:"resource_owner_password,omitempty"`
 	// +optional
-	ResourceOwnerUsername string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty"`
+	ResourceOwnerUsername string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty" protobuf:"bytes,17,opt,name=resourceOwnerUsername"`
 	// +optional
-	SupportState bool `json:"supportState,omitempty" tf:"support_state,omitempty"`
+	SupportState bool `json:"supportState,omitempty" tf:"support_state,omitempty" protobuf:"varint,18,opt,name=supportState"`
 	// +optional
-	TokenBodyParameter []ApiManagementAuthorizationServerSpecTokenBodyParameter `json:"tokenBodyParameter,omitempty" tf:"token_body_parameter,omitempty"`
+	TokenBodyParameter []ApiManagementAuthorizationServerSpecTokenBodyParameter `json:"tokenBodyParameter,omitempty" tf:"token_body_parameter,omitempty" protobuf:"bytes,19,rep,name=tokenBodyParameter"`
 	// +optional
-	TokenEndpoint string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+	TokenEndpoint string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty" protobuf:"bytes,20,opt,name=tokenEndpoint"`
 }
 
 type ApiManagementAuthorizationServerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementAuthorizationServerSpec `json:"output,omitempty"`
+	Output *ApiManagementAuthorizationServerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -100,7 +100,7 @@ type ApiManagementAuthorizationServerStatus struct {
 // ApiManagementAuthorizationServerList is a list of ApiManagementAuthorizationServers
 type ApiManagementAuthorizationServerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementAuthorizationServer CRD objects
-	Items []ApiManagementAuthorizationServer `json:"items,omitempty"`
+	Items []ApiManagementAuthorizationServer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

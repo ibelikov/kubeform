@@ -34,65 +34,65 @@ import (
 
 type NetworkSecurityGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkSecurityGroupSpec   `json:"spec,omitempty"`
-	Status            NetworkSecurityGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NetworkSecurityGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NetworkSecurityGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NetworkSecurityGroupSpecSecurityRule struct {
-	Access string `json:"access" tf:"access"`
+	Access string `json:"access" tf:"access" protobuf:"bytes,1,opt,name=access"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
 	// +optional
-	DestinationAddressPrefix string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty"`
+	DestinationAddressPrefix string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty" protobuf:"bytes,3,opt,name=destinationAddressPrefix"`
 	// +optional
-	DestinationAddressPrefixes []string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
+	DestinationAddressPrefixes []string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty" protobuf:"bytes,4,rep,name=destinationAddressPrefixes"`
 	// +optional
-	DestinationApplicationSecurityGroupIDS []string `json:"destinationApplicationSecurityGroupIDS,omitempty" tf:"destination_application_security_group_ids,omitempty"`
+	DestinationApplicationSecurityGroupIDS []string `json:"destinationApplicationSecurityGroupIDS,omitempty" tf:"destination_application_security_group_ids,omitempty" protobuf:"bytes,5,rep,name=destinationApplicationSecurityGroupIDS"`
 	// +optional
-	DestinationPortRange string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty" protobuf:"bytes,6,opt,name=destinationPortRange"`
 	// +optional
-	DestinationPortRanges []string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
-	Direction             string   `json:"direction" tf:"direction"`
-	Name                  string   `json:"name" tf:"name"`
-	Priority              int64    `json:"priority" tf:"priority"`
-	Protocol              string   `json:"protocol" tf:"protocol"`
+	DestinationPortRanges []string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty" protobuf:"bytes,7,rep,name=destinationPortRanges"`
+	Direction             string   `json:"direction" tf:"direction" protobuf:"bytes,8,opt,name=direction"`
+	Name                  string   `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	Priority              int64    `json:"priority" tf:"priority" protobuf:"varint,10,opt,name=priority"`
+	Protocol              string   `json:"protocol" tf:"protocol" protobuf:"bytes,11,opt,name=protocol"`
 	// +optional
-	SourceAddressPrefix string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty"`
+	SourceAddressPrefix string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty" protobuf:"bytes,12,opt,name=sourceAddressPrefix"`
 	// +optional
-	SourceAddressPrefixes []string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
+	SourceAddressPrefixes []string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty" protobuf:"bytes,13,rep,name=sourceAddressPrefixes"`
 	// +optional
-	SourceApplicationSecurityGroupIDS []string `json:"sourceApplicationSecurityGroupIDS,omitempty" tf:"source_application_security_group_ids,omitempty"`
+	SourceApplicationSecurityGroupIDS []string `json:"sourceApplicationSecurityGroupIDS,omitempty" tf:"source_application_security_group_ids,omitempty" protobuf:"bytes,14,rep,name=sourceApplicationSecurityGroupIDS"`
 	// +optional
-	SourcePortRange string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty" protobuf:"bytes,15,opt,name=sourcePortRange"`
 	// +optional
-	SourcePortRanges []string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
+	SourcePortRanges []string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty" protobuf:"bytes,16,rep,name=sourcePortRanges"`
 }
 
 type NetworkSecurityGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 	// +optional
-	SecurityRule []NetworkSecurityGroupSpecSecurityRule `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
+	SecurityRule []NetworkSecurityGroupSpecSecurityRule `json:"securityRule,omitempty" tf:"security_rule,omitempty" protobuf:"bytes,6,rep,name=securityRule"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 }
 
 type NetworkSecurityGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NetworkSecurityGroupSpec `json:"output,omitempty"`
+	Output *NetworkSecurityGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -101,7 +101,7 @@ type NetworkSecurityGroupStatus struct {
 // NetworkSecurityGroupList is a list of NetworkSecurityGroups
 type NetworkSecurityGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NetworkSecurityGroup CRD objects
-	Items []NetworkSecurityGroup `json:"items,omitempty"`
+	Items []NetworkSecurityGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

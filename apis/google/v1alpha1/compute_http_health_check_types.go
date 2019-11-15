@@ -34,51 +34,51 @@ import (
 
 type ComputeHTTPHealthCheck struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeHTTPHealthCheckSpec   `json:"spec,omitempty"`
-	Status            ComputeHTTPHealthCheckStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeHTTPHealthCheckSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeHTTPHealthCheckStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeHTTPHealthCheckSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CheckIntervalSec int64 `json:"checkIntervalSec,omitempty" tf:"check_interval_sec,omitempty"`
+	CheckIntervalSec int64 `json:"checkIntervalSec,omitempty" tf:"check_interval_sec,omitempty" protobuf:"varint,3,opt,name=checkIntervalSec"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty" protobuf:"varint,6,opt,name=healthyThreshold"`
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
-	Name string `json:"name" tf:"name"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,7,opt,name=host"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,9,opt,name=port"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,10,opt,name=project"`
 	// +optional
-	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty"`
+	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty" protobuf:"bytes,11,opt,name=requestPath"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,12,opt,name=selfLink"`
 	// +optional
-	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty"`
+	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty" protobuf:"varint,13,opt,name=timeoutSec"`
 	// +optional
-	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty" protobuf:"varint,14,opt,name=unhealthyThreshold"`
 }
 
 type ComputeHTTPHealthCheckStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeHTTPHealthCheckSpec `json:"output,omitempty"`
+	Output *ComputeHTTPHealthCheckSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -87,7 +87,7 @@ type ComputeHTTPHealthCheckStatus struct {
 // ComputeHTTPHealthCheckList is a list of ComputeHTTPHealthChecks
 type ComputeHTTPHealthCheckList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeHTTPHealthCheck CRD objects
-	Items []ComputeHTTPHealthCheck `json:"items,omitempty"`
+	Items []ComputeHTTPHealthCheck `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

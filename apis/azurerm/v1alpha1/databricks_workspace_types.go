@@ -34,38 +34,38 @@ import (
 
 type DatabricksWorkspace struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DatabricksWorkspaceSpec   `json:"spec,omitempty"`
-	Status            DatabricksWorkspaceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DatabricksWorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DatabricksWorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DatabricksWorkspaceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Location string `json:"location" tf:"location"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
 	// +optional
-	ManagedResourceGroupID string `json:"managedResourceGroupID,omitempty" tf:"managed_resource_group_id,omitempty"`
+	ManagedResourceGroupID string `json:"managedResourceGroupID,omitempty" tf:"managed_resource_group_id,omitempty" protobuf:"bytes,4,opt,name=managedResourceGroupID"`
 	// +optional
-	ManagedResourceGroupName string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
-	Name                     string `json:"name" tf:"name"`
-	ResourceGroupName        string `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku                      string `json:"sku" tf:"sku"`
+	ManagedResourceGroupName string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty" protobuf:"bytes,5,opt,name=managedResourceGroupName"`
+	Name                     string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName        string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
+	Sku                      string `json:"sku" tf:"sku" protobuf:"bytes,8,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type DatabricksWorkspaceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DatabricksWorkspaceSpec `json:"output,omitempty"`
+	Output *DatabricksWorkspaceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type DatabricksWorkspaceStatus struct {
 // DatabricksWorkspaceList is a list of DatabricksWorkspaces
 type DatabricksWorkspaceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DatabricksWorkspace CRD objects
-	Items []DatabricksWorkspace `json:"items,omitempty"`
+	Items []DatabricksWorkspace `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

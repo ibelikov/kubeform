@@ -34,40 +34,40 @@ import (
 
 type ApplicationInsights struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsSpec   `json:"spec,omitempty"`
-	Status            ApplicationInsightsStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApplicationInsightsSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApplicationInsightsStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApplicationInsightsSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AppID           string `json:"appID,omitempty" tf:"app_id,omitempty"`
-	ApplicationType string `json:"applicationType" tf:"application_type"`
+	AppID           string `json:"appID,omitempty" tf:"app_id,omitempty" protobuf:"bytes,4,opt,name=appID"`
+	ApplicationType string `json:"applicationType" tf:"application_type" protobuf:"bytes,5,opt,name=applicationType"`
 	// +optional
 	InstrumentationKey string `json:"-" sensitive:"true" tf:"instrumentation_key,omitempty"`
-	Location           string `json:"location" tf:"location"`
-	Name               string `json:"name" tf:"name"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	Location           string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type ApplicationInsightsStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApplicationInsightsSpec `json:"output,omitempty"`
+	Output *ApplicationInsightsSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -76,7 +76,7 @@ type ApplicationInsightsStatus struct {
 // ApplicationInsightsList is a list of ApplicationInsightss
 type ApplicationInsightsList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApplicationInsights CRD objects
-	Items []ApplicationInsights `json:"items,omitempty"`
+	Items []ApplicationInsights `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

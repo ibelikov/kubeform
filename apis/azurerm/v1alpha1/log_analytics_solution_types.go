@@ -34,44 +34,44 @@ import (
 
 type LogAnalyticsSolution struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsSolutionSpec   `json:"spec,omitempty"`
-	Status            LogAnalyticsSolutionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LogAnalyticsSolutionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LogAnalyticsSolutionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LogAnalyticsSolutionSpecPlan struct {
 	// +optional
-	Name    string `json:"name,omitempty" tf:"name,omitempty"`
-	Product string `json:"product" tf:"product"`
+	Name    string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
+	Product string `json:"product" tf:"product" protobuf:"bytes,2,opt,name=product"`
 	// +optional
-	PromotionCode string `json:"promotionCode,omitempty" tf:"promotion_code,omitempty"`
-	Publisher     string `json:"publisher" tf:"publisher"`
+	PromotionCode string `json:"promotionCode,omitempty" tf:"promotion_code,omitempty" protobuf:"bytes,3,opt,name=promotionCode"`
+	Publisher     string `json:"publisher" tf:"publisher" protobuf:"bytes,4,opt,name=publisher"`
 }
 
 type LogAnalyticsSolutionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Location string `json:"location" tf:"location"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
 	// +kubebuilder:validation:MaxItems=1
-	Plan                []LogAnalyticsSolutionSpecPlan `json:"plan" tf:"plan"`
-	ResourceGroupName   string                         `json:"resourceGroupName" tf:"resource_group_name"`
-	SolutionName        string                         `json:"solutionName" tf:"solution_name"`
-	WorkspaceName       string                         `json:"workspaceName" tf:"workspace_name"`
-	WorkspaceResourceID string                         `json:"workspaceResourceID" tf:"workspace_resource_id"`
+	Plan                []LogAnalyticsSolutionSpecPlan `json:"plan" tf:"plan" protobuf:"bytes,4,rep,name=plan"`
+	ResourceGroupName   string                         `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
+	SolutionName        string                         `json:"solutionName" tf:"solution_name" protobuf:"bytes,6,opt,name=solutionName"`
+	WorkspaceName       string                         `json:"workspaceName" tf:"workspace_name" protobuf:"bytes,7,opt,name=workspaceName"`
+	WorkspaceResourceID string                         `json:"workspaceResourceID" tf:"workspace_resource_id" protobuf:"bytes,8,opt,name=workspaceResourceID"`
 }
 
 type LogAnalyticsSolutionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LogAnalyticsSolutionSpec `json:"output,omitempty"`
+	Output *LogAnalyticsSolutionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type LogAnalyticsSolutionStatus struct {
 // LogAnalyticsSolutionList is a list of LogAnalyticsSolutions
 type LogAnalyticsSolutionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LogAnalyticsSolution CRD objects
-	Items []LogAnalyticsSolution `json:"items,omitempty"`
+	Items []LogAnalyticsSolution `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

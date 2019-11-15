@@ -34,60 +34,60 @@ import (
 
 type BinaryAuthorizationPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BinaryAuthorizationPolicySpec   `json:"spec,omitempty"`
-	Status            BinaryAuthorizationPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BinaryAuthorizationPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BinaryAuthorizationPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BinaryAuthorizationPolicySpecAdmissionWhitelistPatterns struct {
 	// +optional
-	NamePattern string `json:"namePattern,omitempty" tf:"name_pattern,omitempty"`
+	NamePattern string `json:"namePattern,omitempty" tf:"name_pattern,omitempty" protobuf:"bytes,1,opt,name=namePattern"`
 }
 
 type BinaryAuthorizationPolicySpecClusterAdmissionRules struct {
-	Cluster string `json:"cluster" tf:"cluster"`
+	Cluster string `json:"cluster" tf:"cluster" protobuf:"bytes,1,opt,name=cluster"`
 	// +optional
-	EnforcementMode string `json:"enforcementMode,omitempty" tf:"enforcement_mode,omitempty"`
+	EnforcementMode string `json:"enforcementMode,omitempty" tf:"enforcement_mode,omitempty" protobuf:"bytes,2,opt,name=enforcementMode"`
 	// +optional
-	EvaluationMode string `json:"evaluationMode,omitempty" tf:"evaluation_mode,omitempty"`
+	EvaluationMode string `json:"evaluationMode,omitempty" tf:"evaluation_mode,omitempty" protobuf:"bytes,3,opt,name=evaluationMode"`
 	// +optional
-	RequireAttestationsBy []string `json:"requireAttestationsBy,omitempty" tf:"require_attestations_by,omitempty"`
+	RequireAttestationsBy []string `json:"requireAttestationsBy,omitempty" tf:"require_attestations_by,omitempty" protobuf:"bytes,4,rep,name=requireAttestationsBy"`
 }
 
 type BinaryAuthorizationPolicySpecDefaultAdmissionRule struct {
-	EnforcementMode string `json:"enforcementMode" tf:"enforcement_mode"`
-	EvaluationMode  string `json:"evaluationMode" tf:"evaluation_mode"`
+	EnforcementMode string `json:"enforcementMode" tf:"enforcement_mode" protobuf:"bytes,1,opt,name=enforcementMode"`
+	EvaluationMode  string `json:"evaluationMode" tf:"evaluation_mode" protobuf:"bytes,2,opt,name=evaluationMode"`
 	// +optional
-	RequireAttestationsBy []string `json:"requireAttestationsBy,omitempty" tf:"require_attestations_by,omitempty"`
+	RequireAttestationsBy []string `json:"requireAttestationsBy,omitempty" tf:"require_attestations_by,omitempty" protobuf:"bytes,3,rep,name=requireAttestationsBy"`
 }
 
 type BinaryAuthorizationPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AdmissionWhitelistPatterns []BinaryAuthorizationPolicySpecAdmissionWhitelistPatterns `json:"admissionWhitelistPatterns,omitempty" tf:"admission_whitelist_patterns,omitempty"`
+	AdmissionWhitelistPatterns []BinaryAuthorizationPolicySpecAdmissionWhitelistPatterns `json:"admissionWhitelistPatterns,omitempty" tf:"admission_whitelist_patterns,omitempty" protobuf:"bytes,3,rep,name=admissionWhitelistPatterns"`
 	// +optional
-	ClusterAdmissionRules []BinaryAuthorizationPolicySpecClusterAdmissionRules `json:"clusterAdmissionRules,omitempty" tf:"cluster_admission_rules,omitempty"`
+	ClusterAdmissionRules []BinaryAuthorizationPolicySpecClusterAdmissionRules `json:"clusterAdmissionRules,omitempty" tf:"cluster_admission_rules,omitempty" protobuf:"bytes,4,rep,name=clusterAdmissionRules"`
 	// +kubebuilder:validation:MaxItems=1
-	DefaultAdmissionRule []BinaryAuthorizationPolicySpecDefaultAdmissionRule `json:"defaultAdmissionRule" tf:"default_admission_rule"`
+	DefaultAdmissionRule []BinaryAuthorizationPolicySpecDefaultAdmissionRule `json:"defaultAdmissionRule" tf:"default_admission_rule" protobuf:"bytes,5,rep,name=defaultAdmissionRule"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,7,opt,name=project"`
 }
 
 type BinaryAuthorizationPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BinaryAuthorizationPolicySpec `json:"output,omitempty"`
+	Output *BinaryAuthorizationPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -96,7 +96,7 @@ type BinaryAuthorizationPolicyStatus struct {
 // BinaryAuthorizationPolicyList is a list of BinaryAuthorizationPolicys
 type BinaryAuthorizationPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BinaryAuthorizationPolicy CRD objects
-	Items []BinaryAuthorizationPolicy `json:"items,omitempty"`
+	Items []BinaryAuthorizationPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

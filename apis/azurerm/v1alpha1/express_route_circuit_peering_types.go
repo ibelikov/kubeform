@@ -34,53 +34,53 @@ import (
 
 type ExpressRouteCircuitPeering struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExpressRouteCircuitPeeringSpec   `json:"spec,omitempty"`
-	Status            ExpressRouteCircuitPeeringStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ExpressRouteCircuitPeeringSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ExpressRouteCircuitPeeringStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ExpressRouteCircuitPeeringSpecMicrosoftPeeringConfig struct {
-	AdvertisedPublicPrefixes []string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes"`
+	AdvertisedPublicPrefixes []string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes" protobuf:"bytes,1,rep,name=advertisedPublicPrefixes"`
 }
 
 type ExpressRouteCircuitPeeringSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AzureAsn                int64  `json:"azureAsn,omitempty" tf:"azure_asn,omitempty"`
-	ExpressRouteCircuitName string `json:"expressRouteCircuitName" tf:"express_route_circuit_name"`
+	AzureAsn                int64  `json:"azureAsn,omitempty" tf:"azure_asn,omitempty" protobuf:"varint,4,opt,name=azureAsn"`
+	ExpressRouteCircuitName string `json:"expressRouteCircuitName" tf:"express_route_circuit_name" protobuf:"bytes,5,opt,name=expressRouteCircuitName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	MicrosoftPeeringConfig []ExpressRouteCircuitPeeringSpecMicrosoftPeeringConfig `json:"microsoftPeeringConfig,omitempty" tf:"microsoft_peering_config,omitempty"`
+	MicrosoftPeeringConfig []ExpressRouteCircuitPeeringSpecMicrosoftPeeringConfig `json:"microsoftPeeringConfig,omitempty" tf:"microsoft_peering_config,omitempty" protobuf:"bytes,6,rep,name=microsoftPeeringConfig"`
 	// +optional
-	PeerAsn     int64  `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
-	PeeringType string `json:"peeringType" tf:"peering_type"`
+	PeerAsn     int64  `json:"peerAsn,omitempty" tf:"peer_asn,omitempty" protobuf:"varint,7,opt,name=peerAsn"`
+	PeeringType string `json:"peeringType" tf:"peering_type" protobuf:"bytes,8,opt,name=peeringType"`
 	// +optional
-	PrimaryAzurePort         string `json:"primaryAzurePort,omitempty" tf:"primary_azure_port,omitempty"`
-	PrimaryPeerAddressPrefix string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix"`
-	ResourceGroupName        string `json:"resourceGroupName" tf:"resource_group_name"`
+	PrimaryAzurePort         string `json:"primaryAzurePort,omitempty" tf:"primary_azure_port,omitempty" protobuf:"bytes,9,opt,name=primaryAzurePort"`
+	PrimaryPeerAddressPrefix string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix" protobuf:"bytes,10,opt,name=primaryPeerAddressPrefix"`
+	ResourceGroupName        string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 	// +optional
-	SecondaryAzurePort         string `json:"secondaryAzurePort,omitempty" tf:"secondary_azure_port,omitempty"`
-	SecondaryPeerAddressPrefix string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix"`
+	SecondaryAzurePort         string `json:"secondaryAzurePort,omitempty" tf:"secondary_azure_port,omitempty" protobuf:"bytes,12,opt,name=secondaryAzurePort"`
+	SecondaryPeerAddressPrefix string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix" protobuf:"bytes,13,opt,name=secondaryPeerAddressPrefix"`
 	// +optional
 	SharedKey string `json:"-" sensitive:"true" tf:"shared_key,omitempty"`
-	VlanID    int64  `json:"vlanID" tf:"vlan_id"`
+	VlanID    int64  `json:"vlanID" tf:"vlan_id" protobuf:"varint,14,opt,name=vlanID"`
 }
 
 type ExpressRouteCircuitPeeringStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ExpressRouteCircuitPeeringSpec `json:"output,omitempty"`
+	Output *ExpressRouteCircuitPeeringSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -89,7 +89,7 @@ type ExpressRouteCircuitPeeringStatus struct {
 // ExpressRouteCircuitPeeringList is a list of ExpressRouteCircuitPeerings
 type ExpressRouteCircuitPeeringList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ExpressRouteCircuitPeering CRD objects
-	Items []ExpressRouteCircuitPeering `json:"items,omitempty"`
+	Items []ExpressRouteCircuitPeering `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

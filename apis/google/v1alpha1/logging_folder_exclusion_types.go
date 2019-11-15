@@ -34,35 +34,35 @@ import (
 
 type LoggingFolderExclusion struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoggingFolderExclusionSpec   `json:"spec,omitempty"`
-	Status            LoggingFolderExclusionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LoggingFolderExclusionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LoggingFolderExclusionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LoggingFolderExclusionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
 	// +optional
-	Disabled bool   `json:"disabled,omitempty" tf:"disabled,omitempty"`
-	Filter   string `json:"filter" tf:"filter"`
-	Folder   string `json:"folder" tf:"folder"`
-	Name     string `json:"name" tf:"name"`
+	Disabled bool   `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,4,opt,name=disabled"`
+	Filter   string `json:"filter" tf:"filter" protobuf:"bytes,5,opt,name=filter"`
+	Folder   string `json:"folder" tf:"folder" protobuf:"bytes,6,opt,name=folder"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 }
 
 type LoggingFolderExclusionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LoggingFolderExclusionSpec `json:"output,omitempty"`
+	Output *LoggingFolderExclusionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type LoggingFolderExclusionStatus struct {
 // LoggingFolderExclusionList is a list of LoggingFolderExclusions
 type LoggingFolderExclusionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LoggingFolderExclusion CRD objects
-	Items []LoggingFolderExclusion `json:"items,omitempty"`
+	Items []LoggingFolderExclusion `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

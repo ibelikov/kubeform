@@ -34,36 +34,36 @@ import (
 
 type VirtualMachineDataDiskAttachment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualMachineDataDiskAttachmentSpec   `json:"spec,omitempty"`
-	Status            VirtualMachineDataDiskAttachmentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualMachineDataDiskAttachmentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualMachineDataDiskAttachmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualMachineDataDiskAttachmentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Caching string `json:"caching" tf:"caching"`
+	Caching string `json:"caching" tf:"caching" protobuf:"bytes,3,opt,name=caching"`
 	// +optional
-	CreateOption     string `json:"createOption,omitempty" tf:"create_option,omitempty"`
-	Lun              int64  `json:"lun" tf:"lun"`
-	ManagedDiskID    string `json:"managedDiskID" tf:"managed_disk_id"`
-	VirtualMachineID string `json:"virtualMachineID" tf:"virtual_machine_id"`
+	CreateOption     string `json:"createOption,omitempty" tf:"create_option,omitempty" protobuf:"bytes,4,opt,name=createOption"`
+	Lun              int64  `json:"lun" tf:"lun" protobuf:"varint,5,opt,name=lun"`
+	ManagedDiskID    string `json:"managedDiskID" tf:"managed_disk_id" protobuf:"bytes,6,opt,name=managedDiskID"`
+	VirtualMachineID string `json:"virtualMachineID" tf:"virtual_machine_id" protobuf:"bytes,7,opt,name=virtualMachineID"`
 	// +optional
-	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty" protobuf:"varint,8,opt,name=writeAcceleratorEnabled"`
 }
 
 type VirtualMachineDataDiskAttachmentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualMachineDataDiskAttachmentSpec `json:"output,omitempty"`
+	Output *VirtualMachineDataDiskAttachmentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type VirtualMachineDataDiskAttachmentStatus struct {
 // VirtualMachineDataDiskAttachmentList is a list of VirtualMachineDataDiskAttachments
 type VirtualMachineDataDiskAttachmentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualMachineDataDiskAttachment CRD objects
-	Items []VirtualMachineDataDiskAttachment `json:"items,omitempty"`
+	Items []VirtualMachineDataDiskAttachment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

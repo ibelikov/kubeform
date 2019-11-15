@@ -34,73 +34,73 @@ import (
 
 type ComputeForwardingRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeForwardingRuleSpec   `json:"spec,omitempty"`
-	Status            ComputeForwardingRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeForwardingRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeForwardingRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeForwardingRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	BackendService string `json:"backendService,omitempty" tf:"backend_service,omitempty"`
+	BackendService string `json:"backendService,omitempty" tf:"backend_service,omitempty" protobuf:"bytes,3,opt,name=backendService"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,6,opt,name=ipAddress"`
 	// +optional
-	IpProtocol string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
+	IpProtocol string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty" protobuf:"bytes,7,opt,name=ipProtocol"`
 	// +optional
-	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
+	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty" protobuf:"bytes,8,opt,name=ipVersion"`
 	// +optional
-	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty"`
+	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty" protobuf:"bytes,9,opt,name=labelFingerprint"`
 	// +optional
 	// Deprecated
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,10,rep,name=labels"`
 	// +optional
-	LoadBalancingScheme string `json:"loadBalancingScheme,omitempty" tf:"load_balancing_scheme,omitempty"`
-	Name                string `json:"name" tf:"name"`
+	LoadBalancingScheme string `json:"loadBalancingScheme,omitempty" tf:"load_balancing_scheme,omitempty" protobuf:"bytes,11,opt,name=loadBalancingScheme"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,12,opt,name=name"`
 	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,13,opt,name=network"`
 	// +optional
-	NetworkTier string `json:"networkTier,omitempty" tf:"network_tier,omitempty"`
+	NetworkTier string `json:"networkTier,omitempty" tf:"network_tier,omitempty" protobuf:"bytes,14,opt,name=networkTier"`
 	// +optional
-	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty"`
+	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty" protobuf:"bytes,15,opt,name=portRange"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=5
-	Ports []string `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []string `json:"ports,omitempty" tf:"ports,omitempty" protobuf:"bytes,16,rep,name=ports"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,17,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,18,opt,name=region"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	// +optional
-	// Deprecated
-	ServiceLabel string `json:"serviceLabel,omitempty" tf:"service_label,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,19,opt,name=selfLink"`
 	// +optional
 	// Deprecated
-	ServiceName string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+	ServiceLabel string `json:"serviceLabel,omitempty" tf:"service_label,omitempty" protobuf:"bytes,20,opt,name=serviceLabel"`
 	// +optional
-	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	// Deprecated
+	ServiceName string `json:"serviceName,omitempty" tf:"service_name,omitempty" protobuf:"bytes,21,opt,name=serviceName"`
 	// +optional
-	Target string `json:"target,omitempty" tf:"target,omitempty"`
+	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,22,opt,name=subnetwork"`
+	// +optional
+	Target string `json:"target,omitempty" tf:"target,omitempty" protobuf:"bytes,23,opt,name=target"`
 }
 
 type ComputeForwardingRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeForwardingRuleSpec `json:"output,omitempty"`
+	Output *ComputeForwardingRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -109,7 +109,7 @@ type ComputeForwardingRuleStatus struct {
 // ComputeForwardingRuleList is a list of ComputeForwardingRules
 type ComputeForwardingRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeForwardingRule CRD objects
-	Items []ComputeForwardingRule `json:"items,omitempty"`
+	Items []ComputeForwardingRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

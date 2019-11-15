@@ -34,156 +34,156 @@ import (
 
 type ComputeInstanceTemplate struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeInstanceTemplateSpec   `json:"spec,omitempty"`
-	Status            ComputeInstanceTemplateStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeInstanceTemplateSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeInstanceTemplateStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeInstanceTemplateSpecDiskDiskEncryptionKey struct {
 	// +optional
-	KmsKeySelfLink string `json:"kmsKeySelfLink,omitempty" tf:"kms_key_self_link,omitempty"`
+	KmsKeySelfLink string `json:"kmsKeySelfLink,omitempty" tf:"kms_key_self_link,omitempty" protobuf:"bytes,1,opt,name=kmsKeySelfLink"`
 }
 
 type ComputeInstanceTemplateSpecDisk struct {
 	// +optional
-	AutoDelete bool `json:"autoDelete,omitempty" tf:"auto_delete,omitempty"`
+	AutoDelete bool `json:"autoDelete,omitempty" tf:"auto_delete,omitempty" protobuf:"varint,1,opt,name=autoDelete"`
 	// +optional
-	Boot bool `json:"boot,omitempty" tf:"boot,omitempty"`
+	Boot bool `json:"boot,omitempty" tf:"boot,omitempty" protobuf:"varint,2,opt,name=boot"`
 	// +optional
-	DeviceName string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName string `json:"deviceName,omitempty" tf:"device_name,omitempty" protobuf:"bytes,3,opt,name=deviceName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskEncryptionKey []ComputeInstanceTemplateSpecDiskDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
+	DiskEncryptionKey []ComputeInstanceTemplateSpecDiskDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty" protobuf:"bytes,4,rep,name=diskEncryptionKey"`
 	// +optional
-	DiskName string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
+	DiskName string `json:"diskName,omitempty" tf:"disk_name,omitempty" protobuf:"bytes,5,opt,name=diskName"`
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,6,opt,name=diskSizeGb"`
 	// +optional
-	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty" protobuf:"bytes,7,opt,name=diskType"`
 	// +optional
-	Interface string `json:"interface,omitempty" tf:"interface,omitempty"`
+	Interface string `json:"interface,omitempty" tf:"interface,omitempty" protobuf:"bytes,8,opt,name=interface"`
 	// +optional
-	Mode string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode string `json:"mode,omitempty" tf:"mode,omitempty" protobuf:"bytes,9,opt,name=mode"`
 	// +optional
-	Source string `json:"source,omitempty" tf:"source,omitempty"`
+	Source string `json:"source,omitempty" tf:"source,omitempty" protobuf:"bytes,10,opt,name=source"`
 	// +optional
-	SourceImage string `json:"sourceImage,omitempty" tf:"source_image,omitempty"`
+	SourceImage string `json:"sourceImage,omitempty" tf:"source_image,omitempty" protobuf:"bytes,11,opt,name=sourceImage"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,12,opt,name=type"`
 }
 
 type ComputeInstanceTemplateSpecGuestAccelerator struct {
-	Count int64  `json:"count" tf:"count"`
-	Type  string `json:"type" tf:"type"`
+	Count int64  `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type ComputeInstanceTemplateSpecNetworkInterfaceAccessConfig struct {
 	// +optional
 	// Deprecated
-	AssignedNATIP string `json:"assignedNATIP,omitempty" tf:"assigned_nat_ip,omitempty"`
+	AssignedNATIP string `json:"assignedNATIP,omitempty" tf:"assigned_nat_ip,omitempty" protobuf:"bytes,1,opt,name=assignedNATIP"`
 	// +optional
-	NatIP string `json:"natIP,omitempty" tf:"nat_ip,omitempty"`
+	NatIP string `json:"natIP,omitempty" tf:"nat_ip,omitempty" protobuf:"bytes,2,opt,name=natIP"`
 	// +optional
-	NetworkTier string `json:"networkTier,omitempty" tf:"network_tier,omitempty"`
+	NetworkTier string `json:"networkTier,omitempty" tf:"network_tier,omitempty" protobuf:"bytes,3,opt,name=networkTier"`
 }
 
 type ComputeInstanceTemplateSpecNetworkInterfaceAliasIPRange struct {
-	IpCIDRRange string `json:"ipCIDRRange" tf:"ip_cidr_range"`
+	IpCIDRRange string `json:"ipCIDRRange" tf:"ip_cidr_range" protobuf:"bytes,1,opt,name=ipCIDRRange"`
 	// +optional
-	SubnetworkRangeName string `json:"subnetworkRangeName,omitempty" tf:"subnetwork_range_name,omitempty"`
+	SubnetworkRangeName string `json:"subnetworkRangeName,omitempty" tf:"subnetwork_range_name,omitempty" protobuf:"bytes,2,opt,name=subnetworkRangeName"`
 }
 
 type ComputeInstanceTemplateSpecNetworkInterface struct {
 	// +optional
-	AccessConfig []ComputeInstanceTemplateSpecNetworkInterfaceAccessConfig `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
+	AccessConfig []ComputeInstanceTemplateSpecNetworkInterfaceAccessConfig `json:"accessConfig,omitempty" tf:"access_config,omitempty" protobuf:"bytes,1,rep,name=accessConfig"`
 	// +optional
 	// Deprecated
-	Address string `json:"address,omitempty" tf:"address,omitempty"`
+	Address string `json:"address,omitempty" tf:"address,omitempty" protobuf:"bytes,2,opt,name=address"`
 	// +optional
-	AliasIPRange []ComputeInstanceTemplateSpecNetworkInterfaceAliasIPRange `json:"aliasIPRange,omitempty" tf:"alias_ip_range,omitempty"`
+	AliasIPRange []ComputeInstanceTemplateSpecNetworkInterfaceAliasIPRange `json:"aliasIPRange,omitempty" tf:"alias_ip_range,omitempty" protobuf:"bytes,3,rep,name=aliasIPRange"`
 	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,4,opt,name=network"`
 	// +optional
-	NetworkIP string `json:"networkIP,omitempty" tf:"network_ip,omitempty"`
+	NetworkIP string `json:"networkIP,omitempty" tf:"network_ip,omitempty" protobuf:"bytes,5,opt,name=networkIP"`
 	// +optional
-	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,6,opt,name=subnetwork"`
 	// +optional
-	SubnetworkProject string `json:"subnetworkProject,omitempty" tf:"subnetwork_project,omitempty"`
+	SubnetworkProject string `json:"subnetworkProject,omitempty" tf:"subnetwork_project,omitempty" protobuf:"bytes,7,opt,name=subnetworkProject"`
 }
 
 type ComputeInstanceTemplateSpecScheduling struct {
 	// +optional
-	AutomaticRestart bool `json:"automaticRestart,omitempty" tf:"automatic_restart,omitempty"`
+	AutomaticRestart bool `json:"automaticRestart,omitempty" tf:"automatic_restart,omitempty" protobuf:"varint,1,opt,name=automaticRestart"`
 	// +optional
-	OnHostMaintenance string `json:"onHostMaintenance,omitempty" tf:"on_host_maintenance,omitempty"`
+	OnHostMaintenance string `json:"onHostMaintenance,omitempty" tf:"on_host_maintenance,omitempty" protobuf:"bytes,2,opt,name=onHostMaintenance"`
 	// +optional
-	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
+	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty" protobuf:"varint,3,opt,name=preemptible"`
 }
 
 type ComputeInstanceTemplateSpecServiceAccount struct {
 	// +optional
-	Email  string   `json:"email,omitempty" tf:"email,omitempty"`
-	Scopes []string `json:"scopes" tf:"scopes"`
+	Email  string   `json:"email,omitempty" tf:"email,omitempty" protobuf:"bytes,1,opt,name=email"`
+	Scopes []string `json:"scopes" tf:"scopes" protobuf:"bytes,2,rep,name=scopes"`
 }
 
 type ComputeInstanceTemplateSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CanIPForward bool `json:"canIPForward,omitempty" tf:"can_ip_forward,omitempty"`
+	CanIPForward bool `json:"canIPForward,omitempty" tf:"can_ip_forward,omitempty" protobuf:"varint,3,opt,name=canIPForward"`
 	// +optional
-	Description string                            `json:"description,omitempty" tf:"description,omitempty"`
-	Disk        []ComputeInstanceTemplateSpecDisk `json:"disk" tf:"disk"`
+	Description string                            `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	Disk        []ComputeInstanceTemplateSpecDisk `json:"disk" tf:"disk" protobuf:"bytes,5,rep,name=disk"`
 	// +optional
-	GuestAccelerator []ComputeInstanceTemplateSpecGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty"`
+	GuestAccelerator []ComputeInstanceTemplateSpecGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty" protobuf:"bytes,6,rep,name=guestAccelerator"`
 	// +optional
-	InstanceDescription string `json:"instanceDescription,omitempty" tf:"instance_description,omitempty"`
+	InstanceDescription string `json:"instanceDescription,omitempty" tf:"instance_description,omitempty" protobuf:"bytes,7,opt,name=instanceDescription"`
 	// +optional
-	Labels      map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	MachineType string            `json:"machineType" tf:"machine_type"`
+	Labels      map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,8,rep,name=labels"`
+	MachineType string            `json:"machineType" tf:"machine_type" protobuf:"bytes,9,opt,name=machineType"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,10,rep,name=metadata"`
 	// +optional
-	MetadataFingerprint string `json:"metadataFingerprint,omitempty" tf:"metadata_fingerprint,omitempty"`
+	MetadataFingerprint string `json:"metadataFingerprint,omitempty" tf:"metadata_fingerprint,omitempty" protobuf:"bytes,11,opt,name=metadataFingerprint"`
 	// +optional
-	MetadataStartupScript string `json:"metadataStartupScript,omitempty" tf:"metadata_startup_script,omitempty"`
+	MetadataStartupScript string `json:"metadataStartupScript,omitempty" tf:"metadata_startup_script,omitempty" protobuf:"bytes,12,opt,name=metadataStartupScript"`
 	// +optional
-	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty"`
+	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty" protobuf:"bytes,13,opt,name=minCPUPlatform"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,14,opt,name=name"`
 	// +optional
-	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty" protobuf:"bytes,15,opt,name=namePrefix"`
 	// +optional
-	NetworkInterface []ComputeInstanceTemplateSpecNetworkInterface `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+	NetworkInterface []ComputeInstanceTemplateSpecNetworkInterface `json:"networkInterface,omitempty" tf:"network_interface,omitempty" protobuf:"bytes,16,rep,name=networkInterface"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,17,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,18,opt,name=region"`
 	// +optional
-	Scheduling []ComputeInstanceTemplateSpecScheduling `json:"scheduling,omitempty" tf:"scheduling,omitempty"`
+	Scheduling []ComputeInstanceTemplateSpecScheduling `json:"scheduling,omitempty" tf:"scheduling,omitempty" protobuf:"bytes,19,rep,name=scheduling"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,20,opt,name=selfLink"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ServiceAccount []ComputeInstanceTemplateSpecServiceAccount `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount []ComputeInstanceTemplateSpecServiceAccount `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,21,rep,name=serviceAccount"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,22,rep,name=tags"`
 	// +optional
-	TagsFingerprint string `json:"tagsFingerprint,omitempty" tf:"tags_fingerprint,omitempty"`
+	TagsFingerprint string `json:"tagsFingerprint,omitempty" tf:"tags_fingerprint,omitempty" protobuf:"bytes,23,opt,name=tagsFingerprint"`
 }
 
 type ComputeInstanceTemplateStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeInstanceTemplateSpec `json:"output,omitempty"`
+	Output *ComputeInstanceTemplateSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -192,7 +192,7 @@ type ComputeInstanceTemplateStatus struct {
 // ComputeInstanceTemplateList is a list of ComputeInstanceTemplates
 type ComputeInstanceTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeInstanceTemplate CRD objects
-	Items []ComputeInstanceTemplate `json:"items,omitempty"`
+	Items []ComputeInstanceTemplate `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

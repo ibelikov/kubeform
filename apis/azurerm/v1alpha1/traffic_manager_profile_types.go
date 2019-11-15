@@ -34,51 +34,51 @@ import (
 
 type TrafficManagerProfile struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficManagerProfileSpec   `json:"spec,omitempty"`
-	Status            TrafficManagerProfileStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              TrafficManagerProfileSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            TrafficManagerProfileStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type TrafficManagerProfileSpecDnsConfig struct {
-	RelativeName string `json:"relativeName" tf:"relative_name"`
-	Ttl          int64  `json:"ttl" tf:"ttl"`
+	RelativeName string `json:"relativeName" tf:"relative_name" protobuf:"bytes,1,opt,name=relativeName"`
+	Ttl          int64  `json:"ttl" tf:"ttl" protobuf:"varint,2,opt,name=ttl"`
 }
 
 type TrafficManagerProfileSpecMonitorConfig struct {
 	// +optional
-	Path     string `json:"path,omitempty" tf:"path,omitempty"`
-	Port     int64  `json:"port" tf:"port"`
-	Protocol string `json:"protocol" tf:"protocol"`
+	Path     string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,1,opt,name=path"`
+	Port     int64  `json:"port" tf:"port" protobuf:"varint,2,opt,name=port"`
+	Protocol string `json:"protocol" tf:"protocol" protobuf:"bytes,3,opt,name=protocol"`
 }
 
 type TrafficManagerProfileSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	DnsConfig []TrafficManagerProfileSpecDnsConfig `json:"dnsConfig" tf:"dns_config"`
+	DnsConfig []TrafficManagerProfileSpecDnsConfig `json:"dnsConfig" tf:"dns_config" protobuf:"bytes,3,rep,name=dnsConfig"`
 	// +optional
-	Fqdn          string                                   `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-	MonitorConfig []TrafficManagerProfileSpecMonitorConfig `json:"monitorConfig" tf:"monitor_config"`
-	Name          string                                   `json:"name" tf:"name"`
+	Fqdn          string                                   `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,4,opt,name=fqdn"`
+	MonitorConfig []TrafficManagerProfileSpecMonitorConfig `json:"monitorConfig" tf:"monitor_config" protobuf:"bytes,5,rep,name=monitorConfig"`
+	Name          string                                   `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	ProfileStatus     string `json:"profileStatus,omitempty" tf:"profile_status,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ProfileStatus     string `json:"profileStatus,omitempty" tf:"profile_status,omitempty" protobuf:"bytes,7,opt,name=profileStatus"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Tags                 map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	TrafficRoutingMethod string            `json:"trafficRoutingMethod" tf:"traffic_routing_method"`
+	Tags                 map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
+	TrafficRoutingMethod string            `json:"trafficRoutingMethod" tf:"traffic_routing_method" protobuf:"bytes,10,opt,name=trafficRoutingMethod"`
 }
 
 type TrafficManagerProfileStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *TrafficManagerProfileSpec `json:"output,omitempty"`
+	Output *TrafficManagerProfileSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -87,7 +87,7 @@ type TrafficManagerProfileStatus struct {
 // TrafficManagerProfileList is a list of TrafficManagerProfiles
 type TrafficManagerProfileList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of TrafficManagerProfile CRD objects
-	Items []TrafficManagerProfile `json:"items,omitempty"`
+	Items []TrafficManagerProfile `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

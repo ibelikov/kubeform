@@ -34,46 +34,46 @@ import (
 
 type SqlSSLCert struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SqlSSLCertSpec   `json:"spec,omitempty"`
-	Status            SqlSSLCertStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SqlSSLCertSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SqlSSLCertStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SqlSSLCertSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Cert string `json:"cert,omitempty" tf:"cert,omitempty"`
+	Cert string `json:"cert,omitempty" tf:"cert,omitempty" protobuf:"bytes,4,opt,name=cert"`
 	// +optional
-	CertSerialNumber string `json:"certSerialNumber,omitempty" tf:"cert_serial_number,omitempty"`
-	CommonName       string `json:"commonName" tf:"common_name"`
+	CertSerialNumber string `json:"certSerialNumber,omitempty" tf:"cert_serial_number,omitempty" protobuf:"bytes,5,opt,name=certSerialNumber"`
+	CommonName       string `json:"commonName" tf:"common_name" protobuf:"bytes,6,opt,name=commonName"`
 	// +optional
-	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty"`
+	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty" protobuf:"bytes,7,opt,name=createTime"`
 	// +optional
-	ExpirationTime string `json:"expirationTime,omitempty" tf:"expiration_time,omitempty"`
-	Instance       string `json:"instance" tf:"instance"`
+	ExpirationTime string `json:"expirationTime,omitempty" tf:"expiration_time,omitempty" protobuf:"bytes,8,opt,name=expirationTime"`
+	Instance       string `json:"instance" tf:"instance" protobuf:"bytes,9,opt,name=instance"`
 	// +optional
 	PrivateKey string `json:"-" sensitive:"true" tf:"private_key,omitempty"`
 	// +optional
-	ServerCaCert string `json:"serverCaCert,omitempty" tf:"server_ca_cert,omitempty"`
+	ServerCaCert string `json:"serverCaCert,omitempty" tf:"server_ca_cert,omitempty" protobuf:"bytes,10,opt,name=serverCaCert"`
 	// +optional
-	Sha1Fingerprint string `json:"sha1Fingerprint,omitempty" tf:"sha1_fingerprint,omitempty"`
+	Sha1Fingerprint string `json:"sha1Fingerprint,omitempty" tf:"sha1_fingerprint,omitempty" protobuf:"bytes,11,opt,name=sha1Fingerprint"`
 }
 
 type SqlSSLCertStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SqlSSLCertSpec `json:"output,omitempty"`
+	Output *SqlSSLCertSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type SqlSSLCertStatus struct {
 // SqlSSLCertList is a list of SqlSSLCerts
 type SqlSSLCertList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SqlSSLCert CRD objects
-	Items []SqlSSLCert `json:"items,omitempty"`
+	Items []SqlSSLCert `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

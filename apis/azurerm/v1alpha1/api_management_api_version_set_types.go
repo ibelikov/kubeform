@@ -34,39 +34,39 @@ import (
 
 type ApiManagementAPIVersionSet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementAPIVersionSetSpec   `json:"spec,omitempty"`
-	Status            ApiManagementAPIVersionSetStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementAPIVersionSetSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementAPIVersionSetStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementAPIVersionSetSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
 	// +optional
-	Description       string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName       string `json:"displayName" tf:"display_name"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Description       string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	DisplayName       string `json:"displayName" tf:"display_name" protobuf:"bytes,5,opt,name=displayName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	VersionHeaderName string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
+	VersionHeaderName string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty" protobuf:"bytes,8,opt,name=versionHeaderName"`
 	// +optional
-	VersionQueryName string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
-	VersioningScheme string `json:"versioningScheme" tf:"versioning_scheme"`
+	VersionQueryName string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty" protobuf:"bytes,9,opt,name=versionQueryName"`
+	VersioningScheme string `json:"versioningScheme" tf:"versioning_scheme" protobuf:"bytes,10,opt,name=versioningScheme"`
 }
 
 type ApiManagementAPIVersionSetStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementAPIVersionSetSpec `json:"output,omitempty"`
+	Output *ApiManagementAPIVersionSetSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -75,7 +75,7 @@ type ApiManagementAPIVersionSetStatus struct {
 // ApiManagementAPIVersionSetList is a list of ApiManagementAPIVersionSets
 type ApiManagementAPIVersionSetList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementAPIVersionSet CRD objects
-	Items []ApiManagementAPIVersionSet `json:"items,omitempty"`
+	Items []ApiManagementAPIVersionSet `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

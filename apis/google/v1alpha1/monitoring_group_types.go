@@ -34,38 +34,38 @@ import (
 
 type MonitoringGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitoringGroupSpec   `json:"spec,omitempty"`
-	Status            MonitoringGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitoringGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitoringGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitoringGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	DisplayName string `json:"displayName" tf:"display_name"`
-	Filter      string `json:"filter" tf:"filter"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,3,opt,name=displayName"`
+	Filter      string `json:"filter" tf:"filter" protobuf:"bytes,4,opt,name=filter"`
 	// +optional
-	IsCluster bool `json:"isCluster,omitempty" tf:"is_cluster,omitempty"`
+	IsCluster bool `json:"isCluster,omitempty" tf:"is_cluster,omitempty" protobuf:"varint,5,opt,name=isCluster"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	ParentName string `json:"parentName,omitempty" tf:"parent_name,omitempty"`
+	ParentName string `json:"parentName,omitempty" tf:"parent_name,omitempty" protobuf:"bytes,7,opt,name=parentName"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,8,opt,name=project"`
 }
 
 type MonitoringGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitoringGroupSpec `json:"output,omitempty"`
+	Output *MonitoringGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type MonitoringGroupStatus struct {
 // MonitoringGroupList is a list of MonitoringGroups
 type MonitoringGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitoringGroup CRD objects
-	Items []MonitoringGroup `json:"items,omitempty"`
+	Items []MonitoringGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

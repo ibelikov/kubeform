@@ -34,77 +34,77 @@ import (
 
 type ComputeFirewall struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeFirewallSpec   `json:"spec,omitempty"`
-	Status            ComputeFirewallStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeFirewallSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeFirewallStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeFirewallSpecAllow struct {
 	// +optional
-	Ports    []string `json:"ports,omitempty" tf:"ports,omitempty"`
-	Protocol string   `json:"protocol" tf:"protocol"`
+	Ports    []string `json:"ports,omitempty" tf:"ports,omitempty" protobuf:"bytes,1,rep,name=ports"`
+	Protocol string   `json:"protocol" tf:"protocol" protobuf:"bytes,2,opt,name=protocol"`
 }
 
 type ComputeFirewallSpecDeny struct {
 	// +optional
-	Ports    []string `json:"ports,omitempty" tf:"ports,omitempty"`
-	Protocol string   `json:"protocol" tf:"protocol"`
+	Ports    []string `json:"ports,omitempty" tf:"ports,omitempty" protobuf:"bytes,1,rep,name=ports"`
+	Protocol string   `json:"protocol" tf:"protocol" protobuf:"bytes,2,opt,name=protocol"`
 }
 
 type ComputeFirewallSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Allow []ComputeFirewallSpecAllow `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow []ComputeFirewallSpecAllow `json:"allow,omitempty" tf:"allow,omitempty" protobuf:"bytes,3,rep,name=allow"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Deny []ComputeFirewallSpecDeny `json:"deny,omitempty" tf:"deny,omitempty"`
+	Deny []ComputeFirewallSpecDeny `json:"deny,omitempty" tf:"deny,omitempty" protobuf:"bytes,5,rep,name=deny"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	DestinationRanges []string `json:"destinationRanges,omitempty" tf:"destination_ranges,omitempty"`
+	DestinationRanges []string `json:"destinationRanges,omitempty" tf:"destination_ranges,omitempty" protobuf:"bytes,7,rep,name=destinationRanges"`
 	// +optional
-	Direction string `json:"direction,omitempty" tf:"direction,omitempty"`
+	Direction string `json:"direction,omitempty" tf:"direction,omitempty" protobuf:"bytes,8,opt,name=direction"`
 	// +optional
-	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled bool `json:"disabled,omitempty" tf:"disabled,omitempty" protobuf:"varint,9,opt,name=disabled"`
 	// +optional
 	// Deprecated
-	EnableLogging bool   `json:"enableLogging,omitempty" tf:"enable_logging,omitempty"`
-	Name          string `json:"name" tf:"name"`
-	Network       string `json:"network" tf:"network"`
+	EnableLogging bool   `json:"enableLogging,omitempty" tf:"enable_logging,omitempty" protobuf:"varint,10,opt,name=enableLogging"`
+	Name          string `json:"name" tf:"name" protobuf:"bytes,11,opt,name=name"`
+	Network       string `json:"network" tf:"network" protobuf:"bytes,12,opt,name=network"`
 	// +optional
-	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty" protobuf:"varint,13,opt,name=priority"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,14,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,15,opt,name=selfLink"`
 	// +optional
-	SourceRanges []string `json:"sourceRanges,omitempty" tf:"source_ranges,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	SourceServiceAccounts []string `json:"sourceServiceAccounts,omitempty" tf:"source_service_accounts,omitempty"`
-	// +optional
-	SourceTags []string `json:"sourceTags,omitempty" tf:"source_tags,omitempty"`
+	SourceRanges []string `json:"sourceRanges,omitempty" tf:"source_ranges,omitempty" protobuf:"bytes,16,rep,name=sourceRanges"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TargetServiceAccounts []string `json:"targetServiceAccounts,omitempty" tf:"target_service_accounts,omitempty"`
+	SourceServiceAccounts []string `json:"sourceServiceAccounts,omitempty" tf:"source_service_accounts,omitempty" protobuf:"bytes,17,rep,name=sourceServiceAccounts"`
 	// +optional
-	TargetTags []string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
+	SourceTags []string `json:"sourceTags,omitempty" tf:"source_tags,omitempty" protobuf:"bytes,18,rep,name=sourceTags"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	TargetServiceAccounts []string `json:"targetServiceAccounts,omitempty" tf:"target_service_accounts,omitempty" protobuf:"bytes,19,rep,name=targetServiceAccounts"`
+	// +optional
+	TargetTags []string `json:"targetTags,omitempty" tf:"target_tags,omitempty" protobuf:"bytes,20,rep,name=targetTags"`
 }
 
 type ComputeFirewallStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeFirewallSpec `json:"output,omitempty"`
+	Output *ComputeFirewallSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -113,7 +113,7 @@ type ComputeFirewallStatus struct {
 // ComputeFirewallList is a list of ComputeFirewalls
 type ComputeFirewallList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeFirewall CRD objects
-	Items []ComputeFirewall `json:"items,omitempty"`
+	Items []ComputeFirewall `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

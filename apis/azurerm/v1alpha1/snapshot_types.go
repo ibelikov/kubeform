@@ -34,65 +34,65 @@ import (
 
 type Snapshot struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotSpec   `json:"spec,omitempty"`
-	Status            SnapshotStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SnapshotSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SnapshotStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SnapshotSpecEncryptionSettingsDiskEncryptionKey struct {
-	SecretURL     string `json:"secretURL" tf:"secret_url"`
-	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id"`
+	SecretURL     string `json:"secretURL" tf:"secret_url" protobuf:"bytes,1,opt,name=secretURL"`
+	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id" protobuf:"bytes,2,opt,name=sourceVaultID"`
 }
 
 type SnapshotSpecEncryptionSettingsKeyEncryptionKey struct {
-	KeyURL        string `json:"keyURL" tf:"key_url"`
-	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id"`
+	KeyURL        string `json:"keyURL" tf:"key_url" protobuf:"bytes,1,opt,name=keyURL"`
+	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id" protobuf:"bytes,2,opt,name=sourceVaultID"`
 }
 
 type SnapshotSpecEncryptionSettings struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskEncryptionKey []SnapshotSpecEncryptionSettingsDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
-	Enabled           bool                                              `json:"enabled" tf:"enabled"`
+	DiskEncryptionKey []SnapshotSpecEncryptionSettingsDiskEncryptionKey `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty" protobuf:"bytes,1,rep,name=diskEncryptionKey"`
+	Enabled           bool                                              `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	KeyEncryptionKey []SnapshotSpecEncryptionSettingsKeyEncryptionKey `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
+	KeyEncryptionKey []SnapshotSpecEncryptionSettingsKeyEncryptionKey `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty" protobuf:"bytes,3,rep,name=keyEncryptionKey"`
 }
 
 type SnapshotSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	CreateOption string `json:"createOption" tf:"create_option"`
+	CreateOption string `json:"createOption" tf:"create_option" protobuf:"bytes,3,opt,name=createOption"`
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,4,opt,name=diskSizeGb"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	EncryptionSettings []SnapshotSpecEncryptionSettings `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
-	Location           string                           `json:"location" tf:"location"`
-	Name               string                           `json:"name" tf:"name"`
-	ResourceGroupName  string                           `json:"resourceGroupName" tf:"resource_group_name"`
+	EncryptionSettings []SnapshotSpecEncryptionSettings `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty" protobuf:"bytes,5,rep,name=encryptionSettings"`
+	Location           string                           `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name               string                           `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName  string                           `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	SourceResourceID string `json:"sourceResourceID,omitempty" tf:"source_resource_id,omitempty"`
+	SourceResourceID string `json:"sourceResourceID,omitempty" tf:"source_resource_id,omitempty" protobuf:"bytes,9,opt,name=sourceResourceID"`
 	// +optional
-	SourceURI string `json:"sourceURI,omitempty" tf:"source_uri,omitempty"`
+	SourceURI string `json:"sourceURI,omitempty" tf:"source_uri,omitempty" protobuf:"bytes,10,opt,name=sourceURI"`
 	// +optional
-	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty" protobuf:"bytes,11,opt,name=storageAccountID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,12,rep,name=tags"`
 }
 
 type SnapshotStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SnapshotSpec `json:"output,omitempty"`
+	Output *SnapshotSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -101,7 +101,7 @@ type SnapshotStatus struct {
 // SnapshotList is a list of Snapshots
 type SnapshotList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Snapshot CRD objects
-	Items []Snapshot `json:"items,omitempty"`
+	Items []Snapshot `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

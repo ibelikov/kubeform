@@ -34,44 +34,44 @@ import (
 
 type DnsZone struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DnsZoneSpec   `json:"spec,omitempty"`
-	Status            DnsZoneStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DnsZoneSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DnsZoneStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DnsZoneSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	MaxNumberOfRecordSets int64  `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty"`
-	Name                  string `json:"name" tf:"name"`
+	MaxNumberOfRecordSets int64  `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty" protobuf:"varint,3,opt,name=maxNumberOfRecordSets"`
+	Name                  string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	NameServers []string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
+	NameServers []string `json:"nameServers,omitempty" tf:"name_servers,omitempty" protobuf:"bytes,5,rep,name=nameServers"`
 	// +optional
-	NumberOfRecordSets int64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
+	NumberOfRecordSets int64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty" protobuf:"varint,6,opt,name=numberOfRecordSets"`
 	// +optional
-	RegistrationVirtualNetworkIDS []string `json:"registrationVirtualNetworkIDS,omitempty" tf:"registration_virtual_network_ids,omitempty"`
+	RegistrationVirtualNetworkIDS []string `json:"registrationVirtualNetworkIDS,omitempty" tf:"registration_virtual_network_ids,omitempty" protobuf:"bytes,7,rep,name=registrationVirtualNetworkIDS"`
 	// +optional
-	ResolutionVirtualNetworkIDS []string `json:"resolutionVirtualNetworkIDS,omitempty" tf:"resolution_virtual_network_ids,omitempty"`
-	ResourceGroupName           string   `json:"resourceGroupName" tf:"resource_group_name"`
+	ResolutionVirtualNetworkIDS []string `json:"resolutionVirtualNetworkIDS,omitempty" tf:"resolution_virtual_network_ids,omitempty" protobuf:"bytes,8,rep,name=resolutionVirtualNetworkIDS"`
+	ResourceGroupName           string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 	// +optional
-	ZoneType string `json:"zoneType,omitempty" tf:"zone_type,omitempty"`
+	ZoneType string `json:"zoneType,omitempty" tf:"zone_type,omitempty" protobuf:"bytes,11,opt,name=zoneType"`
 }
 
 type DnsZoneStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DnsZoneSpec `json:"output,omitempty"`
+	Output *DnsZoneSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type DnsZoneStatus struct {
 // DnsZoneList is a list of DnsZones
 type DnsZoneList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DnsZone CRD objects
-	Items []DnsZone `json:"items,omitempty"`
+	Items []DnsZone `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

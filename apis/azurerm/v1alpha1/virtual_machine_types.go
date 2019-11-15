@@ -34,207 +34,207 @@ import (
 
 type VirtualMachine struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualMachineSpec   `json:"spec,omitempty"`
-	Status            VirtualMachineStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualMachineSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualMachineStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualMachineSpecBootDiagnostics struct {
-	Enabled    bool   `json:"enabled" tf:"enabled"`
-	StorageURI string `json:"storageURI" tf:"storage_uri"`
+	Enabled    bool   `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
+	StorageURI string `json:"storageURI" tf:"storage_uri" protobuf:"bytes,2,opt,name=storageURI"`
 }
 
 type VirtualMachineSpecIdentity struct {
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty" protobuf:"bytes,1,rep,name=identityIDS"`
 	// +optional
-	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
-	Type        string `json:"type" tf:"type"`
+	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,2,opt,name=principalID"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type VirtualMachineSpecOsProfile struct {
 	// +optional
 	AdminPassword string `json:"-" sensitive:"true" tf:"admin_password,omitempty"`
-	AdminUsername string `json:"adminUsername" tf:"admin_username"`
-	ComputerName  string `json:"computerName" tf:"computer_name"`
+	AdminUsername string `json:"adminUsername" tf:"admin_username" protobuf:"bytes,1,opt,name=adminUsername"`
+	ComputerName  string `json:"computerName" tf:"computer_name" protobuf:"bytes,2,opt,name=computerName"`
 	// +optional
-	CustomData string `json:"customData,omitempty" tf:"custom_data,omitempty"`
+	CustomData string `json:"customData,omitempty" tf:"custom_data,omitempty" protobuf:"bytes,3,opt,name=customData"`
 }
 
 type VirtualMachineSpecOsProfileLinuxConfigSshKeys struct {
-	KeyData string `json:"keyData" tf:"key_data"`
-	Path    string `json:"path" tf:"path"`
+	KeyData string `json:"keyData" tf:"key_data" protobuf:"bytes,1,opt,name=keyData"`
+	Path    string `json:"path" tf:"path" protobuf:"bytes,2,opt,name=path"`
 }
 
 type VirtualMachineSpecOsProfileLinuxConfig struct {
-	DisablePasswordAuthentication bool `json:"disablePasswordAuthentication" tf:"disable_password_authentication"`
+	DisablePasswordAuthentication bool `json:"disablePasswordAuthentication" tf:"disable_password_authentication" protobuf:"varint,1,opt,name=disablePasswordAuthentication"`
 	// +optional
-	SshKeys []VirtualMachineSpecOsProfileLinuxConfigSshKeys `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+	SshKeys []VirtualMachineSpecOsProfileLinuxConfigSshKeys `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty" protobuf:"bytes,2,rep,name=sshKeys"`
 }
 
 type VirtualMachineSpecOsProfileSecretsVaultCertificates struct {
 	// +optional
-	CertificateStore string `json:"certificateStore,omitempty" tf:"certificate_store,omitempty"`
-	CertificateURL   string `json:"certificateURL" tf:"certificate_url"`
+	CertificateStore string `json:"certificateStore,omitempty" tf:"certificate_store,omitempty" protobuf:"bytes,1,opt,name=certificateStore"`
+	CertificateURL   string `json:"certificateURL" tf:"certificate_url" protobuf:"bytes,2,opt,name=certificateURL"`
 }
 
 type VirtualMachineSpecOsProfileSecrets struct {
-	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id"`
+	SourceVaultID string `json:"sourceVaultID" tf:"source_vault_id" protobuf:"bytes,1,opt,name=sourceVaultID"`
 	// +optional
-	VaultCertificates []VirtualMachineSpecOsProfileSecretsVaultCertificates `json:"vaultCertificates,omitempty" tf:"vault_certificates,omitempty"`
+	VaultCertificates []VirtualMachineSpecOsProfileSecretsVaultCertificates `json:"vaultCertificates,omitempty" tf:"vault_certificates,omitempty" protobuf:"bytes,2,rep,name=vaultCertificates"`
 }
 
 type VirtualMachineSpecOsProfileWindowsConfigAdditionalUnattendConfig struct {
-	Component   string `json:"component" tf:"component"`
+	Component   string `json:"component" tf:"component" protobuf:"bytes,1,opt,name=component"`
 	Content     string `json:"-" sensitive:"true" tf:"content"`
-	Pass        string `json:"pass" tf:"pass"`
-	SettingName string `json:"settingName" tf:"setting_name"`
+	Pass        string `json:"pass" tf:"pass" protobuf:"bytes,2,opt,name=pass"`
+	SettingName string `json:"settingName" tf:"setting_name" protobuf:"bytes,3,opt,name=settingName"`
 }
 
 type VirtualMachineSpecOsProfileWindowsConfigWinrm struct {
 	// +optional
-	CertificateURL string `json:"certificateURL,omitempty" tf:"certificate_url,omitempty"`
-	Protocol       string `json:"protocol" tf:"protocol"`
+	CertificateURL string `json:"certificateURL,omitempty" tf:"certificate_url,omitempty" protobuf:"bytes,1,opt,name=certificateURL"`
+	Protocol       string `json:"protocol" tf:"protocol" protobuf:"bytes,2,opt,name=protocol"`
 }
 
 type VirtualMachineSpecOsProfileWindowsConfig struct {
 	// +optional
-	AdditionalUnattendConfig []VirtualMachineSpecOsProfileWindowsConfigAdditionalUnattendConfig `json:"additionalUnattendConfig,omitempty" tf:"additional_unattend_config,omitempty"`
+	AdditionalUnattendConfig []VirtualMachineSpecOsProfileWindowsConfigAdditionalUnattendConfig `json:"additionalUnattendConfig,omitempty" tf:"additional_unattend_config,omitempty" protobuf:"bytes,1,rep,name=additionalUnattendConfig"`
 	// +optional
-	EnableAutomaticUpgrades bool `json:"enableAutomaticUpgrades,omitempty" tf:"enable_automatic_upgrades,omitempty"`
+	EnableAutomaticUpgrades bool `json:"enableAutomaticUpgrades,omitempty" tf:"enable_automatic_upgrades,omitempty" protobuf:"varint,2,opt,name=enableAutomaticUpgrades"`
 	// +optional
-	ProvisionVmAgent bool `json:"provisionVmAgent,omitempty" tf:"provision_vm_agent,omitempty"`
+	ProvisionVmAgent bool `json:"provisionVmAgent,omitempty" tf:"provision_vm_agent,omitempty" protobuf:"varint,3,opt,name=provisionVmAgent"`
 	// +optional
-	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty" protobuf:"bytes,4,opt,name=timezone"`
 	// +optional
-	Winrm []VirtualMachineSpecOsProfileWindowsConfigWinrm `json:"winrm,omitempty" tf:"winrm,omitempty"`
+	Winrm []VirtualMachineSpecOsProfileWindowsConfigWinrm `json:"winrm,omitempty" tf:"winrm,omitempty" protobuf:"bytes,5,rep,name=winrm"`
 }
 
 type VirtualMachineSpecPlan struct {
-	Name      string `json:"name" tf:"name"`
-	Product   string `json:"product" tf:"product"`
-	Publisher string `json:"publisher" tf:"publisher"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Product   string `json:"product" tf:"product" protobuf:"bytes,2,opt,name=product"`
+	Publisher string `json:"publisher" tf:"publisher" protobuf:"bytes,3,opt,name=publisher"`
 }
 
 type VirtualMachineSpecStorageDataDisk struct {
 	// +optional
-	Caching      string `json:"caching,omitempty" tf:"caching,omitempty"`
-	CreateOption string `json:"createOption" tf:"create_option"`
+	Caching      string `json:"caching,omitempty" tf:"caching,omitempty" protobuf:"bytes,1,opt,name=caching"`
+	CreateOption string `json:"createOption" tf:"create_option" protobuf:"bytes,2,opt,name=createOption"`
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
-	Lun        int64 `json:"lun" tf:"lun"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,3,opt,name=diskSizeGb"`
+	Lun        int64 `json:"lun" tf:"lun" protobuf:"varint,4,opt,name=lun"`
 	// +optional
-	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty"`
+	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty" protobuf:"bytes,5,opt,name=managedDiskID"`
 	// +optional
-	ManagedDiskType string `json:"managedDiskType,omitempty" tf:"managed_disk_type,omitempty"`
-	Name            string `json:"name" tf:"name"`
+	ManagedDiskType string `json:"managedDiskType,omitempty" tf:"managed_disk_type,omitempty" protobuf:"bytes,6,opt,name=managedDiskType"`
+	Name            string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	VhdURI string `json:"vhdURI,omitempty" tf:"vhd_uri,omitempty"`
+	VhdURI string `json:"vhdURI,omitempty" tf:"vhd_uri,omitempty" protobuf:"bytes,8,opt,name=vhdURI"`
 	// +optional
-	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty" protobuf:"varint,9,opt,name=writeAcceleratorEnabled"`
 }
 
 type VirtualMachineSpecStorageImageReference struct {
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
 	// +optional
-	Offer string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer string `json:"offer,omitempty" tf:"offer,omitempty" protobuf:"bytes,2,opt,name=offer"`
 	// +optional
-	Publisher string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher string `json:"publisher,omitempty" tf:"publisher,omitempty" protobuf:"bytes,3,opt,name=publisher"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,4,opt,name=sku"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,5,opt,name=version"`
 }
 
 type VirtualMachineSpecStorageOsDisk struct {
 	// +optional
-	Caching      string `json:"caching,omitempty" tf:"caching,omitempty"`
-	CreateOption string `json:"createOption" tf:"create_option"`
+	Caching      string `json:"caching,omitempty" tf:"caching,omitempty" protobuf:"bytes,1,opt,name=caching"`
+	CreateOption string `json:"createOption" tf:"create_option" protobuf:"bytes,2,opt,name=createOption"`
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,3,opt,name=diskSizeGb"`
 	// +optional
-	ImageURI string `json:"imageURI,omitempty" tf:"image_uri,omitempty"`
+	ImageURI string `json:"imageURI,omitempty" tf:"image_uri,omitempty" protobuf:"bytes,4,opt,name=imageURI"`
 	// +optional
-	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty"`
+	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty" protobuf:"bytes,5,opt,name=managedDiskID"`
 	// +optional
-	ManagedDiskType string `json:"managedDiskType,omitempty" tf:"managed_disk_type,omitempty"`
-	Name            string `json:"name" tf:"name"`
+	ManagedDiskType string `json:"managedDiskType,omitempty" tf:"managed_disk_type,omitempty" protobuf:"bytes,6,opt,name=managedDiskType"`
+	Name            string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
+	OsType string `json:"osType,omitempty" tf:"os_type,omitempty" protobuf:"bytes,8,opt,name=osType"`
 	// +optional
-	VhdURI string `json:"vhdURI,omitempty" tf:"vhd_uri,omitempty"`
+	VhdURI string `json:"vhdURI,omitempty" tf:"vhd_uri,omitempty" protobuf:"bytes,9,opt,name=vhdURI"`
 	// +optional
-	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+	WriteAcceleratorEnabled bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty" protobuf:"varint,10,opt,name=writeAcceleratorEnabled"`
 }
 
 type VirtualMachineSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AvailabilitySetID string `json:"availabilitySetID,omitempty" tf:"availability_set_id,omitempty"`
+	AvailabilitySetID string `json:"availabilitySetID,omitempty" tf:"availability_set_id,omitempty" protobuf:"bytes,4,opt,name=availabilitySetID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	BootDiagnostics []VirtualMachineSpecBootDiagnostics `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
+	BootDiagnostics []VirtualMachineSpecBootDiagnostics `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty" protobuf:"bytes,5,rep,name=bootDiagnostics"`
 	// +optional
-	DeleteDataDisksOnTermination bool `json:"deleteDataDisksOnTermination,omitempty" tf:"delete_data_disks_on_termination,omitempty"`
+	DeleteDataDisksOnTermination bool `json:"deleteDataDisksOnTermination,omitempty" tf:"delete_data_disks_on_termination,omitempty" protobuf:"varint,6,opt,name=deleteDataDisksOnTermination"`
 	// +optional
-	DeleteOsDiskOnTermination bool `json:"deleteOsDiskOnTermination,omitempty" tf:"delete_os_disk_on_termination,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Identity []VirtualMachineSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
-	// +optional
-	LicenseType         string   `json:"licenseType,omitempty" tf:"license_type,omitempty"`
-	Location            string   `json:"location" tf:"location"`
-	Name                string   `json:"name" tf:"name"`
-	NetworkInterfaceIDS []string `json:"networkInterfaceIDS" tf:"network_interface_ids"`
+	DeleteOsDiskOnTermination bool `json:"deleteOsDiskOnTermination,omitempty" tf:"delete_os_disk_on_termination,omitempty" protobuf:"varint,7,opt,name=deleteOsDiskOnTermination"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	OsProfile []VirtualMachineSpecOsProfile `json:"osProfile,omitempty" tf:"os_profile,omitempty"`
+	Identity []VirtualMachineSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,8,rep,name=identity"`
+	// +optional
+	LicenseType         string   `json:"licenseType,omitempty" tf:"license_type,omitempty" protobuf:"bytes,9,opt,name=licenseType"`
+	Location            string   `json:"location" tf:"location" protobuf:"bytes,10,opt,name=location"`
+	Name                string   `json:"name" tf:"name" protobuf:"bytes,11,opt,name=name"`
+	NetworkInterfaceIDS []string `json:"networkInterfaceIDS" tf:"network_interface_ids" protobuf:"bytes,12,rep,name=networkInterfaceIDS"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	OsProfileLinuxConfig []VirtualMachineSpecOsProfileLinuxConfig `json:"osProfileLinuxConfig,omitempty" tf:"os_profile_linux_config,omitempty"`
-	// +optional
-	OsProfileSecrets []VirtualMachineSpecOsProfileSecrets `json:"osProfileSecrets,omitempty" tf:"os_profile_secrets,omitempty"`
+	OsProfile []VirtualMachineSpecOsProfile `json:"osProfile,omitempty" tf:"os_profile,omitempty" protobuf:"bytes,13,rep,name=osProfile"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	OsProfileWindowsConfig []VirtualMachineSpecOsProfileWindowsConfig `json:"osProfileWindowsConfig,omitempty" tf:"os_profile_windows_config,omitempty"`
+	OsProfileLinuxConfig []VirtualMachineSpecOsProfileLinuxConfig `json:"osProfileLinuxConfig,omitempty" tf:"os_profile_linux_config,omitempty" protobuf:"bytes,14,rep,name=osProfileLinuxConfig"`
+	// +optional
+	OsProfileSecrets []VirtualMachineSpecOsProfileSecrets `json:"osProfileSecrets,omitempty" tf:"os_profile_secrets,omitempty" protobuf:"bytes,15,rep,name=osProfileSecrets"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Plan []VirtualMachineSpecPlan `json:"plan,omitempty" tf:"plan,omitempty"`
-	// +optional
-	PrimaryNetworkInterfaceID string `json:"primaryNetworkInterfaceID,omitempty" tf:"primary_network_interface_id,omitempty"`
-	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	StorageDataDisk []VirtualMachineSpecStorageDataDisk `json:"storageDataDisk,omitempty" tf:"storage_data_disk,omitempty"`
+	OsProfileWindowsConfig []VirtualMachineSpecOsProfileWindowsConfig `json:"osProfileWindowsConfig,omitempty" tf:"os_profile_windows_config,omitempty" protobuf:"bytes,16,rep,name=osProfileWindowsConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	StorageImageReference []VirtualMachineSpecStorageImageReference `json:"storageImageReference,omitempty" tf:"storage_image_reference,omitempty"`
-	// +kubebuilder:validation:MaxItems=1
-	StorageOsDisk []VirtualMachineSpecStorageOsDisk `json:"storageOsDisk" tf:"storage_os_disk"`
+	Plan []VirtualMachineSpecPlan `json:"plan,omitempty" tf:"plan,omitempty" protobuf:"bytes,17,rep,name=plan"`
 	// +optional
-	Tags   map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	VmSize string            `json:"vmSize" tf:"vm_size"`
+	PrimaryNetworkInterfaceID string `json:"primaryNetworkInterfaceID,omitempty" tf:"primary_network_interface_id,omitempty" protobuf:"bytes,18,opt,name=primaryNetworkInterfaceID"`
+	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,19,opt,name=resourceGroupName"`
+	// +optional
+	StorageDataDisk []VirtualMachineSpecStorageDataDisk `json:"storageDataDisk,omitempty" tf:"storage_data_disk,omitempty" protobuf:"bytes,20,rep,name=storageDataDisk"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	StorageImageReference []VirtualMachineSpecStorageImageReference `json:"storageImageReference,omitempty" tf:"storage_image_reference,omitempty" protobuf:"bytes,21,rep,name=storageImageReference"`
+	// +kubebuilder:validation:MaxItems=1
+	StorageOsDisk []VirtualMachineSpecStorageOsDisk `json:"storageOsDisk" tf:"storage_os_disk" protobuf:"bytes,22,rep,name=storageOsDisk"`
+	// +optional
+	Tags   map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,23,rep,name=tags"`
+	VmSize string            `json:"vmSize" tf:"vm_size" protobuf:"bytes,24,opt,name=vmSize"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,25,rep,name=zones"`
 }
 
 type VirtualMachineStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualMachineSpec `json:"output,omitempty"`
+	Output *VirtualMachineSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -243,7 +243,7 @@ type VirtualMachineStatus struct {
 // VirtualMachineList is a list of VirtualMachines
 type VirtualMachineList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualMachine CRD objects
-	Items []VirtualMachine `json:"items,omitempty"`
+	Items []VirtualMachine `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

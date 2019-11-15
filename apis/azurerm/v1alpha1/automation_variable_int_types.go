@@ -34,37 +34,37 @@ import (
 
 type AutomationVariableInt struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutomationVariableIntSpec   `json:"spec,omitempty"`
-	Status            AutomationVariableIntStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutomationVariableIntSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutomationVariableIntStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutomationVariableIntSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name"`
+	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name" protobuf:"bytes,3,opt,name=automationAccountName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	Encrypted         bool   `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Encrypted         bool   `json:"encrypted,omitempty" tf:"encrypted,omitempty" protobuf:"varint,5,opt,name=encrypted"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	Value int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value int64 `json:"value,omitempty" tf:"value,omitempty" protobuf:"varint,8,opt,name=value"`
 }
 
 type AutomationVariableIntStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutomationVariableIntSpec `json:"output,omitempty"`
+	Output *AutomationVariableIntSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type AutomationVariableIntStatus struct {
 // AutomationVariableIntList is a list of AutomationVariableInts
 type AutomationVariableIntList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutomationVariableInt CRD objects
-	Items []AutomationVariableInt `json:"items,omitempty"`
+	Items []AutomationVariableInt `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

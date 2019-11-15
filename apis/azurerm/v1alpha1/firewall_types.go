@@ -34,47 +34,47 @@ import (
 
 type Firewall struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallSpec   `json:"spec,omitempty"`
-	Status            FirewallStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FirewallSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FirewallStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FirewallSpecIpConfiguration struct {
 	// +optional
 	// Deprecated
-	InternalPublicIPAddressID string `json:"internalPublicIPAddressID,omitempty" tf:"internal_public_ip_address_id,omitempty"`
-	Name                      string `json:"name" tf:"name"`
+	InternalPublicIPAddressID string `json:"internalPublicIPAddressID,omitempty" tf:"internal_public_ip_address_id,omitempty" protobuf:"bytes,1,opt,name=internalPublicIPAddressID"`
+	Name                      string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,3,opt,name=privateIPAddress"`
 	// +optional
-	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
-	SubnetID          string `json:"subnetID" tf:"subnet_id"`
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty" protobuf:"bytes,4,opt,name=publicIPAddressID"`
+	SubnetID          string `json:"subnetID" tf:"subnet_id" protobuf:"bytes,5,opt,name=subnetID"`
 }
 
 type FirewallSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MaxItems=1
-	IpConfiguration   []FirewallSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
-	Location          string                        `json:"location" tf:"location"`
-	Name              string                        `json:"name" tf:"name"`
-	ResourceGroupName string                        `json:"resourceGroupName" tf:"resource_group_name"`
+	IpConfiguration   []FirewallSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration" protobuf:"bytes,3,rep,name=ipConfiguration"`
+	Location          string                        `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name              string                        `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string                        `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 }
 
 type FirewallStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FirewallSpec `json:"output,omitempty"`
+	Output *FirewallSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type FirewallStatus struct {
 // FirewallList is a list of Firewalls
 type FirewallList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Firewall CRD objects
-	Items []Firewall `json:"items,omitempty"`
+	Items []Firewall `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

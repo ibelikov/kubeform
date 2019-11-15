@@ -34,86 +34,86 @@ import (
 
 type Project struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProjectSpec   `json:"spec,omitempty"`
-	Status            ProjectStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ProjectSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ProjectStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ProjectSpecAppEngineFeatureSettings struct {
 	// +optional
-	SplitHealthChecks bool `json:"splitHealthChecks,omitempty" tf:"split_health_checks,omitempty"`
+	SplitHealthChecks bool `json:"splitHealthChecks,omitempty" tf:"split_health_checks,omitempty" protobuf:"varint,1,opt,name=splitHealthChecks"`
 }
 
 type ProjectSpecAppEngineUrlDispatchRule struct {
 	// +optional
-	Domain string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain string `json:"domain,omitempty" tf:"domain,omitempty" protobuf:"bytes,1,opt,name=domain"`
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,2,opt,name=path"`
 	// +optional
-	Service string `json:"service,omitempty" tf:"service,omitempty"`
+	Service string `json:"service,omitempty" tf:"service,omitempty" protobuf:"bytes,3,opt,name=service"`
 }
 
 type ProjectSpecAppEngine struct {
 	// +optional
-	AuthDomain string `json:"authDomain,omitempty" tf:"auth_domain,omitempty"`
+	AuthDomain string `json:"authDomain,omitempty" tf:"auth_domain,omitempty" protobuf:"bytes,1,opt,name=authDomain"`
 	// +optional
-	CodeBucket string `json:"codeBucket,omitempty" tf:"code_bucket,omitempty"`
+	CodeBucket string `json:"codeBucket,omitempty" tf:"code_bucket,omitempty" protobuf:"bytes,2,opt,name=codeBucket"`
 	// +optional
-	DefaultBucket string `json:"defaultBucket,omitempty" tf:"default_bucket,omitempty"`
+	DefaultBucket string `json:"defaultBucket,omitempty" tf:"default_bucket,omitempty" protobuf:"bytes,3,opt,name=defaultBucket"`
 	// +optional
-	DefaultHostname string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
+	DefaultHostname string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty" protobuf:"bytes,4,opt,name=defaultHostname"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FeatureSettings []ProjectSpecAppEngineFeatureSettings `json:"featureSettings,omitempty" tf:"feature_settings,omitempty"`
+	FeatureSettings []ProjectSpecAppEngineFeatureSettings `json:"featureSettings,omitempty" tf:"feature_settings,omitempty" protobuf:"bytes,5,rep,name=featureSettings"`
 	// +optional
-	GcrDomain string `json:"gcrDomain,omitempty" tf:"gcr_domain,omitempty"`
+	GcrDomain string `json:"gcrDomain,omitempty" tf:"gcr_domain,omitempty" protobuf:"bytes,6,opt,name=gcrDomain"`
 	// +optional
-	LocationID string `json:"locationID,omitempty" tf:"location_id,omitempty"`
+	LocationID string `json:"locationID,omitempty" tf:"location_id,omitempty" protobuf:"bytes,7,opt,name=locationID"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	ServingStatus string `json:"servingStatus,omitempty" tf:"serving_status,omitempty"`
+	ServingStatus string `json:"servingStatus,omitempty" tf:"serving_status,omitempty" protobuf:"bytes,9,opt,name=servingStatus"`
 	// +optional
-	UrlDispatchRule []ProjectSpecAppEngineUrlDispatchRule `json:"urlDispatchRule,omitempty" tf:"url_dispatch_rule,omitempty"`
+	UrlDispatchRule []ProjectSpecAppEngineUrlDispatchRule `json:"urlDispatchRule,omitempty" tf:"url_dispatch_rule,omitempty" protobuf:"bytes,10,rep,name=urlDispatchRule"`
 }
 
 type ProjectSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	AppEngine []ProjectSpecAppEngine `json:"appEngine,omitempty" tf:"app_engine,omitempty"`
+	AppEngine []ProjectSpecAppEngine `json:"appEngine,omitempty" tf:"app_engine,omitempty" protobuf:"bytes,3,rep,name=appEngine"`
 	// +optional
-	AutoCreateNetwork bool `json:"autoCreateNetwork,omitempty" tf:"auto_create_network,omitempty"`
+	AutoCreateNetwork bool `json:"autoCreateNetwork,omitempty" tf:"auto_create_network,omitempty" protobuf:"varint,4,opt,name=autoCreateNetwork"`
 	// +optional
-	BillingAccount string `json:"billingAccount,omitempty" tf:"billing_account,omitempty"`
+	BillingAccount string `json:"billingAccount,omitempty" tf:"billing_account,omitempty" protobuf:"bytes,5,opt,name=billingAccount"`
 	// +optional
-	FolderID string `json:"folderID,omitempty" tf:"folder_id,omitempty"`
+	FolderID string `json:"folderID,omitempty" tf:"folder_id,omitempty" protobuf:"bytes,6,opt,name=folderID"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,7,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	Number string `json:"number,omitempty" tf:"number,omitempty"`
+	Number string `json:"number,omitempty" tf:"number,omitempty" protobuf:"bytes,9,opt,name=number"`
 	// +optional
-	OrgID     string `json:"orgID,omitempty" tf:"org_id,omitempty"`
-	ProjectID string `json:"projectID" tf:"project_id"`
+	OrgID     string `json:"orgID,omitempty" tf:"org_id,omitempty" protobuf:"bytes,10,opt,name=orgID"`
+	ProjectID string `json:"projectID" tf:"project_id" protobuf:"bytes,11,opt,name=projectID"`
 	// +optional
-	SkipDelete bool `json:"skipDelete,omitempty" tf:"skip_delete,omitempty"`
+	SkipDelete bool `json:"skipDelete,omitempty" tf:"skip_delete,omitempty" protobuf:"varint,12,opt,name=skipDelete"`
 }
 
 type ProjectStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ProjectSpec `json:"output,omitempty"`
+	Output *ProjectSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -122,7 +122,7 @@ type ProjectStatus struct {
 // ProjectList is a list of Projects
 type ProjectList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Project CRD objects
-	Items []Project `json:"items,omitempty"`
+	Items []Project `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

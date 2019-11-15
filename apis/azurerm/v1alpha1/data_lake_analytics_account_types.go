@@ -34,36 +34,36 @@ import (
 
 type DataLakeAnalyticsAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataLakeAnalyticsAccountSpec   `json:"spec,omitempty"`
-	Status            DataLakeAnalyticsAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataLakeAnalyticsAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataLakeAnalyticsAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataLakeAnalyticsAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	DefaultStoreAccountName string `json:"defaultStoreAccountName" tf:"default_store_account_name"`
-	Location                string `json:"location" tf:"location"`
-	Name                    string `json:"name" tf:"name"`
-	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name"`
+	DefaultStoreAccountName string `json:"defaultStoreAccountName" tf:"default_store_account_name" protobuf:"bytes,3,opt,name=defaultStoreAccountName"`
+	Location                string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name                    string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 	// +optional
-	Tier string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier string `json:"tier,omitempty" tf:"tier,omitempty" protobuf:"bytes,8,opt,name=tier"`
 }
 
 type DataLakeAnalyticsAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataLakeAnalyticsAccountSpec `json:"output,omitempty"`
+	Output *DataLakeAnalyticsAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type DataLakeAnalyticsAccountStatus struct {
 // DataLakeAnalyticsAccountList is a list of DataLakeAnalyticsAccounts
 type DataLakeAnalyticsAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataLakeAnalyticsAccount CRD objects
-	Items []DataLakeAnalyticsAccount `json:"items,omitempty"`
+	Items []DataLakeAnalyticsAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

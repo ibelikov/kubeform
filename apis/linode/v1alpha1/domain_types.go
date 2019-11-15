@@ -34,65 +34,65 @@ import (
 
 type Domain struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec,omitempty"`
-	Status            DomainStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DomainSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DomainStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DomainSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The list of IPs that may perform a zone transfer for this Domain. This is potentially dangerous, and should be set to an empty list unless you intend to use it.
 	// +optional
-	AxfrIPS []string `json:"axfrIPS,omitempty" tf:"axfr_ips,omitempty"`
+	AxfrIPS []string `json:"axfrIPS,omitempty" tf:"axfr_ips,omitempty" protobuf:"bytes,3,rep,name=axfrIPS"`
 	// A description for this Domain. This is for display purposes only.
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// The domain this Domain represents. These must be unique in our system; you cannot have two Domains representing the same domain.
-	Domain string `json:"domain" tf:"domain"`
+	Domain string `json:"domain" tf:"domain" protobuf:"bytes,5,opt,name=domain"`
 	// The amount of time in seconds that may pass before this Domain is no longer authoritative. Valid values are 0, 00, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, and 2419200 - any other value will be rounded to the nearest valid value.
 	// +optional
-	ExpireSec int64 `json:"expireSec,omitempty" tf:"expire_sec,omitempty"`
+	ExpireSec int64 `json:"expireSec,omitempty" tf:"expire_sec,omitempty" protobuf:"varint,6,opt,name=expireSec"`
 	// The group this Domain belongs to. This is for display purposes only.
 	// +optional
-	Group string `json:"group,omitempty" tf:"group,omitempty"`
+	Group string `json:"group,omitempty" tf:"group,omitempty" protobuf:"bytes,7,opt,name=group"`
 	// The IP addresses representing the master DNS for this Domain.
 	// +optional
-	MasterIPS []string `json:"masterIPS,omitempty" tf:"master_ips,omitempty"`
+	MasterIPS []string `json:"masterIPS,omitempty" tf:"master_ips,omitempty" protobuf:"bytes,8,rep,name=masterIPS"`
 	// The amount of time in seconds before this Domain should be refreshed. Valid values are 0, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, and 2419200 - any other value will be rounded to the nearest valid value.
 	// +optional
-	RefreshSec int64 `json:"refreshSec,omitempty" tf:"refresh_sec,omitempty"`
+	RefreshSec int64 `json:"refreshSec,omitempty" tf:"refresh_sec,omitempty" protobuf:"varint,9,opt,name=refreshSec"`
 	// The interval, in seconds, at which a failed refresh should be retried. Valid values are 0, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, and 2419200 - any other value will be rounded to the nearest valid value.
 	// +optional
-	RetrySec int64 `json:"retrySec,omitempty" tf:"retry_sec,omitempty"`
+	RetrySec int64 `json:"retrySec,omitempty" tf:"retry_sec,omitempty" protobuf:"varint,10,opt,name=retrySec"`
 	// Start of Authority email address. This is required for master Domains.
 	// +optional
-	SoaEmail string `json:"soaEmail,omitempty" tf:"soa_email,omitempty"`
+	SoaEmail string `json:"soaEmail,omitempty" tf:"soa_email,omitempty" protobuf:"bytes,11,opt,name=soaEmail"`
 	// Used to control whether this Domain is currently being rendered.
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,12,opt,name=status"`
 	// An array of tags applied to this object. Tags are for organizational purposes only.
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// 'Time to Live' - the amount of time in seconds that this Domain's records may be cached by resolvers or other domain servers. Valid values are 0, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, and 2419200 - any other value will be rounded to the nearest valid value.
 	// +optional
-	TtlSec int64 `json:"ttlSec,omitempty" tf:"ttl_sec,omitempty"`
+	TtlSec int64 `json:"ttlSec,omitempty" tf:"ttl_sec,omitempty" protobuf:"varint,14,opt,name=ttlSec"`
 	// If this Domain represents the authoritative source of information for the domain it describes, or if it is a read-only copy of a master (also called a slave).
-	Type string `json:"type" tf:"type"`
+	Type string `json:"type" tf:"type" protobuf:"bytes,15,opt,name=type"`
 }
 
 type DomainStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DomainSpec `json:"output,omitempty"`
+	Output *DomainSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -101,7 +101,7 @@ type DomainStatus struct {
 // DomainList is a list of Domains
 type DomainList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Domain CRD objects
-	Items []Domain `json:"items,omitempty"`
+	Items []Domain `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

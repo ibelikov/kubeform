@@ -34,115 +34,115 @@ import (
 
 type MonitoringUptimeCheckConfig struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitoringUptimeCheckConfigSpec   `json:"spec,omitempty"`
-	Status            MonitoringUptimeCheckConfigStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitoringUptimeCheckConfigSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitoringUptimeCheckConfigStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitoringUptimeCheckConfigSpecContentMatchers struct {
 	// +optional
-	Content string `json:"content,omitempty" tf:"content,omitempty"`
+	Content string `json:"content,omitempty" tf:"content,omitempty" protobuf:"bytes,1,opt,name=content"`
 }
 
 type MonitoringUptimeCheckConfigSpecHttpCheckAuthInfo struct {
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,1,opt,name=username"`
 }
 
 type MonitoringUptimeCheckConfigSpecHttpCheck struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthInfo []MonitoringUptimeCheckConfigSpecHttpCheckAuthInfo `json:"authInfo,omitempty" tf:"auth_info,omitempty"`
+	AuthInfo []MonitoringUptimeCheckConfigSpecHttpCheckAuthInfo `json:"authInfo,omitempty" tf:"auth_info,omitempty" protobuf:"bytes,1,rep,name=authInfo"`
 	// +optional
-	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty" protobuf:"bytes,2,rep,name=headers"`
 	// +optional
-	MaskHeaders bool `json:"maskHeaders,omitempty" tf:"mask_headers,omitempty"`
+	MaskHeaders bool `json:"maskHeaders,omitempty" tf:"mask_headers,omitempty" protobuf:"varint,3,opt,name=maskHeaders"`
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,4,opt,name=path"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,5,opt,name=port"`
 	// +optional
-	UseSSL bool `json:"useSSL,omitempty" tf:"use_ssl,omitempty"`
+	UseSSL bool `json:"useSSL,omitempty" tf:"use_ssl,omitempty" protobuf:"varint,6,opt,name=useSSL"`
 }
 
 type MonitoringUptimeCheckConfigSpecInternalCheckers struct {
 	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,1,opt,name=displayName"`
 	// +optional
-	GcpZone string `json:"gcpZone,omitempty" tf:"gcp_zone,omitempty"`
+	GcpZone string `json:"gcpZone,omitempty" tf:"gcp_zone,omitempty" protobuf:"bytes,2,opt,name=gcpZone"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,3,opt,name=name"`
 	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,4,opt,name=network"`
 	// +optional
-	PeerProjectID string `json:"peerProjectID,omitempty" tf:"peer_project_id,omitempty"`
+	PeerProjectID string `json:"peerProjectID,omitempty" tf:"peer_project_id,omitempty" protobuf:"bytes,5,opt,name=peerProjectID"`
 }
 
 type MonitoringUptimeCheckConfigSpecMonitoredResource struct {
-	Labels map[string]string `json:"labels" tf:"labels"`
-	Type   string            `json:"type" tf:"type"`
+	Labels map[string]string `json:"labels" tf:"labels" protobuf:"bytes,1,rep,name=labels"`
+	Type   string            `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type MonitoringUptimeCheckConfigSpecResourceGroup struct {
 	// +optional
-	GroupID string `json:"groupID,omitempty" tf:"group_id,omitempty"`
+	GroupID string `json:"groupID,omitempty" tf:"group_id,omitempty" protobuf:"bytes,1,opt,name=groupID"`
 	// +optional
-	ResourceType string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType string `json:"resourceType,omitempty" tf:"resource_type,omitempty" protobuf:"bytes,2,opt,name=resourceType"`
 }
 
 type MonitoringUptimeCheckConfigSpecTcpCheck struct {
-	Port int64 `json:"port" tf:"port"`
+	Port int64 `json:"port" tf:"port" protobuf:"varint,1,opt,name=port"`
 }
 
 type MonitoringUptimeCheckConfigSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	ContentMatchers []MonitoringUptimeCheckConfigSpecContentMatchers `json:"contentMatchers,omitempty" tf:"content_matchers,omitempty"`
-	DisplayName     string                                           `json:"displayName" tf:"display_name"`
+	ContentMatchers []MonitoringUptimeCheckConfigSpecContentMatchers `json:"contentMatchers,omitempty" tf:"content_matchers,omitempty" protobuf:"bytes,4,rep,name=contentMatchers"`
+	DisplayName     string                                           `json:"displayName" tf:"display_name" protobuf:"bytes,5,opt,name=displayName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HttpCheck []MonitoringUptimeCheckConfigSpecHttpCheck `json:"httpCheck,omitempty" tf:"http_check,omitempty"`
+	HttpCheck []MonitoringUptimeCheckConfigSpecHttpCheck `json:"httpCheck,omitempty" tf:"http_check,omitempty" protobuf:"bytes,6,rep,name=httpCheck"`
 	// +optional
-	InternalCheckers []MonitoringUptimeCheckConfigSpecInternalCheckers `json:"internalCheckers,omitempty" tf:"internal_checkers,omitempty"`
+	InternalCheckers []MonitoringUptimeCheckConfigSpecInternalCheckers `json:"internalCheckers,omitempty" tf:"internal_checkers,omitempty" protobuf:"bytes,7,rep,name=internalCheckers"`
 	// +optional
-	IsInternal bool `json:"isInternal,omitempty" tf:"is_internal,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	MonitoredResource []MonitoringUptimeCheckConfigSpecMonitoredResource `json:"monitoredResource,omitempty" tf:"monitored_resource,omitempty"`
-	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
-	// +optional
-	Period string `json:"period,omitempty" tf:"period,omitempty"`
-	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	IsInternal bool `json:"isInternal,omitempty" tf:"is_internal,omitempty" protobuf:"varint,8,opt,name=isInternal"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ResourceGroup []MonitoringUptimeCheckConfigSpecResourceGroup `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+	MonitoredResource []MonitoringUptimeCheckConfigSpecMonitoredResource `json:"monitoredResource,omitempty" tf:"monitored_resource,omitempty" protobuf:"bytes,9,rep,name=monitoredResource"`
 	// +optional
-	SelectedRegions []string `json:"selectedRegions,omitempty" tf:"selected_regions,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,10,opt,name=name"`
+	// +optional
+	Period string `json:"period,omitempty" tf:"period,omitempty" protobuf:"bytes,11,opt,name=period"`
+	// +optional
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,12,opt,name=project"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TcpCheck []MonitoringUptimeCheckConfigSpecTcpCheck `json:"tcpCheck,omitempty" tf:"tcp_check,omitempty"`
-	Timeout  string                                    `json:"timeout" tf:"timeout"`
+	ResourceGroup []MonitoringUptimeCheckConfigSpecResourceGroup `json:"resourceGroup,omitempty" tf:"resource_group,omitempty" protobuf:"bytes,13,rep,name=resourceGroup"`
+	// +optional
+	SelectedRegions []string `json:"selectedRegions,omitempty" tf:"selected_regions,omitempty" protobuf:"bytes,14,rep,name=selectedRegions"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	TcpCheck []MonitoringUptimeCheckConfigSpecTcpCheck `json:"tcpCheck,omitempty" tf:"tcp_check,omitempty" protobuf:"bytes,15,rep,name=tcpCheck"`
+	Timeout  string                                    `json:"timeout" tf:"timeout" protobuf:"bytes,16,opt,name=timeout"`
 }
 
 type MonitoringUptimeCheckConfigStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitoringUptimeCheckConfigSpec `json:"output,omitempty"`
+	Output *MonitoringUptimeCheckConfigSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -151,7 +151,7 @@ type MonitoringUptimeCheckConfigStatus struct {
 // MonitoringUptimeCheckConfigList is a list of MonitoringUptimeCheckConfigs
 type MonitoringUptimeCheckConfigList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitoringUptimeCheckConfig CRD objects
-	Items []MonitoringUptimeCheckConfig `json:"items,omitempty"`
+	Items []MonitoringUptimeCheckConfig `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

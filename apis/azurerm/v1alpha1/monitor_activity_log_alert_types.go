@@ -34,70 +34,70 @@ import (
 
 type MonitorActivityLogAlert struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorActivityLogAlertSpec   `json:"spec,omitempty"`
-	Status            MonitorActivityLogAlertStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitorActivityLogAlertSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitorActivityLogAlertStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitorActivityLogAlertSpecAction struct {
-	ActionGroupID string `json:"actionGroupID" tf:"action_group_id"`
+	ActionGroupID string `json:"actionGroupID" tf:"action_group_id" protobuf:"bytes,1,opt,name=actionGroupID"`
 	// +optional
-	WebhookProperties map[string]string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
+	WebhookProperties map[string]string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty" protobuf:"bytes,2,rep,name=webhookProperties"`
 }
 
 type MonitorActivityLogAlertSpecCriteria struct {
 	// +optional
-	Caller   string `json:"caller,omitempty" tf:"caller,omitempty"`
-	Category string `json:"category" tf:"category"`
+	Caller   string `json:"caller,omitempty" tf:"caller,omitempty" protobuf:"bytes,1,opt,name=caller"`
+	Category string `json:"category" tf:"category" protobuf:"bytes,2,opt,name=category"`
 	// +optional
-	Level string `json:"level,omitempty" tf:"level,omitempty"`
+	Level string `json:"level,omitempty" tf:"level,omitempty" protobuf:"bytes,3,opt,name=level"`
 	// +optional
-	OperationName string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+	OperationName string `json:"operationName,omitempty" tf:"operation_name,omitempty" protobuf:"bytes,4,opt,name=operationName"`
 	// +optional
-	ResourceGroup string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+	ResourceGroup string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty" protobuf:"bytes,5,opt,name=resourceGroup"`
 	// +optional
-	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty"`
+	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty" protobuf:"bytes,6,opt,name=resourceID"`
 	// +optional
-	ResourceProvider string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
+	ResourceProvider string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty" protobuf:"bytes,7,opt,name=resourceProvider"`
 	// +optional
-	ResourceType string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType string `json:"resourceType,omitempty" tf:"resource_type,omitempty" protobuf:"bytes,8,opt,name=resourceType"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,9,opt,name=status"`
 	// +optional
-	SubStatus string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+	SubStatus string `json:"subStatus,omitempty" tf:"sub_status,omitempty" protobuf:"bytes,10,opt,name=subStatus"`
 }
 
 type MonitorActivityLogAlertSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Action []MonitorActivityLogAlertSpecAction `json:"action,omitempty" tf:"action,omitempty"`
+	Action []MonitorActivityLogAlertSpecAction `json:"action,omitempty" tf:"action,omitempty" protobuf:"bytes,3,rep,name=action"`
 	// +kubebuilder:validation:MaxItems=1
-	Criteria []MonitorActivityLogAlertSpecCriteria `json:"criteria" tf:"criteria"`
+	Criteria []MonitorActivityLogAlertSpecCriteria `json:"criteria" tf:"criteria" protobuf:"bytes,4,rep,name=criteria"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,6,opt,name=enabled"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MinItems=1
-	Scopes []string `json:"scopes" tf:"scopes"`
+	Scopes []string `json:"scopes" tf:"scopes" protobuf:"bytes,9,rep,name=scopes"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type MonitorActivityLogAlertStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitorActivityLogAlertSpec `json:"output,omitempty"`
+	Output *MonitorActivityLogAlertSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -106,7 +106,7 @@ type MonitorActivityLogAlertStatus struct {
 // MonitorActivityLogAlertList is a list of MonitorActivityLogAlerts
 type MonitorActivityLogAlertList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitorActivityLogAlert CRD objects
-	Items []MonitorActivityLogAlert `json:"items,omitempty"`
+	Items []MonitorActivityLogAlert `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

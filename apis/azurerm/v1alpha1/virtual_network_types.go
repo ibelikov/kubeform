@@ -34,56 +34,56 @@ import (
 
 type VirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkSpec   `json:"spec,omitempty"`
-	Status            VirtualNetworkStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualNetworkSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualNetworkStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualNetworkSpecDdosProtectionPlan struct {
-	Enable bool   `json:"enable" tf:"enable"`
-	ID     string `json:"ID" tf:"id"`
+	Enable bool   `json:"enable" tf:"enable" protobuf:"varint,1,opt,name=enable"`
+	ID     string `json:"ID" tf:"id" protobuf:"bytes,2,opt,name=ID"`
 }
 
 type VirtualNetworkSpecSubnet struct {
-	AddressPrefix string `json:"addressPrefix" tf:"address_prefix"`
+	AddressPrefix string `json:"addressPrefix" tf:"address_prefix" protobuf:"bytes,1,opt,name=addressPrefix"`
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 	// +optional
-	SecurityGroup string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
+	SecurityGroup string `json:"securityGroup,omitempty" tf:"security_group,omitempty" protobuf:"bytes,4,opt,name=securityGroup"`
 }
 
 type VirtualNetworkSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MinItems=1
-	AddressSpace []string `json:"addressSpace" tf:"address_space"`
+	AddressSpace []string `json:"addressSpace" tf:"address_space" protobuf:"bytes,3,rep,name=addressSpace"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DdosProtectionPlan []VirtualNetworkSpecDdosProtectionPlan `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
+	DdosProtectionPlan []VirtualNetworkSpecDdosProtectionPlan `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty" protobuf:"bytes,4,rep,name=ddosProtectionPlan"`
 	// +optional
-	DnsServers        []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-	Location          string   `json:"location" tf:"location"`
-	Name              string   `json:"name" tf:"name"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	DnsServers        []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty" protobuf:"bytes,5,rep,name=dnsServers"`
+	Location          string   `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Subnet []VirtualNetworkSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []VirtualNetworkSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty" protobuf:"bytes,9,rep,name=subnet"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type VirtualNetworkStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualNetworkSpec `json:"output,omitempty"`
+	Output *VirtualNetworkSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -92,7 +92,7 @@ type VirtualNetworkStatus struct {
 // VirtualNetworkList is a list of VirtualNetworks
 type VirtualNetworkList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualNetwork CRD objects
-	Items []VirtualNetwork `json:"items,omitempty"`
+	Items []VirtualNetwork `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

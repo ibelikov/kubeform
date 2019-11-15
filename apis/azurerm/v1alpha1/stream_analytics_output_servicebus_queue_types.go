@@ -34,49 +34,49 @@ import (
 
 type StreamAnalyticsOutputServicebusQueue struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamAnalyticsOutputServicebusQueueSpec   `json:"spec,omitempty"`
-	Status            StreamAnalyticsOutputServicebusQueueStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StreamAnalyticsOutputServicebusQueueSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StreamAnalyticsOutputServicebusQueueStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StreamAnalyticsOutputServicebusQueueSpecSerialization struct {
 	// +optional
-	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty" protobuf:"bytes,1,opt,name=encoding"`
 	// +optional
-	FieldDelimiter string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+	FieldDelimiter string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty" protobuf:"bytes,2,opt,name=fieldDelimiter"`
 	// +optional
-	Format string `json:"format,omitempty" tf:"format,omitempty"`
-	Type   string `json:"type" tf:"type"`
+	Format string `json:"format,omitempty" tf:"format,omitempty" protobuf:"bytes,3,opt,name=format"`
+	Type   string `json:"type" tf:"type" protobuf:"bytes,4,opt,name=type"`
 }
 
 type StreamAnalyticsOutputServicebusQueueSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Name              string `json:"name" tf:"name"`
-	QueueName         string `json:"queueName" tf:"queue_name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	QueueName         string `json:"queueName" tf:"queue_name" protobuf:"bytes,5,opt,name=queueName"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	Serialization          []StreamAnalyticsOutputServicebusQueueSpecSerialization `json:"serialization" tf:"serialization"`
-	ServicebusNamespace    string                                                  `json:"servicebusNamespace" tf:"servicebus_namespace"`
+	Serialization          []StreamAnalyticsOutputServicebusQueueSpecSerialization `json:"serialization" tf:"serialization" protobuf:"bytes,7,rep,name=serialization"`
+	ServicebusNamespace    string                                                  `json:"servicebusNamespace" tf:"servicebus_namespace" protobuf:"bytes,8,opt,name=servicebusNamespace"`
 	SharedAccessPolicyKey  string                                                  `json:"-" sensitive:"true" tf:"shared_access_policy_key"`
-	SharedAccessPolicyName string                                                  `json:"sharedAccessPolicyName" tf:"shared_access_policy_name"`
-	StreamAnalyticsJobName string                                                  `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name"`
+	SharedAccessPolicyName string                                                  `json:"sharedAccessPolicyName" tf:"shared_access_policy_name" protobuf:"bytes,9,opt,name=sharedAccessPolicyName"`
+	StreamAnalyticsJobName string                                                  `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name" protobuf:"bytes,10,opt,name=streamAnalyticsJobName"`
 }
 
 type StreamAnalyticsOutputServicebusQueueStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StreamAnalyticsOutputServicebusQueueSpec `json:"output,omitempty"`
+	Output *StreamAnalyticsOutputServicebusQueueSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -85,7 +85,7 @@ type StreamAnalyticsOutputServicebusQueueStatus struct {
 // StreamAnalyticsOutputServicebusQueueList is a list of StreamAnalyticsOutputServicebusQueues
 type StreamAnalyticsOutputServicebusQueueList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StreamAnalyticsOutputServicebusQueue CRD objects
-	Items []StreamAnalyticsOutputServicebusQueue `json:"items,omitempty"`
+	Items []StreamAnalyticsOutputServicebusQueue `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

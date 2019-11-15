@@ -34,44 +34,44 @@ import (
 
 type CosmosdbMongoCollection struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CosmosdbMongoCollectionSpec   `json:"spec,omitempty"`
-	Status            CosmosdbMongoCollectionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CosmosdbMongoCollectionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CosmosdbMongoCollectionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CosmosdbMongoCollectionSpecIndexes struct {
-	Key string `json:"key" tf:"key"`
+	Key string `json:"key" tf:"key" protobuf:"bytes,1,opt,name=key"`
 	// +optional
-	Unique bool `json:"unique,omitempty" tf:"unique,omitempty"`
+	Unique bool `json:"unique,omitempty" tf:"unique,omitempty" protobuf:"varint,2,opt,name=unique"`
 }
 
 type CosmosdbMongoCollectionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AccountName  string `json:"accountName" tf:"account_name"`
-	DatabaseName string `json:"databaseName" tf:"database_name"`
+	AccountName  string `json:"accountName" tf:"account_name" protobuf:"bytes,3,opt,name=accountName"`
+	DatabaseName string `json:"databaseName" tf:"database_name" protobuf:"bytes,4,opt,name=databaseName"`
 	// +optional
-	DefaultTtlSeconds int64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
+	DefaultTtlSeconds int64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty" protobuf:"varint,5,opt,name=defaultTtlSeconds"`
 	// +optional
-	Indexes           []CosmosdbMongoCollectionSpecIndexes `json:"indexes,omitempty" tf:"indexes,omitempty"`
-	Name              string                               `json:"name" tf:"name"`
-	ResourceGroupName string                               `json:"resourceGroupName" tf:"resource_group_name"`
+	Indexes           []CosmosdbMongoCollectionSpecIndexes `json:"indexes,omitempty" tf:"indexes,omitempty" protobuf:"bytes,6,rep,name=indexes"`
+	Name              string                               `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName string                               `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	ShardKey string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
+	ShardKey string `json:"shardKey,omitempty" tf:"shard_key,omitempty" protobuf:"bytes,9,opt,name=shardKey"`
 }
 
 type CosmosdbMongoCollectionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CosmosdbMongoCollectionSpec `json:"output,omitempty"`
+	Output *CosmosdbMongoCollectionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type CosmosdbMongoCollectionStatus struct {
 // CosmosdbMongoCollectionList is a list of CosmosdbMongoCollections
 type CosmosdbMongoCollectionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CosmosdbMongoCollection CRD objects
-	Items []CosmosdbMongoCollection `json:"items,omitempty"`
+	Items []CosmosdbMongoCollection `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

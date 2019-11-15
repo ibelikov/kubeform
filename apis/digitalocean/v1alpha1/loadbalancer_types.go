@@ -34,90 +34,90 @@ import (
 
 type Loadbalancer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoadbalancerSpec   `json:"spec,omitempty"`
-	Status            LoadbalancerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LoadbalancerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LoadbalancerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LoadbalancerSpecForwardingRule struct {
 	// +optional
-	CertificateID  string `json:"certificateID,omitempty" tf:"certificate_id,omitempty"`
-	EntryPort      int64  `json:"entryPort" tf:"entry_port"`
-	EntryProtocol  string `json:"entryProtocol" tf:"entry_protocol"`
-	TargetPort     int64  `json:"targetPort" tf:"target_port"`
-	TargetProtocol string `json:"targetProtocol" tf:"target_protocol"`
+	CertificateID  string `json:"certificateID,omitempty" tf:"certificate_id,omitempty" protobuf:"bytes,1,opt,name=certificateID"`
+	EntryPort      int64  `json:"entryPort" tf:"entry_port" protobuf:"varint,2,opt,name=entryPort"`
+	EntryProtocol  string `json:"entryProtocol" tf:"entry_protocol" protobuf:"bytes,3,opt,name=entryProtocol"`
+	TargetPort     int64  `json:"targetPort" tf:"target_port" protobuf:"varint,4,opt,name=targetPort"`
+	TargetProtocol string `json:"targetProtocol" tf:"target_protocol" protobuf:"bytes,5,opt,name=targetProtocol"`
 	// +optional
-	TlsPassthrough bool `json:"tlsPassthrough,omitempty" tf:"tls_passthrough,omitempty"`
+	TlsPassthrough bool `json:"tlsPassthrough,omitempty" tf:"tls_passthrough,omitempty" protobuf:"varint,6,opt,name=tlsPassthrough"`
 }
 
 type LoadbalancerSpecHealthcheck struct {
 	// +optional
-	CheckIntervalSeconds int64 `json:"checkIntervalSeconds,omitempty" tf:"check_interval_seconds,omitempty"`
+	CheckIntervalSeconds int64 `json:"checkIntervalSeconds,omitempty" tf:"check_interval_seconds,omitempty" protobuf:"varint,1,opt,name=checkIntervalSeconds"`
 	// +optional
-	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty" protobuf:"varint,2,opt,name=healthyThreshold"`
 	// +optional
-	Path     string `json:"path,omitempty" tf:"path,omitempty"`
-	Port     int64  `json:"port" tf:"port"`
-	Protocol string `json:"protocol" tf:"protocol"`
+	Path     string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,3,opt,name=path"`
+	Port     int64  `json:"port" tf:"port" protobuf:"varint,4,opt,name=port"`
+	Protocol string `json:"protocol" tf:"protocol" protobuf:"bytes,5,opt,name=protocol"`
 	// +optional
-	ResponseTimeoutSeconds int64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
+	ResponseTimeoutSeconds int64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty" protobuf:"varint,6,opt,name=responseTimeoutSeconds"`
 	// +optional
-	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty" protobuf:"varint,7,opt,name=unhealthyThreshold"`
 }
 
 type LoadbalancerSpecStickySessions struct {
 	// +optional
-	CookieName string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
+	CookieName string `json:"cookieName,omitempty" tf:"cookie_name,omitempty" protobuf:"bytes,1,opt,name=cookieName"`
 	// +optional
-	CookieTtlSeconds int64 `json:"cookieTtlSeconds,omitempty" tf:"cookie_ttl_seconds,omitempty"`
+	CookieTtlSeconds int64 `json:"cookieTtlSeconds,omitempty" tf:"cookie_ttl_seconds,omitempty" protobuf:"varint,2,opt,name=cookieTtlSeconds"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,3,opt,name=type"`
 }
 
 type LoadbalancerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Algorithm string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+	Algorithm string `json:"algorithm,omitempty" tf:"algorithm,omitempty" protobuf:"bytes,3,opt,name=algorithm"`
 	// +optional
-	DropletIDS []int64 `json:"dropletIDS,omitempty" tf:"droplet_ids,omitempty"`
+	DropletIDS []int64 `json:"dropletIDS,omitempty" tf:"droplet_ids,omitempty" protobuf:"varint,4,rep,name=dropletIDS"`
 	// +optional
-	DropletTag string `json:"dropletTag,omitempty" tf:"droplet_tag,omitempty"`
+	DropletTag string `json:"dropletTag,omitempty" tf:"droplet_tag,omitempty" protobuf:"bytes,5,opt,name=dropletTag"`
 	// +optional
-	EnableProxyProtocol bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
+	EnableProxyProtocol bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty" protobuf:"varint,6,opt,name=enableProxyProtocol"`
 	// +kubebuilder:validation:MinItems=1
-	ForwardingRule []LoadbalancerSpecForwardingRule `json:"forwardingRule" tf:"forwarding_rule"`
+	ForwardingRule []LoadbalancerSpecForwardingRule `json:"forwardingRule" tf:"forwarding_rule" protobuf:"bytes,7,rep,name=forwardingRule"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Healthcheck []LoadbalancerSpecHealthcheck `json:"healthcheck,omitempty" tf:"healthcheck,omitempty"`
+	Healthcheck []LoadbalancerSpecHealthcheck `json:"healthcheck,omitempty" tf:"healthcheck,omitempty" protobuf:"bytes,8,rep,name=healthcheck"`
 	// +optional
-	Ip   string `json:"ip,omitempty" tf:"ip,omitempty"`
-	Name string `json:"name" tf:"name"`
+	Ip   string `json:"ip,omitempty" tf:"ip,omitempty" protobuf:"bytes,9,opt,name=ip"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	RedirectHTTPToHTTPS bool   `json:"redirectHTTPToHTTPS,omitempty" tf:"redirect_http_to_https,omitempty"`
-	Region              string `json:"region" tf:"region"`
+	RedirectHTTPToHTTPS bool   `json:"redirectHTTPToHTTPS,omitempty" tf:"redirect_http_to_https,omitempty" protobuf:"varint,11,opt,name=redirectHTTPToHTTPS"`
+	Region              string `json:"region" tf:"region" protobuf:"bytes,12,opt,name=region"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,13,opt,name=status"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	StickySessions []LoadbalancerSpecStickySessions `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
+	StickySessions []LoadbalancerSpecStickySessions `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty" protobuf:"bytes,14,rep,name=stickySessions"`
 	// the uniform resource name for the load balancer
 	// +optional
-	Urn string `json:"urn,omitempty" tf:"urn,omitempty"`
+	Urn string `json:"urn,omitempty" tf:"urn,omitempty" protobuf:"bytes,15,opt,name=urn"`
 }
 
 type LoadbalancerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LoadbalancerSpec `json:"output,omitempty"`
+	Output *LoadbalancerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -126,7 +126,7 @@ type LoadbalancerStatus struct {
 // LoadbalancerList is a list of Loadbalancers
 type LoadbalancerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Loadbalancer CRD objects
-	Items []Loadbalancer `json:"items,omitempty"`
+	Items []Loadbalancer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

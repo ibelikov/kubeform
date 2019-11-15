@@ -34,32 +34,32 @@ import (
 
 type Rdns struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RdnsSpec   `json:"spec,omitempty"`
-	Status            RdnsStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RdnsSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RdnsStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RdnsSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The public Linode IPv4 or IPv6 address to operate on.
-	Address string `json:"address" tf:"address"`
+	Address string `json:"address" tf:"address" protobuf:"bytes,3,opt,name=address"`
 	// The reverse DNS assigned to this address. For public IPv4 addresses, this will be set to a default value provided by Linode if not explicitly set.
-	Rdns string `json:"rdns" tf:"rdns"`
+	Rdns string `json:"rdns" tf:"rdns" protobuf:"bytes,4,opt,name=rdns"`
 }
 
 type RdnsStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RdnsSpec `json:"output,omitempty"`
+	Output *RdnsSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -68,7 +68,7 @@ type RdnsStatus struct {
 // RdnsList is a list of Rdnss
 type RdnsList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Rdns CRD objects
-	Items []Rdns `json:"items,omitempty"`
+	Items []Rdns `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

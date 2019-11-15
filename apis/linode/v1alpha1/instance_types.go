@@ -34,219 +34,219 @@ import (
 
 type Instance struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec,omitempty"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              InstanceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            InstanceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type InstanceSpecAlerts struct {
 	// The percentage of CPU usage required to trigger an alert. If the average CPU usage over two hours exceeds this value, we'll send you an alert. If this is set to 0, the alert is disabled.
 	// +optional
-	Cpu int64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	Cpu int64 `json:"cpu,omitempty" tf:"cpu,omitempty" protobuf:"varint,1,opt,name=cpu"`
 	// The amount of disk IO operation per second required to trigger an alert. If the average disk IO over two hours exceeds this value, we'll send you an alert. If set to 0, this alert is disabled.
 	// +optional
-	Io int64 `json:"io,omitempty" tf:"io,omitempty"`
+	Io int64 `json:"io,omitempty" tf:"io,omitempty" protobuf:"varint,2,opt,name=io"`
 	// The amount of incoming traffic, in Mbit/s, required to trigger an alert. If the average incoming traffic over two hours exceeds this value, we'll send you an alert. If this is set to 0 (zero), the alert is disabled.
 	// +optional
-	NetworkIn int64 `json:"networkIn,omitempty" tf:"network_in,omitempty"`
+	NetworkIn int64 `json:"networkIn,omitempty" tf:"network_in,omitempty" protobuf:"varint,3,opt,name=networkIn"`
 	// The amount of outbound traffic, in Mbit/s, required to trigger an alert. If the average outbound traffic over two hours exceeds this value, we'll send you an alert. If this is set to 0 (zero), the alert is disabled.
 	// +optional
-	NetworkOut int64 `json:"networkOut,omitempty" tf:"network_out,omitempty"`
+	NetworkOut int64 `json:"networkOut,omitempty" tf:"network_out,omitempty" protobuf:"varint,4,opt,name=networkOut"`
 	// The percentage of network transfer that may be used before an alert is triggered. When this value is exceeded, we'll alert you. If this is set to 0 (zero), the alert is disabled.
 	// +optional
-	TransferQuota int64 `json:"transferQuota,omitempty" tf:"transfer_quota,omitempty"`
+	TransferQuota int64 `json:"transferQuota,omitempty" tf:"transfer_quota,omitempty" protobuf:"varint,5,opt,name=transferQuota"`
 }
 
 type InstanceSpecBackupsSchedule struct {
 	// The day ('Sunday'-'Saturday') of the week that your Linode's weekly Backup is taken. If not set manually, a day will be chosen for you. Backups are taken every day, but backups taken on this day are preferred when selecting backups to retain for a longer period.  If not set manually, then when backups are initially enabled, this may come back as 'Scheduling' until the day is automatically selected.
 	// +optional
-	Day string `json:"day,omitempty" tf:"day,omitempty"`
+	Day string `json:"day,omitempty" tf:"day,omitempty" protobuf:"bytes,1,opt,name=day"`
 	// The window ('W0'-'W22') in which your backups will be taken, in UTC. A backups window is a two-hour span of time in which the backup may occur. For example, 'W10' indicates that your backups should be taken between 10:00 and 12:00. If you do not choose a backup window, one will be selected for you automatically.  If not set manually, when backups are initially enabled this may come back as Scheduling until the window is automatically selected.
 	// +optional
-	Window string `json:"window,omitempty" tf:"window,omitempty"`
+	Window string `json:"window,omitempty" tf:"window,omitempty" protobuf:"bytes,2,opt,name=window"`
 }
 
 type InstanceSpecBackups struct {
 	// If this Linode has the Backup service enabled.
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Schedule []InstanceSpecBackupsSchedule `json:"schedule,omitempty" tf:"schedule,omitempty"`
+	Schedule []InstanceSpecBackupsSchedule `json:"schedule,omitempty" tf:"schedule,omitempty" protobuf:"bytes,2,rep,name=schedule"`
 }
 
 type InstanceSpecConfigDevicesSda struct {
 	// The Disk ID to map to this disk slot
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// The `label` of the `disk` to map to this `device` slot.
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// The Block Storage volume ID to map to this disk slot
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdb struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdc struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdd struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSde struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdf struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdg struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevicesSdh struct {
 	// +optional
-	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty"`
+	DiskID int64 `json:"diskID,omitempty" tf:"disk_id,omitempty" protobuf:"varint,1,opt,name=diskID"`
 	// +optional
-	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty"`
+	DiskLabel string `json:"diskLabel,omitempty" tf:"disk_label,omitempty" protobuf:"bytes,2,opt,name=diskLabel"`
 	// +optional
-	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty"`
+	VolumeID int64 `json:"volumeID,omitempty" tf:"volume_id,omitempty" protobuf:"varint,3,opt,name=volumeID"`
 }
 
 type InstanceSpecConfigDevices struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sda []InstanceSpecConfigDevicesSda `json:"sda,omitempty" tf:"sda,omitempty"`
+	Sda []InstanceSpecConfigDevicesSda `json:"sda,omitempty" tf:"sda,omitempty" protobuf:"bytes,1,rep,name=sda"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdb []InstanceSpecConfigDevicesSdb `json:"sdb,omitempty" tf:"sdb,omitempty"`
+	Sdb []InstanceSpecConfigDevicesSdb `json:"sdb,omitempty" tf:"sdb,omitempty" protobuf:"bytes,2,rep,name=sdb"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdc []InstanceSpecConfigDevicesSdc `json:"sdc,omitempty" tf:"sdc,omitempty"`
+	Sdc []InstanceSpecConfigDevicesSdc `json:"sdc,omitempty" tf:"sdc,omitempty" protobuf:"bytes,3,rep,name=sdc"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdd []InstanceSpecConfigDevicesSdd `json:"sdd,omitempty" tf:"sdd,omitempty"`
+	Sdd []InstanceSpecConfigDevicesSdd `json:"sdd,omitempty" tf:"sdd,omitempty" protobuf:"bytes,4,rep,name=sdd"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sde []InstanceSpecConfigDevicesSde `json:"sde,omitempty" tf:"sde,omitempty"`
+	Sde []InstanceSpecConfigDevicesSde `json:"sde,omitempty" tf:"sde,omitempty" protobuf:"bytes,5,rep,name=sde"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdf []InstanceSpecConfigDevicesSdf `json:"sdf,omitempty" tf:"sdf,omitempty"`
+	Sdf []InstanceSpecConfigDevicesSdf `json:"sdf,omitempty" tf:"sdf,omitempty" protobuf:"bytes,6,rep,name=sdf"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdg []InstanceSpecConfigDevicesSdg `json:"sdg,omitempty" tf:"sdg,omitempty"`
+	Sdg []InstanceSpecConfigDevicesSdg `json:"sdg,omitempty" tf:"sdg,omitempty" protobuf:"bytes,7,rep,name=sdg"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Sdh []InstanceSpecConfigDevicesSdh `json:"sdh,omitempty" tf:"sdh,omitempty"`
+	Sdh []InstanceSpecConfigDevicesSdh `json:"sdh,omitempty" tf:"sdh,omitempty" protobuf:"bytes,8,rep,name=sdh"`
 }
 
 type InstanceSpecConfigHelpers struct {
 	// Populates the /dev directory early during boot without udev. Defaults to false.
 	// +optional
-	DevtmpfsAutomount bool `json:"devtmpfsAutomount,omitempty" tf:"devtmpfs_automount,omitempty"`
+	DevtmpfsAutomount bool `json:"devtmpfsAutomount,omitempty" tf:"devtmpfs_automount,omitempty" protobuf:"varint,1,opt,name=devtmpfsAutomount"`
 	// Controls the behavior of the Linode Config's Distribution Helper setting.
 	// +optional
-	Distro bool `json:"distro,omitempty" tf:"distro,omitempty"`
+	Distro bool `json:"distro,omitempty" tf:"distro,omitempty" protobuf:"varint,2,opt,name=distro"`
 	// Creates a modules dependency file for the Kernel you run.
 	// +optional
-	ModulesDep bool `json:"modulesDep,omitempty" tf:"modules_dep,omitempty"`
+	ModulesDep bool `json:"modulesDep,omitempty" tf:"modules_dep,omitempty" protobuf:"varint,3,opt,name=modulesDep"`
 	// Controls the behavior of the Linode Config's Network Helper setting, used to automatically configure additional IP addresses assigned to this instance.
 	// +optional
-	Network bool `json:"network,omitempty" tf:"network,omitempty"`
+	Network bool `json:"network,omitempty" tf:"network,omitempty" protobuf:"varint,4,opt,name=network"`
 	// Disables updatedb cron job to avoid disk thrashing.
 	// +optional
-	UpdatedbDisabled bool `json:"updatedbDisabled,omitempty" tf:"updatedb_disabled,omitempty"`
+	UpdatedbDisabled bool `json:"updatedbDisabled,omitempty" tf:"updatedb_disabled,omitempty" protobuf:"varint,5,opt,name=updatedbDisabled"`
 }
 
 type InstanceSpecConfig struct {
 	// Optional field for arbitrary User comments on this Config.
 	// +optional
-	Comments string `json:"comments,omitempty" tf:"comments,omitempty"`
+	Comments string `json:"comments,omitempty" tf:"comments,omitempty" protobuf:"bytes,1,opt,name=comments"`
 	// Device sda-sdh can be either a Disk or Volume identified by disk_label or volume_id. Only one type per slot allowed.
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Devices []InstanceSpecConfigDevices `json:"devices,omitempty" tf:"devices,omitempty"`
+	Devices []InstanceSpecConfigDevices `json:"devices,omitempty" tf:"devices,omitempty" protobuf:"bytes,2,rep,name=devices"`
 	// Helpers enabled when booting to this Linode Config.
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Helpers []InstanceSpecConfigHelpers `json:"helpers,omitempty" tf:"helpers,omitempty"`
+	Helpers []InstanceSpecConfigHelpers `json:"helpers,omitempty" tf:"helpers,omitempty" protobuf:"bytes,3,rep,name=helpers"`
 	// A Kernel ID to boot a Linode with. Default is based on image choice. (examples: linode/latest-64bit, linode/grub2, linode/direct-disk)
 	// +optional
-	Kernel string `json:"kernel,omitempty" tf:"kernel,omitempty"`
+	Kernel string `json:"kernel,omitempty" tf:"kernel,omitempty" protobuf:"bytes,4,opt,name=kernel"`
 	// The Config's label for display purposes.  Also used by `boot_config_label`.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,5,opt,name=label"`
 	// Defaults to the total RAM of the Linode
 	// +optional
-	MemoryLimit int64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
+	MemoryLimit int64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty" protobuf:"varint,6,opt,name=memoryLimit"`
 	// The root device to boot. The corresponding disk must be attached.
 	// +optional
-	RootDevice string `json:"rootDevice,omitempty" tf:"root_device,omitempty"`
+	RootDevice string `json:"rootDevice,omitempty" tf:"root_device,omitempty" protobuf:"bytes,7,opt,name=rootDevice"`
 	// Defines the state of your Linode after booting. Defaults to default.
 	// +optional
-	RunLevel string `json:"runLevel,omitempty" tf:"run_level,omitempty"`
+	RunLevel string `json:"runLevel,omitempty" tf:"run_level,omitempty" protobuf:"bytes,8,opt,name=runLevel"`
 	// Controls the virtualization mode. Defaults to paravirt.
 	// +optional
-	VirtMode string `json:"virtMode,omitempty" tf:"virt_mode,omitempty"`
+	VirtMode string `json:"virtMode,omitempty" tf:"virt_mode,omitempty" protobuf:"bytes,9,opt,name=virtMode"`
 }
 
 type InstanceSpecDisk struct {
 	// A list of SSH public keys to deploy for the root user on the newly created Linode. Only accepted if 'image' is provided.
 	// +optional
-	AuthorizedKeys []string `json:"authorizedKeys,omitempty" tf:"authorized_keys,omitempty"`
+	AuthorizedKeys []string `json:"authorizedKeys,omitempty" tf:"authorized_keys,omitempty" protobuf:"bytes,1,rep,name=authorizedKeys"`
 	// A list of Linode usernames. If the usernames have associated SSH keys, the keys will be appended to the `root` user's `~/.ssh/authorized_keys` file automatically. Only accepted if 'image' is provided.
 	// +optional
-	AuthorizedUsers []string `json:"authorizedUsers,omitempty" tf:"authorized_users,omitempty"`
+	AuthorizedUsers []string `json:"authorizedUsers,omitempty" tf:"authorized_users,omitempty" protobuf:"bytes,2,rep,name=authorizedUsers"`
 	// The Disk filesystem can be one of: raw, swap, ext3, ext4, initrd (max 32mb)
 	// +optional
-	Filesystem string `json:"filesystem,omitempty" tf:"filesystem,omitempty"`
+	Filesystem string `json:"filesystem,omitempty" tf:"filesystem,omitempty" protobuf:"bytes,3,opt,name=filesystem"`
 	// The ID of the Disk (for use in Linode Image resources and Linode Instance Config Devices)
 	// +optional
-	ID int64 `json:"ID,omitempty" tf:"id,omitempty"`
+	ID int64 `json:"ID,omitempty" tf:"id,omitempty" protobuf:"varint,4,opt,name=ID"`
 	// An Image ID to deploy the Disk from. Official Linode Images start with linode/, while your Images start with private/.
 	// +optional
-	Image string `json:"image,omitempty" tf:"image,omitempty"`
+	Image string `json:"image,omitempty" tf:"image,omitempty" protobuf:"bytes,5,opt,name=image"`
 	// The disks label, which acts as an identifier in Terraform.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,6,opt,name=label"`
 	// If true, this Disk is read-only.
 	// +optional
-	ReadOnly bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" tf:"read_only,omitempty" protobuf:"varint,7,opt,name=readOnly"`
 	// The password that will be initialially assigned to the 'root' user account.
 	// +optional
 	RootPass string `json:"-" sensitive:"true" tf:"root_pass,omitempty"`
@@ -257,123 +257,123 @@ type InstanceSpecDisk struct {
 	StackscriptData map[string]string `json:"-" sensitive:"true" tf:"stackscript_data,omitempty"`
 	// The StackScript to deploy to the newly created Linode. If provided, 'image' must also be provided, and must be an Image that is compatible with this StackScript.
 	// +optional
-	StackscriptID int64 `json:"stackscriptID,omitempty" tf:"stackscript_id,omitempty"`
+	StackscriptID int64 `json:"stackscriptID,omitempty" tf:"stackscript_id,omitempty" protobuf:"varint,9,opt,name=stackscriptID"`
 }
 
 type InstanceSpecSpecs struct {
 	// The amount of storage space, in GB. this Linode has access to. A typical Linode will divide this space between a primary disk with an image deployed to it, and a swap disk, usually 512 MB. This is the default configuration created when deploying a Linode with an image without specifying disks.
 	// +optional
-	Disk int64 `json:"disk,omitempty" tf:"disk,omitempty"`
+	Disk int64 `json:"disk,omitempty" tf:"disk,omitempty" protobuf:"varint,1,opt,name=disk"`
 	// The amount of RAM, in MB, this Linode has access to. Typically a Linode will choose to boot with all of its available RAM, but this can be configured in a Config profile.
 	// +optional
-	Memory int64 `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory int64 `json:"memory,omitempty" tf:"memory,omitempty" protobuf:"varint,2,opt,name=memory"`
 	// The amount of network transfer this Linode is allotted each month.
 	// +optional
-	Transfer int64 `json:"transfer,omitempty" tf:"transfer,omitempty"`
+	Transfer int64 `json:"transfer,omitempty" tf:"transfer,omitempty" protobuf:"varint,3,opt,name=transfer"`
 	// The number of vcpus this Linode has access to. Typically a Linode will choose to boot with all of its available vcpus, but this can be configured in a Config Profile.
 	// +optional
-	Vcpus int64 `json:"vcpus,omitempty" tf:"vcpus,omitempty"`
+	Vcpus int64 `json:"vcpus,omitempty" tf:"vcpus,omitempty" protobuf:"varint,4,opt,name=vcpus"`
 }
 
 type InstanceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Alerts []InstanceSpecAlerts `json:"alerts,omitempty" tf:"alerts,omitempty"`
+	Alerts []InstanceSpecAlerts `json:"alerts,omitempty" tf:"alerts,omitempty" protobuf:"bytes,4,rep,name=alerts"`
 	// A list of SSH public keys to deploy for the root user on the newly created Linode. Only accepted if 'image' is provided.
 	// +optional
-	AuthorizedKeys []string `json:"authorizedKeys,omitempty" tf:"authorized_keys,omitempty"`
+	AuthorizedKeys []string `json:"authorizedKeys,omitempty" tf:"authorized_keys,omitempty" protobuf:"bytes,5,rep,name=authorizedKeys"`
 	// A list of Linode usernames. If the usernames have associated SSH keys, the keys will be appended to the `root` user's `~/.ssh/authorized_keys` file automatically. Only accepted if 'image' is provided.
 	// +optional
-	AuthorizedUsers []string `json:"authorizedUsers,omitempty" tf:"authorized_users,omitempty"`
+	AuthorizedUsers []string `json:"authorizedUsers,omitempty" tf:"authorized_users,omitempty" protobuf:"bytes,6,rep,name=authorizedUsers"`
 	// A Backup ID from another Linode's available backups. Your User must have read_write access to that Linode, the Backup must have a status of successful, and the Linode must be deployed to the same region as the Backup. See /linode/instances/{linodeId}/backups for a Linode's available backups. This field and the image field are mutually exclusive.
 	// +optional
-	BackupID int64 `json:"backupID,omitempty" tf:"backup_id,omitempty"`
+	BackupID int64 `json:"backupID,omitempty" tf:"backup_id,omitempty" protobuf:"varint,7,opt,name=backupID"`
 	// Information about this Linode's backups status.
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Backups []InstanceSpecBackups `json:"backups,omitempty" tf:"backups,omitempty"`
+	Backups []InstanceSpecBackups `json:"backups,omitempty" tf:"backups,omitempty" protobuf:"bytes,8,rep,name=backups"`
 	// If this field is set to true, the created Linode will automatically be enrolled in the Linode Backup service. This will incur an additional charge. The cost for the Backup service is dependent on the Type of Linode deployed.
 	// +optional
-	BackupsEnabled bool `json:"backupsEnabled,omitempty" tf:"backups_enabled,omitempty"`
+	BackupsEnabled bool `json:"backupsEnabled,omitempty" tf:"backups_enabled,omitempty" protobuf:"varint,9,opt,name=backupsEnabled"`
 	// The Label of the Instance Config that should be used to boot the Linode instance.
 	// +optional
-	BootConfigLabel string `json:"bootConfigLabel,omitempty" tf:"boot_config_label,omitempty"`
+	BootConfigLabel string `json:"bootConfigLabel,omitempty" tf:"boot_config_label,omitempty" protobuf:"bytes,10,opt,name=bootConfigLabel"`
 	// Configuration profiles define the VM settings and boot behavior of the Linode Instance.
 	// +optional
-	Config []InstanceSpecConfig `json:"config,omitempty" tf:"config,omitempty"`
+	Config []InstanceSpecConfig `json:"config,omitempty" tf:"config,omitempty" protobuf:"bytes,11,rep,name=config"`
 	// +optional
-	Disk []InstanceSpecDisk `json:"disk,omitempty" tf:"disk,omitempty"`
+	Disk []InstanceSpecDisk `json:"disk,omitempty" tf:"disk,omitempty" protobuf:"bytes,12,rep,name=disk"`
 	// The display group of the Linode instance.
 	// +optional
-	Group string `json:"group,omitempty" tf:"group,omitempty"`
+	Group string `json:"group,omitempty" tf:"group,omitempty" protobuf:"bytes,13,opt,name=group"`
 	// An Image ID to deploy the Disk from. Official Linode Images start with linode/, while your Images start with private/. See /images for more information on the Images available for you to use.
 	// +optional
-	Image string `json:"image,omitempty" tf:"image,omitempty"`
+	Image string `json:"image,omitempty" tf:"image,omitempty" protobuf:"bytes,14,opt,name=image"`
 	// This Linode's Public IPv4 Address. If there are multiple public IPv4 addresses on this Instance, an arbitrary address will be used for this field.
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,15,opt,name=ipAddress"`
 	// This Linode's IPv4 Addresses. Each Linode is assigned a single public IPv4 address upon creation, and may get a single private IPv4 address if needed. You may need to open a support ticket to get additional IPv4 addresses.
 	// +optional
-	Ipv4 []string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
+	Ipv4 []string `json:"ipv4,omitempty" tf:"ipv4,omitempty" protobuf:"bytes,16,rep,name=ipv4"`
 	// This Linode's IPv6 SLAAC addresses. This address is specific to a Linode, and may not be shared.
 	// +optional
-	Ipv6 string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+	Ipv6 string `json:"ipv6,omitempty" tf:"ipv6,omitempty" protobuf:"bytes,17,opt,name=ipv6"`
 	// The Linode's label is for display purposes only. If no label is provided for a Linode, a default will be assigned
 	// +optional
-	Label string `json:"label,omitempty" tf:"label,omitempty"`
+	Label string `json:"label,omitempty" tf:"label,omitempty" protobuf:"bytes,18,opt,name=label"`
 	// If true, the created Linode will have private networking enabled, allowing use of the 192.168.128.0/17 network within the Linode's region.
 	// +optional
-	PrivateIP bool `json:"privateIP,omitempty" tf:"private_ip,omitempty"`
+	PrivateIP bool `json:"privateIP,omitempty" tf:"private_ip,omitempty" protobuf:"varint,19,opt,name=privateIP"`
 	// This Linode's Private IPv4 Address.  The regional private IP address range is 192.168.128/17 address shared by all Linode Instances in a region.
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,20,opt,name=privateIPAddress"`
 	// This is the location where the Linode was deployed. This cannot be changed without opening a support ticket.
-	Region string `json:"region" tf:"region"`
+	Region string `json:"region" tf:"region" protobuf:"bytes,21,opt,name=region"`
 	// The password that will be initialially assigned to the 'root' user account.
 	// +optional
 	RootPass string `json:"-" sensitive:"true" tf:"root_pass,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Specs []InstanceSpecSpecs `json:"specs,omitempty" tf:"specs,omitempty"`
+	Specs []InstanceSpecSpecs `json:"specs,omitempty" tf:"specs,omitempty" protobuf:"bytes,22,rep,name=specs"`
 	// An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode. Only accepted if 'stackscript_id' is given. The required values depend on the StackScript being deployed.
 	// +optional
 	StackscriptData map[string]string `json:"-" sensitive:"true" tf:"stackscript_data,omitempty"`
 	// The StackScript to deploy to the newly created Linode. If provided, 'image' must also be provided, and must be an Image that is compatible with this StackScript.
 	// +optional
-	StackscriptID int64 `json:"stackscriptID,omitempty" tf:"stackscript_id,omitempty"`
+	StackscriptID int64 `json:"stackscriptID,omitempty" tf:"stackscript_id,omitempty" protobuf:"varint,23,opt,name=stackscriptID"`
 	// The status of the instance, indicating the current readiness state.
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,24,opt,name=status"`
 	// When deploying from an Image, this field is optional with a Linode API default of 512mb, otherwise it is ignored. This is used to set the swap disk size for the newly-created Linode.
 	// +optional
-	SwapSize int64 `json:"swapSize,omitempty" tf:"swap_size,omitempty"`
+	SwapSize int64 `json:"swapSize,omitempty" tf:"swap_size,omitempty" protobuf:"varint,25,opt,name=swapSize"`
 	// An array of tags applied to this object. Tags are for organizational purposes only.
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,26,rep,name=tags"`
 	// The type of instance to be deployed, determining the price and size.
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,27,opt,name=type"`
 	// The watchdog, named Lassie, is a Shutdown Watchdog that monitors your Linode and will reboot it if it powers off unexpectedly. It works by issuing a boot job when your Linode powers off without a shutdown job being responsible. To prevent a loop, Lassie will give up if there have been more than 5 boot jobs issued within 15 minutes.
 	// +optional
-	WatchdogEnabled bool `json:"watchdogEnabled,omitempty" tf:"watchdog_enabled,omitempty"`
+	WatchdogEnabled bool `json:"watchdogEnabled,omitempty" tf:"watchdog_enabled,omitempty" protobuf:"varint,28,opt,name=watchdogEnabled"`
 }
 
 type InstanceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *InstanceSpec `json:"output,omitempty"`
+	Output *InstanceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -382,7 +382,7 @@ type InstanceStatus struct {
 // InstanceList is a list of Instances
 type InstanceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Instance CRD objects
-	Items []Instance `json:"items,omitempty"`
+	Items []Instance `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

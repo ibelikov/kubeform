@@ -34,61 +34,61 @@ import (
 
 type BigtableInstance struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BigtableInstanceSpec   `json:"spec,omitempty"`
-	Status            BigtableInstanceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BigtableInstanceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BigtableInstanceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BigtableInstanceSpecCluster struct {
 	// +optional
-	ClusterID string `json:"clusterID,omitempty" tf:"cluster_id,omitempty"`
+	ClusterID string `json:"clusterID,omitempty" tf:"cluster_id,omitempty" protobuf:"bytes,1,opt,name=clusterID"`
 	// +optional
-	NumNodes int64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty"`
+	NumNodes int64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty" protobuf:"varint,2,opt,name=numNodes"`
 	// +optional
-	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty" protobuf:"bytes,3,opt,name=storageType"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,4,opt,name=zone"`
 }
 
 type BigtableInstanceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Cluster []BigtableInstanceSpecCluster `json:"cluster,omitempty" tf:"cluster,omitempty"`
+	Cluster []BigtableInstanceSpecCluster `json:"cluster,omitempty" tf:"cluster,omitempty" protobuf:"bytes,3,rep,name=cluster"`
 	// +optional
 	// Deprecated
-	ClusterID string `json:"clusterID,omitempty" tf:"cluster_id,omitempty"`
+	ClusterID string `json:"clusterID,omitempty" tf:"cluster_id,omitempty" protobuf:"bytes,4,opt,name=clusterID"`
 	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,5,opt,name=displayName"`
 	// +optional
-	InstanceType string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
-	Name         string `json:"name" tf:"name"`
-	// +optional
-	// Deprecated
-	NumNodes int64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty"`
-	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	InstanceType string `json:"instanceType,omitempty" tf:"instance_type,omitempty" protobuf:"bytes,6,opt,name=instanceType"`
+	Name         string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
 	// Deprecated
-	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+	NumNodes int64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty" protobuf:"varint,8,opt,name=numNodes"`
+	// +optional
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,9,opt,name=project"`
 	// +optional
 	// Deprecated
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty" protobuf:"bytes,10,opt,name=storageType"`
+	// +optional
+	// Deprecated
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,11,opt,name=zone"`
 }
 
 type BigtableInstanceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BigtableInstanceSpec `json:"output,omitempty"`
+	Output *BigtableInstanceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -97,7 +97,7 @@ type BigtableInstanceStatus struct {
 // BigtableInstanceList is a list of BigtableInstances
 type BigtableInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BigtableInstance CRD objects
-	Items []BigtableInstance `json:"items,omitempty"`
+	Items []BigtableInstance `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

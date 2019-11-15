@@ -34,20 +34,20 @@ import (
 
 type ServicebusNamespace struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicebusNamespaceSpec   `json:"spec,omitempty"`
-	Status            ServicebusNamespaceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ServicebusNamespaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ServicebusNamespaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ServicebusNamespaceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Capacity int64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity int64 `json:"capacity,omitempty" tf:"capacity,omitempty" protobuf:"varint,4,opt,name=capacity"`
 	// +optional
 	DefaultPrimaryConnectionString string `json:"-" sensitive:"true" tf:"default_primary_connection_string,omitempty"`
 	// +optional
@@ -56,24 +56,24 @@ type ServicebusNamespaceSpec struct {
 	DefaultSecondaryConnectionString string `json:"-" sensitive:"true" tf:"default_secondary_connection_string,omitempty"`
 	// +optional
 	DefaultSecondaryKey string `json:"-" sensitive:"true" tf:"default_secondary_key,omitempty"`
-	Location            string `json:"location" tf:"location"`
-	Name                string `json:"name" tf:"name"`
-	ResourceGroupName   string `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku                 string `json:"sku" tf:"sku"`
+	Location            string `json:"location" tf:"location" protobuf:"bytes,5,opt,name=location"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName   string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
+	Sku                 string `json:"sku" tf:"sku" protobuf:"bytes,8,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type ServicebusNamespaceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ServicebusNamespaceSpec `json:"output,omitempty"`
+	Output *ServicebusNamespaceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type ServicebusNamespaceStatus struct {
 // ServicebusNamespaceList is a list of ServicebusNamespaces
 type ServicebusNamespaceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ServicebusNamespace CRD objects
-	Items []ServicebusNamespace `json:"items,omitempty"`
+	Items []ServicebusNamespace `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,46 +34,46 @@ import (
 
 type LogAnalyticsWorkspace struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsWorkspaceSpec   `json:"spec,omitempty"`
-	Status            LogAnalyticsWorkspaceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LogAnalyticsWorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LogAnalyticsWorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LogAnalyticsWorkspaceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	PortalURL string `json:"portalURL,omitempty" tf:"portal_url,omitempty"`
+	PortalURL string `json:"portalURL,omitempty" tf:"portal_url,omitempty" protobuf:"bytes,6,opt,name=portalURL"`
 	// +optional
 	PrimarySharedKey  string `json:"-" sensitive:"true" tf:"primary_shared_key,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	RetentionInDays int64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+	RetentionInDays int64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty" protobuf:"varint,8,opt,name=retentionInDays"`
 	// +optional
 	SecondarySharedKey string `json:"-" sensitive:"true" tf:"secondary_shared_key,omitempty"`
-	Sku                string `json:"sku" tf:"sku"`
+	Sku                string `json:"sku" tf:"sku" protobuf:"bytes,9,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 	// +optional
-	WorkspaceID string `json:"workspaceID,omitempty" tf:"workspace_id,omitempty"`
+	WorkspaceID string `json:"workspaceID,omitempty" tf:"workspace_id,omitempty" protobuf:"bytes,11,opt,name=workspaceID"`
 }
 
 type LogAnalyticsWorkspaceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LogAnalyticsWorkspaceSpec `json:"output,omitempty"`
+	Output *LogAnalyticsWorkspaceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type LogAnalyticsWorkspaceStatus struct {
 // LogAnalyticsWorkspaceList is a list of LogAnalyticsWorkspaces
 type LogAnalyticsWorkspaceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LogAnalyticsWorkspace CRD objects
-	Items []LogAnalyticsWorkspace `json:"items,omitempty"`
+	Items []LogAnalyticsWorkspace `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

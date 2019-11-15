@@ -34,65 +34,65 @@ import (
 
 type Lb struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LbSpec   `json:"spec,omitempty"`
-	Status            LbStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LbSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LbStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LbSpecFrontendIPConfiguration struct {
 	// +optional
-	InboundNATRules []string `json:"inboundNATRules,omitempty" tf:"inbound_nat_rules,omitempty"`
+	InboundNATRules []string `json:"inboundNATRules,omitempty" tf:"inbound_nat_rules,omitempty" protobuf:"bytes,1,rep,name=inboundNATRules"`
 	// +optional
-	LoadBalancerRules []string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
-	Name              string   `json:"name" tf:"name"`
+	LoadBalancerRules []string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty" protobuf:"bytes,2,rep,name=loadBalancerRules"`
+	Name              string   `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 	// +optional
-	OutboundRules []string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
+	OutboundRules []string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty" protobuf:"bytes,4,rep,name=outboundRules"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,5,opt,name=privateIPAddress"`
 	// +optional
-	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty" protobuf:"bytes,6,opt,name=privateIPAddressAllocation"`
 	// +optional
-	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty" protobuf:"bytes,7,opt,name=publicIPAddressID"`
 	// +optional
-	PublicIPPrefixID string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty"`
+	PublicIPPrefixID string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty" protobuf:"bytes,8,opt,name=publicIPPrefixID"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,9,opt,name=subnetID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,10,rep,name=zones"`
 }
 
 type LbSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	FrontendIPConfiguration []LbSpecFrontendIPConfiguration `json:"frontendIPConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
-	Location                string                          `json:"location" tf:"location"`
-	Name                    string                          `json:"name" tf:"name"`
+	FrontendIPConfiguration []LbSpecFrontendIPConfiguration `json:"frontendIPConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty" protobuf:"bytes,3,rep,name=frontendIPConfiguration"`
+	Location                string                          `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name                    string                          `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,6,opt,name=privateIPAddress"`
 	// +optional
-	PrivateIPAddresses []string `json:"privateIPAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
-	ResourceGroupName  string   `json:"resourceGroupName" tf:"resource_group_name"`
+	PrivateIPAddresses []string `json:"privateIPAddresses,omitempty" tf:"private_ip_addresses,omitempty" protobuf:"bytes,7,rep,name=privateIPAddresses"`
+	ResourceGroupName  string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,9,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type LbStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LbSpec `json:"output,omitempty"`
+	Output *LbSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -101,7 +101,7 @@ type LbStatus struct {
 // LbList is a list of Lbs
 type LbList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Lb CRD objects
-	Items []Lb `json:"items,omitempty"`
+	Items []Lb `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

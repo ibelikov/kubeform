@@ -34,36 +34,36 @@ import (
 
 type ResourceManagerLien struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceManagerLienSpec   `json:"spec,omitempty"`
-	Status            ResourceManagerLienStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ResourceManagerLienSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ResourceManagerLienStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ResourceManagerLienSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty"`
+	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty" protobuf:"bytes,3,opt,name=createTime"`
 	// +optional
-	Name         string   `json:"name,omitempty" tf:"name,omitempty"`
-	Origin       string   `json:"origin" tf:"origin"`
-	Parent       string   `json:"parent" tf:"parent"`
-	Reason       string   `json:"reason" tf:"reason"`
-	Restrictions []string `json:"restrictions" tf:"restrictions"`
+	Name         string   `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,4,opt,name=name"`
+	Origin       string   `json:"origin" tf:"origin" protobuf:"bytes,5,opt,name=origin"`
+	Parent       string   `json:"parent" tf:"parent" protobuf:"bytes,6,opt,name=parent"`
+	Reason       string   `json:"reason" tf:"reason" protobuf:"bytes,7,opt,name=reason"`
+	Restrictions []string `json:"restrictions" tf:"restrictions" protobuf:"bytes,8,rep,name=restrictions"`
 }
 
 type ResourceManagerLienStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ResourceManagerLienSpec `json:"output,omitempty"`
+	Output *ResourceManagerLienSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type ResourceManagerLienStatus struct {
 // ResourceManagerLienList is a list of ResourceManagerLiens
 type ResourceManagerLienList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ResourceManagerLien CRD objects
-	Items []ResourceManagerLien `json:"items,omitempty"`
+	Items []ResourceManagerLien `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

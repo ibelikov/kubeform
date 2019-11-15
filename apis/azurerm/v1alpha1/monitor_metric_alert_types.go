@@ -34,74 +34,74 @@ import (
 
 type MonitorMetricAlert struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorMetricAlertSpec   `json:"spec,omitempty"`
-	Status            MonitorMetricAlertStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitorMetricAlertSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitorMetricAlertStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitorMetricAlertSpecAction struct {
-	ActionGroupID string `json:"actionGroupID" tf:"action_group_id"`
+	ActionGroupID string `json:"actionGroupID" tf:"action_group_id" protobuf:"bytes,1,opt,name=actionGroupID"`
 	// +optional
-	WebhookProperties map[string]string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
+	WebhookProperties map[string]string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty" protobuf:"bytes,2,rep,name=webhookProperties"`
 }
 
 type MonitorMetricAlertSpecCriteriaDimension struct {
-	Name     string `json:"name" tf:"name"`
-	Operator string `json:"operator" tf:"operator"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Operator string `json:"operator" tf:"operator" protobuf:"bytes,2,opt,name=operator"`
 	// +kubebuilder:validation:MinItems=1
-	Values []string `json:"values" tf:"values"`
+	Values []string `json:"values" tf:"values" protobuf:"bytes,3,rep,name=values"`
 }
 
 type MonitorMetricAlertSpecCriteria struct {
-	Aggregation string `json:"aggregation" tf:"aggregation"`
+	Aggregation string `json:"aggregation" tf:"aggregation" protobuf:"bytes,1,opt,name=aggregation"`
 	// +optional
-	Dimension       []MonitorMetricAlertSpecCriteriaDimension `json:"dimension,omitempty" tf:"dimension,omitempty"`
-	MetricName      string                                    `json:"metricName" tf:"metric_name"`
-	MetricNamespace string                                    `json:"metricNamespace" tf:"metric_namespace"`
-	Operator        string                                    `json:"operator" tf:"operator"`
-	Threshold       float64                                   `json:"threshold" tf:"threshold"`
+	Dimension       []MonitorMetricAlertSpecCriteriaDimension `json:"dimension,omitempty" tf:"dimension,omitempty" protobuf:"bytes,2,rep,name=dimension"`
+	MetricName      string                                    `json:"metricName" tf:"metric_name" protobuf:"bytes,3,opt,name=metricName"`
+	MetricNamespace string                                    `json:"metricNamespace" tf:"metric_namespace" protobuf:"bytes,4,opt,name=metricNamespace"`
+	Operator        string                                    `json:"operator" tf:"operator" protobuf:"bytes,5,opt,name=operator"`
+	Threshold       float64                                   `json:"threshold" tf:"threshold" protobuf:"fixed64,6,opt,name=threshold"`
 }
 
 type MonitorMetricAlertSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Action []MonitorMetricAlertSpecAction `json:"action,omitempty" tf:"action,omitempty"`
+	Action []MonitorMetricAlertSpecAction `json:"action,omitempty" tf:"action,omitempty" protobuf:"bytes,3,rep,name=action"`
 	// +optional
-	AutoMitigate bool `json:"autoMitigate,omitempty" tf:"auto_mitigate,omitempty"`
+	AutoMitigate bool `json:"autoMitigate,omitempty" tf:"auto_mitigate,omitempty" protobuf:"varint,4,opt,name=autoMitigate"`
 	// +kubebuilder:validation:MinItems=1
-	Criteria []MonitorMetricAlertSpecCriteria `json:"criteria" tf:"criteria"`
+	Criteria []MonitorMetricAlertSpecCriteria `json:"criteria" tf:"criteria" protobuf:"bytes,5,rep,name=criteria"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,7,opt,name=enabled"`
 	// +optional
-	Frequency         string `json:"frequency,omitempty" tf:"frequency,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Frequency         string `json:"frequency,omitempty" tf:"frequency,omitempty" protobuf:"bytes,8,opt,name=frequency"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	Scopes []string `json:"scopes" tf:"scopes"`
+	Scopes []string `json:"scopes" tf:"scopes" protobuf:"bytes,11,rep,name=scopes"`
 	// +optional
-	Severity int64 `json:"severity,omitempty" tf:"severity,omitempty"`
+	Severity int64 `json:"severity,omitempty" tf:"severity,omitempty" protobuf:"varint,12,opt,name=severity"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// +optional
-	WindowSize string `json:"windowSize,omitempty" tf:"window_size,omitempty"`
+	WindowSize string `json:"windowSize,omitempty" tf:"window_size,omitempty" protobuf:"bytes,14,opt,name=windowSize"`
 }
 
 type MonitorMetricAlertStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitorMetricAlertSpec `json:"output,omitempty"`
+	Output *MonitorMetricAlertSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -110,7 +110,7 @@ type MonitorMetricAlertStatus struct {
 // MonitorMetricAlertList is a list of MonitorMetricAlerts
 type MonitorMetricAlertList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitorMetricAlert CRD objects
-	Items []MonitorMetricAlert `json:"items,omitempty"`
+	Items []MonitorMetricAlert `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

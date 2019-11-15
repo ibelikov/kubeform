@@ -34,59 +34,59 @@ import (
 
 type ComputeRegionBackendService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeRegionBackendServiceSpec   `json:"spec,omitempty"`
-	Status            ComputeRegionBackendServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeRegionBackendServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeRegionBackendServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeRegionBackendServiceSpecBackend struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
 	// +optional
-	Group string `json:"group,omitempty" tf:"group,omitempty"`
+	Group string `json:"group,omitempty" tf:"group,omitempty" protobuf:"bytes,2,opt,name=group"`
 }
 
 type ComputeRegionBackendServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Backend []ComputeRegionBackendServiceSpecBackend `json:"backend,omitempty" tf:"backend,omitempty"`
+	Backend []ComputeRegionBackendServiceSpecBackend `json:"backend,omitempty" tf:"backend,omitempty" protobuf:"bytes,3,rep,name=backend"`
 	// +optional
-	ConnectionDrainingTimeoutSec int64 `json:"connectionDrainingTimeoutSec,omitempty" tf:"connection_draining_timeout_sec,omitempty"`
+	ConnectionDrainingTimeoutSec int64 `json:"connectionDrainingTimeoutSec,omitempty" tf:"connection_draining_timeout_sec,omitempty" protobuf:"varint,4,opt,name=connectionDrainingTimeoutSec"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty" protobuf:"bytes,6,opt,name=fingerprint"`
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	HealthChecks []string `json:"healthChecks" tf:"health_checks"`
-	Name         string   `json:"name" tf:"name"`
+	HealthChecks []string `json:"healthChecks" tf:"health_checks" protobuf:"bytes,7,rep,name=healthChecks"`
+	Name         string   `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,9,opt,name=project"`
 	// +optional
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,10,opt,name=protocol"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,11,opt,name=region"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,12,opt,name=selfLink"`
 	// +optional
-	SessionAffinity string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
+	SessionAffinity string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty" protobuf:"bytes,13,opt,name=sessionAffinity"`
 	// +optional
-	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty"`
+	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty" protobuf:"varint,14,opt,name=timeoutSec"`
 }
 
 type ComputeRegionBackendServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeRegionBackendServiceSpec `json:"output,omitempty"`
+	Output *ComputeRegionBackendServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -95,7 +95,7 @@ type ComputeRegionBackendServiceStatus struct {
 // ComputeRegionBackendServiceList is a list of ComputeRegionBackendServices
 type ComputeRegionBackendServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeRegionBackendService CRD objects
-	Items []ComputeRegionBackendService `json:"items,omitempty"`
+	Items []ComputeRegionBackendService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,112 +34,112 @@ import (
 
 type ComputeBackendService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeBackendServiceSpec   `json:"spec,omitempty"`
-	Status            ComputeBackendServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeBackendServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeBackendServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeBackendServiceSpecBackend struct {
 	// +optional
-	BalancingMode string `json:"balancingMode,omitempty" tf:"balancing_mode,omitempty"`
+	BalancingMode string `json:"balancingMode,omitempty" tf:"balancing_mode,omitempty" protobuf:"bytes,1,opt,name=balancingMode"`
 	// +optional
-	CapacityScaler float64 `json:"capacityScaler,omitempty" tf:"capacity_scaler,omitempty"`
+	CapacityScaler float64 `json:"capacityScaler,omitempty" tf:"capacity_scaler,omitempty" protobuf:"fixed64,2,opt,name=capacityScaler"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
 	// +optional
-	Group string `json:"group,omitempty" tf:"group,omitempty"`
+	Group string `json:"group,omitempty" tf:"group,omitempty" protobuf:"bytes,4,opt,name=group"`
 	// +optional
-	MaxConnections int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty" protobuf:"varint,5,opt,name=maxConnections"`
 	// +optional
-	MaxConnectionsPerInstance int64 `json:"maxConnectionsPerInstance,omitempty" tf:"max_connections_per_instance,omitempty"`
+	MaxConnectionsPerInstance int64 `json:"maxConnectionsPerInstance,omitempty" tf:"max_connections_per_instance,omitempty" protobuf:"varint,6,opt,name=maxConnectionsPerInstance"`
 	// +optional
-	MaxRate int64 `json:"maxRate,omitempty" tf:"max_rate,omitempty"`
+	MaxRate int64 `json:"maxRate,omitempty" tf:"max_rate,omitempty" protobuf:"varint,7,opt,name=maxRate"`
 	// +optional
-	MaxRatePerInstance float64 `json:"maxRatePerInstance,omitempty" tf:"max_rate_per_instance,omitempty"`
+	MaxRatePerInstance float64 `json:"maxRatePerInstance,omitempty" tf:"max_rate_per_instance,omitempty" protobuf:"fixed64,8,opt,name=maxRatePerInstance"`
 	// +optional
-	MaxUtilization float64 `json:"maxUtilization,omitempty" tf:"max_utilization,omitempty"`
+	MaxUtilization float64 `json:"maxUtilization,omitempty" tf:"max_utilization,omitempty" protobuf:"fixed64,9,opt,name=maxUtilization"`
 }
 
 type ComputeBackendServiceSpecCdnPolicyCacheKeyPolicy struct {
 	// +optional
-	IncludeHost bool `json:"includeHost,omitempty" tf:"include_host,omitempty"`
+	IncludeHost bool `json:"includeHost,omitempty" tf:"include_host,omitempty" protobuf:"varint,1,opt,name=includeHost"`
 	// +optional
-	IncludeProtocol bool `json:"includeProtocol,omitempty" tf:"include_protocol,omitempty"`
+	IncludeProtocol bool `json:"includeProtocol,omitempty" tf:"include_protocol,omitempty" protobuf:"varint,2,opt,name=includeProtocol"`
 	// +optional
-	IncludeQueryString bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
+	IncludeQueryString bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty" protobuf:"varint,3,opt,name=includeQueryString"`
 	// +optional
-	QueryStringBlacklist []string `json:"queryStringBlacklist,omitempty" tf:"query_string_blacklist,omitempty"`
+	QueryStringBlacklist []string `json:"queryStringBlacklist,omitempty" tf:"query_string_blacklist,omitempty" protobuf:"bytes,4,rep,name=queryStringBlacklist"`
 	// +optional
-	QueryStringWhitelist []string `json:"queryStringWhitelist,omitempty" tf:"query_string_whitelist,omitempty"`
+	QueryStringWhitelist []string `json:"queryStringWhitelist,omitempty" tf:"query_string_whitelist,omitempty" protobuf:"bytes,5,rep,name=queryStringWhitelist"`
 }
 
 type ComputeBackendServiceSpecCdnPolicy struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CacheKeyPolicy []ComputeBackendServiceSpecCdnPolicyCacheKeyPolicy `json:"cacheKeyPolicy,omitempty" tf:"cache_key_policy,omitempty"`
+	CacheKeyPolicy []ComputeBackendServiceSpecCdnPolicyCacheKeyPolicy `json:"cacheKeyPolicy,omitempty" tf:"cache_key_policy,omitempty" protobuf:"bytes,1,rep,name=cacheKeyPolicy"`
 }
 
 type ComputeBackendServiceSpecIap struct {
-	Oauth2ClientID     string `json:"oauth2ClientID" tf:"oauth2_client_id"`
+	Oauth2ClientID     string `json:"oauth2ClientID" tf:"oauth2_client_id" protobuf:"bytes,1,opt,name=oauth2ClientID"`
 	Oauth2ClientSecret string `json:"-" sensitive:"true" tf:"oauth2_client_secret"`
 }
 
 type ComputeBackendServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Backend []ComputeBackendServiceSpecBackend `json:"backend,omitempty" tf:"backend,omitempty"`
+	Backend []ComputeBackendServiceSpecBackend `json:"backend,omitempty" tf:"backend,omitempty" protobuf:"bytes,4,rep,name=backend"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CdnPolicy []ComputeBackendServiceSpecCdnPolicy `json:"cdnPolicy,omitempty" tf:"cdn_policy,omitempty"`
+	CdnPolicy []ComputeBackendServiceSpecCdnPolicy `json:"cdnPolicy,omitempty" tf:"cdn_policy,omitempty" protobuf:"bytes,5,rep,name=cdnPolicy"`
 	// +optional
-	ConnectionDrainingTimeoutSec int64 `json:"connectionDrainingTimeoutSec,omitempty" tf:"connection_draining_timeout_sec,omitempty"`
+	ConnectionDrainingTimeoutSec int64 `json:"connectionDrainingTimeoutSec,omitempty" tf:"connection_draining_timeout_sec,omitempty" protobuf:"varint,6,opt,name=connectionDrainingTimeoutSec"`
 	// +optional
 	// Deprecated
-	CustomRequestHeaders []string `json:"customRequestHeaders,omitempty" tf:"custom_request_headers,omitempty"`
+	CustomRequestHeaders []string `json:"customRequestHeaders,omitempty" tf:"custom_request_headers,omitempty" protobuf:"bytes,7,rep,name=customRequestHeaders"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,8,opt,name=description"`
 	// +optional
-	EnableCdn bool `json:"enableCdn,omitempty" tf:"enable_cdn,omitempty"`
+	EnableCdn bool `json:"enableCdn,omitempty" tf:"enable_cdn,omitempty" protobuf:"varint,9,opt,name=enableCdn"`
 	// +optional
-	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty" protobuf:"bytes,10,opt,name=fingerprint"`
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	HealthChecks []string `json:"healthChecks" tf:"health_checks"`
+	HealthChecks []string `json:"healthChecks" tf:"health_checks" protobuf:"bytes,11,rep,name=healthChecks"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Iap  []ComputeBackendServiceSpecIap `json:"iap,omitempty" tf:"iap,omitempty"`
-	Name string                         `json:"name" tf:"name"`
+	Iap  []ComputeBackendServiceSpecIap `json:"iap,omitempty" tf:"iap,omitempty" protobuf:"bytes,12,rep,name=iap"`
+	Name string                         `json:"name" tf:"name" protobuf:"bytes,13,opt,name=name"`
 	// +optional
-	PortName string `json:"portName,omitempty" tf:"port_name,omitempty"`
+	PortName string `json:"portName,omitempty" tf:"port_name,omitempty" protobuf:"bytes,14,opt,name=portName"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,15,opt,name=project"`
 	// +optional
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,16,opt,name=protocol"`
 	// +optional
-	SecurityPolicy string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+	SecurityPolicy string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty" protobuf:"bytes,17,opt,name=securityPolicy"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,18,opt,name=selfLink"`
 	// +optional
-	SessionAffinity string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
+	SessionAffinity string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty" protobuf:"bytes,19,opt,name=sessionAffinity"`
 	// +optional
-	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty"`
+	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty" protobuf:"varint,20,opt,name=timeoutSec"`
 }
 
 type ComputeBackendServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeBackendServiceSpec `json:"output,omitempty"`
+	Output *ComputeBackendServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -148,7 +148,7 @@ type ComputeBackendServiceStatus struct {
 // ComputeBackendServiceList is a list of ComputeBackendServices
 type ComputeBackendServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeBackendService CRD objects
-	Items []ComputeBackendService `json:"items,omitempty"`
+	Items []ComputeBackendService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

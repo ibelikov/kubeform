@@ -34,72 +34,72 @@ import (
 
 type AppServicePlan struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppServicePlanSpec   `json:"spec,omitempty"`
-	Status            AppServicePlanStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AppServicePlanSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AppServicePlanStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AppServicePlanSpecProperties struct {
 	// +optional
 	// Deprecated
-	AppServiceEnvironmentID string `json:"appServiceEnvironmentID,omitempty" tf:"app_service_environment_id,omitempty"`
+	AppServiceEnvironmentID string `json:"appServiceEnvironmentID,omitempty" tf:"app_service_environment_id,omitempty" protobuf:"bytes,1,opt,name=appServiceEnvironmentID"`
 	// +optional
 	// Deprecated
-	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
+	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty" protobuf:"varint,2,opt,name=perSiteScaling"`
 	// +optional
 	// Deprecated
-	Reserved bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
+	Reserved bool `json:"reserved,omitempty" tf:"reserved,omitempty" protobuf:"varint,3,opt,name=reserved"`
 }
 
 type AppServicePlanSpecSku struct {
 	// +optional
-	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty" protobuf:"varint,1,opt,name=capacity"`
 	Size     string `json:"size" tf:"size"`
-	Tier     string `json:"tier" tf:"tier"`
+	Tier     string `json:"tier" tf:"tier" protobuf:"bytes,3,opt,name=tier"`
 }
 
 type AppServicePlanSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AppServiceEnvironmentID string `json:"appServiceEnvironmentID,omitempty" tf:"app_service_environment_id,omitempty"`
+	AppServiceEnvironmentID string `json:"appServiceEnvironmentID,omitempty" tf:"app_service_environment_id,omitempty" protobuf:"bytes,3,opt,name=appServiceEnvironmentID"`
 	// +optional
-	IsXenon bool `json:"isXenon,omitempty" tf:"is_xenon,omitempty"`
+	IsXenon bool `json:"isXenon,omitempty" tf:"is_xenon,omitempty" protobuf:"varint,4,opt,name=isXenon"`
 	// +optional
-	Kind     string `json:"kind,omitempty" tf:"kind,omitempty"`
-	Location string `json:"location" tf:"location"`
+	Kind     string `json:"kind,omitempty" tf:"kind,omitempty" protobuf:"bytes,5,opt,name=kind"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
 	// +optional
-	MaximumElasticWorkerCount int64 `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
+	MaximumElasticWorkerCount int64 `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty" protobuf:"varint,7,opt,name=maximumElasticWorkerCount"`
 	// +optional
-	MaximumNumberOfWorkers int64  `json:"maximumNumberOfWorkers,omitempty" tf:"maximum_number_of_workers,omitempty"`
-	Name                   string `json:"name" tf:"name"`
+	MaximumNumberOfWorkers int64  `json:"maximumNumberOfWorkers,omitempty" tf:"maximum_number_of_workers,omitempty" protobuf:"varint,8,opt,name=maximumNumberOfWorkers"`
+	Name                   string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
+	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty" protobuf:"varint,10,opt,name=perSiteScaling"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	Properties []AppServicePlanSpecProperties `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties []AppServicePlanSpecProperties `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,11,rep,name=properties"`
 	// +optional
-	Reserved          bool   `json:"reserved,omitempty" tf:"reserved,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Reserved          bool   `json:"reserved,omitempty" tf:"reserved,omitempty" protobuf:"varint,12,opt,name=reserved"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,13,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	Sku []AppServicePlanSpecSku `json:"sku" tf:"sku"`
+	Sku []AppServicePlanSpecSku `json:"sku" tf:"sku" protobuf:"bytes,14,rep,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,15,rep,name=tags"`
 }
 
 type AppServicePlanStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AppServicePlanSpec `json:"output,omitempty"`
+	Output *AppServicePlanSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -108,7 +108,7 @@ type AppServicePlanStatus struct {
 // AppServicePlanList is a list of AppServicePlans
 type AppServicePlanList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AppServicePlan CRD objects
-	Items []AppServicePlan `json:"items,omitempty"`
+	Items []AppServicePlan `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

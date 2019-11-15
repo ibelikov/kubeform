@@ -34,138 +34,138 @@ import (
 
 type MonitoringAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitoringAlertPolicySpec   `json:"spec,omitempty"`
-	Status            MonitoringAlertPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitoringAlertPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitoringAlertPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionAbsentAggregations struct {
 	// +optional
-	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty"`
+	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty" protobuf:"bytes,1,opt,name=alignmentPeriod"`
 	// +optional
-	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty"`
+	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty" protobuf:"bytes,2,opt,name=crossSeriesReducer"`
 	// +optional
-	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty"`
+	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty" protobuf:"bytes,3,rep,name=groupByFields"`
 	// +optional
-	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty"`
+	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty" protobuf:"bytes,4,opt,name=perSeriesAligner"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionAbsentTrigger struct {
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
 	// +optional
-	Percent float64 `json:"percent,omitempty" tf:"percent,omitempty"`
+	Percent float64 `json:"percent,omitempty" tf:"percent,omitempty" protobuf:"fixed64,2,opt,name=percent"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionAbsent struct {
 	// +optional
-	Aggregations []MonitoringAlertPolicySpecConditionsConditionAbsentAggregations `json:"aggregations,omitempty" tf:"aggregations,omitempty"`
-	Duration     string                                                           `json:"duration" tf:"duration"`
+	Aggregations []MonitoringAlertPolicySpecConditionsConditionAbsentAggregations `json:"aggregations,omitempty" tf:"aggregations,omitempty" protobuf:"bytes,1,rep,name=aggregations"`
+	Duration     string                                                           `json:"duration" tf:"duration" protobuf:"bytes,2,opt,name=duration"`
 	// +optional
-	Filter string `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter string `json:"filter,omitempty" tf:"filter,omitempty" protobuf:"bytes,3,opt,name=filter"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Trigger []MonitoringAlertPolicySpecConditionsConditionAbsentTrigger `json:"trigger,omitempty" tf:"trigger,omitempty"`
+	Trigger []MonitoringAlertPolicySpecConditionsConditionAbsentTrigger `json:"trigger,omitempty" tf:"trigger,omitempty" protobuf:"bytes,4,rep,name=trigger"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionThresholdAggregations struct {
 	// +optional
-	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty"`
+	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty" protobuf:"bytes,1,opt,name=alignmentPeriod"`
 	// +optional
-	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty"`
+	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty" protobuf:"bytes,2,opt,name=crossSeriesReducer"`
 	// +optional
-	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty"`
+	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty" protobuf:"bytes,3,rep,name=groupByFields"`
 	// +optional
-	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty"`
+	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty" protobuf:"bytes,4,opt,name=perSeriesAligner"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionThresholdDenominatorAggregations struct {
 	// +optional
-	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty"`
+	AlignmentPeriod string `json:"alignmentPeriod,omitempty" tf:"alignment_period,omitempty" protobuf:"bytes,1,opt,name=alignmentPeriod"`
 	// +optional
-	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty"`
+	CrossSeriesReducer string `json:"crossSeriesReducer,omitempty" tf:"cross_series_reducer,omitempty" protobuf:"bytes,2,opt,name=crossSeriesReducer"`
 	// +optional
-	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty"`
+	GroupByFields []string `json:"groupByFields,omitempty" tf:"group_by_fields,omitempty" protobuf:"bytes,3,rep,name=groupByFields"`
 	// +optional
-	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty"`
+	PerSeriesAligner string `json:"perSeriesAligner,omitempty" tf:"per_series_aligner,omitempty" protobuf:"bytes,4,opt,name=perSeriesAligner"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionThresholdTrigger struct {
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
 	// +optional
-	Percent float64 `json:"percent,omitempty" tf:"percent,omitempty"`
+	Percent float64 `json:"percent,omitempty" tf:"percent,omitempty" protobuf:"fixed64,2,opt,name=percent"`
 }
 
 type MonitoringAlertPolicySpecConditionsConditionThreshold struct {
 	// +optional
-	Aggregations []MonitoringAlertPolicySpecConditionsConditionThresholdAggregations `json:"aggregations,omitempty" tf:"aggregations,omitempty"`
-	Comparison   string                                                              `json:"comparison" tf:"comparison"`
+	Aggregations []MonitoringAlertPolicySpecConditionsConditionThresholdAggregations `json:"aggregations,omitempty" tf:"aggregations,omitempty" protobuf:"bytes,1,rep,name=aggregations"`
+	Comparison   string                                                              `json:"comparison" tf:"comparison" protobuf:"bytes,2,opt,name=comparison"`
 	// +optional
-	DenominatorAggregations []MonitoringAlertPolicySpecConditionsConditionThresholdDenominatorAggregations `json:"denominatorAggregations,omitempty" tf:"denominator_aggregations,omitempty"`
+	DenominatorAggregations []MonitoringAlertPolicySpecConditionsConditionThresholdDenominatorAggregations `json:"denominatorAggregations,omitempty" tf:"denominator_aggregations,omitempty" protobuf:"bytes,3,rep,name=denominatorAggregations"`
 	// +optional
-	DenominatorFilter string `json:"denominatorFilter,omitempty" tf:"denominator_filter,omitempty"`
-	Duration          string `json:"duration" tf:"duration"`
+	DenominatorFilter string `json:"denominatorFilter,omitempty" tf:"denominator_filter,omitempty" protobuf:"bytes,4,opt,name=denominatorFilter"`
+	Duration          string `json:"duration" tf:"duration" protobuf:"bytes,5,opt,name=duration"`
 	// +optional
-	Filter string `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter string `json:"filter,omitempty" tf:"filter,omitempty" protobuf:"bytes,6,opt,name=filter"`
 	// +optional
-	ThresholdValue float64 `json:"thresholdValue,omitempty" tf:"threshold_value,omitempty"`
+	ThresholdValue float64 `json:"thresholdValue,omitempty" tf:"threshold_value,omitempty" protobuf:"fixed64,7,opt,name=thresholdValue"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Trigger []MonitoringAlertPolicySpecConditionsConditionThresholdTrigger `json:"trigger,omitempty" tf:"trigger,omitempty"`
+	Trigger []MonitoringAlertPolicySpecConditionsConditionThresholdTrigger `json:"trigger,omitempty" tf:"trigger,omitempty" protobuf:"bytes,8,rep,name=trigger"`
 }
 
 type MonitoringAlertPolicySpecConditions struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ConditionAbsent []MonitoringAlertPolicySpecConditionsConditionAbsent `json:"conditionAbsent,omitempty" tf:"condition_absent,omitempty"`
+	ConditionAbsent []MonitoringAlertPolicySpecConditionsConditionAbsent `json:"conditionAbsent,omitempty" tf:"condition_absent,omitempty" protobuf:"bytes,1,rep,name=conditionAbsent"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ConditionThreshold []MonitoringAlertPolicySpecConditionsConditionThreshold `json:"conditionThreshold,omitempty" tf:"condition_threshold,omitempty"`
-	DisplayName        string                                                  `json:"displayName" tf:"display_name"`
+	ConditionThreshold []MonitoringAlertPolicySpecConditionsConditionThreshold `json:"conditionThreshold,omitempty" tf:"condition_threshold,omitempty" protobuf:"bytes,2,rep,name=conditionThreshold"`
+	DisplayName        string                                                  `json:"displayName" tf:"display_name" protobuf:"bytes,3,opt,name=displayName"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,4,opt,name=name"`
 }
 
 type MonitoringAlertPolicySpecCreationRecord struct {
 	// +optional
-	MutateTime string `json:"mutateTime,omitempty" tf:"mutate_time,omitempty"`
+	MutateTime string `json:"mutateTime,omitempty" tf:"mutate_time,omitempty" protobuf:"bytes,1,opt,name=mutateTime"`
 	// +optional
-	MutatedBy string `json:"mutatedBy,omitempty" tf:"mutated_by,omitempty"`
+	MutatedBy string `json:"mutatedBy,omitempty" tf:"mutated_by,omitempty" protobuf:"bytes,2,opt,name=mutatedBy"`
 }
 
 type MonitoringAlertPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Combiner   string                                `json:"combiner" tf:"combiner"`
-	Conditions []MonitoringAlertPolicySpecConditions `json:"conditions" tf:"conditions"`
+	Combiner   string                                `json:"combiner" tf:"combiner" protobuf:"bytes,3,opt,name=combiner"`
+	Conditions []MonitoringAlertPolicySpecConditions `json:"conditions" tf:"conditions" protobuf:"bytes,4,rep,name=conditions"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CreationRecord []MonitoringAlertPolicySpecCreationRecord `json:"creationRecord,omitempty" tf:"creation_record,omitempty"`
-	DisplayName    string                                    `json:"displayName" tf:"display_name"`
-	Enabled        bool                                      `json:"enabled" tf:"enabled"`
+	CreationRecord []MonitoringAlertPolicySpecCreationRecord `json:"creationRecord,omitempty" tf:"creation_record,omitempty" protobuf:"bytes,5,rep,name=creationRecord"`
+	DisplayName    string                                    `json:"displayName" tf:"display_name" protobuf:"bytes,6,opt,name=displayName"`
+	Enabled        bool                                      `json:"enabled" tf:"enabled" protobuf:"varint,7,opt,name=enabled"`
 	// +optional
-	Labels []string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels []string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,8,rep,name=labels"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	NotificationChannels []string `json:"notificationChannels,omitempty" tf:"notification_channels,omitempty"`
+	NotificationChannels []string `json:"notificationChannels,omitempty" tf:"notification_channels,omitempty" protobuf:"bytes,10,rep,name=notificationChannels"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 }
 
 type MonitoringAlertPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitoringAlertPolicySpec `json:"output,omitempty"`
+	Output *MonitoringAlertPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -174,7 +174,7 @@ type MonitoringAlertPolicyStatus struct {
 // MonitoringAlertPolicyList is a list of MonitoringAlertPolicys
 type MonitoringAlertPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitoringAlertPolicy CRD objects
-	Items []MonitoringAlertPolicy `json:"items,omitempty"`
+	Items []MonitoringAlertPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

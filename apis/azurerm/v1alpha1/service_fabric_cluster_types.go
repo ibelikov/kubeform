@@ -34,147 +34,147 @@ import (
 
 type ServiceFabricCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceFabricClusterSpec   `json:"spec,omitempty"`
-	Status            ServiceFabricClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ServiceFabricClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ServiceFabricClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ServiceFabricClusterSpecAzureActiveDirectory struct {
-	ClientApplicationID  string `json:"clientApplicationID" tf:"client_application_id"`
-	ClusterApplicationID string `json:"clusterApplicationID" tf:"cluster_application_id"`
-	TenantID             string `json:"tenantID" tf:"tenant_id"`
+	ClientApplicationID  string `json:"clientApplicationID" tf:"client_application_id" protobuf:"bytes,1,opt,name=clientApplicationID"`
+	ClusterApplicationID string `json:"clusterApplicationID" tf:"cluster_application_id" protobuf:"bytes,2,opt,name=clusterApplicationID"`
+	TenantID             string `json:"tenantID" tf:"tenant_id" protobuf:"bytes,3,opt,name=tenantID"`
 }
 
 type ServiceFabricClusterSpecCertificate struct {
-	Thumbprint string `json:"thumbprint" tf:"thumbprint"`
+	Thumbprint string `json:"thumbprint" tf:"thumbprint" protobuf:"bytes,1,opt,name=thumbprint"`
 	// +optional
-	ThumbprintSecondary string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty"`
-	X509StoreName       string `json:"x509StoreName" tf:"x509_store_name"`
+	ThumbprintSecondary string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty" protobuf:"bytes,2,opt,name=thumbprintSecondary"`
+	X509StoreName       string `json:"x509StoreName" tf:"x509_store_name" protobuf:"bytes,3,opt,name=x509StoreName"`
 }
 
 type ServiceFabricClusterSpecCertificateCommonNamesCommonNames struct {
-	CertificateCommonName string `json:"certificateCommonName" tf:"certificate_common_name"`
+	CertificateCommonName string `json:"certificateCommonName" tf:"certificate_common_name" protobuf:"bytes,1,opt,name=certificateCommonName"`
 	// +optional
-	CertificateIssuerThumbprint string `json:"certificateIssuerThumbprint,omitempty" tf:"certificate_issuer_thumbprint,omitempty"`
+	CertificateIssuerThumbprint string `json:"certificateIssuerThumbprint,omitempty" tf:"certificate_issuer_thumbprint,omitempty" protobuf:"bytes,2,opt,name=certificateIssuerThumbprint"`
 }
 
 type ServiceFabricClusterSpecCertificateCommonNames struct {
 	// +kubebuilder:validation:MinItems=1
-	CommonNames   []ServiceFabricClusterSpecCertificateCommonNamesCommonNames `json:"commonNames" tf:"common_names"`
-	X509StoreName string                                                      `json:"x509StoreName" tf:"x509_store_name"`
+	CommonNames   []ServiceFabricClusterSpecCertificateCommonNamesCommonNames `json:"commonNames" tf:"common_names" protobuf:"bytes,1,rep,name=commonNames"`
+	X509StoreName string                                                      `json:"x509StoreName" tf:"x509_store_name" protobuf:"bytes,2,opt,name=x509StoreName"`
 }
 
 type ServiceFabricClusterSpecClientCertificateThumbprint struct {
-	IsAdmin    bool   `json:"isAdmin" tf:"is_admin"`
-	Thumbprint string `json:"thumbprint" tf:"thumbprint"`
+	IsAdmin    bool   `json:"isAdmin" tf:"is_admin" protobuf:"varint,1,opt,name=isAdmin"`
+	Thumbprint string `json:"thumbprint" tf:"thumbprint" protobuf:"bytes,2,opt,name=thumbprint"`
 }
 
 type ServiceFabricClusterSpecDiagnosticsConfig struct {
-	BlobEndpoint            string `json:"blobEndpoint" tf:"blob_endpoint"`
-	ProtectedAccountKeyName string `json:"protectedAccountKeyName" tf:"protected_account_key_name"`
-	QueueEndpoint           string `json:"queueEndpoint" tf:"queue_endpoint"`
-	StorageAccountName      string `json:"storageAccountName" tf:"storage_account_name"`
-	TableEndpoint           string `json:"tableEndpoint" tf:"table_endpoint"`
+	BlobEndpoint            string `json:"blobEndpoint" tf:"blob_endpoint" protobuf:"bytes,1,opt,name=blobEndpoint"`
+	ProtectedAccountKeyName string `json:"protectedAccountKeyName" tf:"protected_account_key_name" protobuf:"bytes,2,opt,name=protectedAccountKeyName"`
+	QueueEndpoint           string `json:"queueEndpoint" tf:"queue_endpoint" protobuf:"bytes,3,opt,name=queueEndpoint"`
+	StorageAccountName      string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,4,opt,name=storageAccountName"`
+	TableEndpoint           string `json:"tableEndpoint" tf:"table_endpoint" protobuf:"bytes,5,opt,name=tableEndpoint"`
 }
 
 type ServiceFabricClusterSpecFabricSettings struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	Parameters map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,2,rep,name=parameters"`
 }
 
 type ServiceFabricClusterSpecNodeTypeApplicationPorts struct {
-	EndPort   int64 `json:"endPort" tf:"end_port"`
-	StartPort int64 `json:"startPort" tf:"start_port"`
+	EndPort   int64 `json:"endPort" tf:"end_port" protobuf:"varint,1,opt,name=endPort"`
+	StartPort int64 `json:"startPort" tf:"start_port" protobuf:"varint,2,opt,name=startPort"`
 }
 
 type ServiceFabricClusterSpecNodeTypeEphemeralPorts struct {
-	EndPort   int64 `json:"endPort" tf:"end_port"`
-	StartPort int64 `json:"startPort" tf:"start_port"`
+	EndPort   int64 `json:"endPort" tf:"end_port" protobuf:"varint,1,opt,name=endPort"`
+	StartPort int64 `json:"startPort" tf:"start_port" protobuf:"varint,2,opt,name=startPort"`
 }
 
 type ServiceFabricClusterSpecNodeType struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ApplicationPorts []ServiceFabricClusterSpecNodeTypeApplicationPorts `json:"applicationPorts,omitempty" tf:"application_ports,omitempty"`
+	ApplicationPorts []ServiceFabricClusterSpecNodeTypeApplicationPorts `json:"applicationPorts,omitempty" tf:"application_ports,omitempty" protobuf:"bytes,1,rep,name=applicationPorts"`
 	// +optional
-	Capacities         map[string]string `json:"capacities,omitempty" tf:"capacities,omitempty"`
-	ClientEndpointPort int64             `json:"clientEndpointPort" tf:"client_endpoint_port"`
+	Capacities         map[string]string `json:"capacities,omitempty" tf:"capacities,omitempty" protobuf:"bytes,2,rep,name=capacities"`
+	ClientEndpointPort int64             `json:"clientEndpointPort" tf:"client_endpoint_port" protobuf:"varint,3,opt,name=clientEndpointPort"`
 	// +optional
-	DurabilityLevel string `json:"durabilityLevel,omitempty" tf:"durability_level,omitempty"`
+	DurabilityLevel string `json:"durabilityLevel,omitempty" tf:"durability_level,omitempty" protobuf:"bytes,4,opt,name=durabilityLevel"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	EphemeralPorts   []ServiceFabricClusterSpecNodeTypeEphemeralPorts `json:"ephemeralPorts,omitempty" tf:"ephemeral_ports,omitempty"`
-	HttpEndpointPort int64                                            `json:"httpEndpointPort" tf:"http_endpoint_port"`
-	InstanceCount    int64                                            `json:"instanceCount" tf:"instance_count"`
-	IsPrimary        bool                                             `json:"isPrimary" tf:"is_primary"`
-	Name             string                                           `json:"name" tf:"name"`
+	EphemeralPorts   []ServiceFabricClusterSpecNodeTypeEphemeralPorts `json:"ephemeralPorts,omitempty" tf:"ephemeral_ports,omitempty" protobuf:"bytes,5,rep,name=ephemeralPorts"`
+	HttpEndpointPort int64                                            `json:"httpEndpointPort" tf:"http_endpoint_port" protobuf:"varint,6,opt,name=httpEndpointPort"`
+	InstanceCount    int64                                            `json:"instanceCount" tf:"instance_count" protobuf:"varint,7,opt,name=instanceCount"`
+	IsPrimary        bool                                             `json:"isPrimary" tf:"is_primary" protobuf:"varint,8,opt,name=isPrimary"`
+	Name             string                                           `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	PlacementProperties map[string]string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
+	PlacementProperties map[string]string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty" protobuf:"bytes,10,rep,name=placementProperties"`
 	// +optional
-	ReverseProxyEndpointPort int64 `json:"reverseProxyEndpointPort,omitempty" tf:"reverse_proxy_endpoint_port,omitempty"`
+	ReverseProxyEndpointPort int64 `json:"reverseProxyEndpointPort,omitempty" tf:"reverse_proxy_endpoint_port,omitempty" protobuf:"varint,11,opt,name=reverseProxyEndpointPort"`
 }
 
 type ServiceFabricClusterSpecReverseProxyCertificate struct {
-	Thumbprint string `json:"thumbprint" tf:"thumbprint"`
+	Thumbprint string `json:"thumbprint" tf:"thumbprint" protobuf:"bytes,1,opt,name=thumbprint"`
 	// +optional
-	ThumbprintSecondary string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty"`
-	X509StoreName       string `json:"x509StoreName" tf:"x509_store_name"`
+	ThumbprintSecondary string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty" protobuf:"bytes,2,opt,name=thumbprintSecondary"`
+	X509StoreName       string `json:"x509StoreName" tf:"x509_store_name" protobuf:"bytes,3,opt,name=x509StoreName"`
 }
 
 type ServiceFabricClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AddOnFeatures []string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty"`
+	AddOnFeatures []string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty" protobuf:"bytes,3,rep,name=addOnFeatures"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AzureActiveDirectory []ServiceFabricClusterSpecAzureActiveDirectory `json:"azureActiveDirectory,omitempty" tf:"azure_active_directory,omitempty"`
+	AzureActiveDirectory []ServiceFabricClusterSpecAzureActiveDirectory `json:"azureActiveDirectory,omitempty" tf:"azure_active_directory,omitempty" protobuf:"bytes,4,rep,name=azureActiveDirectory"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Certificate []ServiceFabricClusterSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []ServiceFabricClusterSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty" protobuf:"bytes,5,rep,name=certificate"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CertificateCommonNames []ServiceFabricClusterSpecCertificateCommonNames `json:"certificateCommonNames,omitempty" tf:"certificate_common_names,omitempty"`
+	CertificateCommonNames []ServiceFabricClusterSpecCertificateCommonNames `json:"certificateCommonNames,omitempty" tf:"certificate_common_names,omitempty" protobuf:"bytes,6,rep,name=certificateCommonNames"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=2
-	ClientCertificateThumbprint []ServiceFabricClusterSpecClientCertificateThumbprint `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
+	ClientCertificateThumbprint []ServiceFabricClusterSpecClientCertificateThumbprint `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty" protobuf:"bytes,7,rep,name=clientCertificateThumbprint"`
 	// +optional
-	ClusterCodeVersion string `json:"clusterCodeVersion,omitempty" tf:"cluster_code_version,omitempty"`
+	ClusterCodeVersion string `json:"clusterCodeVersion,omitempty" tf:"cluster_code_version,omitempty" protobuf:"bytes,8,opt,name=clusterCodeVersion"`
 	// +optional
-	ClusterEndpoint string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	DiagnosticsConfig []ServiceFabricClusterSpecDiagnosticsConfig `json:"diagnosticsConfig,omitempty" tf:"diagnostics_config,omitempty"`
-	// +optional
-	FabricSettings     []ServiceFabricClusterSpecFabricSettings `json:"fabricSettings,omitempty" tf:"fabric_settings,omitempty"`
-	Location           string                                   `json:"location" tf:"location"`
-	ManagementEndpoint string                                   `json:"managementEndpoint" tf:"management_endpoint"`
-	Name               string                                   `json:"name" tf:"name"`
-	NodeType           []ServiceFabricClusterSpecNodeType       `json:"nodeType" tf:"node_type"`
-	ReliabilityLevel   string                                   `json:"reliabilityLevel" tf:"reliability_level"`
-	ResourceGroupName  string                                   `json:"resourceGroupName" tf:"resource_group_name"`
+	ClusterEndpoint string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty" protobuf:"bytes,9,opt,name=clusterEndpoint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ReverseProxyCertificate []ServiceFabricClusterSpecReverseProxyCertificate `json:"reverseProxyCertificate,omitempty" tf:"reverse_proxy_certificate,omitempty"`
+	DiagnosticsConfig []ServiceFabricClusterSpecDiagnosticsConfig `json:"diagnosticsConfig,omitempty" tf:"diagnostics_config,omitempty" protobuf:"bytes,10,rep,name=diagnosticsConfig"`
 	// +optional
-	Tags        map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	UpgradeMode string            `json:"upgradeMode" tf:"upgrade_mode"`
-	VmImage     string            `json:"vmImage" tf:"vm_image"`
+	FabricSettings     []ServiceFabricClusterSpecFabricSettings `json:"fabricSettings,omitempty" tf:"fabric_settings,omitempty" protobuf:"bytes,11,rep,name=fabricSettings"`
+	Location           string                                   `json:"location" tf:"location" protobuf:"bytes,12,opt,name=location"`
+	ManagementEndpoint string                                   `json:"managementEndpoint" tf:"management_endpoint" protobuf:"bytes,13,opt,name=managementEndpoint"`
+	Name               string                                   `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
+	NodeType           []ServiceFabricClusterSpecNodeType       `json:"nodeType" tf:"node_type" protobuf:"bytes,15,rep,name=nodeType"`
+	ReliabilityLevel   string                                   `json:"reliabilityLevel" tf:"reliability_level" protobuf:"bytes,16,opt,name=reliabilityLevel"`
+	ResourceGroupName  string                                   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,17,opt,name=resourceGroupName"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	ReverseProxyCertificate []ServiceFabricClusterSpecReverseProxyCertificate `json:"reverseProxyCertificate,omitempty" tf:"reverse_proxy_certificate,omitempty" protobuf:"bytes,18,rep,name=reverseProxyCertificate"`
+	// +optional
+	Tags        map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,19,rep,name=tags"`
+	UpgradeMode string            `json:"upgradeMode" tf:"upgrade_mode" protobuf:"bytes,20,opt,name=upgradeMode"`
+	VmImage     string            `json:"vmImage" tf:"vm_image" protobuf:"bytes,21,opt,name=vmImage"`
 }
 
 type ServiceFabricClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ServiceFabricClusterSpec `json:"output,omitempty"`
+	Output *ServiceFabricClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -183,7 +183,7 @@ type ServiceFabricClusterStatus struct {
 // ServiceFabricClusterList is a list of ServiceFabricClusters
 type ServiceFabricClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ServiceFabricCluster CRD objects
-	Items []ServiceFabricCluster `json:"items,omitempty"`
+	Items []ServiceFabricCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

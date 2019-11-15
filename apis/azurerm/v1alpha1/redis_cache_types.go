@@ -34,103 +34,103 @@ import (
 
 type RedisCache struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RedisCacheSpec   `json:"spec,omitempty"`
-	Status            RedisCacheStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RedisCacheSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RedisCacheStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RedisCacheSpecPatchSchedule struct {
-	DayOfWeek string `json:"dayOfWeek" tf:"day_of_week"`
+	DayOfWeek string `json:"dayOfWeek" tf:"day_of_week" protobuf:"bytes,1,opt,name=dayOfWeek"`
 	// +optional
-	StartHourUtc int64 `json:"startHourUtc,omitempty" tf:"start_hour_utc,omitempty"`
+	StartHourUtc int64 `json:"startHourUtc,omitempty" tf:"start_hour_utc,omitempty" protobuf:"varint,2,opt,name=startHourUtc"`
 }
 
 type RedisCacheSpecRedisConfiguration struct {
 	// +optional
-	AofBackupEnabled bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
+	AofBackupEnabled bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty" protobuf:"varint,1,opt,name=aofBackupEnabled"`
 	// +optional
 	AofStorageConnectionString0 string `json:"-" sensitive:"true" tf:"aof_storage_connection_string_0,omitempty"`
 	// +optional
 	AofStorageConnectionString1 string `json:"-" sensitive:"true" tf:"aof_storage_connection_string_1,omitempty"`
 	// +optional
-	EnableAuthentication bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
+	EnableAuthentication bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty" protobuf:"varint,2,opt,name=enableAuthentication"`
 	// +optional
-	Maxclients int64 `json:"maxclients,omitempty" tf:"maxclients,omitempty"`
+	Maxclients int64 `json:"maxclients,omitempty" tf:"maxclients,omitempty" protobuf:"varint,3,opt,name=maxclients"`
 	// +optional
-	MaxfragmentationmemoryReserved int64 `json:"maxfragmentationmemoryReserved,omitempty" tf:"maxfragmentationmemory_reserved,omitempty"`
+	MaxfragmentationmemoryReserved int64 `json:"maxfragmentationmemoryReserved,omitempty" tf:"maxfragmentationmemory_reserved,omitempty" protobuf:"varint,4,opt,name=maxfragmentationmemoryReserved"`
 	// +optional
-	MaxmemoryDelta int64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
+	MaxmemoryDelta int64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty" protobuf:"varint,5,opt,name=maxmemoryDelta"`
 	// +optional
-	MaxmemoryPolicy string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
+	MaxmemoryPolicy string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty" protobuf:"bytes,6,opt,name=maxmemoryPolicy"`
 	// +optional
-	MaxmemoryReserved int64 `json:"maxmemoryReserved,omitempty" tf:"maxmemory_reserved,omitempty"`
+	MaxmemoryReserved int64 `json:"maxmemoryReserved,omitempty" tf:"maxmemory_reserved,omitempty" protobuf:"varint,7,opt,name=maxmemoryReserved"`
 	// +optional
-	NotifyKeyspaceEvents string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
+	NotifyKeyspaceEvents string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty" protobuf:"bytes,8,opt,name=notifyKeyspaceEvents"`
 	// +optional
-	RdbBackupEnabled bool `json:"rdbBackupEnabled,omitempty" tf:"rdb_backup_enabled,omitempty"`
+	RdbBackupEnabled bool `json:"rdbBackupEnabled,omitempty" tf:"rdb_backup_enabled,omitempty" protobuf:"varint,9,opt,name=rdbBackupEnabled"`
 	// +optional
-	RdbBackupFrequency int64 `json:"rdbBackupFrequency,omitempty" tf:"rdb_backup_frequency,omitempty"`
+	RdbBackupFrequency int64 `json:"rdbBackupFrequency,omitempty" tf:"rdb_backup_frequency,omitempty" protobuf:"varint,10,opt,name=rdbBackupFrequency"`
 	// +optional
-	RdbBackupMaxSnapshotCount int64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
+	RdbBackupMaxSnapshotCount int64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty" protobuf:"varint,11,opt,name=rdbBackupMaxSnapshotCount"`
 	// +optional
 	RdbStorageConnectionString string `json:"-" sensitive:"true" tf:"rdb_storage_connection_string,omitempty"`
 }
 
 type RedisCacheSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Capacity int64 `json:"capacity" tf:"capacity"`
+	Capacity int64 `json:"capacity" tf:"capacity" protobuf:"varint,4,opt,name=capacity"`
 	// +optional
-	EnableNonSSLPort bool   `json:"enableNonSSLPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
-	Family           string `json:"family" tf:"family"`
+	EnableNonSSLPort bool   `json:"enableNonSSLPort,omitempty" tf:"enable_non_ssl_port,omitempty" protobuf:"varint,5,opt,name=enableNonSSLPort"`
+	Family           string `json:"family" tf:"family" protobuf:"bytes,6,opt,name=family"`
 	// +optional
-	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty"`
-	Location string `json:"location" tf:"location"`
+	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty" protobuf:"bytes,7,opt,name=hostname"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,8,opt,name=location"`
 	// +optional
-	MinimumTLSVersion string `json:"minimumTLSVersion,omitempty" tf:"minimum_tls_version,omitempty"`
-	Name              string `json:"name" tf:"name"`
+	MinimumTLSVersion string `json:"minimumTLSVersion,omitempty" tf:"minimum_tls_version,omitempty" protobuf:"bytes,9,opt,name=minimumTLSVersion"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	PatchSchedule []RedisCacheSpecPatchSchedule `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty"`
+	PatchSchedule []RedisCacheSpecPatchSchedule `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty" protobuf:"bytes,11,rep,name=patchSchedule"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,12,opt,name=port"`
 	// +optional
 	PrimaryAccessKey string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
 	// +optional
-	PrivateStaticIPAddress string `json:"privateStaticIPAddress,omitempty" tf:"private_static_ip_address,omitempty"`
+	PrivateStaticIPAddress string `json:"privateStaticIPAddress,omitempty" tf:"private_static_ip_address,omitempty" protobuf:"bytes,13,opt,name=privateStaticIPAddress"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RedisConfiguration []RedisCacheSpecRedisConfiguration `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
-	ResourceGroupName  string                             `json:"resourceGroupName" tf:"resource_group_name"`
+	RedisConfiguration []RedisCacheSpecRedisConfiguration `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty" protobuf:"bytes,14,rep,name=redisConfiguration"`
+	ResourceGroupName  string                             `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,15,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
 	// +optional
-	ShardCount int64  `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
-	SkuName    string `json:"skuName" tf:"sku_name"`
+	ShardCount int64  `json:"shardCount,omitempty" tf:"shard_count,omitempty" protobuf:"varint,16,opt,name=shardCount"`
+	SkuName    string `json:"skuName" tf:"sku_name" protobuf:"bytes,17,opt,name=skuName"`
 	// +optional
-	SslPort int64 `json:"sslPort,omitempty" tf:"ssl_port,omitempty"`
+	SslPort int64 `json:"sslPort,omitempty" tf:"ssl_port,omitempty" protobuf:"varint,18,opt,name=sslPort"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,19,opt,name=subnetID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,20,rep,name=tags"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,21,rep,name=zones"`
 }
 
 type RedisCacheStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RedisCacheSpec `json:"output,omitempty"`
+	Output *RedisCacheSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -139,7 +139,7 @@ type RedisCacheStatus struct {
 // RedisCacheList is a list of RedisCaches
 type RedisCacheList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RedisCache CRD objects
-	Items []RedisCache `json:"items,omitempty"`
+	Items []RedisCache `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

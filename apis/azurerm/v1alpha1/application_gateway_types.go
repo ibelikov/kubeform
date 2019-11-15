@@ -34,445 +34,445 @@ import (
 
 type ApplicationGateway struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationGatewaySpec   `json:"spec,omitempty"`
-	Status            ApplicationGatewayStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApplicationGatewaySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApplicationGatewayStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApplicationGatewaySpecAuthenticationCertificate struct {
 	Data string `json:"-" sensitive:"true" tf:"data"`
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type ApplicationGatewaySpecAutoscaleConfiguration struct {
 	// +optional
-	MaxCapacity int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
-	MinCapacity int64 `json:"minCapacity" tf:"min_capacity"`
+	MaxCapacity int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty" protobuf:"varint,1,opt,name=maxCapacity"`
+	MinCapacity int64 `json:"minCapacity" tf:"min_capacity" protobuf:"varint,2,opt,name=minCapacity"`
 }
 
 type ApplicationGatewaySpecBackendAddressPool struct {
 	// +optional
 	// +kubebuilder:validation:MinItems=1
 	// Deprecated
-	FqdnList []string `json:"fqdnList,omitempty" tf:"fqdn_list,omitempty"`
+	FqdnList []string `json:"fqdnList,omitempty" tf:"fqdn_list,omitempty" protobuf:"bytes,1,rep,name=fqdnList"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	Fqdns []string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
+	Fqdns []string `json:"fqdns,omitempty" tf:"fqdns,omitempty" protobuf:"bytes,2,rep,name=fqdns"`
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,3,opt,name=ID"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
 	// Deprecated
-	IpAddressList []string `json:"ipAddressList,omitempty" tf:"ip_address_list,omitempty"`
+	IpAddressList []string `json:"ipAddressList,omitempty" tf:"ip_address_list,omitempty" protobuf:"bytes,4,rep,name=ipAddressList"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	IpAddresses []string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
-	Name        string   `json:"name" tf:"name"`
+	IpAddresses []string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty" protobuf:"bytes,5,rep,name=ipAddresses"`
+	Name        string   `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 }
 
 type ApplicationGatewaySpecBackendHTTPSettingsAuthenticationCertificate struct {
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type ApplicationGatewaySpecBackendHTTPSettingsConnectionDraining struct {
-	DrainTimeoutSec int64 `json:"drainTimeoutSec" tf:"drain_timeout_sec"`
-	Enabled         bool  `json:"enabled" tf:"enabled"`
+	DrainTimeoutSec int64 `json:"drainTimeoutSec" tf:"drain_timeout_sec" protobuf:"varint,1,opt,name=drainTimeoutSec"`
+	Enabled         bool  `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
 }
 
 type ApplicationGatewaySpecBackendHTTPSettings struct {
 	// +optional
-	AffinityCookieName string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
+	AffinityCookieName string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty" protobuf:"bytes,1,opt,name=affinityCookieName"`
 	// +optional
-	AuthenticationCertificate []ApplicationGatewaySpecBackendHTTPSettingsAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
+	AuthenticationCertificate []ApplicationGatewaySpecBackendHTTPSettingsAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty" protobuf:"bytes,2,rep,name=authenticationCertificate"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ConnectionDraining  []ApplicationGatewaySpecBackendHTTPSettingsConnectionDraining `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty"`
-	CookieBasedAffinity string                                                        `json:"cookieBasedAffinity" tf:"cookie_based_affinity"`
+	ConnectionDraining  []ApplicationGatewaySpecBackendHTTPSettingsConnectionDraining `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty" protobuf:"bytes,3,rep,name=connectionDraining"`
+	CookieBasedAffinity string                                                        `json:"cookieBasedAffinity" tf:"cookie_based_affinity" protobuf:"bytes,4,opt,name=cookieBasedAffinity"`
 	// +optional
-	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty" protobuf:"bytes,5,opt,name=hostName"`
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,6,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,8,opt,name=path"`
 	// +optional
-	PickHostNameFromBackendAddress bool  `json:"pickHostNameFromBackendAddress,omitempty" tf:"pick_host_name_from_backend_address,omitempty"`
-	Port                           int64 `json:"port" tf:"port"`
+	PickHostNameFromBackendAddress bool  `json:"pickHostNameFromBackendAddress,omitempty" tf:"pick_host_name_from_backend_address,omitempty" protobuf:"varint,9,opt,name=pickHostNameFromBackendAddress"`
+	Port                           int64 `json:"port" tf:"port" protobuf:"varint,10,opt,name=port"`
 	// +optional
-	ProbeID string `json:"probeID,omitempty" tf:"probe_id,omitempty"`
+	ProbeID string `json:"probeID,omitempty" tf:"probe_id,omitempty" protobuf:"bytes,11,opt,name=probeID"`
 	// +optional
-	ProbeName string `json:"probeName,omitempty" tf:"probe_name,omitempty"`
-	Protocol  string `json:"protocol" tf:"protocol"`
+	ProbeName string `json:"probeName,omitempty" tf:"probe_name,omitempty" protobuf:"bytes,12,opt,name=probeName"`
+	Protocol  string `json:"protocol" tf:"protocol" protobuf:"bytes,13,opt,name=protocol"`
 	// +optional
-	RequestTimeout int64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
+	RequestTimeout int64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty" protobuf:"varint,14,opt,name=requestTimeout"`
 }
 
 type ApplicationGatewaySpecCustomErrorConfiguration struct {
-	CustomErrorPageURL string `json:"customErrorPageURL" tf:"custom_error_page_url"`
+	CustomErrorPageURL string `json:"customErrorPageURL" tf:"custom_error_page_url" protobuf:"bytes,1,opt,name=customErrorPageURL"`
 	// +optional
-	ID         string `json:"ID,omitempty" tf:"id,omitempty"`
-	StatusCode string `json:"statusCode" tf:"status_code"`
+	ID         string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
+	StatusCode string `json:"statusCode" tf:"status_code" protobuf:"bytes,3,opt,name=statusCode"`
 }
 
 type ApplicationGatewaySpecFrontendIPConfiguration struct {
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,3,opt,name=privateIPAddress"`
 	// +optional
-	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty" protobuf:"bytes,4,opt,name=privateIPAddressAllocation"`
 	// +optional
-	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty" protobuf:"bytes,5,opt,name=publicIPAddressID"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,6,opt,name=subnetID"`
 }
 
 type ApplicationGatewaySpecFrontendPort struct {
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
-	Port int64  `json:"port" tf:"port"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	Port int64  `json:"port" tf:"port" protobuf:"varint,3,opt,name=port"`
 }
 
 type ApplicationGatewaySpecGatewayIPConfiguration struct {
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name     string `json:"name" tf:"name"`
-	SubnetID string `json:"subnetID" tf:"subnet_id"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	SubnetID string `json:"subnetID" tf:"subnet_id" protobuf:"bytes,3,opt,name=subnetID"`
 }
 
 type ApplicationGatewaySpecHttpListenerCustomErrorConfiguration struct {
-	CustomErrorPageURL string `json:"customErrorPageURL" tf:"custom_error_page_url"`
+	CustomErrorPageURL string `json:"customErrorPageURL" tf:"custom_error_page_url" protobuf:"bytes,1,opt,name=customErrorPageURL"`
 	// +optional
-	ID         string `json:"ID,omitempty" tf:"id,omitempty"`
-	StatusCode string `json:"statusCode" tf:"status_code"`
+	ID         string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
+	StatusCode string `json:"statusCode" tf:"status_code" protobuf:"bytes,3,opt,name=statusCode"`
 }
 
 type ApplicationGatewaySpecHttpListener struct {
 	// +optional
-	CustomErrorConfiguration []ApplicationGatewaySpecHttpListenerCustomErrorConfiguration `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty"`
+	CustomErrorConfiguration []ApplicationGatewaySpecHttpListenerCustomErrorConfiguration `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty" protobuf:"bytes,1,rep,name=customErrorConfiguration"`
 	// +optional
-	FrontendIPConfigurationID   string `json:"frontendIPConfigurationID,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
-	FrontendIPConfigurationName string `json:"frontendIPConfigurationName" tf:"frontend_ip_configuration_name"`
+	FrontendIPConfigurationID   string `json:"frontendIPConfigurationID,omitempty" tf:"frontend_ip_configuration_id,omitempty" protobuf:"bytes,2,opt,name=frontendIPConfigurationID"`
+	FrontendIPConfigurationName string `json:"frontendIPConfigurationName" tf:"frontend_ip_configuration_name" protobuf:"bytes,3,opt,name=frontendIPConfigurationName"`
 	// +optional
-	FrontendPortID   string `json:"frontendPortID,omitempty" tf:"frontend_port_id,omitempty"`
-	FrontendPortName string `json:"frontendPortName" tf:"frontend_port_name"`
+	FrontendPortID   string `json:"frontendPortID,omitempty" tf:"frontend_port_id,omitempty" protobuf:"bytes,4,opt,name=frontendPortID"`
+	FrontendPortName string `json:"frontendPortName" tf:"frontend_port_name" protobuf:"bytes,5,opt,name=frontendPortName"`
 	// +optional
-	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty" protobuf:"bytes,6,opt,name=hostName"`
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name     string `json:"name" tf:"name"`
-	Protocol string `json:"protocol" tf:"protocol"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,7,opt,name=ID"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
+	Protocol string `json:"protocol" tf:"protocol" protobuf:"bytes,9,opt,name=protocol"`
 	// +optional
-	RequireSni bool `json:"requireSni,omitempty" tf:"require_sni,omitempty"`
+	RequireSni bool `json:"requireSni,omitempty" tf:"require_sni,omitempty" protobuf:"varint,10,opt,name=requireSni"`
 	// +optional
-	SslCertificateID string `json:"sslCertificateID,omitempty" tf:"ssl_certificate_id,omitempty"`
+	SslCertificateID string `json:"sslCertificateID,omitempty" tf:"ssl_certificate_id,omitempty" protobuf:"bytes,11,opt,name=sslCertificateID"`
 	// +optional
-	SslCertificateName string `json:"sslCertificateName,omitempty" tf:"ssl_certificate_name,omitempty"`
+	SslCertificateName string `json:"sslCertificateName,omitempty" tf:"ssl_certificate_name,omitempty" protobuf:"bytes,12,opt,name=sslCertificateName"`
 }
 
 type ApplicationGatewaySpecIdentity struct {
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	IdentityIDS []string `json:"identityIDS" tf:"identity_ids"`
+	IdentityIDS []string `json:"identityIDS" tf:"identity_ids" protobuf:"bytes,1,rep,name=identityIDS"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,2,opt,name=type"`
 }
 
 type ApplicationGatewaySpecProbeMatch struct {
 	// +optional
-	Body string `json:"body,omitempty" tf:"body,omitempty"`
+	Body string `json:"body,omitempty" tf:"body,omitempty" protobuf:"bytes,1,opt,name=body"`
 	// +optional
-	StatusCode []string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode []string `json:"statusCode,omitempty" tf:"status_code,omitempty" protobuf:"bytes,2,rep,name=statusCode"`
 }
 
 type ApplicationGatewaySpecProbe struct {
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,1,opt,name=host"`
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Interval int64  `json:"interval" tf:"interval"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
+	Interval int64  `json:"interval" tf:"interval" protobuf:"varint,3,opt,name=interval"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Match []ApplicationGatewaySpecProbeMatch `json:"match,omitempty" tf:"match,omitempty"`
+	Match []ApplicationGatewaySpecProbeMatch `json:"match,omitempty" tf:"match,omitempty" protobuf:"bytes,4,rep,name=match"`
 	// +optional
-	MinimumServers int64  `json:"minimumServers,omitempty" tf:"minimum_servers,omitempty"`
-	Name           string `json:"name" tf:"name"`
-	Path           string `json:"path" tf:"path"`
+	MinimumServers int64  `json:"minimumServers,omitempty" tf:"minimum_servers,omitempty" protobuf:"varint,5,opt,name=minimumServers"`
+	Name           string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	Path           string `json:"path" tf:"path" protobuf:"bytes,7,opt,name=path"`
 	// +optional
-	PickHostNameFromBackendHTTPSettings bool   `json:"pickHostNameFromBackendHTTPSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty"`
-	Protocol                            string `json:"protocol" tf:"protocol"`
-	Timeout                             int64  `json:"timeout" tf:"timeout"`
-	UnhealthyThreshold                  int64  `json:"unhealthyThreshold" tf:"unhealthy_threshold"`
+	PickHostNameFromBackendHTTPSettings bool   `json:"pickHostNameFromBackendHTTPSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty" protobuf:"varint,8,opt,name=pickHostNameFromBackendHTTPSettings"`
+	Protocol                            string `json:"protocol" tf:"protocol" protobuf:"bytes,9,opt,name=protocol"`
+	Timeout                             int64  `json:"timeout" tf:"timeout" protobuf:"varint,10,opt,name=timeout"`
+	UnhealthyThreshold                  int64  `json:"unhealthyThreshold" tf:"unhealthy_threshold" protobuf:"varint,11,opt,name=unhealthyThreshold"`
 }
 
 type ApplicationGatewaySpecRedirectConfiguration struct {
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
 	// +optional
-	IncludePath bool `json:"includePath,omitempty" tf:"include_path,omitempty"`
+	IncludePath bool `json:"includePath,omitempty" tf:"include_path,omitempty" protobuf:"varint,2,opt,name=includePath"`
 	// +optional
-	IncludeQueryString bool   `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
-	Name               string `json:"name" tf:"name"`
-	RedirectType       string `json:"redirectType" tf:"redirect_type"`
+	IncludeQueryString bool   `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty" protobuf:"varint,3,opt,name=includeQueryString"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	RedirectType       string `json:"redirectType" tf:"redirect_type" protobuf:"bytes,5,opt,name=redirectType"`
 	// +optional
-	TargetListenerID string `json:"targetListenerID,omitempty" tf:"target_listener_id,omitempty"`
+	TargetListenerID string `json:"targetListenerID,omitempty" tf:"target_listener_id,omitempty" protobuf:"bytes,6,opt,name=targetListenerID"`
 	// +optional
-	TargetListenerName string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty"`
+	TargetListenerName string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty" protobuf:"bytes,7,opt,name=targetListenerName"`
 	// +optional
-	TargetURL string `json:"targetURL,omitempty" tf:"target_url,omitempty"`
+	TargetURL string `json:"targetURL,omitempty" tf:"target_url,omitempty" protobuf:"bytes,8,opt,name=targetURL"`
 }
 
 type ApplicationGatewaySpecRequestRoutingRule struct {
 	// +optional
-	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty"`
+	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty" protobuf:"bytes,1,opt,name=backendAddressPoolID"`
 	// +optional
-	BackendAddressPoolName string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty"`
+	BackendAddressPoolName string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty" protobuf:"bytes,2,opt,name=backendAddressPoolName"`
 	// +optional
-	BackendHTTPSettingsID string `json:"backendHTTPSettingsID,omitempty" tf:"backend_http_settings_id,omitempty"`
+	BackendHTTPSettingsID string `json:"backendHTTPSettingsID,omitempty" tf:"backend_http_settings_id,omitempty" protobuf:"bytes,3,opt,name=backendHTTPSettingsID"`
 	// +optional
-	BackendHTTPSettingsName string `json:"backendHTTPSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
+	BackendHTTPSettingsName string `json:"backendHTTPSettingsName,omitempty" tf:"backend_http_settings_name,omitempty" protobuf:"bytes,4,opt,name=backendHTTPSettingsName"`
 	// +optional
-	HttpListenerID   string `json:"httpListenerID,omitempty" tf:"http_listener_id,omitempty"`
-	HttpListenerName string `json:"httpListenerName" tf:"http_listener_name"`
+	HttpListenerID   string `json:"httpListenerID,omitempty" tf:"http_listener_id,omitempty" protobuf:"bytes,5,opt,name=httpListenerID"`
+	HttpListenerName string `json:"httpListenerName" tf:"http_listener_name" protobuf:"bytes,6,opt,name=httpListenerName"`
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,7,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	RedirectConfigurationID string `json:"redirectConfigurationID,omitempty" tf:"redirect_configuration_id,omitempty"`
+	RedirectConfigurationID string `json:"redirectConfigurationID,omitempty" tf:"redirect_configuration_id,omitempty" protobuf:"bytes,9,opt,name=redirectConfigurationID"`
 	// +optional
-	RedirectConfigurationName string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty"`
+	RedirectConfigurationName string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty" protobuf:"bytes,10,opt,name=redirectConfigurationName"`
 	// +optional
-	RewriteRuleSetID string `json:"rewriteRuleSetID,omitempty" tf:"rewrite_rule_set_id,omitempty"`
+	RewriteRuleSetID string `json:"rewriteRuleSetID,omitempty" tf:"rewrite_rule_set_id,omitempty" protobuf:"bytes,11,opt,name=rewriteRuleSetID"`
 	// +optional
-	RewriteRuleSetName string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty"`
-	RuleType           string `json:"ruleType" tf:"rule_type"`
+	RewriteRuleSetName string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty" protobuf:"bytes,12,opt,name=rewriteRuleSetName"`
+	RuleType           string `json:"ruleType" tf:"rule_type" protobuf:"bytes,13,opt,name=ruleType"`
 	// +optional
-	UrlPathMapID string `json:"urlPathMapID,omitempty" tf:"url_path_map_id,omitempty"`
+	UrlPathMapID string `json:"urlPathMapID,omitempty" tf:"url_path_map_id,omitempty" protobuf:"bytes,14,opt,name=urlPathMapID"`
 	// +optional
-	UrlPathMapName string `json:"urlPathMapName,omitempty" tf:"url_path_map_name,omitempty"`
+	UrlPathMapName string `json:"urlPathMapName,omitempty" tf:"url_path_map_name,omitempty" protobuf:"bytes,15,opt,name=urlPathMapName"`
 }
 
 type ApplicationGatewaySpecRewriteRuleSetRewriteRuleCondition struct {
 	// +optional
-	IgnoreCase bool `json:"ignoreCase,omitempty" tf:"ignore_case,omitempty"`
+	IgnoreCase bool `json:"ignoreCase,omitempty" tf:"ignore_case,omitempty" protobuf:"varint,1,opt,name=ignoreCase"`
 	// +optional
-	Negate   bool   `json:"negate,omitempty" tf:"negate,omitempty"`
-	Pattern  string `json:"pattern" tf:"pattern"`
-	Variable string `json:"variable" tf:"variable"`
+	Negate   bool   `json:"negate,omitempty" tf:"negate,omitempty" protobuf:"varint,2,opt,name=negate"`
+	Pattern  string `json:"pattern" tf:"pattern" protobuf:"bytes,3,opt,name=pattern"`
+	Variable string `json:"variable" tf:"variable" protobuf:"bytes,4,opt,name=variable"`
 }
 
 type ApplicationGatewaySpecRewriteRuleSetRewriteRuleRequestHeaderConfiguration struct {
-	HeaderName  string `json:"headerName" tf:"header_name"`
-	HeaderValue string `json:"headerValue" tf:"header_value"`
+	HeaderName  string `json:"headerName" tf:"header_name" protobuf:"bytes,1,opt,name=headerName"`
+	HeaderValue string `json:"headerValue" tf:"header_value" protobuf:"bytes,2,opt,name=headerValue"`
 }
 
 type ApplicationGatewaySpecRewriteRuleSetRewriteRuleResponseHeaderConfiguration struct {
-	HeaderName  string `json:"headerName" tf:"header_name"`
-	HeaderValue string `json:"headerValue" tf:"header_value"`
+	HeaderName  string `json:"headerName" tf:"header_name" protobuf:"bytes,1,opt,name=headerName"`
+	HeaderValue string `json:"headerValue" tf:"header_value" protobuf:"bytes,2,opt,name=headerValue"`
 }
 
 type ApplicationGatewaySpecRewriteRuleSetRewriteRule struct {
 	// +optional
-	Condition []ApplicationGatewaySpecRewriteRuleSetRewriteRuleCondition `json:"condition,omitempty" tf:"condition,omitempty"`
-	Name      string                                                     `json:"name" tf:"name"`
+	Condition []ApplicationGatewaySpecRewriteRuleSetRewriteRuleCondition `json:"condition,omitempty" tf:"condition,omitempty" protobuf:"bytes,1,rep,name=condition"`
+	Name      string                                                     `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	RequestHeaderConfiguration []ApplicationGatewaySpecRewriteRuleSetRewriteRuleRequestHeaderConfiguration `json:"requestHeaderConfiguration,omitempty" tf:"request_header_configuration,omitempty"`
+	RequestHeaderConfiguration []ApplicationGatewaySpecRewriteRuleSetRewriteRuleRequestHeaderConfiguration `json:"requestHeaderConfiguration,omitempty" tf:"request_header_configuration,omitempty" protobuf:"bytes,3,rep,name=requestHeaderConfiguration"`
 	// +optional
-	ResponseHeaderConfiguration []ApplicationGatewaySpecRewriteRuleSetRewriteRuleResponseHeaderConfiguration `json:"responseHeaderConfiguration,omitempty" tf:"response_header_configuration,omitempty"`
-	RuleSequence                int64                                                                        `json:"ruleSequence" tf:"rule_sequence"`
+	ResponseHeaderConfiguration []ApplicationGatewaySpecRewriteRuleSetRewriteRuleResponseHeaderConfiguration `json:"responseHeaderConfiguration,omitempty" tf:"response_header_configuration,omitempty" protobuf:"bytes,4,rep,name=responseHeaderConfiguration"`
+	RuleSequence                int64                                                                        `json:"ruleSequence" tf:"rule_sequence" protobuf:"varint,5,opt,name=ruleSequence"`
 }
 
 type ApplicationGatewaySpecRewriteRuleSet struct {
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	RewriteRule []ApplicationGatewaySpecRewriteRuleSetRewriteRule `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty"`
+	RewriteRule []ApplicationGatewaySpecRewriteRuleSetRewriteRule `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty" protobuf:"bytes,3,rep,name=rewriteRule"`
 }
 
 type ApplicationGatewaySpecSku struct {
 	// +optional
-	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty"`
-	Name     string `json:"name" tf:"name"`
-	Tier     string `json:"tier" tf:"tier"`
+	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty" protobuf:"varint,1,opt,name=capacity"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	Tier     string `json:"tier" tf:"tier" protobuf:"bytes,3,opt,name=tier"`
 }
 
 type ApplicationGatewaySpecSslCertificate struct {
 	Data string `json:"-" sensitive:"true" tf:"data"`
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name     string `json:"name" tf:"name"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	Password string `json:"-" sensitive:"true" tf:"password"`
 	// +optional
-	PublicCertData string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
+	PublicCertData string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty" protobuf:"bytes,3,opt,name=publicCertData"`
 }
 
 type ApplicationGatewaySpecSslPolicy struct {
 	// +optional
-	CipherSuites []string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
+	CipherSuites []string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty" protobuf:"bytes,1,rep,name=cipherSuites"`
 	// +optional
-	DisabledProtocols []string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty"`
+	DisabledProtocols []string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty" protobuf:"bytes,2,rep,name=disabledProtocols"`
 	// +optional
-	MinProtocolVersion string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
+	MinProtocolVersion string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty" protobuf:"bytes,3,opt,name=minProtocolVersion"`
 	// +optional
-	PolicyName string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+	PolicyName string `json:"policyName,omitempty" tf:"policy_name,omitempty" protobuf:"bytes,4,opt,name=policyName"`
 	// +optional
-	PolicyType string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+	PolicyType string `json:"policyType,omitempty" tf:"policy_type,omitempty" protobuf:"bytes,5,opt,name=policyType"`
 }
 
 type ApplicationGatewaySpecUrlPathMapPathRule struct {
 	// +optional
-	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty"`
+	BackendAddressPoolID string `json:"backendAddressPoolID,omitempty" tf:"backend_address_pool_id,omitempty" protobuf:"bytes,1,opt,name=backendAddressPoolID"`
 	// +optional
-	BackendAddressPoolName string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty"`
+	BackendAddressPoolName string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty" protobuf:"bytes,2,opt,name=backendAddressPoolName"`
 	// +optional
-	BackendHTTPSettingsID string `json:"backendHTTPSettingsID,omitempty" tf:"backend_http_settings_id,omitempty"`
+	BackendHTTPSettingsID string `json:"backendHTTPSettingsID,omitempty" tf:"backend_http_settings_id,omitempty" protobuf:"bytes,3,opt,name=backendHTTPSettingsID"`
 	// +optional
-	BackendHTTPSettingsName string `json:"backendHTTPSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
+	BackendHTTPSettingsName string `json:"backendHTTPSettingsName,omitempty" tf:"backend_http_settings_name,omitempty" protobuf:"bytes,4,opt,name=backendHTTPSettingsName"`
 	// +optional
-	ID    string   `json:"ID,omitempty" tf:"id,omitempty"`
-	Name  string   `json:"name" tf:"name"`
-	Paths []string `json:"paths" tf:"paths"`
+	ID    string   `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,5,opt,name=ID"`
+	Name  string   `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	Paths []string `json:"paths" tf:"paths" protobuf:"bytes,7,rep,name=paths"`
 	// +optional
-	RedirectConfigurationID string `json:"redirectConfigurationID,omitempty" tf:"redirect_configuration_id,omitempty"`
+	RedirectConfigurationID string `json:"redirectConfigurationID,omitempty" tf:"redirect_configuration_id,omitempty" protobuf:"bytes,8,opt,name=redirectConfigurationID"`
 	// +optional
-	RedirectConfigurationName string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty"`
+	RedirectConfigurationName string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty" protobuf:"bytes,9,opt,name=redirectConfigurationName"`
 	// +optional
-	RewriteRuleSetID string `json:"rewriteRuleSetID,omitempty" tf:"rewrite_rule_set_id,omitempty"`
+	RewriteRuleSetID string `json:"rewriteRuleSetID,omitempty" tf:"rewrite_rule_set_id,omitempty" protobuf:"bytes,10,opt,name=rewriteRuleSetID"`
 	// +optional
-	RewriteRuleSetName string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty"`
+	RewriteRuleSetName string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty" protobuf:"bytes,11,opt,name=rewriteRuleSetName"`
 }
 
 type ApplicationGatewaySpecUrlPathMap struct {
 	// +optional
-	DefaultBackendAddressPoolID string `json:"defaultBackendAddressPoolID,omitempty" tf:"default_backend_address_pool_id,omitempty"`
+	DefaultBackendAddressPoolID string `json:"defaultBackendAddressPoolID,omitempty" tf:"default_backend_address_pool_id,omitempty" protobuf:"bytes,1,opt,name=defaultBackendAddressPoolID"`
 	// +optional
-	DefaultBackendAddressPoolName string `json:"defaultBackendAddressPoolName,omitempty" tf:"default_backend_address_pool_name,omitempty"`
+	DefaultBackendAddressPoolName string `json:"defaultBackendAddressPoolName,omitempty" tf:"default_backend_address_pool_name,omitempty" protobuf:"bytes,2,opt,name=defaultBackendAddressPoolName"`
 	// +optional
-	DefaultBackendHTTPSettingsID string `json:"defaultBackendHTTPSettingsID,omitempty" tf:"default_backend_http_settings_id,omitempty"`
+	DefaultBackendHTTPSettingsID string `json:"defaultBackendHTTPSettingsID,omitempty" tf:"default_backend_http_settings_id,omitempty" protobuf:"bytes,3,opt,name=defaultBackendHTTPSettingsID"`
 	// +optional
-	DefaultBackendHTTPSettingsName string `json:"defaultBackendHTTPSettingsName,omitempty" tf:"default_backend_http_settings_name,omitempty"`
+	DefaultBackendHTTPSettingsName string `json:"defaultBackendHTTPSettingsName,omitempty" tf:"default_backend_http_settings_name,omitempty" protobuf:"bytes,4,opt,name=defaultBackendHTTPSettingsName"`
 	// +optional
-	DefaultRedirectConfigurationID string `json:"defaultRedirectConfigurationID,omitempty" tf:"default_redirect_configuration_id,omitempty"`
+	DefaultRedirectConfigurationID string `json:"defaultRedirectConfigurationID,omitempty" tf:"default_redirect_configuration_id,omitempty" protobuf:"bytes,5,opt,name=defaultRedirectConfigurationID"`
 	// +optional
-	DefaultRedirectConfigurationName string `json:"defaultRedirectConfigurationName,omitempty" tf:"default_redirect_configuration_name,omitempty"`
+	DefaultRedirectConfigurationName string `json:"defaultRedirectConfigurationName,omitempty" tf:"default_redirect_configuration_name,omitempty" protobuf:"bytes,6,opt,name=defaultRedirectConfigurationName"`
 	// +optional
-	DefaultRewriteRuleSetID string `json:"defaultRewriteRuleSetID,omitempty" tf:"default_rewrite_rule_set_id,omitempty"`
+	DefaultRewriteRuleSetID string `json:"defaultRewriteRuleSetID,omitempty" tf:"default_rewrite_rule_set_id,omitempty" protobuf:"bytes,7,opt,name=defaultRewriteRuleSetID"`
 	// +optional
-	DefaultRewriteRuleSetName string `json:"defaultRewriteRuleSetName,omitempty" tf:"default_rewrite_rule_set_name,omitempty"`
+	DefaultRewriteRuleSetName string `json:"defaultRewriteRuleSetName,omitempty" tf:"default_rewrite_rule_set_name,omitempty" protobuf:"bytes,8,opt,name=defaultRewriteRuleSetName"`
 	// +optional
-	ID       string                                     `json:"ID,omitempty" tf:"id,omitempty"`
-	Name     string                                     `json:"name" tf:"name"`
-	PathRule []ApplicationGatewaySpecUrlPathMapPathRule `json:"pathRule" tf:"path_rule"`
+	ID       string                                     `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,9,opt,name=ID"`
+	Name     string                                     `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
+	PathRule []ApplicationGatewaySpecUrlPathMapPathRule `json:"pathRule" tf:"path_rule" protobuf:"bytes,11,rep,name=pathRule"`
 }
 
 type ApplicationGatewaySpecWafConfigurationDisabledRuleGroup struct {
-	RuleGroupName string `json:"ruleGroupName" tf:"rule_group_name"`
+	RuleGroupName string `json:"ruleGroupName" tf:"rule_group_name" protobuf:"bytes,1,opt,name=ruleGroupName"`
 	// +optional
-	Rules []int64 `json:"rules,omitempty" tf:"rules,omitempty"`
+	Rules []int64 `json:"rules,omitempty" tf:"rules,omitempty" protobuf:"varint,2,rep,name=rules"`
 }
 
 type ApplicationGatewaySpecWafConfigurationExclusion struct {
-	MatchVariable string `json:"matchVariable" tf:"match_variable"`
+	MatchVariable string `json:"matchVariable" tf:"match_variable" protobuf:"bytes,1,opt,name=matchVariable"`
 	// +optional
-	Selector string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector string `json:"selector,omitempty" tf:"selector,omitempty" protobuf:"bytes,2,opt,name=selector"`
 	// +optional
-	SelectorMatchOperator string `json:"selectorMatchOperator,omitempty" tf:"selector_match_operator,omitempty"`
+	SelectorMatchOperator string `json:"selectorMatchOperator,omitempty" tf:"selector_match_operator,omitempty" protobuf:"bytes,3,opt,name=selectorMatchOperator"`
 }
 
 type ApplicationGatewaySpecWafConfiguration struct {
 	// +optional
-	DisabledRuleGroup []ApplicationGatewaySpecWafConfigurationDisabledRuleGroup `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
-	Enabled           bool                                                      `json:"enabled" tf:"enabled"`
+	DisabledRuleGroup []ApplicationGatewaySpecWafConfigurationDisabledRuleGroup `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty" protobuf:"bytes,1,rep,name=disabledRuleGroup"`
+	Enabled           bool                                                      `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
 	// +optional
-	Exclusion []ApplicationGatewaySpecWafConfigurationExclusion `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+	Exclusion []ApplicationGatewaySpecWafConfigurationExclusion `json:"exclusion,omitempty" tf:"exclusion,omitempty" protobuf:"bytes,3,rep,name=exclusion"`
 	// +optional
-	FileUploadLimitMb int64  `json:"fileUploadLimitMb,omitempty" tf:"file_upload_limit_mb,omitempty"`
-	FirewallMode      string `json:"firewallMode" tf:"firewall_mode"`
+	FileUploadLimitMb int64  `json:"fileUploadLimitMb,omitempty" tf:"file_upload_limit_mb,omitempty" protobuf:"varint,4,opt,name=fileUploadLimitMb"`
+	FirewallMode      string `json:"firewallMode" tf:"firewall_mode" protobuf:"bytes,5,opt,name=firewallMode"`
 	// +optional
-	MaxRequestBodySizeKb int64 `json:"maxRequestBodySizeKb,omitempty" tf:"max_request_body_size_kb,omitempty"`
+	MaxRequestBodySizeKb int64 `json:"maxRequestBodySizeKb,omitempty" tf:"max_request_body_size_kb,omitempty" protobuf:"varint,6,opt,name=maxRequestBodySizeKb"`
 	// +optional
-	RequestBodyCheck bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
+	RequestBodyCheck bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty" protobuf:"varint,7,opt,name=requestBodyCheck"`
 	// +optional
-	RuleSetType    string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
-	RuleSetVersion string `json:"ruleSetVersion" tf:"rule_set_version"`
+	RuleSetType    string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty" protobuf:"bytes,8,opt,name=ruleSetType"`
+	RuleSetVersion string `json:"ruleSetVersion" tf:"rule_set_version" protobuf:"bytes,9,opt,name=ruleSetVersion"`
 }
 
 type ApplicationGatewaySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AuthenticationCertificate []ApplicationGatewaySpecAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
+	AuthenticationCertificate []ApplicationGatewaySpecAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty" protobuf:"bytes,4,rep,name=authenticationCertificate"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AutoscaleConfiguration []ApplicationGatewaySpecAutoscaleConfiguration `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
-	BackendAddressPool     []ApplicationGatewaySpecBackendAddressPool     `json:"backendAddressPool" tf:"backend_address_pool"`
+	AutoscaleConfiguration []ApplicationGatewaySpecAutoscaleConfiguration `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty" protobuf:"bytes,5,rep,name=autoscaleConfiguration"`
+	BackendAddressPool     []ApplicationGatewaySpecBackendAddressPool     `json:"backendAddressPool" tf:"backend_address_pool" protobuf:"bytes,6,rep,name=backendAddressPool"`
 	// +kubebuilder:validation:MinItems=1
-	BackendHTTPSettings []ApplicationGatewaySpecBackendHTTPSettings `json:"backendHTTPSettings" tf:"backend_http_settings"`
+	BackendHTTPSettings []ApplicationGatewaySpecBackendHTTPSettings `json:"backendHTTPSettings" tf:"backend_http_settings" protobuf:"bytes,7,rep,name=backendHTTPSettings"`
 	// +optional
-	CustomErrorConfiguration []ApplicationGatewaySpecCustomErrorConfiguration `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty"`
+	CustomErrorConfiguration []ApplicationGatewaySpecCustomErrorConfiguration `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty" protobuf:"bytes,8,rep,name=customErrorConfiguration"`
 	// +optional
 	// Deprecated
-	DisabledSSLProtocols []string `json:"disabledSSLProtocols,omitempty" tf:"disabled_ssl_protocols,omitempty"`
+	DisabledSSLProtocols []string `json:"disabledSSLProtocols,omitempty" tf:"disabled_ssl_protocols,omitempty" protobuf:"bytes,9,rep,name=disabledSSLProtocols"`
 	// +optional
-	EnableHttp2 bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+	EnableHttp2 bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty" protobuf:"varint,10,opt,name=enableHttp2"`
 	// +kubebuilder:validation:MinItems=1
-	FrontendIPConfiguration []ApplicationGatewaySpecFrontendIPConfiguration `json:"frontendIPConfiguration" tf:"frontend_ip_configuration"`
-	FrontendPort            []ApplicationGatewaySpecFrontendPort            `json:"frontendPort" tf:"frontend_port"`
+	FrontendIPConfiguration []ApplicationGatewaySpecFrontendIPConfiguration `json:"frontendIPConfiguration" tf:"frontend_ip_configuration" protobuf:"bytes,11,rep,name=frontendIPConfiguration"`
+	FrontendPort            []ApplicationGatewaySpecFrontendPort            `json:"frontendPort" tf:"frontend_port" protobuf:"bytes,12,rep,name=frontendPort"`
 	// +kubebuilder:validation:MaxItems=2
-	GatewayIPConfiguration []ApplicationGatewaySpecGatewayIPConfiguration `json:"gatewayIPConfiguration" tf:"gateway_ip_configuration"`
-	HttpListener           []ApplicationGatewaySpecHttpListener           `json:"httpListener" tf:"http_listener"`
+	GatewayIPConfiguration []ApplicationGatewaySpecGatewayIPConfiguration `json:"gatewayIPConfiguration" tf:"gateway_ip_configuration" protobuf:"bytes,13,rep,name=gatewayIPConfiguration"`
+	HttpListener           []ApplicationGatewaySpecHttpListener           `json:"httpListener" tf:"http_listener" protobuf:"bytes,14,rep,name=httpListener"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Identity []ApplicationGatewaySpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
-	Location string                           `json:"location" tf:"location"`
-	Name     string                           `json:"name" tf:"name"`
+	Identity []ApplicationGatewaySpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,15,rep,name=identity"`
+	Location string                           `json:"location" tf:"location" protobuf:"bytes,16,opt,name=location"`
+	Name     string                           `json:"name" tf:"name" protobuf:"bytes,17,opt,name=name"`
 	// +optional
-	Probe []ApplicationGatewaySpecProbe `json:"probe,omitempty" tf:"probe,omitempty"`
+	Probe []ApplicationGatewaySpecProbe `json:"probe,omitempty" tf:"probe,omitempty" protobuf:"bytes,18,rep,name=probe"`
 	// +optional
-	RedirectConfiguration []ApplicationGatewaySpecRedirectConfiguration `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
+	RedirectConfiguration []ApplicationGatewaySpecRedirectConfiguration `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty" protobuf:"bytes,19,rep,name=redirectConfiguration"`
 	// +kubebuilder:validation:MinItems=1
-	RequestRoutingRule []ApplicationGatewaySpecRequestRoutingRule `json:"requestRoutingRule" tf:"request_routing_rule"`
-	ResourceGroupName  string                                     `json:"resourceGroupName" tf:"resource_group_name"`
+	RequestRoutingRule []ApplicationGatewaySpecRequestRoutingRule `json:"requestRoutingRule" tf:"request_routing_rule" protobuf:"bytes,20,rep,name=requestRoutingRule"`
+	ResourceGroupName  string                                     `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,21,opt,name=resourceGroupName"`
 	// +optional
-	RewriteRuleSet []ApplicationGatewaySpecRewriteRuleSet `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty"`
+	RewriteRuleSet []ApplicationGatewaySpecRewriteRuleSet `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty" protobuf:"bytes,22,rep,name=rewriteRuleSet"`
 	// +kubebuilder:validation:MaxItems=1
-	Sku []ApplicationGatewaySpecSku `json:"sku" tf:"sku"`
+	Sku []ApplicationGatewaySpecSku `json:"sku" tf:"sku" protobuf:"bytes,23,rep,name=sku"`
 	// +optional
-	SslCertificate []ApplicationGatewaySpecSslCertificate `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
+	SslCertificate []ApplicationGatewaySpecSslCertificate `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty" protobuf:"bytes,24,rep,name=sslCertificate"`
 	// +optional
-	SslPolicy []ApplicationGatewaySpecSslPolicy `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+	SslPolicy []ApplicationGatewaySpecSslPolicy `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty" protobuf:"bytes,25,rep,name=sslPolicy"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,26,rep,name=tags"`
 	// +optional
-	UrlPathMap []ApplicationGatewaySpecUrlPathMap `json:"urlPathMap,omitempty" tf:"url_path_map,omitempty"`
+	UrlPathMap []ApplicationGatewaySpecUrlPathMap `json:"urlPathMap,omitempty" tf:"url_path_map,omitempty" protobuf:"bytes,27,rep,name=urlPathMap"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	WafConfiguration []ApplicationGatewaySpecWafConfiguration `json:"wafConfiguration,omitempty" tf:"waf_configuration,omitempty"`
+	WafConfiguration []ApplicationGatewaySpecWafConfiguration `json:"wafConfiguration,omitempty" tf:"waf_configuration,omitempty" protobuf:"bytes,28,rep,name=wafConfiguration"`
 	// +optional
-	Zones []string `json:"zones,omitempty" tf:"zones,omitempty"`
+	Zones []string `json:"zones,omitempty" tf:"zones,omitempty" protobuf:"bytes,29,rep,name=zones"`
 }
 
 type ApplicationGatewayStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApplicationGatewaySpec `json:"output,omitempty"`
+	Output *ApplicationGatewaySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -481,7 +481,7 @@ type ApplicationGatewayStatus struct {
 // ApplicationGatewayList is a list of ApplicationGateways
 type ApplicationGatewayList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApplicationGateway CRD objects
-	Items []ApplicationGateway `json:"items,omitempty"`
+	Items []ApplicationGateway `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

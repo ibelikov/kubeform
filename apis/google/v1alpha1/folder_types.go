@@ -34,36 +34,36 @@ import (
 
 type Folder struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FolderSpec   `json:"spec,omitempty"`
-	Status            FolderStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FolderSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FolderStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FolderSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreateTime  string `json:"createTime,omitempty" tf:"create_time,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
+	CreateTime  string `json:"createTime,omitempty" tf:"create_time,omitempty" protobuf:"bytes,3,opt,name=createTime"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,4,opt,name=displayName"`
 	// +optional
-	LifecycleState string `json:"lifecycleState,omitempty" tf:"lifecycle_state,omitempty"`
+	LifecycleState string `json:"lifecycleState,omitempty" tf:"lifecycle_state,omitempty" protobuf:"bytes,5,opt,name=lifecycleState"`
 	// +optional
-	Name   string `json:"name,omitempty" tf:"name,omitempty"`
-	Parent string `json:"parent" tf:"parent"`
+	Name   string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,6,opt,name=name"`
+	Parent string `json:"parent" tf:"parent" protobuf:"bytes,7,opt,name=parent"`
 }
 
 type FolderStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FolderSpec `json:"output,omitempty"`
+	Output *FolderSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type FolderStatus struct {
 // FolderList is a list of Folders
 type FolderList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Folder CRD objects
-	Items []Folder `json:"items,omitempty"`
+	Items []Folder `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

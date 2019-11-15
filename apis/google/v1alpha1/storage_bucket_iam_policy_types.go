@@ -34,32 +34,32 @@ import (
 
 type StorageBucketIamPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageBucketIamPolicySpec   `json:"spec,omitempty"`
-	Status            StorageBucketIamPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageBucketIamPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageBucketIamPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageBucketIamPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Bucket string `json:"bucket" tf:"bucket"`
+	Bucket string `json:"bucket" tf:"bucket" protobuf:"bytes,3,opt,name=bucket"`
 	// +optional
-	Etag       string `json:"etag,omitempty" tf:"etag,omitempty"`
-	PolicyData string `json:"policyData" tf:"policy_data"`
+	Etag       string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,4,opt,name=etag"`
+	PolicyData string `json:"policyData" tf:"policy_data" protobuf:"bytes,5,opt,name=policyData"`
 }
 
 type StorageBucketIamPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageBucketIamPolicySpec `json:"output,omitempty"`
+	Output *StorageBucketIamPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -68,7 +68,7 @@ type StorageBucketIamPolicyStatus struct {
 // StorageBucketIamPolicyList is a list of StorageBucketIamPolicys
 type StorageBucketIamPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageBucketIamPolicy CRD objects
-	Items []StorageBucketIamPolicy `json:"items,omitempty"`
+	Items []StorageBucketIamPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

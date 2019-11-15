@@ -34,78 +34,78 @@ import (
 
 type ProjectOrganizationPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProjectOrganizationPolicySpec   `json:"spec,omitempty"`
-	Status            ProjectOrganizationPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ProjectOrganizationPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ProjectOrganizationPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ProjectOrganizationPolicySpecBooleanPolicy struct {
-	Enforced bool `json:"enforced" tf:"enforced"`
+	Enforced bool `json:"enforced" tf:"enforced" protobuf:"varint,1,opt,name=enforced"`
 }
 
 type ProjectOrganizationPolicySpecListPolicyAllow struct {
 	// +optional
-	All bool `json:"all,omitempty" tf:"all,omitempty"`
+	All bool `json:"all,omitempty" tf:"all,omitempty" protobuf:"varint,1,opt,name=all"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,2,rep,name=values"`
 }
 
 type ProjectOrganizationPolicySpecListPolicyDeny struct {
 	// +optional
-	All bool `json:"all,omitempty" tf:"all,omitempty"`
+	All bool `json:"all,omitempty" tf:"all,omitempty" protobuf:"varint,1,opt,name=all"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,2,rep,name=values"`
 }
 
 type ProjectOrganizationPolicySpecListPolicy struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Allow []ProjectOrganizationPolicySpecListPolicyAllow `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow []ProjectOrganizationPolicySpecListPolicyAllow `json:"allow,omitempty" tf:"allow,omitempty" protobuf:"bytes,1,rep,name=allow"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Deny []ProjectOrganizationPolicySpecListPolicyDeny `json:"deny,omitempty" tf:"deny,omitempty"`
+	Deny []ProjectOrganizationPolicySpecListPolicyDeny `json:"deny,omitempty" tf:"deny,omitempty" protobuf:"bytes,2,rep,name=deny"`
 	// +optional
-	SuggestedValue string `json:"suggestedValue,omitempty" tf:"suggested_value,omitempty"`
+	SuggestedValue string `json:"suggestedValue,omitempty" tf:"suggested_value,omitempty" protobuf:"bytes,3,opt,name=suggestedValue"`
 }
 
 type ProjectOrganizationPolicySpecRestorePolicy struct {
-	Default bool `json:"default" tf:"default"`
+	Default bool `json:"default" tf:"default" protobuf:"varint,1,opt,name=default"`
 }
 
 type ProjectOrganizationPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	BooleanPolicy []ProjectOrganizationPolicySpecBooleanPolicy `json:"booleanPolicy,omitempty" tf:"boolean_policy,omitempty"`
-	Constraint    string                                       `json:"constraint" tf:"constraint"`
+	BooleanPolicy []ProjectOrganizationPolicySpecBooleanPolicy `json:"booleanPolicy,omitempty" tf:"boolean_policy,omitempty" protobuf:"bytes,3,rep,name=booleanPolicy"`
+	Constraint    string                                       `json:"constraint" tf:"constraint" protobuf:"bytes,4,opt,name=constraint"`
 	// +optional
-	Etag string `json:"etag,omitempty" tf:"etag,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	ListPolicy []ProjectOrganizationPolicySpecListPolicy `json:"listPolicy,omitempty" tf:"list_policy,omitempty"`
-	Project    string                                    `json:"project" tf:"project"`
+	Etag string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,5,opt,name=etag"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RestorePolicy []ProjectOrganizationPolicySpecRestorePolicy `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty"`
+	ListPolicy []ProjectOrganizationPolicySpecListPolicy `json:"listPolicy,omitempty" tf:"list_policy,omitempty" protobuf:"bytes,6,rep,name=listPolicy"`
+	Project    string                                    `json:"project" tf:"project" protobuf:"bytes,7,opt,name=project"`
 	// +optional
-	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	RestorePolicy []ProjectOrganizationPolicySpecRestorePolicy `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty" protobuf:"bytes,8,rep,name=restorePolicy"`
 	// +optional
-	Version int64 `json:"version,omitempty" tf:"version,omitempty"`
+	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty" protobuf:"bytes,9,opt,name=updateTime"`
+	// +optional
+	Version int64 `json:"version,omitempty" tf:"version,omitempty" protobuf:"varint,10,opt,name=version"`
 }
 
 type ProjectOrganizationPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ProjectOrganizationPolicySpec `json:"output,omitempty"`
+	Output *ProjectOrganizationPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -114,7 +114,7 @@ type ProjectOrganizationPolicyStatus struct {
 // ProjectOrganizationPolicyList is a list of ProjectOrganizationPolicys
 type ProjectOrganizationPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ProjectOrganizationPolicy CRD objects
-	Items []ProjectOrganizationPolicy `json:"items,omitempty"`
+	Items []ProjectOrganizationPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

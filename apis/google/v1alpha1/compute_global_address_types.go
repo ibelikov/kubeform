@@ -34,57 +34,57 @@ import (
 
 type ComputeGlobalAddress struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeGlobalAddressSpec   `json:"spec,omitempty"`
-	Status            ComputeGlobalAddressStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeGlobalAddressSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeGlobalAddressStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeGlobalAddressSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Address string `json:"address,omitempty" tf:"address,omitempty"`
+	Address string `json:"address,omitempty" tf:"address,omitempty" protobuf:"bytes,3,opt,name=address"`
 	// +optional
-	AddressType string `json:"addressType,omitempty" tf:"address_type,omitempty"`
+	AddressType string `json:"addressType,omitempty" tf:"address_type,omitempty" protobuf:"bytes,4,opt,name=addressType"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,5,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
+	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty" protobuf:"bytes,7,opt,name=ipVersion"`
 	// +optional
-	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty"`
-	// +optional
-	// Deprecated
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty" protobuf:"bytes,8,opt,name=labelFingerprint"`
 	// +optional
 	// Deprecated
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,9,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
 	// Deprecated
-	PrefixLength int64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
-	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,11,opt,name=network"`
 	// +optional
 	// Deprecated
-	Purpose string `json:"purpose,omitempty" tf:"purpose,omitempty"`
+	PrefixLength int64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty" protobuf:"varint,12,opt,name=prefixLength"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,13,opt,name=project"`
+	// +optional
+	// Deprecated
+	Purpose string `json:"purpose,omitempty" tf:"purpose,omitempty" protobuf:"bytes,14,opt,name=purpose"`
+	// +optional
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,15,opt,name=selfLink"`
 }
 
 type ComputeGlobalAddressStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeGlobalAddressSpec `json:"output,omitempty"`
+	Output *ComputeGlobalAddressSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -93,7 +93,7 @@ type ComputeGlobalAddressStatus struct {
 // ComputeGlobalAddressList is a list of ComputeGlobalAddresss
 type ComputeGlobalAddressList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeGlobalAddress CRD objects
-	Items []ComputeGlobalAddress `json:"items,omitempty"`
+	Items []ComputeGlobalAddress `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

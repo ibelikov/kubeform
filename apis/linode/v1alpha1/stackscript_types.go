@@ -34,78 +34,78 @@ import (
 
 type Stackscript struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StackscriptSpec   `json:"spec,omitempty"`
-	Status            StackscriptStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StackscriptSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StackscriptStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StackscriptSpecUserDefinedFields struct {
 	// +optional
-	Default string `json:"default,omitempty" tf:"default,omitempty"`
+	Default string `json:"default,omitempty" tf:"default,omitempty" protobuf:"bytes,1,opt,name=default"`
 	// +optional
-	Example string `json:"example,omitempty" tf:"example,omitempty"`
+	Example string `json:"example,omitempty" tf:"example,omitempty" protobuf:"bytes,2,opt,name=example"`
 	// +optional
-	Label string `json:"label,omitempty" tf:"label,omitempty"`
+	Label string `json:"label,omitempty" tf:"label,omitempty" protobuf:"bytes,3,opt,name=label"`
 	// +optional
-	ManyOf string `json:"manyOf,omitempty" tf:"many_of,omitempty"`
+	ManyOf string `json:"manyOf,omitempty" tf:"many_of,omitempty" protobuf:"bytes,4,opt,name=manyOf"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	OneOf string `json:"oneOf,omitempty" tf:"one_of,omitempty"`
+	OneOf string `json:"oneOf,omitempty" tf:"one_of,omitempty" protobuf:"bytes,6,opt,name=oneOf"`
 }
 
 type StackscriptSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The date this StackScript was created.
 	// +optional
-	Created string `json:"created,omitempty" tf:"created,omitempty"`
+	Created string `json:"created,omitempty" tf:"created,omitempty" protobuf:"bytes,3,opt,name=created"`
 	// Count of currently active, deployed Linodes created from this StackScript.
 	// +optional
-	DeploymentsActive int64 `json:"deploymentsActive,omitempty" tf:"deployments_active,omitempty"`
+	DeploymentsActive int64 `json:"deploymentsActive,omitempty" tf:"deployments_active,omitempty" protobuf:"varint,4,opt,name=deploymentsActive"`
 	// The total number of times this StackScript has been deployed.
 	// +optional
-	DeploymentsTotal int64 `json:"deploymentsTotal,omitempty" tf:"deployments_total,omitempty"`
+	DeploymentsTotal int64 `json:"deploymentsTotal,omitempty" tf:"deployments_total,omitempty" protobuf:"varint,5,opt,name=deploymentsTotal"`
 	// A description for the StackScript.
-	Description string `json:"description" tf:"description"`
+	Description string `json:"description" tf:"description" protobuf:"bytes,6,opt,name=description"`
 	// An array of Image IDs representing the Images that this StackScript is compatible for deploying with.
-	Images []string `json:"images" tf:"images"`
+	Images []string `json:"images" tf:"images" protobuf:"bytes,7,rep,name=images"`
 	// This determines whether other users can use your StackScript. Once a StackScript is made public, it cannot be made private.
 	// +optional
-	IsPublic bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+	IsPublic bool `json:"isPublic,omitempty" tf:"is_public,omitempty" protobuf:"varint,8,opt,name=isPublic"`
 	// The StackScript's label is for display purposes only.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,9,opt,name=label"`
 	// This field allows you to add notes for the set of revisions made to this StackScript.
 	// +optional
-	RevNote string `json:"revNote,omitempty" tf:"rev_note,omitempty"`
+	RevNote string `json:"revNote,omitempty" tf:"rev_note,omitempty" protobuf:"bytes,10,opt,name=revNote"`
 	// The script to execute when provisioning a new Linode with this StackScript.
-	Script string `json:"script" tf:"script"`
+	Script string `json:"script" tf:"script" protobuf:"bytes,11,opt,name=script"`
 	// The date this StackScript was updated.
 	// +optional
-	Updated string `json:"updated,omitempty" tf:"updated,omitempty"`
+	Updated string `json:"updated,omitempty" tf:"updated,omitempty" protobuf:"bytes,12,opt,name=updated"`
 	// This is a list of fields defined with a special syntax inside this StackScript that allow for supplying customized parameters during deployment.
 	// +optional
-	UserDefinedFields []StackscriptSpecUserDefinedFields `json:"userDefinedFields,omitempty" tf:"user_defined_fields,omitempty"`
+	UserDefinedFields []StackscriptSpecUserDefinedFields `json:"userDefinedFields,omitempty" tf:"user_defined_fields,omitempty" protobuf:"bytes,13,rep,name=userDefinedFields"`
 	// The Gravatar ID for the User who created the StackScript.
 	// +optional
-	UserGravatarID string `json:"userGravatarID,omitempty" tf:"user_gravatar_id,omitempty"`
+	UserGravatarID string `json:"userGravatarID,omitempty" tf:"user_gravatar_id,omitempty" protobuf:"bytes,14,opt,name=userGravatarID"`
 	// The User who created the StackScript.
 	// +optional
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,15,opt,name=username"`
 }
 
 type StackscriptStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StackscriptSpec `json:"output,omitempty"`
+	Output *StackscriptSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -114,7 +114,7 @@ type StackscriptStatus struct {
 // StackscriptList is a list of Stackscripts
 type StackscriptList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Stackscript CRD objects
-	Items []Stackscript `json:"items,omitempty"`
+	Items []Stackscript `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

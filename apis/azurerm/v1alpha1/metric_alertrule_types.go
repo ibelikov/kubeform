@@ -34,62 +34,62 @@ import (
 
 type MetricAlertrule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricAlertruleSpec   `json:"spec,omitempty"`
-	Status            MetricAlertruleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MetricAlertruleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MetricAlertruleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MetricAlertruleSpecEmailAction struct {
 	// +optional
-	CustomEmails []string `json:"customEmails,omitempty" tf:"custom_emails,omitempty"`
+	CustomEmails []string `json:"customEmails,omitempty" tf:"custom_emails,omitempty" protobuf:"bytes,1,rep,name=customEmails"`
 	// +optional
-	SendToServiceOwners bool `json:"sendToServiceOwners,omitempty" tf:"send_to_service_owners,omitempty"`
+	SendToServiceOwners bool `json:"sendToServiceOwners,omitempty" tf:"send_to_service_owners,omitempty" protobuf:"varint,2,opt,name=sendToServiceOwners"`
 }
 
 type MetricAlertruleSpecWebhookAction struct {
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
-	ServiceURI string            `json:"serviceURI" tf:"service_uri"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,1,rep,name=properties"`
+	ServiceURI string            `json:"serviceURI" tf:"service_uri" protobuf:"bytes,2,opt,name=serviceURI"`
 }
 
 type MetricAlertruleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Aggregation string `json:"aggregation" tf:"aggregation"`
+	Aggregation string `json:"aggregation" tf:"aggregation" protobuf:"bytes,3,opt,name=aggregation"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	EmailAction []MetricAlertruleSpecEmailAction `json:"emailAction,omitempty" tf:"email_action,omitempty"`
+	EmailAction []MetricAlertruleSpecEmailAction `json:"emailAction,omitempty" tf:"email_action,omitempty" protobuf:"bytes,5,rep,name=emailAction"`
 	// +optional
-	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	MetricName        string `json:"metricName" tf:"metric_name"`
-	Name              string `json:"name" tf:"name"`
-	Operator          string `json:"operator" tf:"operator"`
-	Period            string `json:"period" tf:"period"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	ResourceID        string `json:"resourceID" tf:"resource_id"`
+	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,6,opt,name=enabled"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
+	MetricName        string `json:"metricName" tf:"metric_name" protobuf:"bytes,8,opt,name=metricName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	Operator          string `json:"operator" tf:"operator" protobuf:"bytes,10,opt,name=operator"`
+	Period            string `json:"period" tf:"period" protobuf:"bytes,11,opt,name=period"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
+	ResourceID        string `json:"resourceID" tf:"resource_id" protobuf:"bytes,13,opt,name=resourceID"`
 	// +optional
-	Tags      map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Threshold float64           `json:"threshold" tf:"threshold"`
+	Tags      map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,14,rep,name=tags"`
+	Threshold float64           `json:"threshold" tf:"threshold" protobuf:"fixed64,15,opt,name=threshold"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	WebhookAction []MetricAlertruleSpecWebhookAction `json:"webhookAction,omitempty" tf:"webhook_action,omitempty"`
+	WebhookAction []MetricAlertruleSpecWebhookAction `json:"webhookAction,omitempty" tf:"webhook_action,omitempty" protobuf:"bytes,16,rep,name=webhookAction"`
 }
 
 type MetricAlertruleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MetricAlertruleSpec `json:"output,omitempty"`
+	Output *MetricAlertruleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -98,7 +98,7 @@ type MetricAlertruleStatus struct {
 // MetricAlertruleList is a list of MetricAlertrules
 type MetricAlertruleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MetricAlertrule CRD objects
-	Items []MetricAlertrule `json:"items,omitempty"`
+	Items []MetricAlertrule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

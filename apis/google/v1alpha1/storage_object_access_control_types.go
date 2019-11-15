@@ -34,50 +34,50 @@ import (
 
 type StorageObjectAccessControl struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageObjectAccessControlSpec   `json:"spec,omitempty"`
-	Status            StorageObjectAccessControlStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageObjectAccessControlSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageObjectAccessControlStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageObjectAccessControlSpecProjectTeam struct {
 	// +optional
-	ProjectNumber string `json:"projectNumber,omitempty" tf:"project_number,omitempty"`
+	ProjectNumber string `json:"projectNumber,omitempty" tf:"project_number,omitempty" protobuf:"bytes,1,opt,name=projectNumber"`
 	// +optional
-	Team string `json:"team,omitempty" tf:"team,omitempty"`
+	Team string `json:"team,omitempty" tf:"team,omitempty" protobuf:"bytes,2,opt,name=team"`
 }
 
 type StorageObjectAccessControlSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Bucket string `json:"bucket" tf:"bucket"`
+	Bucket string `json:"bucket" tf:"bucket" protobuf:"bytes,3,opt,name=bucket"`
 	// +optional
-	Domain string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain string `json:"domain,omitempty" tf:"domain,omitempty" protobuf:"bytes,4,opt,name=domain"`
 	// +optional
-	Email  string `json:"email,omitempty" tf:"email,omitempty"`
-	Entity string `json:"entity" tf:"entity"`
+	Email  string `json:"email,omitempty" tf:"email,omitempty" protobuf:"bytes,5,opt,name=email"`
+	Entity string `json:"entity" tf:"entity" protobuf:"bytes,6,opt,name=entity"`
 	// +optional
-	EntityID string `json:"entityID,omitempty" tf:"entity_id,omitempty"`
+	EntityID string `json:"entityID,omitempty" tf:"entity_id,omitempty" protobuf:"bytes,7,opt,name=entityID"`
 	// +optional
-	Generation int64  `json:"generation,omitempty" tf:"generation,omitempty"`
-	Object     string `json:"object" tf:"object"`
+	Generation int64  `json:"generation,omitempty" tf:"generation,omitempty" protobuf:"varint,8,opt,name=generation"`
+	Object     string `json:"object" tf:"object" protobuf:"bytes,9,opt,name=object"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ProjectTeam []StorageObjectAccessControlSpecProjectTeam `json:"projectTeam,omitempty" tf:"project_team,omitempty"`
-	Role        string                                      `json:"role" tf:"role"`
+	ProjectTeam []StorageObjectAccessControlSpecProjectTeam `json:"projectTeam,omitempty" tf:"project_team,omitempty" protobuf:"bytes,10,rep,name=projectTeam"`
+	Role        string                                      `json:"role" tf:"role" protobuf:"bytes,11,opt,name=role"`
 }
 
 type StorageObjectAccessControlStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageObjectAccessControlSpec `json:"output,omitempty"`
+	Output *StorageObjectAccessControlSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -86,7 +86,7 @@ type StorageObjectAccessControlStatus struct {
 // StorageObjectAccessControlList is a list of StorageObjectAccessControls
 type StorageObjectAccessControlList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageObjectAccessControl CRD objects
-	Items []StorageObjectAccessControl `json:"items,omitempty"`
+	Items []StorageObjectAccessControl `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

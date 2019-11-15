@@ -34,43 +34,43 @@ import (
 
 type StreamAnalyticsJob struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamAnalyticsJobSpec   `json:"spec,omitempty"`
-	Status            StreamAnalyticsJobStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StreamAnalyticsJobSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StreamAnalyticsJobStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StreamAnalyticsJobSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	CompatibilityLevel                 string `json:"compatibilityLevel" tf:"compatibility_level"`
-	DataLocale                         string `json:"dataLocale" tf:"data_locale"`
-	EventsLateArrivalMaxDelayInSeconds int64  `json:"eventsLateArrivalMaxDelayInSeconds" tf:"events_late_arrival_max_delay_in_seconds"`
-	EventsOutOfOrderMaxDelayInSeconds  int64  `json:"eventsOutOfOrderMaxDelayInSeconds" tf:"events_out_of_order_max_delay_in_seconds"`
-	EventsOutOfOrderPolicy             string `json:"eventsOutOfOrderPolicy" tf:"events_out_of_order_policy"`
+	CompatibilityLevel                 string `json:"compatibilityLevel" tf:"compatibility_level" protobuf:"bytes,3,opt,name=compatibilityLevel"`
+	DataLocale                         string `json:"dataLocale" tf:"data_locale" protobuf:"bytes,4,opt,name=dataLocale"`
+	EventsLateArrivalMaxDelayInSeconds int64  `json:"eventsLateArrivalMaxDelayInSeconds" tf:"events_late_arrival_max_delay_in_seconds" protobuf:"varint,5,opt,name=eventsLateArrivalMaxDelayInSeconds"`
+	EventsOutOfOrderMaxDelayInSeconds  int64  `json:"eventsOutOfOrderMaxDelayInSeconds" tf:"events_out_of_order_max_delay_in_seconds" protobuf:"varint,6,opt,name=eventsOutOfOrderMaxDelayInSeconds"`
+	EventsOutOfOrderPolicy             string `json:"eventsOutOfOrderPolicy" tf:"events_out_of_order_policy" protobuf:"bytes,7,opt,name=eventsOutOfOrderPolicy"`
 	// +optional
-	JobID             string `json:"jobID,omitempty" tf:"job_id,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	OutputErrorPolicy string `json:"outputErrorPolicy" tf:"output_error_policy"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	StreamingUnits    int64  `json:"streamingUnits" tf:"streaming_units"`
+	JobID             string `json:"jobID,omitempty" tf:"job_id,omitempty" protobuf:"bytes,8,opt,name=jobID"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,9,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
+	OutputErrorPolicy string `json:"outputErrorPolicy" tf:"output_error_policy" protobuf:"bytes,11,opt,name=outputErrorPolicy"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
+	StreamingUnits    int64  `json:"streamingUnits" tf:"streaming_units" protobuf:"varint,13,opt,name=streamingUnits"`
 	// +optional
-	Tags                map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	TransformationQuery string            `json:"transformationQuery" tf:"transformation_query"`
+	Tags                map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,14,rep,name=tags"`
+	TransformationQuery string            `json:"transformationQuery" tf:"transformation_query" protobuf:"bytes,15,opt,name=transformationQuery"`
 }
 
 type StreamAnalyticsJobStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StreamAnalyticsJobSpec `json:"output,omitempty"`
+	Output *StreamAnalyticsJobSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -79,7 +79,7 @@ type StreamAnalyticsJobStatus struct {
 // StreamAnalyticsJobList is a list of StreamAnalyticsJobs
 type StreamAnalyticsJobList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StreamAnalyticsJob CRD objects
-	Items []StreamAnalyticsJob `json:"items,omitempty"`
+	Items []StreamAnalyticsJob `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

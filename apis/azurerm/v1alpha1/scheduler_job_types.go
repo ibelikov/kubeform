@@ -34,188 +34,188 @@ import (
 
 type SchedulerJob struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SchedulerJobSpec   `json:"spec,omitempty"`
-	Status            SchedulerJobStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SchedulerJobSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SchedulerJobStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SchedulerJobSpecActionStorageQueue struct {
-	Message            string `json:"message" tf:"message"`
-	SasToken           string `json:"sasToken" tf:"sas_token"`
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
-	StorageQueueName   string `json:"storageQueueName" tf:"storage_queue_name"`
+	Message            string `json:"message" tf:"message" protobuf:"bytes,1,opt,name=message"`
+	SasToken           string `json:"sasToken" tf:"sas_token" protobuf:"bytes,2,opt,name=sasToken"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,3,opt,name=storageAccountName"`
+	StorageQueueName   string `json:"storageQueueName" tf:"storage_queue_name" protobuf:"bytes,4,opt,name=storageQueueName"`
 }
 
 type SchedulerJobSpecActionWebAuthenticationActiveDirectory struct {
 	// +optional
-	Audience string `json:"audience,omitempty" tf:"audience,omitempty"`
-	ClientID string `json:"clientID" tf:"client_id"`
+	Audience string `json:"audience,omitempty" tf:"audience,omitempty" protobuf:"bytes,1,opt,name=audience"`
+	ClientID string `json:"clientID" tf:"client_id" protobuf:"bytes,2,opt,name=clientID"`
 	Secret   string `json:"-" sensitive:"true" tf:"secret"`
-	TenantID string `json:"tenantID" tf:"tenant_id"`
+	TenantID string `json:"tenantID" tf:"tenant_id" protobuf:"bytes,3,opt,name=tenantID"`
 }
 
 type SchedulerJobSpecActionWebAuthenticationBasic struct {
 	Password string `json:"-" sensitive:"true" tf:"password"`
-	Username string `json:"username" tf:"username"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,1,opt,name=username"`
 }
 
 type SchedulerJobSpecActionWebAuthenticationCertificate struct {
 	// +optional
-	Expiration string `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration string `json:"expiration,omitempty" tf:"expiration,omitempty" protobuf:"bytes,1,opt,name=expiration"`
 	Password   string `json:"-" sensitive:"true" tf:"password"`
 	Pfx        string `json:"-" sensitive:"true" tf:"pfx"`
 	// +optional
-	SubjectName string `json:"subjectName,omitempty" tf:"subject_name,omitempty"`
+	SubjectName string `json:"subjectName,omitempty" tf:"subject_name,omitempty" protobuf:"bytes,2,opt,name=subjectName"`
 	// +optional
-	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty" protobuf:"bytes,3,opt,name=thumbprint"`
 }
 
 type SchedulerJobSpecActionWeb struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationActiveDirectory []SchedulerJobSpecActionWebAuthenticationActiveDirectory `json:"authenticationActiveDirectory,omitempty" tf:"authentication_active_directory,omitempty"`
+	AuthenticationActiveDirectory []SchedulerJobSpecActionWebAuthenticationActiveDirectory `json:"authenticationActiveDirectory,omitempty" tf:"authentication_active_directory,omitempty" protobuf:"bytes,1,rep,name=authenticationActiveDirectory"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationBasic []SchedulerJobSpecActionWebAuthenticationBasic `json:"authenticationBasic,omitempty" tf:"authentication_basic,omitempty"`
+	AuthenticationBasic []SchedulerJobSpecActionWebAuthenticationBasic `json:"authenticationBasic,omitempty" tf:"authentication_basic,omitempty" protobuf:"bytes,2,rep,name=authenticationBasic"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationCertificate []SchedulerJobSpecActionWebAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
+	AuthenticationCertificate []SchedulerJobSpecActionWebAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty" protobuf:"bytes,3,rep,name=authenticationCertificate"`
 	// +optional
-	Body string `json:"body,omitempty" tf:"body,omitempty"`
+	Body string `json:"body,omitempty" tf:"body,omitempty" protobuf:"bytes,4,opt,name=body"`
 	// +optional
-	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty"`
-	Method  string            `json:"method" tf:"method"`
-	Url     string            `json:"url" tf:"url"`
+	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty" protobuf:"bytes,5,rep,name=headers"`
+	Method  string            `json:"method" tf:"method" protobuf:"bytes,6,opt,name=method"`
+	Url     string            `json:"url" tf:"url" protobuf:"bytes,7,opt,name=url"`
 }
 
 type SchedulerJobSpecErrorActionStorageQueue struct {
-	Message            string `json:"message" tf:"message"`
-	SasToken           string `json:"sasToken" tf:"sas_token"`
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
-	StorageQueueName   string `json:"storageQueueName" tf:"storage_queue_name"`
+	Message            string `json:"message" tf:"message" protobuf:"bytes,1,opt,name=message"`
+	SasToken           string `json:"sasToken" tf:"sas_token" protobuf:"bytes,2,opt,name=sasToken"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,3,opt,name=storageAccountName"`
+	StorageQueueName   string `json:"storageQueueName" tf:"storage_queue_name" protobuf:"bytes,4,opt,name=storageQueueName"`
 }
 
 type SchedulerJobSpecErrorActionWebAuthenticationActiveDirectory struct {
 	// +optional
-	Audience string `json:"audience,omitempty" tf:"audience,omitempty"`
-	ClientID string `json:"clientID" tf:"client_id"`
+	Audience string `json:"audience,omitempty" tf:"audience,omitempty" protobuf:"bytes,1,opt,name=audience"`
+	ClientID string `json:"clientID" tf:"client_id" protobuf:"bytes,2,opt,name=clientID"`
 	Secret   string `json:"-" sensitive:"true" tf:"secret"`
-	TenantID string `json:"tenantID" tf:"tenant_id"`
+	TenantID string `json:"tenantID" tf:"tenant_id" protobuf:"bytes,3,opt,name=tenantID"`
 }
 
 type SchedulerJobSpecErrorActionWebAuthenticationBasic struct {
 	Password string `json:"-" sensitive:"true" tf:"password"`
-	Username string `json:"username" tf:"username"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,1,opt,name=username"`
 }
 
 type SchedulerJobSpecErrorActionWebAuthenticationCertificate struct {
 	// +optional
-	Expiration string `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration string `json:"expiration,omitempty" tf:"expiration,omitempty" protobuf:"bytes,1,opt,name=expiration"`
 	Password   string `json:"-" sensitive:"true" tf:"password"`
 	Pfx        string `json:"-" sensitive:"true" tf:"pfx"`
 	// +optional
-	SubjectName string `json:"subjectName,omitempty" tf:"subject_name,omitempty"`
+	SubjectName string `json:"subjectName,omitempty" tf:"subject_name,omitempty" protobuf:"bytes,2,opt,name=subjectName"`
 	// +optional
-	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty" protobuf:"bytes,3,opt,name=thumbprint"`
 }
 
 type SchedulerJobSpecErrorActionWeb struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationActiveDirectory []SchedulerJobSpecErrorActionWebAuthenticationActiveDirectory `json:"authenticationActiveDirectory,omitempty" tf:"authentication_active_directory,omitempty"`
+	AuthenticationActiveDirectory []SchedulerJobSpecErrorActionWebAuthenticationActiveDirectory `json:"authenticationActiveDirectory,omitempty" tf:"authentication_active_directory,omitempty" protobuf:"bytes,1,rep,name=authenticationActiveDirectory"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationBasic []SchedulerJobSpecErrorActionWebAuthenticationBasic `json:"authenticationBasic,omitempty" tf:"authentication_basic,omitempty"`
+	AuthenticationBasic []SchedulerJobSpecErrorActionWebAuthenticationBasic `json:"authenticationBasic,omitempty" tf:"authentication_basic,omitempty" protobuf:"bytes,2,rep,name=authenticationBasic"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AuthenticationCertificate []SchedulerJobSpecErrorActionWebAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
+	AuthenticationCertificate []SchedulerJobSpecErrorActionWebAuthenticationCertificate `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty" protobuf:"bytes,3,rep,name=authenticationCertificate"`
 	// +optional
-	Body string `json:"body,omitempty" tf:"body,omitempty"`
+	Body string `json:"body,omitempty" tf:"body,omitempty" protobuf:"bytes,4,opt,name=body"`
 	// +optional
-	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty"`
-	Method  string            `json:"method" tf:"method"`
-	Url     string            `json:"url" tf:"url"`
+	Headers map[string]string `json:"headers,omitempty" tf:"headers,omitempty" protobuf:"bytes,5,rep,name=headers"`
+	Method  string            `json:"method" tf:"method" protobuf:"bytes,6,opt,name=method"`
+	Url     string            `json:"url" tf:"url" protobuf:"bytes,7,opt,name=url"`
 }
 
 type SchedulerJobSpecRecurrenceMonthlyOccurrences struct {
-	Day        string `json:"day" tf:"day"`
-	Occurrence int64  `json:"occurrence" tf:"occurrence"`
+	Day        string `json:"day" tf:"day" protobuf:"bytes,1,opt,name=day"`
+	Occurrence int64  `json:"occurrence" tf:"occurrence" protobuf:"varint,2,opt,name=occurrence"`
 }
 
 type SchedulerJobSpecRecurrence struct {
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
 	// +optional
-	EndTime   string `json:"endTime,omitempty" tf:"end_time,omitempty"`
-	Frequency string `json:"frequency" tf:"frequency"`
+	EndTime   string `json:"endTime,omitempty" tf:"end_time,omitempty" protobuf:"bytes,2,opt,name=endTime"`
+	Frequency string `json:"frequency" tf:"frequency" protobuf:"bytes,3,opt,name=frequency"`
 	// +optional
-	Hours []int64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours []int64 `json:"hours,omitempty" tf:"hours,omitempty" protobuf:"varint,4,rep,name=hours"`
 	// +optional
-	Interval int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval int64 `json:"interval,omitempty" tf:"interval,omitempty" protobuf:"varint,5,opt,name=interval"`
 	// +optional
-	Minutes []int64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MinItems=1
-	MonthDays []int64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
+	Minutes []int64 `json:"minutes,omitempty" tf:"minutes,omitempty" protobuf:"varint,6,rep,name=minutes"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	MonthlyOccurrences []SchedulerJobSpecRecurrenceMonthlyOccurrences `json:"monthlyOccurrences,omitempty" tf:"monthly_occurrences,omitempty"`
+	MonthDays []int64 `json:"monthDays,omitempty" tf:"month_days,omitempty" protobuf:"varint,7,rep,name=monthDays"`
 	// +optional
-	WeekDays []string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
+	// +kubebuilder:validation:MinItems=1
+	MonthlyOccurrences []SchedulerJobSpecRecurrenceMonthlyOccurrences `json:"monthlyOccurrences,omitempty" tf:"monthly_occurrences,omitempty" protobuf:"bytes,8,rep,name=monthlyOccurrences"`
+	// +optional
+	WeekDays []string `json:"weekDays,omitempty" tf:"week_days,omitempty" protobuf:"bytes,9,rep,name=weekDays"`
 }
 
 type SchedulerJobSpecRetry struct {
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
 	// +optional
-	Interval string `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval string `json:"interval,omitempty" tf:"interval,omitempty" protobuf:"bytes,2,opt,name=interval"`
 }
 
 type SchedulerJobSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ActionStorageQueue []SchedulerJobSpecActionStorageQueue `json:"actionStorageQueue,omitempty" tf:"action_storage_queue,omitempty"`
+	ActionStorageQueue []SchedulerJobSpecActionStorageQueue `json:"actionStorageQueue,omitempty" tf:"action_storage_queue,omitempty" protobuf:"bytes,4,rep,name=actionStorageQueue"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ActionWeb []SchedulerJobSpecActionWeb `json:"actionWeb,omitempty" tf:"action_web,omitempty"`
+	ActionWeb []SchedulerJobSpecActionWeb `json:"actionWeb,omitempty" tf:"action_web,omitempty" protobuf:"bytes,5,rep,name=actionWeb"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ErrorActionStorageQueue []SchedulerJobSpecErrorActionStorageQueue `json:"errorActionStorageQueue,omitempty" tf:"error_action_storage_queue,omitempty"`
+	ErrorActionStorageQueue []SchedulerJobSpecErrorActionStorageQueue `json:"errorActionStorageQueue,omitempty" tf:"error_action_storage_queue,omitempty" protobuf:"bytes,6,rep,name=errorActionStorageQueue"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ErrorActionWeb    []SchedulerJobSpecErrorActionWeb `json:"errorActionWeb,omitempty" tf:"error_action_web,omitempty"`
-	JobCollectionName string                           `json:"jobCollectionName" tf:"job_collection_name"`
-	Name              string                           `json:"name" tf:"name"`
+	ErrorActionWeb    []SchedulerJobSpecErrorActionWeb `json:"errorActionWeb,omitempty" tf:"error_action_web,omitempty" protobuf:"bytes,7,rep,name=errorActionWeb"`
+	JobCollectionName string                           `json:"jobCollectionName" tf:"job_collection_name" protobuf:"bytes,8,opt,name=jobCollectionName"`
+	Name              string                           `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	Recurrence        []SchedulerJobSpecRecurrence `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
-	ResourceGroupName string                       `json:"resourceGroupName" tf:"resource_group_name"`
+	Recurrence        []SchedulerJobSpecRecurrence `json:"recurrence,omitempty" tf:"recurrence,omitempty" protobuf:"bytes,10,rep,name=recurrence"`
+	ResourceGroupName string                       `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Retry []SchedulerJobSpecRetry `json:"retry,omitempty" tf:"retry,omitempty"`
+	Retry []SchedulerJobSpecRetry `json:"retry,omitempty" tf:"retry,omitempty" protobuf:"bytes,12,rep,name=retry"`
 	// +optional
-	StartTime string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime string `json:"startTime,omitempty" tf:"start_time,omitempty" protobuf:"bytes,13,opt,name=startTime"`
 	// +optional
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,14,opt,name=state"`
 }
 
 type SchedulerJobStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SchedulerJobSpec `json:"output,omitempty"`
+	Output *SchedulerJobSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -224,7 +224,7 @@ type SchedulerJobStatus struct {
 // SchedulerJobList is a list of SchedulerJobs
 type SchedulerJobList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SchedulerJob CRD objects
-	Items []SchedulerJob `json:"items,omitempty"`
+	Items []SchedulerJob `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

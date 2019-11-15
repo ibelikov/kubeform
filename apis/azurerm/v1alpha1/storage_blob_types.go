@@ -34,50 +34,50 @@ import (
 
 type StorageBlob struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageBlobSpec   `json:"spec,omitempty"`
-	Status            StorageBlobStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageBlobSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageBlobStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageBlobSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Attempts int64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
+	Attempts int64 `json:"attempts,omitempty" tf:"attempts,omitempty" protobuf:"varint,3,opt,name=attempts"`
 	// +optional
-	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty" protobuf:"bytes,4,opt,name=contentType"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-	Name     string            `json:"name" tf:"name"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,5,rep,name=metadata"`
+	Name     string            `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	Parallelism       int64  `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Parallelism       int64  `json:"parallelism,omitempty" tf:"parallelism,omitempty" protobuf:"varint,7,opt,name=parallelism"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
 	Size int64 `json:"size,omitempty" tf:"size,omitempty"`
 	// +optional
-	Source string `json:"source,omitempty" tf:"source,omitempty"`
+	Source string `json:"source,omitempty" tf:"source,omitempty" protobuf:"bytes,10,opt,name=source"`
 	// +optional
-	SourceURI            string `json:"sourceURI,omitempty" tf:"source_uri,omitempty"`
-	StorageAccountName   string `json:"storageAccountName" tf:"storage_account_name"`
-	StorageContainerName string `json:"storageContainerName" tf:"storage_container_name"`
+	SourceURI            string `json:"sourceURI,omitempty" tf:"source_uri,omitempty" protobuf:"bytes,11,opt,name=sourceURI"`
+	StorageAccountName   string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,12,opt,name=storageAccountName"`
+	StorageContainerName string `json:"storageContainerName" tf:"storage_container_name" protobuf:"bytes,13,opt,name=storageContainerName"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,14,opt,name=type"`
 	// +optional
-	Url string `json:"url,omitempty" tf:"url,omitempty"`
+	Url string `json:"url,omitempty" tf:"url,omitempty" protobuf:"bytes,15,opt,name=url"`
 }
 
 type StorageBlobStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageBlobSpec `json:"output,omitempty"`
+	Output *StorageBlobSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -86,7 +86,7 @@ type StorageBlobStatus struct {
 // StorageBlobList is a list of StorageBlobs
 type StorageBlobList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageBlob CRD objects
-	Items []StorageBlob `json:"items,omitempty"`
+	Items []StorageBlob `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

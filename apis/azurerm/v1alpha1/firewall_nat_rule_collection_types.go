@@ -34,47 +34,47 @@ import (
 
 type FirewallNATRuleCollection struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallNATRuleCollectionSpec   `json:"spec,omitempty"`
-	Status            FirewallNATRuleCollectionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FirewallNATRuleCollectionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FirewallNATRuleCollectionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FirewallNATRuleCollectionSpecRule struct {
 	// +optional
-	Description          string   `json:"description,omitempty" tf:"description,omitempty"`
-	DestinationAddresses []string `json:"destinationAddresses" tf:"destination_addresses"`
-	DestinationPorts     []string `json:"destinationPorts" tf:"destination_ports"`
-	Name                 string   `json:"name" tf:"name"`
-	Protocols            []string `json:"protocols" tf:"protocols"`
-	SourceAddresses      []string `json:"sourceAddresses" tf:"source_addresses"`
-	TranslatedAddress    string   `json:"translatedAddress" tf:"translated_address"`
-	TranslatedPort       string   `json:"translatedPort" tf:"translated_port"`
+	Description          string   `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
+	DestinationAddresses []string `json:"destinationAddresses" tf:"destination_addresses" protobuf:"bytes,2,rep,name=destinationAddresses"`
+	DestinationPorts     []string `json:"destinationPorts" tf:"destination_ports" protobuf:"bytes,3,rep,name=destinationPorts"`
+	Name                 string   `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	Protocols            []string `json:"protocols" tf:"protocols" protobuf:"bytes,5,rep,name=protocols"`
+	SourceAddresses      []string `json:"sourceAddresses" tf:"source_addresses" protobuf:"bytes,6,rep,name=sourceAddresses"`
+	TranslatedAddress    string   `json:"translatedAddress" tf:"translated_address" protobuf:"bytes,7,opt,name=translatedAddress"`
+	TranslatedPort       string   `json:"translatedPort" tf:"translated_port" protobuf:"bytes,8,opt,name=translatedPort"`
 }
 
 type FirewallNATRuleCollectionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Action            string `json:"action" tf:"action"`
-	AzureFirewallName string `json:"azureFirewallName" tf:"azure_firewall_name"`
-	Name              string `json:"name" tf:"name"`
-	Priority          int64  `json:"priority" tf:"priority"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Action            string `json:"action" tf:"action" protobuf:"bytes,3,opt,name=action"`
+	AzureFirewallName string `json:"azureFirewallName" tf:"azure_firewall_name" protobuf:"bytes,4,opt,name=azureFirewallName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	Priority          int64  `json:"priority" tf:"priority" protobuf:"varint,6,opt,name=priority"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MinItems=1
-	Rule []FirewallNATRuleCollectionSpecRule `json:"rule" tf:"rule"`
+	Rule []FirewallNATRuleCollectionSpecRule `json:"rule" tf:"rule" protobuf:"bytes,8,rep,name=rule"`
 }
 
 type FirewallNATRuleCollectionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FirewallNATRuleCollectionSpec `json:"output,omitempty"`
+	Output *FirewallNATRuleCollectionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type FirewallNATRuleCollectionStatus struct {
 // FirewallNATRuleCollectionList is a list of FirewallNATRuleCollections
 type FirewallNATRuleCollectionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of FirewallNATRuleCollection CRD objects
-	Items []FirewallNATRuleCollection `json:"items,omitempty"`
+	Items []FirewallNATRuleCollection `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,53 +34,53 @@ import (
 
 type BatchAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BatchAccountSpec   `json:"spec,omitempty"`
-	Status            BatchAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BatchAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BatchAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BatchAccountSpecKeyVaultReference struct {
-	ID  string `json:"ID" tf:"id"`
-	Url string `json:"url" tf:"url"`
+	ID  string `json:"ID" tf:"id" protobuf:"bytes,1,opt,name=ID"`
+	Url string `json:"url" tf:"url" protobuf:"bytes,2,opt,name=url"`
 }
 
 type BatchAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AccountEndpoint string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
+	AccountEndpoint string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty" protobuf:"bytes,4,opt,name=accountEndpoint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	KeyVaultReference []BatchAccountSpecKeyVaultReference `json:"keyVaultReference,omitempty" tf:"key_vault_reference,omitempty"`
-	Location          string                              `json:"location" tf:"location"`
-	Name              string                              `json:"name" tf:"name"`
+	KeyVaultReference []BatchAccountSpecKeyVaultReference `json:"keyVaultReference,omitempty" tf:"key_vault_reference,omitempty" protobuf:"bytes,5,rep,name=keyVaultReference"`
+	Location          string                              `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name              string                              `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	PoolAllocationMode string `json:"poolAllocationMode,omitempty" tf:"pool_allocation_mode,omitempty"`
+	PoolAllocationMode string `json:"poolAllocationMode,omitempty" tf:"pool_allocation_mode,omitempty" protobuf:"bytes,8,opt,name=poolAllocationMode"`
 	// +optional
 	PrimaryAccessKey  string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
 	// +optional
-	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty" protobuf:"bytes,10,opt,name=storageAccountID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 }
 
 type BatchAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BatchAccountSpec `json:"output,omitempty"`
+	Output *BatchAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -89,7 +89,7 @@ type BatchAccountStatus struct {
 // BatchAccountList is a list of BatchAccounts
 type BatchAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BatchAccount CRD objects
-	Items []BatchAccount `json:"items,omitempty"`
+	Items []BatchAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

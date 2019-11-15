@@ -34,44 +34,44 @@ import (
 
 type MonitoringNotificationChannel struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitoringNotificationChannelSpec   `json:"spec,omitempty"`
-	Status            MonitoringNotificationChannelStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitoringNotificationChannelSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitoringNotificationChannelStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitoringNotificationChannelSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,4,opt,name=displayName"`
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,5,opt,name=enabled"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,6,rep,name=labels"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	Type    string `json:"type" tf:"type"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,8,opt,name=project"`
+	Type    string `json:"type" tf:"type" protobuf:"bytes,9,opt,name=type"`
 	// +optional
-	UserLabels map[string]string `json:"userLabels,omitempty" tf:"user_labels,omitempty"`
+	UserLabels map[string]string `json:"userLabels,omitempty" tf:"user_labels,omitempty" protobuf:"bytes,10,rep,name=userLabels"`
 	// +optional
-	VerificationStatus string `json:"verificationStatus,omitempty" tf:"verification_status,omitempty"`
+	VerificationStatus string `json:"verificationStatus,omitempty" tf:"verification_status,omitempty" protobuf:"bytes,11,opt,name=verificationStatus"`
 }
 
 type MonitoringNotificationChannelStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitoringNotificationChannelSpec `json:"output,omitempty"`
+	Output *MonitoringNotificationChannelSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type MonitoringNotificationChannelStatus struct {
 // MonitoringNotificationChannelList is a list of MonitoringNotificationChannels
 type MonitoringNotificationChannelList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitoringNotificationChannel CRD objects
-	Items []MonitoringNotificationChannel `json:"items,omitempty"`
+	Items []MonitoringNotificationChannel `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

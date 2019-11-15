@@ -34,71 +34,71 @@ import (
 
 type ComputeAutoscaler struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeAutoscalerSpec   `json:"spec,omitempty"`
-	Status            ComputeAutoscalerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeAutoscalerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeAutoscalerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeAutoscalerSpecAutoscalingPolicyCpuUtilization struct {
-	Target float64 `json:"target" tf:"target"`
+	Target float64 `json:"target" tf:"target" protobuf:"fixed64,1,opt,name=target"`
 }
 
 type ComputeAutoscalerSpecAutoscalingPolicyLoadBalancingUtilization struct {
-	Target float64 `json:"target" tf:"target"`
+	Target float64 `json:"target" tf:"target" protobuf:"fixed64,1,opt,name=target"`
 }
 
 type ComputeAutoscalerSpecAutoscalingPolicyMetric struct {
-	Name   string  `json:"name" tf:"name"`
-	Target float64 `json:"target" tf:"target"`
-	Type   string  `json:"type" tf:"type"`
+	Name   string  `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Target float64 `json:"target" tf:"target" protobuf:"fixed64,2,opt,name=target"`
+	Type   string  `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type ComputeAutoscalerSpecAutoscalingPolicy struct {
 	// +optional
-	CooldownPeriod int64 `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
+	CooldownPeriod int64 `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty" protobuf:"varint,1,opt,name=cooldownPeriod"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CpuUtilization []ComputeAutoscalerSpecAutoscalingPolicyCpuUtilization `json:"cpuUtilization,omitempty" tf:"cpu_utilization,omitempty"`
+	CpuUtilization []ComputeAutoscalerSpecAutoscalingPolicyCpuUtilization `json:"cpuUtilization,omitempty" tf:"cpu_utilization,omitempty" protobuf:"bytes,2,rep,name=cpuUtilization"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoadBalancingUtilization []ComputeAutoscalerSpecAutoscalingPolicyLoadBalancingUtilization `json:"loadBalancingUtilization,omitempty" tf:"load_balancing_utilization,omitempty"`
-	MaxReplicas              int64                                                            `json:"maxReplicas" tf:"max_replicas"`
+	LoadBalancingUtilization []ComputeAutoscalerSpecAutoscalingPolicyLoadBalancingUtilization `json:"loadBalancingUtilization,omitempty" tf:"load_balancing_utilization,omitempty" protobuf:"bytes,3,rep,name=loadBalancingUtilization"`
+	MaxReplicas              int64                                                            `json:"maxReplicas" tf:"max_replicas" protobuf:"varint,4,opt,name=maxReplicas"`
 	// +optional
-	Metric      []ComputeAutoscalerSpecAutoscalingPolicyMetric `json:"metric,omitempty" tf:"metric,omitempty"`
-	MinReplicas int64                                          `json:"minReplicas" tf:"min_replicas"`
+	Metric      []ComputeAutoscalerSpecAutoscalingPolicyMetric `json:"metric,omitempty" tf:"metric,omitempty" protobuf:"bytes,5,rep,name=metric"`
+	MinReplicas int64                                          `json:"minReplicas" tf:"min_replicas" protobuf:"varint,6,opt,name=minReplicas"`
 }
 
 type ComputeAutoscalerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MaxItems=1
-	AutoscalingPolicy []ComputeAutoscalerSpecAutoscalingPolicy `json:"autoscalingPolicy" tf:"autoscaling_policy"`
+	AutoscalingPolicy []ComputeAutoscalerSpecAutoscalingPolicy `json:"autoscalingPolicy" tf:"autoscaling_policy" protobuf:"bytes,3,rep,name=autoscalingPolicy"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,7,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	Target   string `json:"target" tf:"target"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,8,opt,name=selfLink"`
+	Target   string `json:"target" tf:"target" protobuf:"bytes,9,opt,name=target"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,10,opt,name=zone"`
 }
 
 type ComputeAutoscalerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeAutoscalerSpec `json:"output,omitempty"`
+	Output *ComputeAutoscalerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -107,7 +107,7 @@ type ComputeAutoscalerStatus struct {
 // ComputeAutoscalerList is a list of ComputeAutoscalers
 type ComputeAutoscalerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeAutoscaler CRD objects
-	Items []ComputeAutoscaler `json:"items,omitempty"`
+	Items []ComputeAutoscaler `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

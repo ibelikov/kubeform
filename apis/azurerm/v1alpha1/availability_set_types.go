@@ -34,39 +34,39 @@ import (
 
 type AvailabilitySet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AvailabilitySetSpec   `json:"spec,omitempty"`
-	Status            AvailabilitySetStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AvailabilitySetSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AvailabilitySetStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AvailabilitySetSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Location string `json:"location" tf:"location"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
 	// +optional
-	Managed bool   `json:"managed,omitempty" tf:"managed,omitempty"`
-	Name    string `json:"name" tf:"name"`
+	Managed bool   `json:"managed,omitempty" tf:"managed,omitempty" protobuf:"varint,4,opt,name=managed"`
+	Name    string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	PlatformFaultDomainCount int64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty"`
+	PlatformFaultDomainCount int64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty" protobuf:"varint,6,opt,name=platformFaultDomainCount"`
 	// +optional
-	PlatformUpdateDomainCount int64  `json:"platformUpdateDomainCount,omitempty" tf:"platform_update_domain_count,omitempty"`
-	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name"`
+	PlatformUpdateDomainCount int64  `json:"platformUpdateDomainCount,omitempty" tf:"platform_update_domain_count,omitempty" protobuf:"varint,7,opt,name=platformUpdateDomainCount"`
+	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type AvailabilitySetStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AvailabilitySetSpec `json:"output,omitempty"`
+	Output *AvailabilitySetSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -75,7 +75,7 @@ type AvailabilitySetStatus struct {
 // AvailabilitySetList is a list of AvailabilitySets
 type AvailabilitySetList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AvailabilitySet CRD objects
-	Items []AvailabilitySet `json:"items,omitempty"`
+	Items []AvailabilitySet `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

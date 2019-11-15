@@ -34,54 +34,54 @@ import (
 
 type DatabaseCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DatabaseClusterSpec   `json:"spec,omitempty"`
-	Status            DatabaseClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DatabaseClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DatabaseClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DatabaseClusterSpecMaintenanceWindow struct {
-	Day  string `json:"day" tf:"day"`
-	Hour string `json:"hour" tf:"hour"`
+	Day  string `json:"day" tf:"day" protobuf:"bytes,1,opt,name=day"`
+	Hour string `json:"hour" tf:"hour" protobuf:"bytes,2,opt,name=hour"`
 }
 
 type DatabaseClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Database string `json:"database,omitempty" tf:"database,omitempty"`
-	Engine   string `json:"engine" tf:"engine"`
+	Database string `json:"database,omitempty" tf:"database,omitempty" protobuf:"bytes,3,opt,name=database"`
+	Engine   string `json:"engine" tf:"engine" protobuf:"bytes,4,opt,name=engine"`
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,5,opt,name=host"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	MaintenanceWindow []DatabaseClusterSpecMaintenanceWindow `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
-	Name              string                                 `json:"name" tf:"name"`
-	NodeCount         int64                                  `json:"nodeCount" tf:"node_count"`
+	MaintenanceWindow []DatabaseClusterSpecMaintenanceWindow `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty" protobuf:"bytes,6,rep,name=maintenanceWindow"`
+	Name              string                                 `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	NodeCount         int64                                  `json:"nodeCount" tf:"node_count" protobuf:"varint,8,opt,name=nodeCount"`
 	// +optional
-	Password string `json:"password,omitempty" tf:"password,omitempty"`
+	Password string `json:"password,omitempty" tf:"password,omitempty" protobuf:"bytes,9,opt,name=password"`
 	// +optional
-	Port   int64  `json:"port,omitempty" tf:"port,omitempty"`
-	Region string `json:"region" tf:"region"`
+	Port   int64  `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,10,opt,name=port"`
+	Region string `json:"region" tf:"region" protobuf:"bytes,11,opt,name=region"`
 	Size   string `json:"size" tf:"size"`
 	// +optional
-	Uri string `json:"uri,omitempty" tf:"uri,omitempty"`
+	Uri string `json:"uri,omitempty" tf:"uri,omitempty" protobuf:"bytes,13,opt,name=uri"`
 	// +optional
-	User    string `json:"user,omitempty" tf:"user,omitempty"`
-	Version string `json:"version" tf:"version"`
+	User    string `json:"user,omitempty" tf:"user,omitempty" protobuf:"bytes,14,opt,name=user"`
+	Version string `json:"version" tf:"version" protobuf:"bytes,15,opt,name=version"`
 }
 
 type DatabaseClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DatabaseClusterSpec `json:"output,omitempty"`
+	Output *DatabaseClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -90,7 +90,7 @@ type DatabaseClusterStatus struct {
 // DatabaseClusterList is a list of DatabaseClusters
 type DatabaseClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DatabaseCluster CRD objects
-	Items []DatabaseCluster `json:"items,omitempty"`
+	Items []DatabaseCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

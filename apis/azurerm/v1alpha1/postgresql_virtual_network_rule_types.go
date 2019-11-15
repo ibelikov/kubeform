@@ -34,34 +34,34 @@ import (
 
 type PostgresqlVirtualNetworkRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PostgresqlVirtualNetworkRuleSpec   `json:"spec,omitempty"`
-	Status            PostgresqlVirtualNetworkRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PostgresqlVirtualNetworkRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PostgresqlVirtualNetworkRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PostgresqlVirtualNetworkRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	IgnoreMissingVnetServiceEndpoint bool   `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
-	Name                             string `json:"name" tf:"name"`
-	ResourceGroupName                string `json:"resourceGroupName" tf:"resource_group_name"`
-	ServerName                       string `json:"serverName" tf:"server_name"`
-	SubnetID                         string `json:"subnetID" tf:"subnet_id"`
+	IgnoreMissingVnetServiceEndpoint bool   `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty" protobuf:"varint,3,opt,name=ignoreMissingVnetServiceEndpoint"`
+	Name                             string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	ResourceGroupName                string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
+	ServerName                       string `json:"serverName" tf:"server_name" protobuf:"bytes,6,opt,name=serverName"`
+	SubnetID                         string `json:"subnetID" tf:"subnet_id" protobuf:"bytes,7,opt,name=subnetID"`
 }
 
 type PostgresqlVirtualNetworkRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PostgresqlVirtualNetworkRuleSpec `json:"output,omitempty"`
+	Output *PostgresqlVirtualNetworkRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -70,7 +70,7 @@ type PostgresqlVirtualNetworkRuleStatus struct {
 // PostgresqlVirtualNetworkRuleList is a list of PostgresqlVirtualNetworkRules
 type PostgresqlVirtualNetworkRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PostgresqlVirtualNetworkRule CRD objects
-	Items []PostgresqlVirtualNetworkRule `json:"items,omitempty"`
+	Items []PostgresqlVirtualNetworkRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

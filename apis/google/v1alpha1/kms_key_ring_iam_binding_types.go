@@ -34,33 +34,33 @@ import (
 
 type KmsKeyRingIamBinding struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KmsKeyRingIamBindingSpec   `json:"spec,omitempty"`
-	Status            KmsKeyRingIamBindingStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KmsKeyRingIamBindingSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KmsKeyRingIamBindingStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KmsKeyRingIamBindingSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Etag      string   `json:"etag,omitempty" tf:"etag,omitempty"`
-	KeyRingID string   `json:"keyRingID" tf:"key_ring_id"`
-	Members   []string `json:"members" tf:"members"`
-	Role      string   `json:"role" tf:"role"`
+	Etag      string   `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,3,opt,name=etag"`
+	KeyRingID string   `json:"keyRingID" tf:"key_ring_id" protobuf:"bytes,4,opt,name=keyRingID"`
+	Members   []string `json:"members" tf:"members" protobuf:"bytes,5,rep,name=members"`
+	Role      string   `json:"role" tf:"role" protobuf:"bytes,6,opt,name=role"`
 }
 
 type KmsKeyRingIamBindingStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KmsKeyRingIamBindingSpec `json:"output,omitempty"`
+	Output *KmsKeyRingIamBindingSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -69,7 +69,7 @@ type KmsKeyRingIamBindingStatus struct {
 // KmsKeyRingIamBindingList is a list of KmsKeyRingIamBindings
 type KmsKeyRingIamBindingList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KmsKeyRingIamBinding CRD objects
-	Items []KmsKeyRingIamBinding `json:"items,omitempty"`
+	Items []KmsKeyRingIamBinding `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

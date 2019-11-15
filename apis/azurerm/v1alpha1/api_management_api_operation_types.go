@@ -34,161 +34,161 @@ import (
 
 type ApiManagementAPIOperation struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementAPIOperationSpec   `json:"spec,omitempty"`
-	Status            ApiManagementAPIOperationStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementAPIOperationSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementAPIOperationStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementAPIOperationSpecRequestHeader struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpecRequestQueryParameter struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpecRequestRepresentationFormParameter struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpecRequestRepresentation struct {
-	ContentType string `json:"contentType" tf:"content_type"`
+	ContentType string `json:"contentType" tf:"content_type" protobuf:"bytes,1,opt,name=contentType"`
 	// +optional
-	FormParameter []ApiManagementAPIOperationSpecRequestRepresentationFormParameter `json:"formParameter,omitempty" tf:"form_parameter,omitempty"`
+	FormParameter []ApiManagementAPIOperationSpecRequestRepresentationFormParameter `json:"formParameter,omitempty" tf:"form_parameter,omitempty" protobuf:"bytes,2,rep,name=formParameter"`
 	// +optional
-	Sample string `json:"sample,omitempty" tf:"sample,omitempty"`
+	Sample string `json:"sample,omitempty" tf:"sample,omitempty" protobuf:"bytes,3,opt,name=sample"`
 	// +optional
-	SchemaID string `json:"schemaID,omitempty" tf:"schema_id,omitempty"`
+	SchemaID string `json:"schemaID,omitempty" tf:"schema_id,omitempty" protobuf:"bytes,4,opt,name=schemaID"`
 	// +optional
-	TypeName string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+	TypeName string `json:"typeName,omitempty" tf:"type_name,omitempty" protobuf:"bytes,5,opt,name=typeName"`
 }
 
 type ApiManagementAPIOperationSpecRequest struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
 	// +optional
-	Header []ApiManagementAPIOperationSpecRequestHeader `json:"header,omitempty" tf:"header,omitempty"`
+	Header []ApiManagementAPIOperationSpecRequestHeader `json:"header,omitempty" tf:"header,omitempty" protobuf:"bytes,2,rep,name=header"`
 	// +optional
-	QueryParameter []ApiManagementAPIOperationSpecRequestQueryParameter `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
+	QueryParameter []ApiManagementAPIOperationSpecRequestQueryParameter `json:"queryParameter,omitempty" tf:"query_parameter,omitempty" protobuf:"bytes,3,rep,name=queryParameter"`
 	// +optional
-	Representation []ApiManagementAPIOperationSpecRequestRepresentation `json:"representation,omitempty" tf:"representation,omitempty"`
+	Representation []ApiManagementAPIOperationSpecRequestRepresentation `json:"representation,omitempty" tf:"representation,omitempty" protobuf:"bytes,4,rep,name=representation"`
 }
 
 type ApiManagementAPIOperationSpecResponseHeader struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpecResponseRepresentationFormParameter struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpecResponseRepresentation struct {
-	ContentType string `json:"contentType" tf:"content_type"`
+	ContentType string `json:"contentType" tf:"content_type" protobuf:"bytes,1,opt,name=contentType"`
 	// +optional
-	FormParameter []ApiManagementAPIOperationSpecResponseRepresentationFormParameter `json:"formParameter,omitempty" tf:"form_parameter,omitempty"`
+	FormParameter []ApiManagementAPIOperationSpecResponseRepresentationFormParameter `json:"formParameter,omitempty" tf:"form_parameter,omitempty" protobuf:"bytes,2,rep,name=formParameter"`
 	// +optional
-	Sample string `json:"sample,omitempty" tf:"sample,omitempty"`
+	Sample string `json:"sample,omitempty" tf:"sample,omitempty" protobuf:"bytes,3,opt,name=sample"`
 	// +optional
-	SchemaID string `json:"schemaID,omitempty" tf:"schema_id,omitempty"`
+	SchemaID string `json:"schemaID,omitempty" tf:"schema_id,omitempty" protobuf:"bytes,4,opt,name=schemaID"`
 	// +optional
-	TypeName string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+	TypeName string `json:"typeName,omitempty" tf:"type_name,omitempty" protobuf:"bytes,5,opt,name=typeName"`
 }
 
 type ApiManagementAPIOperationSpecResponse struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
 	// +optional
-	Header []ApiManagementAPIOperationSpecResponseHeader `json:"header,omitempty" tf:"header,omitempty"`
+	Header []ApiManagementAPIOperationSpecResponseHeader `json:"header,omitempty" tf:"header,omitempty" protobuf:"bytes,2,rep,name=header"`
 	// +optional
-	Representation []ApiManagementAPIOperationSpecResponseRepresentation `json:"representation,omitempty" tf:"representation,omitempty"`
-	StatusCode     int64                                                 `json:"statusCode" tf:"status_code"`
+	Representation []ApiManagementAPIOperationSpecResponseRepresentation `json:"representation,omitempty" tf:"representation,omitempty" protobuf:"bytes,3,rep,name=representation"`
+	StatusCode     int64                                                 `json:"statusCode" tf:"status_code" protobuf:"varint,4,opt,name=statusCode"`
 }
 
 type ApiManagementAPIOperationSpecTemplateParameter struct {
 	// +optional
-	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty" tf:"default_value,omitempty" protobuf:"bytes,1,opt,name=defaultValue"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Required    bool   `json:"required" tf:"required"`
-	Type        string `json:"type" tf:"type"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Required    bool   `json:"required" tf:"required" protobuf:"varint,4,opt,name=required"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,5,opt,name=type"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,6,rep,name=values"`
 }
 
 type ApiManagementAPIOperationSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
-	ApiName           string `json:"apiName" tf:"api_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
+	ApiName           string `json:"apiName" tf:"api_name" protobuf:"bytes,4,opt,name=apiName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
-	Method      string `json:"method" tf:"method"`
-	OperationID string `json:"operationID" tf:"operation_id"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,6,opt,name=displayName"`
+	Method      string `json:"method" tf:"method" protobuf:"bytes,7,opt,name=method"`
+	OperationID string `json:"operationID" tf:"operation_id" protobuf:"bytes,8,opt,name=operationID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Request           []ApiManagementAPIOperationSpecRequest `json:"request,omitempty" tf:"request,omitempty"`
-	ResourceGroupName string                                 `json:"resourceGroupName" tf:"resource_group_name"`
+	Request           []ApiManagementAPIOperationSpecRequest `json:"request,omitempty" tf:"request,omitempty" protobuf:"bytes,9,rep,name=request"`
+	ResourceGroupName string                                 `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +optional
-	Response []ApiManagementAPIOperationSpecResponse `json:"response,omitempty" tf:"response,omitempty"`
+	Response []ApiManagementAPIOperationSpecResponse `json:"response,omitempty" tf:"response,omitempty" protobuf:"bytes,11,rep,name=response"`
 	// +optional
-	TemplateParameter []ApiManagementAPIOperationSpecTemplateParameter `json:"templateParameter,omitempty" tf:"template_parameter,omitempty"`
-	UrlTemplate       string                                           `json:"urlTemplate" tf:"url_template"`
+	TemplateParameter []ApiManagementAPIOperationSpecTemplateParameter `json:"templateParameter,omitempty" tf:"template_parameter,omitempty" protobuf:"bytes,12,rep,name=templateParameter"`
+	UrlTemplate       string                                           `json:"urlTemplate" tf:"url_template" protobuf:"bytes,13,opt,name=urlTemplate"`
 }
 
 type ApiManagementAPIOperationStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementAPIOperationSpec `json:"output,omitempty"`
+	Output *ApiManagementAPIOperationSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -197,7 +197,7 @@ type ApiManagementAPIOperationStatus struct {
 // ApiManagementAPIOperationList is a list of ApiManagementAPIOperations
 type ApiManagementAPIOperationList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementAPIOperation CRD objects
-	Items []ApiManagementAPIOperation `json:"items,omitempty"`
+	Items []ApiManagementAPIOperation `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,90 +34,90 @@ import (
 
 type KubernetesCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KubernetesClusterSpec   `json:"spec,omitempty"`
-	Status            KubernetesClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KubernetesClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KubernetesClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KubernetesClusterSpecKubeConfig struct {
 	// +optional
-	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
+	ClientCertificate string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty" protobuf:"bytes,1,opt,name=clientCertificate"`
 	// +optional
-	ClientKey string `json:"clientKey,omitempty" tf:"client_key,omitempty"`
+	ClientKey string `json:"clientKey,omitempty" tf:"client_key,omitempty" protobuf:"bytes,2,opt,name=clientKey"`
 	// +optional
-	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty"`
+	ClusterCaCertificate string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty" protobuf:"bytes,3,opt,name=clusterCaCertificate"`
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,4,opt,name=host"`
 	// +optional
-	RawConfig string `json:"rawConfig,omitempty" tf:"raw_config,omitempty"`
+	RawConfig string `json:"rawConfig,omitempty" tf:"raw_config,omitempty" protobuf:"bytes,5,opt,name=rawConfig"`
 }
 
 type KubernetesClusterSpecNodePoolNodes struct {
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,1,opt,name=createdAt"`
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,3,opt,name=name"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,4,opt,name=status"`
 	// +optional
-	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty" protobuf:"bytes,5,opt,name=updatedAt"`
 }
 
 type KubernetesClusterSpecNodePool struct {
 	// +optional
-	ID        string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name      string `json:"name" tf:"name"`
-	NodeCount int64  `json:"nodeCount" tf:"node_count"`
+	ID        string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	NodeCount int64  `json:"nodeCount" tf:"node_count" protobuf:"varint,3,opt,name=nodeCount"`
 	// +optional
-	Nodes []KubernetesClusterSpecNodePoolNodes `json:"nodes,omitempty" tf:"nodes,omitempty"`
+	Nodes []KubernetesClusterSpecNodePoolNodes `json:"nodes,omitempty" tf:"nodes,omitempty" protobuf:"bytes,4,rep,name=nodes"`
 	Size  string                               `json:"size" tf:"size"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,6,rep,name=tags"`
 }
 
 type KubernetesClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ClusterSubnet string `json:"clusterSubnet,omitempty" tf:"cluster_subnet,omitempty"`
+	ClusterSubnet string `json:"clusterSubnet,omitempty" tf:"cluster_subnet,omitempty" protobuf:"bytes,3,opt,name=clusterSubnet"`
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,4,opt,name=createdAt"`
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,5,opt,name=endpoint"`
 	// +optional
-	Ipv4Address string `json:"ipv4Address,omitempty" tf:"ipv4_address,omitempty"`
+	Ipv4Address string `json:"ipv4Address,omitempty" tf:"ipv4_address,omitempty" protobuf:"bytes,6,opt,name=ipv4Address"`
 	// +optional
-	KubeConfig []KubernetesClusterSpecKubeConfig `json:"kubeConfig,omitempty" tf:"kube_config,omitempty"`
-	Name       string                            `json:"name" tf:"name"`
+	KubeConfig []KubernetesClusterSpecKubeConfig `json:"kubeConfig,omitempty" tf:"kube_config,omitempty" protobuf:"bytes,7,rep,name=kubeConfig"`
+	Name       string                            `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	NodePool []KubernetesClusterSpecNodePool `json:"nodePool" tf:"node_pool"`
-	Region   string                          `json:"region" tf:"region"`
+	NodePool []KubernetesClusterSpecNodePool `json:"nodePool" tf:"node_pool" protobuf:"bytes,9,rep,name=nodePool"`
+	Region   string                          `json:"region" tf:"region" protobuf:"bytes,10,opt,name=region"`
 	// +optional
-	ServiceSubnet string `json:"serviceSubnet,omitempty" tf:"service_subnet,omitempty"`
+	ServiceSubnet string `json:"serviceSubnet,omitempty" tf:"service_subnet,omitempty" protobuf:"bytes,11,opt,name=serviceSubnet"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,12,opt,name=status"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// +optional
-	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
-	Version   string `json:"version" tf:"version"`
+	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty" protobuf:"bytes,14,opt,name=updatedAt"`
+	Version   string `json:"version" tf:"version" protobuf:"bytes,15,opt,name=version"`
 }
 
 type KubernetesClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KubernetesClusterSpec `json:"output,omitempty"`
+	Output *KubernetesClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -126,7 +126,7 @@ type KubernetesClusterStatus struct {
 // KubernetesClusterList is a list of KubernetesClusters
 type KubernetesClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KubernetesCluster CRD objects
-	Items []KubernetesCluster `json:"items,omitempty"`
+	Items []KubernetesCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

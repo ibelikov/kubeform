@@ -34,107 +34,107 @@ import (
 
 type ComputeRegionInstanceGroupManager struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeRegionInstanceGroupManagerSpec   `json:"spec,omitempty"`
-	Status            ComputeRegionInstanceGroupManagerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeRegionInstanceGroupManagerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeRegionInstanceGroupManagerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeRegionInstanceGroupManagerSpecAutoHealingPolicies struct {
-	HealthCheck     string `json:"healthCheck" tf:"health_check"`
-	InitialDelaySec int64  `json:"initialDelaySec" tf:"initial_delay_sec"`
+	HealthCheck     string `json:"healthCheck" tf:"health_check" protobuf:"bytes,1,opt,name=healthCheck"`
+	InitialDelaySec int64  `json:"initialDelaySec" tf:"initial_delay_sec" protobuf:"varint,2,opt,name=initialDelaySec"`
 }
 
 type ComputeRegionInstanceGroupManagerSpecNamedPort struct {
-	Name string `json:"name" tf:"name"`
-	Port int64  `json:"port" tf:"port"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Port int64  `json:"port" tf:"port" protobuf:"varint,2,opt,name=port"`
 }
 
 type ComputeRegionInstanceGroupManagerSpecRollingUpdatePolicy struct {
 	// +optional
-	MaxSurgeFixed int64 `json:"maxSurgeFixed,omitempty" tf:"max_surge_fixed,omitempty"`
+	MaxSurgeFixed int64 `json:"maxSurgeFixed,omitempty" tf:"max_surge_fixed,omitempty" protobuf:"varint,1,opt,name=maxSurgeFixed"`
 	// +optional
-	MaxSurgePercent int64 `json:"maxSurgePercent,omitempty" tf:"max_surge_percent,omitempty"`
+	MaxSurgePercent int64 `json:"maxSurgePercent,omitempty" tf:"max_surge_percent,omitempty" protobuf:"varint,2,opt,name=maxSurgePercent"`
 	// +optional
-	MaxUnavailableFixed int64 `json:"maxUnavailableFixed,omitempty" tf:"max_unavailable_fixed,omitempty"`
+	MaxUnavailableFixed int64 `json:"maxUnavailableFixed,omitempty" tf:"max_unavailable_fixed,omitempty" protobuf:"varint,3,opt,name=maxUnavailableFixed"`
 	// +optional
-	MaxUnavailablePercent int64 `json:"maxUnavailablePercent,omitempty" tf:"max_unavailable_percent,omitempty"`
+	MaxUnavailablePercent int64 `json:"maxUnavailablePercent,omitempty" tf:"max_unavailable_percent,omitempty" protobuf:"varint,4,opt,name=maxUnavailablePercent"`
 	// +optional
-	MinReadySec   int64  `json:"minReadySec,omitempty" tf:"min_ready_sec,omitempty"`
-	MinimalAction string `json:"minimalAction" tf:"minimal_action"`
-	Type          string `json:"type" tf:"type"`
+	MinReadySec   int64  `json:"minReadySec,omitempty" tf:"min_ready_sec,omitempty" protobuf:"varint,5,opt,name=minReadySec"`
+	MinimalAction string `json:"minimalAction" tf:"minimal_action" protobuf:"bytes,6,opt,name=minimalAction"`
+	Type          string `json:"type" tf:"type" protobuf:"bytes,7,opt,name=type"`
 }
 
 type ComputeRegionInstanceGroupManagerSpecVersionTargetSize struct {
 	// +optional
-	Fixed int64 `json:"fixed,omitempty" tf:"fixed,omitempty"`
+	Fixed int64 `json:"fixed,omitempty" tf:"fixed,omitempty" protobuf:"varint,1,opt,name=fixed"`
 	// +optional
-	Percent int64 `json:"percent,omitempty" tf:"percent,omitempty"`
+	Percent int64 `json:"percent,omitempty" tf:"percent,omitempty" protobuf:"varint,2,opt,name=percent"`
 }
 
 type ComputeRegionInstanceGroupManagerSpecVersion struct {
-	InstanceTemplate string `json:"instanceTemplate" tf:"instance_template"`
-	Name             string `json:"name" tf:"name"`
+	InstanceTemplate string `json:"instanceTemplate" tf:"instance_template" protobuf:"bytes,1,opt,name=instanceTemplate"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TargetSize []ComputeRegionInstanceGroupManagerSpecVersionTargetSize `json:"targetSize,omitempty" tf:"target_size,omitempty"`
+	TargetSize []ComputeRegionInstanceGroupManagerSpecVersionTargetSize `json:"targetSize,omitempty" tf:"target_size,omitempty" protobuf:"bytes,3,rep,name=targetSize"`
 }
 
 type ComputeRegionInstanceGroupManagerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	AutoHealingPolicies []ComputeRegionInstanceGroupManagerSpecAutoHealingPolicies `json:"autoHealingPolicies,omitempty" tf:"auto_healing_policies,omitempty"`
-	BaseInstanceName    string                                                     `json:"baseInstanceName" tf:"base_instance_name"`
+	AutoHealingPolicies []ComputeRegionInstanceGroupManagerSpecAutoHealingPolicies `json:"autoHealingPolicies,omitempty" tf:"auto_healing_policies,omitempty" protobuf:"bytes,3,rep,name=autoHealingPolicies"`
+	BaseInstanceName    string                                                     `json:"baseInstanceName" tf:"base_instance_name" protobuf:"bytes,4,opt,name=baseInstanceName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	DistributionPolicyZones []string `json:"distributionPolicyZones,omitempty" tf:"distribution_policy_zones,omitempty"`
+	DistributionPolicyZones []string `json:"distributionPolicyZones,omitempty" tf:"distribution_policy_zones,omitempty" protobuf:"bytes,6,rep,name=distributionPolicyZones"`
 	// +optional
-	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty" protobuf:"bytes,7,opt,name=fingerprint"`
 	// +optional
-	InstanceGroup string `json:"instanceGroup,omitempty" tf:"instance_group,omitempty"`
+	InstanceGroup string `json:"instanceGroup,omitempty" tf:"instance_group,omitempty" protobuf:"bytes,8,opt,name=instanceGroup"`
 	// +optional
-	InstanceTemplate string `json:"instanceTemplate,omitempty" tf:"instance_template,omitempty"`
-	Name             string `json:"name" tf:"name"`
+	InstanceTemplate string `json:"instanceTemplate,omitempty" tf:"instance_template,omitempty" protobuf:"bytes,9,opt,name=instanceTemplate"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	NamedPort []ComputeRegionInstanceGroupManagerSpecNamedPort `json:"namedPort,omitempty" tf:"named_port,omitempty"`
+	NamedPort []ComputeRegionInstanceGroupManagerSpecNamedPort `json:"namedPort,omitempty" tf:"named_port,omitempty" protobuf:"bytes,11,rep,name=namedPort"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	Region  string `json:"region" tf:"region"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,12,opt,name=project"`
+	Region  string `json:"region" tf:"region" protobuf:"bytes,13,opt,name=region"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	RollingUpdatePolicy []ComputeRegionInstanceGroupManagerSpecRollingUpdatePolicy `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
+	RollingUpdatePolicy []ComputeRegionInstanceGroupManagerSpecRollingUpdatePolicy `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty" protobuf:"bytes,14,rep,name=rollingUpdatePolicy"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,15,opt,name=selfLink"`
 	// +optional
-	TargetPools []string `json:"targetPools,omitempty" tf:"target_pools,omitempty"`
+	TargetPools []string `json:"targetPools,omitempty" tf:"target_pools,omitempty" protobuf:"bytes,16,rep,name=targetPools"`
 	// +optional
-	TargetSize int64 `json:"targetSize,omitempty" tf:"target_size,omitempty"`
-	// +optional
-	// Deprecated
-	UpdateStrategy string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
+	TargetSize int64 `json:"targetSize,omitempty" tf:"target_size,omitempty" protobuf:"varint,17,opt,name=targetSize"`
 	// +optional
 	// Deprecated
-	Version []ComputeRegionInstanceGroupManagerSpecVersion `json:"version,omitempty" tf:"version,omitempty"`
+	UpdateStrategy string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty" protobuf:"bytes,18,opt,name=updateStrategy"`
 	// +optional
-	WaitForInstances bool `json:"waitForInstances,omitempty" tf:"wait_for_instances,omitempty"`
+	// Deprecated
+	Version []ComputeRegionInstanceGroupManagerSpecVersion `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,19,rep,name=version"`
+	// +optional
+	WaitForInstances bool `json:"waitForInstances,omitempty" tf:"wait_for_instances,omitempty" protobuf:"varint,20,opt,name=waitForInstances"`
 }
 
 type ComputeRegionInstanceGroupManagerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeRegionInstanceGroupManagerSpec `json:"output,omitempty"`
+	Output *ComputeRegionInstanceGroupManagerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -143,7 +143,7 @@ type ComputeRegionInstanceGroupManagerStatus struct {
 // ComputeRegionInstanceGroupManagerList is a list of ComputeRegionInstanceGroupManagers
 type ComputeRegionInstanceGroupManagerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeRegionInstanceGroupManager CRD objects
-	Items []ComputeRegionInstanceGroupManager `json:"items,omitempty"`
+	Items []ComputeRegionInstanceGroupManager `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

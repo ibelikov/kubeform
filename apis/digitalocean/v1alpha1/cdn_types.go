@@ -34,45 +34,45 @@ import (
 
 type Cdn struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CdnSpec   `json:"spec,omitempty"`
-	Status            CdnStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CdnSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CdnStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CdnSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// ID of a DigitalOcean managed TLS certificate for use with custom domains
 	// +optional
-	CertificateID string `json:"certificateID,omitempty" tf:"certificate_id,omitempty"`
+	CertificateID string `json:"certificateID,omitempty" tf:"certificate_id,omitempty" protobuf:"bytes,3,opt,name=certificateID"`
 	// The date and time (ISO8601) of when the CDN endpoint was created.
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,4,opt,name=createdAt"`
 	// fully qualified domain name (FQDN) for custom subdomain, (requires certificate_id)
 	// +optional
-	CustomDomain string `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	CustomDomain string `json:"customDomain,omitempty" tf:"custom_domain,omitempty" protobuf:"bytes,5,opt,name=customDomain"`
 	// fully qualified domain name (FQDN) to serve the CDN content
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,6,opt,name=endpoint"`
 	// fully qualified domain name (FQDN) for the origin server
-	Origin string `json:"origin" tf:"origin"`
+	Origin string `json:"origin" tf:"origin" protobuf:"bytes,7,opt,name=origin"`
 	// The amount of time the content is cached in the CDN
 	// +optional
-	Ttl int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	Ttl int64 `json:"ttl,omitempty" tf:"ttl,omitempty" protobuf:"varint,8,opt,name=ttl"`
 }
 
 type CdnStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CdnSpec `json:"output,omitempty"`
+	Output *CdnSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type CdnStatus struct {
 // CdnList is a list of Cdns
 type CdnList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Cdn CRD objects
-	Items []Cdn `json:"items,omitempty"`
+	Items []Cdn `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,40 +34,40 @@ import (
 
 type VirtualNetworkPeering struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkPeeringSpec   `json:"spec,omitempty"`
-	Status            VirtualNetworkPeeringStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualNetworkPeeringSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualNetworkPeeringStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualNetworkPeeringSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AllowForwardedTraffic bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty"`
+	AllowForwardedTraffic bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty" protobuf:"varint,3,opt,name=allowForwardedTraffic"`
 	// +optional
-	AllowGatewayTransit bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
+	AllowGatewayTransit bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty" protobuf:"varint,4,opt,name=allowGatewayTransit"`
 	// +optional
-	AllowVirtualNetworkAccess bool   `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
-	Name                      string `json:"name" tf:"name"`
-	RemoteVirtualNetworkID    string `json:"remoteVirtualNetworkID" tf:"remote_virtual_network_id"`
-	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name"`
+	AllowVirtualNetworkAccess bool   `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty" protobuf:"varint,5,opt,name=allowVirtualNetworkAccess"`
+	Name                      string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	RemoteVirtualNetworkID    string `json:"remoteVirtualNetworkID" tf:"remote_virtual_network_id" protobuf:"bytes,7,opt,name=remoteVirtualNetworkID"`
+	ResourceGroupName         string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	UseRemoteGateways  bool   `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty"`
-	VirtualNetworkName string `json:"virtualNetworkName" tf:"virtual_network_name"`
+	UseRemoteGateways  bool   `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty" protobuf:"varint,9,opt,name=useRemoteGateways"`
+	VirtualNetworkName string `json:"virtualNetworkName" tf:"virtual_network_name" protobuf:"bytes,10,opt,name=virtualNetworkName"`
 }
 
 type VirtualNetworkPeeringStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualNetworkPeeringSpec `json:"output,omitempty"`
+	Output *VirtualNetworkPeeringSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -76,7 +76,7 @@ type VirtualNetworkPeeringStatus struct {
 // VirtualNetworkPeeringList is a list of VirtualNetworkPeerings
 type VirtualNetworkPeeringList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualNetworkPeering CRD objects
-	Items []VirtualNetworkPeering `json:"items,omitempty"`
+	Items []VirtualNetworkPeering `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

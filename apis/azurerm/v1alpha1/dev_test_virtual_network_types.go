@@ -34,49 +34,49 @@ import (
 
 type DevTestVirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DevTestVirtualNetworkSpec   `json:"spec,omitempty"`
-	Status            DevTestVirtualNetworkStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DevTestVirtualNetworkSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DevTestVirtualNetworkStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DevTestVirtualNetworkSpecSubnet struct {
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	UseInVirtualMachineCreation string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
+	UseInVirtualMachineCreation string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty" protobuf:"bytes,2,opt,name=useInVirtualMachineCreation"`
 	// +optional
-	UsePublicIPAddress string `json:"usePublicIPAddress,omitempty" tf:"use_public_ip_address,omitempty"`
+	UsePublicIPAddress string `json:"usePublicIPAddress,omitempty" tf:"use_public_ip_address,omitempty" protobuf:"bytes,3,opt,name=usePublicIPAddress"`
 }
 
 type DevTestVirtualNetworkSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description       string `json:"description,omitempty" tf:"description,omitempty"`
-	LabName           string `json:"labName" tf:"lab_name"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Description       string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
+	LabName           string `json:"labName" tf:"lab_name" protobuf:"bytes,4,opt,name=labName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Subnet []DevTestVirtualNetworkSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []DevTestVirtualNetworkSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty" protobuf:"bytes,7,rep,name=subnet"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
 	// +optional
-	UniqueIdentifier string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty"`
+	UniqueIdentifier string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty" protobuf:"bytes,9,opt,name=uniqueIdentifier"`
 }
 
 type DevTestVirtualNetworkStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DevTestVirtualNetworkSpec `json:"output,omitempty"`
+	Output *DevTestVirtualNetworkSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -85,7 +85,7 @@ type DevTestVirtualNetworkStatus struct {
 // DevTestVirtualNetworkList is a list of DevTestVirtualNetworks
 type DevTestVirtualNetworkList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DevTestVirtualNetwork CRD objects
-	Items []DevTestVirtualNetwork `json:"items,omitempty"`
+	Items []DevTestVirtualNetwork `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

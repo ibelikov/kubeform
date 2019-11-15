@@ -34,33 +34,33 @@ import (
 
 type ManagementLock struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagementLockSpec   `json:"spec,omitempty"`
-	Status            ManagementLockStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ManagementLockSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ManagementLockStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ManagementLockSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	LockLevel string `json:"lockLevel" tf:"lock_level"`
-	Name      string `json:"name" tf:"name"`
+	LockLevel string `json:"lockLevel" tf:"lock_level" protobuf:"bytes,3,opt,name=lockLevel"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	Notes string `json:"notes,omitempty" tf:"notes,omitempty"`
-	Scope string `json:"scope" tf:"scope"`
+	Notes string `json:"notes,omitempty" tf:"notes,omitempty" protobuf:"bytes,5,opt,name=notes"`
+	Scope string `json:"scope" tf:"scope" protobuf:"bytes,6,opt,name=scope"`
 }
 
 type ManagementLockStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ManagementLockSpec `json:"output,omitempty"`
+	Output *ManagementLockSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -69,7 +69,7 @@ type ManagementLockStatus struct {
 // ManagementLockList is a list of ManagementLocks
 type ManagementLockList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ManagementLock CRD objects
-	Items []ManagementLock `json:"items,omitempty"`
+	Items []ManagementLock `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

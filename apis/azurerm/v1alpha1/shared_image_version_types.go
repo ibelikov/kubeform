@@ -34,44 +34,44 @@ import (
 
 type SharedImageVersion struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedImageVersionSpec   `json:"spec,omitempty"`
-	Status            SharedImageVersionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SharedImageVersionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SharedImageVersionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SharedImageVersionSpecTargetRegion struct {
-	Name                 string `json:"name" tf:"name"`
-	RegionalReplicaCount int64  `json:"regionalReplicaCount" tf:"regional_replica_count"`
+	Name                 string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	RegionalReplicaCount int64  `json:"regionalReplicaCount" tf:"regional_replica_count" protobuf:"varint,2,opt,name=regionalReplicaCount"`
 }
 
 type SharedImageVersionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ExcludeFromLatest bool   `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
-	GalleryName       string `json:"galleryName" tf:"gallery_name"`
-	ImageName         string `json:"imageName" tf:"image_name"`
-	Location          string `json:"location" tf:"location"`
-	ManagedImageID    string `json:"managedImageID" tf:"managed_image_id"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ExcludeFromLatest bool   `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty" protobuf:"varint,3,opt,name=excludeFromLatest"`
+	GalleryName       string `json:"galleryName" tf:"gallery_name" protobuf:"bytes,4,opt,name=galleryName"`
+	ImageName         string `json:"imageName" tf:"image_name" protobuf:"bytes,5,opt,name=imageName"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	ManagedImageID    string `json:"managedImageID" tf:"managed_image_id" protobuf:"bytes,7,opt,name=managedImageID"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
-	Tags         map[string]string                    `json:"tags,omitempty" tf:"tags,omitempty"`
-	TargetRegion []SharedImageVersionSpecTargetRegion `json:"targetRegion" tf:"target_region"`
+	Tags         map[string]string                    `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
+	TargetRegion []SharedImageVersionSpecTargetRegion `json:"targetRegion" tf:"target_region" protobuf:"bytes,11,rep,name=targetRegion"`
 }
 
 type SharedImageVersionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SharedImageVersionSpec `json:"output,omitempty"`
+	Output *SharedImageVersionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type SharedImageVersionStatus struct {
 // SharedImageVersionList is a list of SharedImageVersions
 type SharedImageVersionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SharedImageVersion CRD objects
-	Items []SharedImageVersion `json:"items,omitempty"`
+	Items []SharedImageVersion `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

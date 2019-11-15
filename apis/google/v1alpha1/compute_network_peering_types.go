@@ -34,37 +34,37 @@ import (
 
 type ComputeNetworkPeering struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeNetworkPeeringSpec   `json:"spec,omitempty"`
-	Status            ComputeNetworkPeeringStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeNetworkPeeringSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeNetworkPeeringStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeNetworkPeeringSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AutoCreateRoutes bool   `json:"autoCreateRoutes,omitempty" tf:"auto_create_routes,omitempty"`
-	Name             string `json:"name" tf:"name"`
-	Network          string `json:"network" tf:"network"`
-	PeerNetwork      string `json:"peerNetwork" tf:"peer_network"`
+	AutoCreateRoutes bool   `json:"autoCreateRoutes,omitempty" tf:"auto_create_routes,omitempty" protobuf:"varint,3,opt,name=autoCreateRoutes"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	Network          string `json:"network" tf:"network" protobuf:"bytes,5,opt,name=network"`
+	PeerNetwork      string `json:"peerNetwork" tf:"peer_network" protobuf:"bytes,6,opt,name=peerNetwork"`
 	// +optional
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,7,opt,name=state"`
 	// +optional
-	StateDetails string `json:"stateDetails,omitempty" tf:"state_details,omitempty"`
+	StateDetails string `json:"stateDetails,omitempty" tf:"state_details,omitempty" protobuf:"bytes,8,opt,name=stateDetails"`
 }
 
 type ComputeNetworkPeeringStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeNetworkPeeringSpec `json:"output,omitempty"`
+	Output *ComputeNetworkPeeringSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type ComputeNetworkPeeringStatus struct {
 // ComputeNetworkPeeringList is a list of ComputeNetworkPeerings
 type ComputeNetworkPeeringList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeNetworkPeering CRD objects
-	Items []ComputeNetworkPeering `json:"items,omitempty"`
+	Items []ComputeNetworkPeering `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

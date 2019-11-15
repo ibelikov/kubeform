@@ -34,71 +34,71 @@ import (
 
 type VirtualNetworkGatewayConnection struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkGatewayConnectionSpec   `json:"spec,omitempty"`
-	Status            VirtualNetworkGatewayConnectionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualNetworkGatewayConnectionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualNetworkGatewayConnectionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualNetworkGatewayConnectionSpecIpsecPolicy struct {
-	DhGroup         string `json:"dhGroup" tf:"dh_group"`
-	IkeEncryption   string `json:"ikeEncryption" tf:"ike_encryption"`
-	IkeIntegrity    string `json:"ikeIntegrity" tf:"ike_integrity"`
-	IpsecEncryption string `json:"ipsecEncryption" tf:"ipsec_encryption"`
-	IpsecIntegrity  string `json:"ipsecIntegrity" tf:"ipsec_integrity"`
-	PfsGroup        string `json:"pfsGroup" tf:"pfs_group"`
+	DhGroup         string `json:"dhGroup" tf:"dh_group" protobuf:"bytes,1,opt,name=dhGroup"`
+	IkeEncryption   string `json:"ikeEncryption" tf:"ike_encryption" protobuf:"bytes,2,opt,name=ikeEncryption"`
+	IkeIntegrity    string `json:"ikeIntegrity" tf:"ike_integrity" protobuf:"bytes,3,opt,name=ikeIntegrity"`
+	IpsecEncryption string `json:"ipsecEncryption" tf:"ipsec_encryption" protobuf:"bytes,4,opt,name=ipsecEncryption"`
+	IpsecIntegrity  string `json:"ipsecIntegrity" tf:"ipsec_integrity" protobuf:"bytes,5,opt,name=ipsecIntegrity"`
+	PfsGroup        string `json:"pfsGroup" tf:"pfs_group" protobuf:"bytes,6,opt,name=pfsGroup"`
 	// +optional
-	SaDatasize int64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+	SaDatasize int64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty" protobuf:"varint,7,opt,name=saDatasize"`
 	// +optional
-	SaLifetime int64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+	SaLifetime int64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty" protobuf:"varint,8,opt,name=saLifetime"`
 }
 
 type VirtualNetworkGatewayConnectionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	AuthorizationKey string `json:"-" sensitive:"true" tf:"authorization_key,omitempty"`
 	// +optional
-	EnableBGP bool `json:"enableBGP,omitempty" tf:"enable_bgp,omitempty"`
+	EnableBGP bool `json:"enableBGP,omitempty" tf:"enable_bgp,omitempty" protobuf:"varint,4,opt,name=enableBGP"`
 	// +optional
-	ExpressRouteCircuitID string `json:"expressRouteCircuitID,omitempty" tf:"express_route_circuit_id,omitempty"`
+	ExpressRouteCircuitID string `json:"expressRouteCircuitID,omitempty" tf:"express_route_circuit_id,omitempty" protobuf:"bytes,5,opt,name=expressRouteCircuitID"`
 	// +optional
-	ExpressRouteGatewayBypass bool `json:"expressRouteGatewayBypass,omitempty" tf:"express_route_gateway_bypass,omitempty"`
+	ExpressRouteGatewayBypass bool `json:"expressRouteGatewayBypass,omitempty" tf:"express_route_gateway_bypass,omitempty" protobuf:"varint,6,opt,name=expressRouteGatewayBypass"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	IpsecPolicy []VirtualNetworkGatewayConnectionSpecIpsecPolicy `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+	IpsecPolicy []VirtualNetworkGatewayConnectionSpecIpsecPolicy `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty" protobuf:"bytes,7,rep,name=ipsecPolicy"`
 	// +optional
-	LocalNetworkGatewayID string `json:"localNetworkGatewayID,omitempty" tf:"local_network_gateway_id,omitempty"`
-	Location              string `json:"location" tf:"location"`
-	Name                  string `json:"name" tf:"name"`
+	LocalNetworkGatewayID string `json:"localNetworkGatewayID,omitempty" tf:"local_network_gateway_id,omitempty" protobuf:"bytes,8,opt,name=localNetworkGatewayID"`
+	Location              string `json:"location" tf:"location" protobuf:"bytes,9,opt,name=location"`
+	Name                  string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	PeerVirtualNetworkGatewayID string `json:"peerVirtualNetworkGatewayID,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
-	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name"`
+	PeerVirtualNetworkGatewayID string `json:"peerVirtualNetworkGatewayID,omitempty" tf:"peer_virtual_network_gateway_id,omitempty" protobuf:"bytes,11,opt,name=peerVirtualNetworkGatewayID"`
+	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
 	// +optional
-	RoutingWeight int64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+	RoutingWeight int64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty" protobuf:"varint,13,opt,name=routingWeight"`
 	// +optional
 	SharedKey string `json:"-" sensitive:"true" tf:"shared_key,omitempty"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Type string            `json:"type" tf:"type"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,14,rep,name=tags"`
+	Type string            `json:"type" tf:"type" protobuf:"bytes,15,opt,name=type"`
 	// +optional
-	UsePolicyBasedTrafficSelectors bool   `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
-	VirtualNetworkGatewayID        string `json:"virtualNetworkGatewayID" tf:"virtual_network_gateway_id"`
+	UsePolicyBasedTrafficSelectors bool   `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty" protobuf:"varint,16,opt,name=usePolicyBasedTrafficSelectors"`
+	VirtualNetworkGatewayID        string `json:"virtualNetworkGatewayID" tf:"virtual_network_gateway_id" protobuf:"bytes,17,opt,name=virtualNetworkGatewayID"`
 }
 
 type VirtualNetworkGatewayConnectionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualNetworkGatewayConnectionSpec `json:"output,omitempty"`
+	Output *VirtualNetworkGatewayConnectionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -107,7 +107,7 @@ type VirtualNetworkGatewayConnectionStatus struct {
 // VirtualNetworkGatewayConnectionList is a list of VirtualNetworkGatewayConnections
 type VirtualNetworkGatewayConnectionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualNetworkGatewayConnection CRD objects
-	Items []VirtualNetworkGatewayConnection `json:"items,omitempty"`
+	Items []VirtualNetworkGatewayConnection `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

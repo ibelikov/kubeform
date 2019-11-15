@@ -34,31 +34,31 @@ import (
 
 type AppServiceCustomHostnameBinding struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppServiceCustomHostnameBindingSpec   `json:"spec,omitempty"`
-	Status            AppServiceCustomHostnameBindingStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AppServiceCustomHostnameBindingSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AppServiceCustomHostnameBindingStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AppServiceCustomHostnameBindingSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AppServiceName    string `json:"appServiceName" tf:"app_service_name"`
-	Hostname          string `json:"hostname" tf:"hostname"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	AppServiceName    string `json:"appServiceName" tf:"app_service_name" protobuf:"bytes,3,opt,name=appServiceName"`
+	Hostname          string `json:"hostname" tf:"hostname" protobuf:"bytes,4,opt,name=hostname"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 }
 
 type AppServiceCustomHostnameBindingStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AppServiceCustomHostnameBindingSpec `json:"output,omitempty"`
+	Output *AppServiceCustomHostnameBindingSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -67,7 +67,7 @@ type AppServiceCustomHostnameBindingStatus struct {
 // AppServiceCustomHostnameBindingList is a list of AppServiceCustomHostnameBindings
 type AppServiceCustomHostnameBindingList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AppServiceCustomHostnameBinding CRD objects
-	Items []AppServiceCustomHostnameBinding `json:"items,omitempty"`
+	Items []AppServiceCustomHostnameBinding `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

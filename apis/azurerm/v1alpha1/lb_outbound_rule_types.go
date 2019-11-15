@@ -34,48 +34,48 @@ import (
 
 type LbOutboundRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LbOutboundRuleSpec   `json:"spec,omitempty"`
-	Status            LbOutboundRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LbOutboundRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LbOutboundRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LbOutboundRuleSpecFrontendIPConfiguration struct {
 	// +optional
-	ID   string `json:"ID,omitempty" tf:"id,omitempty"`
-	Name string `json:"name" tf:"name"`
+	ID   string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type LbOutboundRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AllocatedOutboundPorts int64  `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
-	BackendAddressPoolID   string `json:"backendAddressPoolID" tf:"backend_address_pool_id"`
+	AllocatedOutboundPorts int64  `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty" protobuf:"varint,3,opt,name=allocatedOutboundPorts"`
+	BackendAddressPoolID   string `json:"backendAddressPoolID" tf:"backend_address_pool_id" protobuf:"bytes,4,opt,name=backendAddressPoolID"`
 	// +optional
-	EnableTcpReset bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+	EnableTcpReset bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty" protobuf:"varint,5,opt,name=enableTcpReset"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	FrontendIPConfiguration []LbOutboundRuleSpecFrontendIPConfiguration `json:"frontendIPConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
+	FrontendIPConfiguration []LbOutboundRuleSpecFrontendIPConfiguration `json:"frontendIPConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty" protobuf:"bytes,6,rep,name=frontendIPConfiguration"`
 	// +optional
-	IdleTimeoutInMinutes int64  `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
-	LoadbalancerID       string `json:"loadbalancerID" tf:"loadbalancer_id"`
-	Name                 string `json:"name" tf:"name"`
-	Protocol             string `json:"protocol" tf:"protocol"`
-	ResourceGroupName    string `json:"resourceGroupName" tf:"resource_group_name"`
+	IdleTimeoutInMinutes int64  `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty" protobuf:"varint,7,opt,name=idleTimeoutInMinutes"`
+	LoadbalancerID       string `json:"loadbalancerID" tf:"loadbalancer_id" protobuf:"bytes,8,opt,name=loadbalancerID"`
+	Name                 string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	Protocol             string `json:"protocol" tf:"protocol" protobuf:"bytes,10,opt,name=protocol"`
+	ResourceGroupName    string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 }
 
 type LbOutboundRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LbOutboundRuleSpec `json:"output,omitempty"`
+	Output *LbOutboundRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -84,7 +84,7 @@ type LbOutboundRuleStatus struct {
 // LbOutboundRuleList is a list of LbOutboundRules
 type LbOutboundRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LbOutboundRule CRD objects
-	Items []LbOutboundRule `json:"items,omitempty"`
+	Items []LbOutboundRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

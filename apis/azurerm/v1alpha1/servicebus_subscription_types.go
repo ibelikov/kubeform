@@ -34,53 +34,53 @@ import (
 
 type ServicebusSubscription struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicebusSubscriptionSpec   `json:"spec,omitempty"`
-	Status            ServicebusSubscriptionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ServicebusSubscriptionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ServicebusSubscriptionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ServicebusSubscriptionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty" protobuf:"bytes,3,opt,name=autoDeleteOnIdle"`
 	// +optional
 	// Deprecated
-	DeadLetteringOnFilterEvaluationExceptions bool `json:"deadLetteringOnFilterEvaluationExceptions,omitempty" tf:"dead_lettering_on_filter_evaluation_exceptions,omitempty"`
+	DeadLetteringOnFilterEvaluationExceptions bool `json:"deadLetteringOnFilterEvaluationExceptions,omitempty" tf:"dead_lettering_on_filter_evaluation_exceptions,omitempty" protobuf:"varint,4,opt,name=deadLetteringOnFilterEvaluationExceptions"`
 	// +optional
-	DeadLetteringOnMessageExpiration bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
+	DeadLetteringOnMessageExpiration bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty" protobuf:"varint,5,opt,name=deadLetteringOnMessageExpiration"`
 	// +optional
-	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
+	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty" protobuf:"bytes,6,opt,name=defaultMessageTtl"`
 	// +optional
-	EnableBatchedOperations bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
+	EnableBatchedOperations bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty" protobuf:"varint,7,opt,name=enableBatchedOperations"`
 	// +optional
-	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
+	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to,omitempty" protobuf:"bytes,8,opt,name=forwardTo"`
 	// +optional
 	// Deprecated
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,9,opt,name=location"`
 	// +optional
-	LockDuration     string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
-	MaxDeliveryCount int64  `json:"maxDeliveryCount" tf:"max_delivery_count"`
-	Name             string `json:"name" tf:"name"`
-	NamespaceName    string `json:"namespaceName" tf:"namespace_name"`
+	LockDuration     string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty" protobuf:"bytes,10,opt,name=lockDuration"`
+	MaxDeliveryCount int64  `json:"maxDeliveryCount" tf:"max_delivery_count" protobuf:"varint,11,opt,name=maxDeliveryCount"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,12,opt,name=name"`
+	NamespaceName    string `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,13,opt,name=namespaceName"`
 	// +optional
-	RequiresSession   bool   `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	TopicName         string `json:"topicName" tf:"topic_name"`
+	RequiresSession   bool   `json:"requiresSession,omitempty" tf:"requires_session,omitempty" protobuf:"varint,14,opt,name=requiresSession"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,15,opt,name=resourceGroupName"`
+	TopicName         string `json:"topicName" tf:"topic_name" protobuf:"bytes,16,opt,name=topicName"`
 }
 
 type ServicebusSubscriptionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ServicebusSubscriptionSpec `json:"output,omitempty"`
+	Output *ServicebusSubscriptionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -89,7 +89,7 @@ type ServicebusSubscriptionStatus struct {
 // ServicebusSubscriptionList is a list of ServicebusSubscriptions
 type ServicebusSubscriptionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ServicebusSubscription CRD objects
-	Items []ServicebusSubscription `json:"items,omitempty"`
+	Items []ServicebusSubscription `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

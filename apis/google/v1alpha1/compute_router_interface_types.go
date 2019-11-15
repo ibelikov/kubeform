@@ -34,37 +34,37 @@ import (
 
 type ComputeRouterInterface struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeRouterInterfaceSpec   `json:"spec,omitempty"`
-	Status            ComputeRouterInterfaceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeRouterInterfaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeRouterInterfaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeRouterInterfaceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	IpRange string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
-	Name    string `json:"name" tf:"name"`
+	IpRange string `json:"ipRange,omitempty" tf:"ip_range,omitempty" protobuf:"bytes,3,opt,name=ipRange"`
+	Name    string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,5,opt,name=project"`
 	// +optional
-	Region    string `json:"region,omitempty" tf:"region,omitempty"`
-	Router    string `json:"router" tf:"router"`
-	VpnTunnel string `json:"vpnTunnel" tf:"vpn_tunnel"`
+	Region    string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,6,opt,name=region"`
+	Router    string `json:"router" tf:"router" protobuf:"bytes,7,opt,name=router"`
+	VpnTunnel string `json:"vpnTunnel" tf:"vpn_tunnel" protobuf:"bytes,8,opt,name=vpnTunnel"`
 }
 
 type ComputeRouterInterfaceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeRouterInterfaceSpec `json:"output,omitempty"`
+	Output *ComputeRouterInterfaceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type ComputeRouterInterfaceStatus struct {
 // ComputeRouterInterfaceList is a list of ComputeRouterInterfaces
 type ComputeRouterInterfaceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeRouterInterface CRD objects
-	Items []ComputeRouterInterface `json:"items,omitempty"`
+	Items []ComputeRouterInterface `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

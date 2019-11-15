@@ -34,9 +34,9 @@ import (
 
 type KeyVaultCertificate struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyVaultCertificateSpec   `json:"spec,omitempty"`
-	Status            KeyVaultCertificateStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KeyVaultCertificateSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KeyVaultCertificateStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KeyVaultCertificateSpecCertificate struct {
@@ -46,112 +46,112 @@ type KeyVaultCertificateSpecCertificate struct {
 }
 
 type KeyVaultCertificateSpecCertificatePolicyIssuerParameters struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyKeyProperties struct {
-	Exportable bool   `json:"exportable" tf:"exportable"`
-	KeySize    int64  `json:"keySize" tf:"key_size"`
-	KeyType    string `json:"keyType" tf:"key_type"`
-	ReuseKey   bool   `json:"reuseKey" tf:"reuse_key"`
+	Exportable bool   `json:"exportable" tf:"exportable" protobuf:"varint,1,opt,name=exportable"`
+	KeySize    int64  `json:"keySize" tf:"key_size" protobuf:"varint,2,opt,name=keySize"`
+	KeyType    string `json:"keyType" tf:"key_type" protobuf:"bytes,3,opt,name=keyType"`
+	ReuseKey   bool   `json:"reuseKey" tf:"reuse_key" protobuf:"varint,4,opt,name=reuseKey"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyLifetimeActionAction struct {
-	ActionType string `json:"actionType" tf:"action_type"`
+	ActionType string `json:"actionType" tf:"action_type" protobuf:"bytes,1,opt,name=actionType"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyLifetimeActionTrigger struct {
 	// +optional
-	DaysBeforeExpiry int64 `json:"daysBeforeExpiry,omitempty" tf:"days_before_expiry,omitempty"`
+	DaysBeforeExpiry int64 `json:"daysBeforeExpiry,omitempty" tf:"days_before_expiry,omitempty" protobuf:"varint,1,opt,name=daysBeforeExpiry"`
 	// +optional
-	LifetimePercentage int64 `json:"lifetimePercentage,omitempty" tf:"lifetime_percentage,omitempty"`
+	LifetimePercentage int64 `json:"lifetimePercentage,omitempty" tf:"lifetime_percentage,omitempty" protobuf:"varint,2,opt,name=lifetimePercentage"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyLifetimeAction struct {
 	// +kubebuilder:validation:MaxItems=1
-	Action []KeyVaultCertificateSpecCertificatePolicyLifetimeActionAction `json:"action" tf:"action"`
+	Action []KeyVaultCertificateSpecCertificatePolicyLifetimeActionAction `json:"action" tf:"action" protobuf:"bytes,1,rep,name=action"`
 	// +kubebuilder:validation:MaxItems=1
-	Trigger []KeyVaultCertificateSpecCertificatePolicyLifetimeActionTrigger `json:"trigger" tf:"trigger"`
+	Trigger []KeyVaultCertificateSpecCertificatePolicyLifetimeActionTrigger `json:"trigger" tf:"trigger" protobuf:"bytes,2,rep,name=trigger"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicySecretProperties struct {
-	ContentType string `json:"contentType" tf:"content_type"`
+	ContentType string `json:"contentType" tf:"content_type" protobuf:"bytes,1,opt,name=contentType"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyX509CertificatePropertiesSubjectAlternativeNames struct {
 	// +optional
-	DnsNames []string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
+	DnsNames []string `json:"dnsNames,omitempty" tf:"dns_names,omitempty" protobuf:"bytes,1,rep,name=dnsNames"`
 	// +optional
-	Emails []string `json:"emails,omitempty" tf:"emails,omitempty"`
+	Emails []string `json:"emails,omitempty" tf:"emails,omitempty" protobuf:"bytes,2,rep,name=emails"`
 	// +optional
-	Upns []string `json:"upns,omitempty" tf:"upns,omitempty"`
+	Upns []string `json:"upns,omitempty" tf:"upns,omitempty" protobuf:"bytes,3,rep,name=upns"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicyX509CertificateProperties struct {
 	// +optional
-	ExtendedKeyUsage []string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
-	KeyUsage         []string `json:"keyUsage" tf:"key_usage"`
-	Subject          string   `json:"subject" tf:"subject"`
+	ExtendedKeyUsage []string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty" protobuf:"bytes,1,rep,name=extendedKeyUsage"`
+	KeyUsage         []string `json:"keyUsage" tf:"key_usage" protobuf:"bytes,2,rep,name=keyUsage"`
+	Subject          string   `json:"subject" tf:"subject" protobuf:"bytes,3,opt,name=subject"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SubjectAlternativeNames []KeyVaultCertificateSpecCertificatePolicyX509CertificatePropertiesSubjectAlternativeNames `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
-	ValidityInMonths        int64                                                                                      `json:"validityInMonths" tf:"validity_in_months"`
+	SubjectAlternativeNames []KeyVaultCertificateSpecCertificatePolicyX509CertificatePropertiesSubjectAlternativeNames `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty" protobuf:"bytes,4,rep,name=subjectAlternativeNames"`
+	ValidityInMonths        int64                                                                                      `json:"validityInMonths" tf:"validity_in_months" protobuf:"varint,5,opt,name=validityInMonths"`
 }
 
 type KeyVaultCertificateSpecCertificatePolicy struct {
 	// +kubebuilder:validation:MaxItems=1
-	IssuerParameters []KeyVaultCertificateSpecCertificatePolicyIssuerParameters `json:"issuerParameters" tf:"issuer_parameters"`
+	IssuerParameters []KeyVaultCertificateSpecCertificatePolicyIssuerParameters `json:"issuerParameters" tf:"issuer_parameters" protobuf:"bytes,1,rep,name=issuerParameters"`
 	// +kubebuilder:validation:MaxItems=1
-	KeyProperties []KeyVaultCertificateSpecCertificatePolicyKeyProperties `json:"keyProperties" tf:"key_properties"`
+	KeyProperties []KeyVaultCertificateSpecCertificatePolicyKeyProperties `json:"keyProperties" tf:"key_properties" protobuf:"bytes,2,rep,name=keyProperties"`
 	// +optional
-	LifetimeAction []KeyVaultCertificateSpecCertificatePolicyLifetimeAction `json:"lifetimeAction,omitempty" tf:"lifetime_action,omitempty"`
+	LifetimeAction []KeyVaultCertificateSpecCertificatePolicyLifetimeAction `json:"lifetimeAction,omitempty" tf:"lifetime_action,omitempty" protobuf:"bytes,3,rep,name=lifetimeAction"`
 	// +kubebuilder:validation:MaxItems=1
-	SecretProperties []KeyVaultCertificateSpecCertificatePolicySecretProperties `json:"secretProperties" tf:"secret_properties"`
+	SecretProperties []KeyVaultCertificateSpecCertificatePolicySecretProperties `json:"secretProperties" tf:"secret_properties" protobuf:"bytes,4,rep,name=secretProperties"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	X509CertificateProperties []KeyVaultCertificateSpecCertificatePolicyX509CertificateProperties `json:"x509CertificateProperties,omitempty" tf:"x509_certificate_properties,omitempty"`
+	X509CertificateProperties []KeyVaultCertificateSpecCertificatePolicyX509CertificateProperties `json:"x509CertificateProperties,omitempty" tf:"x509_certificate_properties,omitempty" protobuf:"bytes,5,rep,name=x509CertificateProperties"`
 }
 
 type KeyVaultCertificateSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Certificate []KeyVaultCertificateSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []KeyVaultCertificateSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty" protobuf:"bytes,4,rep,name=certificate"`
 	// +optional
-	CertificateData string `json:"certificateData,omitempty" tf:"certificate_data,omitempty"`
+	CertificateData string `json:"certificateData,omitempty" tf:"certificate_data,omitempty" protobuf:"bytes,5,opt,name=certificateData"`
 	// +kubebuilder:validation:MaxItems=1
-	CertificatePolicy []KeyVaultCertificateSpecCertificatePolicy `json:"certificatePolicy" tf:"certificate_policy"`
+	CertificatePolicy []KeyVaultCertificateSpecCertificatePolicy `json:"certificatePolicy" tf:"certificate_policy" protobuf:"bytes,6,rep,name=certificatePolicy"`
 	// +optional
-	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
-	Name       string `json:"name" tf:"name"`
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty" protobuf:"bytes,7,opt,name=keyVaultID"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	SecretID string `json:"secretID,omitempty" tf:"secret_id,omitempty"`
+	SecretID string `json:"secretID,omitempty" tf:"secret_id,omitempty" protobuf:"bytes,9,opt,name=secretID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 	// +optional
-	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty" protobuf:"bytes,11,opt,name=thumbprint"`
 	// +optional
 	// Deprecated
-	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty"`
+	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty" protobuf:"bytes,12,opt,name=vaultURI"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,13,opt,name=version"`
 }
 
 type KeyVaultCertificateStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KeyVaultCertificateSpec `json:"output,omitempty"`
+	Output *KeyVaultCertificateSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -160,7 +160,7 @@ type KeyVaultCertificateStatus struct {
 // KeyVaultCertificateList is a list of KeyVaultCertificates
 type KeyVaultCertificateList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KeyVaultCertificate CRD objects
-	Items []KeyVaultCertificate `json:"items,omitempty"`
+	Items []KeyVaultCertificate `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

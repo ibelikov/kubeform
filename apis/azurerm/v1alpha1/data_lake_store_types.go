@@ -34,45 +34,45 @@ import (
 
 type DataLakeStore struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataLakeStoreSpec   `json:"spec,omitempty"`
-	Status            DataLakeStoreStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataLakeStoreSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataLakeStoreStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataLakeStoreSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	EncryptionState string `json:"encryptionState,omitempty" tf:"encryption_state,omitempty"`
+	EncryptionState string `json:"encryptionState,omitempty" tf:"encryption_state,omitempty" protobuf:"bytes,3,opt,name=encryptionState"`
 	// +optional
-	EncryptionType string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+	EncryptionType string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty" protobuf:"bytes,4,opt,name=encryptionType"`
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,5,opt,name=endpoint"`
 	// +optional
-	FirewallAllowAzureIPS string `json:"firewallAllowAzureIPS,omitempty" tf:"firewall_allow_azure_ips,omitempty"`
+	FirewallAllowAzureIPS string `json:"firewallAllowAzureIPS,omitempty" tf:"firewall_allow_azure_ips,omitempty" protobuf:"bytes,6,opt,name=firewallAllowAzureIPS"`
 	// +optional
-	FirewallState     string `json:"firewallState,omitempty" tf:"firewall_state,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	FirewallState     string `json:"firewallState,omitempty" tf:"firewall_state,omitempty" protobuf:"bytes,7,opt,name=firewallState"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,8,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 	// +optional
-	Tier string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier string `json:"tier,omitempty" tf:"tier,omitempty" protobuf:"bytes,12,opt,name=tier"`
 }
 
 type DataLakeStoreStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataLakeStoreSpec `json:"output,omitempty"`
+	Output *DataLakeStoreSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type DataLakeStoreStatus struct {
 // DataLakeStoreList is a list of DataLakeStores
 type DataLakeStoreList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataLakeStore CRD objects
-	Items []DataLakeStore `json:"items,omitempty"`
+	Items []DataLakeStore `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

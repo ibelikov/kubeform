@@ -34,45 +34,45 @@ import (
 
 type DataFactoryLinkedServiceDataLakeStorageGen2 struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataFactoryLinkedServiceDataLakeStorageGen2Spec   `json:"spec,omitempty"`
-	Status            DataFactoryLinkedServiceDataLakeStorageGen2Status `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataFactoryLinkedServiceDataLakeStorageGen2Spec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataFactoryLinkedServiceDataLakeStorageGen2Status `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataFactoryLinkedServiceDataLakeStorageGen2Spec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AdditionalProperties map[string]string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+	AdditionalProperties map[string]string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty" protobuf:"bytes,3,rep,name=additionalProperties"`
 	// +optional
-	Annotations     []string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-	DataFactoryName string   `json:"dataFactoryName" tf:"data_factory_name"`
+	Annotations     []string `json:"annotations,omitempty" tf:"annotations,omitempty" protobuf:"bytes,4,rep,name=annotations"`
+	DataFactoryName string   `json:"dataFactoryName" tf:"data_factory_name" protobuf:"bytes,5,opt,name=dataFactoryName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	IntegrationRuntimeName string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
-	Name                   string `json:"name" tf:"name"`
+	IntegrationRuntimeName string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty" protobuf:"bytes,7,opt,name=integrationRuntimeName"`
+	Name                   string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	Parameters          map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-	ResourceGroupName   string            `json:"resourceGroupName" tf:"resource_group_name"`
-	ServicePrincipalID  string            `json:"servicePrincipalID" tf:"service_principal_id"`
-	ServicePrincipalKey string            `json:"servicePrincipalKey" tf:"service_principal_key"`
-	Tenant              string            `json:"tenant" tf:"tenant"`
-	Url                 string            `json:"url" tf:"url"`
+	Parameters          map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,9,rep,name=parameters"`
+	ResourceGroupName   string            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
+	ServicePrincipalID  string            `json:"servicePrincipalID" tf:"service_principal_id" protobuf:"bytes,11,opt,name=servicePrincipalID"`
+	ServicePrincipalKey string            `json:"servicePrincipalKey" tf:"service_principal_key" protobuf:"bytes,12,opt,name=servicePrincipalKey"`
+	Tenant              string            `json:"tenant" tf:"tenant" protobuf:"bytes,13,opt,name=tenant"`
+	Url                 string            `json:"url" tf:"url" protobuf:"bytes,14,opt,name=url"`
 }
 
 type DataFactoryLinkedServiceDataLakeStorageGen2Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataFactoryLinkedServiceDataLakeStorageGen2Spec `json:"output,omitempty"`
+	Output *DataFactoryLinkedServiceDataLakeStorageGen2Spec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type DataFactoryLinkedServiceDataLakeStorageGen2Status struct {
 // DataFactoryLinkedServiceDataLakeStorageGen2List is a list of DataFactoryLinkedServiceDataLakeStorageGen2s
 type DataFactoryLinkedServiceDataLakeStorageGen2List struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataFactoryLinkedServiceDataLakeStorageGen2 CRD objects
-	Items []DataFactoryLinkedServiceDataLakeStorageGen2 `json:"items,omitempty"`
+	Items []DataFactoryLinkedServiceDataLakeStorageGen2 `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

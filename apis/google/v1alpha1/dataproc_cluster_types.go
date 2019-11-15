@@ -34,156 +34,156 @@ import (
 
 type DataprocCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataprocClusterSpec   `json:"spec,omitempty"`
-	Status            DataprocClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataprocClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataprocClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataprocClusterSpecClusterConfigGceClusterConfig struct {
 	// +optional
-	InternalIPOnly bool `json:"internalIPOnly,omitempty" tf:"internal_ip_only,omitempty"`
+	InternalIPOnly bool `json:"internalIPOnly,omitempty" tf:"internal_ip_only,omitempty" protobuf:"varint,1,opt,name=internalIPOnly"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,2,rep,name=metadata"`
 	// +optional
-	Network string `json:"network,omitempty" tf:"network,omitempty"`
+	Network string `json:"network,omitempty" tf:"network,omitempty" protobuf:"bytes,3,opt,name=network"`
 	// +optional
-	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,4,opt,name=serviceAccount"`
 	// +optional
-	ServiceAccountScopes []string `json:"serviceAccountScopes,omitempty" tf:"service_account_scopes,omitempty"`
+	ServiceAccountScopes []string `json:"serviceAccountScopes,omitempty" tf:"service_account_scopes,omitempty" protobuf:"bytes,5,rep,name=serviceAccountScopes"`
 	// +optional
-	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	Subnetwork string `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,6,opt,name=subnetwork"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,8,opt,name=zone"`
 }
 
 type DataprocClusterSpecClusterConfigInitializationAction struct {
-	Script string `json:"script" tf:"script"`
+	Script string `json:"script" tf:"script" protobuf:"bytes,1,opt,name=script"`
 	// +optional
-	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty"`
+	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty" protobuf:"varint,2,opt,name=timeoutSec"`
 }
 
 type DataprocClusterSpecClusterConfigMasterConfigDiskConfig struct {
 	// +optional
-	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty"`
+	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty" protobuf:"varint,1,opt,name=bootDiskSizeGb"`
 	// +optional
-	BootDiskType string `json:"bootDiskType,omitempty" tf:"boot_disk_type,omitempty"`
+	BootDiskType string `json:"bootDiskType,omitempty" tf:"boot_disk_type,omitempty" protobuf:"bytes,2,opt,name=bootDiskType"`
 	// +optional
-	NumLocalSsds int64 `json:"numLocalSsds,omitempty" tf:"num_local_ssds,omitempty"`
+	NumLocalSsds int64 `json:"numLocalSsds,omitempty" tf:"num_local_ssds,omitempty" protobuf:"varint,3,opt,name=numLocalSsds"`
 }
 
 type DataprocClusterSpecClusterConfigMasterConfig struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskConfig []DataprocClusterSpecClusterConfigMasterConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty"`
+	DiskConfig []DataprocClusterSpecClusterConfigMasterConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty" protobuf:"bytes,1,rep,name=diskConfig"`
 	// +optional
-	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty"`
+	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty" protobuf:"bytes,2,rep,name=instanceNames"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,3,opt,name=machineType"`
 	// +optional
-	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty"`
+	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty" protobuf:"varint,4,opt,name=numInstances"`
 }
 
 type DataprocClusterSpecClusterConfigPreemptibleWorkerConfigDiskConfig struct {
 	// +optional
-	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty"`
+	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty" protobuf:"varint,1,opt,name=bootDiskSizeGb"`
 }
 
 type DataprocClusterSpecClusterConfigPreemptibleWorkerConfig struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskConfig []DataprocClusterSpecClusterConfigPreemptibleWorkerConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty"`
+	DiskConfig []DataprocClusterSpecClusterConfigPreemptibleWorkerConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty" protobuf:"bytes,1,rep,name=diskConfig"`
 	// +optional
-	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty"`
+	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty" protobuf:"bytes,2,rep,name=instanceNames"`
 	// +optional
-	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty"`
+	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty" protobuf:"varint,3,opt,name=numInstances"`
 }
 
 type DataprocClusterSpecClusterConfigSoftwareConfig struct {
 	// +optional
-	ImageVersion string `json:"imageVersion,omitempty" tf:"image_version,omitempty"`
+	ImageVersion string `json:"imageVersion,omitempty" tf:"image_version,omitempty" protobuf:"bytes,1,opt,name=imageVersion"`
 	// +optional
-	OverrideProperties map[string]string `json:"overrideProperties,omitempty" tf:"override_properties,omitempty"`
+	OverrideProperties map[string]string `json:"overrideProperties,omitempty" tf:"override_properties,omitempty" protobuf:"bytes,2,rep,name=overrideProperties"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,3,rep,name=properties"`
 }
 
 type DataprocClusterSpecClusterConfigWorkerConfigDiskConfig struct {
 	// +optional
-	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty"`
+	BootDiskSizeGb int64 `json:"bootDiskSizeGb,omitempty" tf:"boot_disk_size_gb,omitempty" protobuf:"varint,1,opt,name=bootDiskSizeGb"`
 	// +optional
-	BootDiskType string `json:"bootDiskType,omitempty" tf:"boot_disk_type,omitempty"`
+	BootDiskType string `json:"bootDiskType,omitempty" tf:"boot_disk_type,omitempty" protobuf:"bytes,2,opt,name=bootDiskType"`
 	// +optional
-	NumLocalSsds int64 `json:"numLocalSsds,omitempty" tf:"num_local_ssds,omitempty"`
+	NumLocalSsds int64 `json:"numLocalSsds,omitempty" tf:"num_local_ssds,omitempty" protobuf:"varint,3,opt,name=numLocalSsds"`
 }
 
 type DataprocClusterSpecClusterConfigWorkerConfig struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	DiskConfig []DataprocClusterSpecClusterConfigWorkerConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty"`
+	DiskConfig []DataprocClusterSpecClusterConfigWorkerConfigDiskConfig `json:"diskConfig,omitempty" tf:"disk_config,omitempty" protobuf:"bytes,1,rep,name=diskConfig"`
 	// +optional
-	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty"`
+	InstanceNames []string `json:"instanceNames,omitempty" tf:"instance_names,omitempty" protobuf:"bytes,2,rep,name=instanceNames"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,3,opt,name=machineType"`
 	// +optional
-	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty"`
+	NumInstances int64 `json:"numInstances,omitempty" tf:"num_instances,omitempty" protobuf:"varint,4,opt,name=numInstances"`
 }
 
 type DataprocClusterSpecClusterConfig struct {
 	// +optional
-	Bucket string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+	Bucket string `json:"bucket,omitempty" tf:"bucket,omitempty" protobuf:"bytes,1,opt,name=bucket"`
 	// +optional
 	// Deprecated
-	DeleteAutogenBucket bool `json:"deleteAutogenBucket,omitempty" tf:"delete_autogen_bucket,omitempty"`
+	DeleteAutogenBucket bool `json:"deleteAutogenBucket,omitempty" tf:"delete_autogen_bucket,omitempty" protobuf:"varint,2,opt,name=deleteAutogenBucket"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	GceClusterConfig []DataprocClusterSpecClusterConfigGceClusterConfig `json:"gceClusterConfig,omitempty" tf:"gce_cluster_config,omitempty"`
+	GceClusterConfig []DataprocClusterSpecClusterConfigGceClusterConfig `json:"gceClusterConfig,omitempty" tf:"gce_cluster_config,omitempty" protobuf:"bytes,3,rep,name=gceClusterConfig"`
 	// +optional
-	InitializationAction []DataprocClusterSpecClusterConfigInitializationAction `json:"initializationAction,omitempty" tf:"initialization_action,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	MasterConfig []DataprocClusterSpecClusterConfigMasterConfig `json:"masterConfig,omitempty" tf:"master_config,omitempty"`
+	InitializationAction []DataprocClusterSpecClusterConfigInitializationAction `json:"initializationAction,omitempty" tf:"initialization_action,omitempty" protobuf:"bytes,4,rep,name=initializationAction"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PreemptibleWorkerConfig []DataprocClusterSpecClusterConfigPreemptibleWorkerConfig `json:"preemptibleWorkerConfig,omitempty" tf:"preemptible_worker_config,omitempty"`
+	MasterConfig []DataprocClusterSpecClusterConfigMasterConfig `json:"masterConfig,omitempty" tf:"master_config,omitempty" protobuf:"bytes,5,rep,name=masterConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SoftwareConfig []DataprocClusterSpecClusterConfigSoftwareConfig `json:"softwareConfig,omitempty" tf:"software_config,omitempty"`
-	// +optional
-	StagingBucket string `json:"stagingBucket,omitempty" tf:"staging_bucket,omitempty"`
+	PreemptibleWorkerConfig []DataprocClusterSpecClusterConfigPreemptibleWorkerConfig `json:"preemptibleWorkerConfig,omitempty" tf:"preemptible_worker_config,omitempty" protobuf:"bytes,6,rep,name=preemptibleWorkerConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	WorkerConfig []DataprocClusterSpecClusterConfigWorkerConfig `json:"workerConfig,omitempty" tf:"worker_config,omitempty"`
+	SoftwareConfig []DataprocClusterSpecClusterConfigSoftwareConfig `json:"softwareConfig,omitempty" tf:"software_config,omitempty" protobuf:"bytes,7,rep,name=softwareConfig"`
+	// +optional
+	StagingBucket string `json:"stagingBucket,omitempty" tf:"staging_bucket,omitempty" protobuf:"bytes,8,opt,name=stagingBucket"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	WorkerConfig []DataprocClusterSpecClusterConfigWorkerConfig `json:"workerConfig,omitempty" tf:"worker_config,omitempty" protobuf:"bytes,9,rep,name=workerConfig"`
 }
 
 type DataprocClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ClusterConfig []DataprocClusterSpecClusterConfig `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+	ClusterConfig []DataprocClusterSpecClusterConfig `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty" protobuf:"bytes,3,rep,name=clusterConfig"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,4,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,7,opt,name=region"`
 }
 
 type DataprocClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataprocClusterSpec `json:"output,omitempty"`
+	Output *DataprocClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -192,7 +192,7 @@ type DataprocClusterStatus struct {
 // DataprocClusterList is a list of DataprocClusters
 type DataprocClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataprocCluster CRD objects
-	Items []DataprocCluster `json:"items,omitempty"`
+	Items []DataprocCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

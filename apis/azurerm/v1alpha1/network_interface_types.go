@@ -34,84 +34,84 @@ import (
 
 type NetworkInterface struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceSpec   `json:"spec,omitempty"`
-	Status            NetworkInterfaceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NetworkInterfaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NetworkInterfaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NetworkInterfaceSpecIpConfiguration struct {
 	// +optional
 	// Deprecated
-	ApplicationGatewayBackendAddressPoolsIDS []string `json:"applicationGatewayBackendAddressPoolsIDS,omitempty" tf:"application_gateway_backend_address_pools_ids,omitempty"`
+	ApplicationGatewayBackendAddressPoolsIDS []string `json:"applicationGatewayBackendAddressPoolsIDS,omitempty" tf:"application_gateway_backend_address_pools_ids,omitempty" protobuf:"bytes,1,rep,name=applicationGatewayBackendAddressPoolsIDS"`
 	// +optional
 	// Deprecated
-	ApplicationSecurityGroupIDS []string `json:"applicationSecurityGroupIDS,omitempty" tf:"application_security_group_ids,omitempty"`
+	ApplicationSecurityGroupIDS []string `json:"applicationSecurityGroupIDS,omitempty" tf:"application_security_group_ids,omitempty" protobuf:"bytes,2,rep,name=applicationSecurityGroupIDS"`
 	// +optional
 	// Deprecated
-	LoadBalancerBackendAddressPoolsIDS []string `json:"loadBalancerBackendAddressPoolsIDS,omitempty" tf:"load_balancer_backend_address_pools_ids,omitempty"`
+	LoadBalancerBackendAddressPoolsIDS []string `json:"loadBalancerBackendAddressPoolsIDS,omitempty" tf:"load_balancer_backend_address_pools_ids,omitempty" protobuf:"bytes,3,rep,name=loadBalancerBackendAddressPoolsIDS"`
 	// +optional
 	// Deprecated
-	LoadBalancerInboundNATRulesIDS []string `json:"loadBalancerInboundNATRulesIDS,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
-	Name                           string   `json:"name" tf:"name"`
+	LoadBalancerInboundNATRulesIDS []string `json:"loadBalancerInboundNATRulesIDS,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty" protobuf:"bytes,4,rep,name=loadBalancerInboundNATRulesIDS"`
+	Name                           string   `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Primary bool `json:"primary,omitempty" tf:"primary,omitempty"`
+	Primary bool `json:"primary,omitempty" tf:"primary,omitempty" protobuf:"varint,6,opt,name=primary"`
 	// +optional
-	PrivateIPAddress           string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
-	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation" tf:"private_ip_address_allocation"`
+	PrivateIPAddress           string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,7,opt,name=privateIPAddress"`
+	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation" tf:"private_ip_address_allocation" protobuf:"bytes,8,opt,name=privateIPAddressAllocation"`
 	// +optional
-	PrivateIPAddressVersion string `json:"privateIPAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
+	PrivateIPAddressVersion string `json:"privateIPAddressVersion,omitempty" tf:"private_ip_address_version,omitempty" protobuf:"bytes,9,opt,name=privateIPAddressVersion"`
 	// +optional
-	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty" protobuf:"bytes,10,opt,name=publicIPAddressID"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,11,opt,name=subnetID"`
 }
 
 type NetworkInterfaceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AppliedDNSServers []string `json:"appliedDNSServers,omitempty" tf:"applied_dns_servers,omitempty"`
+	AppliedDNSServers []string `json:"appliedDNSServers,omitempty" tf:"applied_dns_servers,omitempty" protobuf:"bytes,3,rep,name=appliedDNSServers"`
 	// +optional
-	DnsServers []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+	DnsServers []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty" protobuf:"bytes,4,rep,name=dnsServers"`
 	// +optional
-	EnableAcceleratedNetworking bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
+	EnableAcceleratedNetworking bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty" protobuf:"varint,5,opt,name=enableAcceleratedNetworking"`
 	// +optional
-	EnableIPForwarding bool `json:"enableIPForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
+	EnableIPForwarding bool `json:"enableIPForwarding,omitempty" tf:"enable_ip_forwarding,omitempty" protobuf:"varint,6,opt,name=enableIPForwarding"`
 	// +optional
-	InternalDNSNameLabel string `json:"internalDNSNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
+	InternalDNSNameLabel string `json:"internalDNSNameLabel,omitempty" tf:"internal_dns_name_label,omitempty" protobuf:"bytes,7,opt,name=internalDNSNameLabel"`
 	// +optional
 	// Deprecated
-	InternalFqdn    string                                `json:"internalFqdn,omitempty" tf:"internal_fqdn,omitempty"`
-	IpConfiguration []NetworkInterfaceSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
-	Location        string                                `json:"location" tf:"location"`
+	InternalFqdn    string                                `json:"internalFqdn,omitempty" tf:"internal_fqdn,omitempty" protobuf:"bytes,8,opt,name=internalFqdn"`
+	IpConfiguration []NetworkInterfaceSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration" protobuf:"bytes,9,rep,name=ipConfiguration"`
+	Location        string                                `json:"location" tf:"location" protobuf:"bytes,10,opt,name=location"`
 	// +optional
-	MacAddress string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
-	Name       string `json:"name" tf:"name"`
+	MacAddress string `json:"macAddress,omitempty" tf:"mac_address,omitempty" protobuf:"bytes,11,opt,name=macAddress"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,12,opt,name=name"`
 	// +optional
-	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty"`
+	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty" protobuf:"bytes,13,opt,name=networkSecurityGroupID"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty" protobuf:"bytes,14,opt,name=privateIPAddress"`
 	// +optional
-	PrivateIPAddresses []string `json:"privateIPAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
-	ResourceGroupName  string   `json:"resourceGroupName" tf:"resource_group_name"`
+	PrivateIPAddresses []string `json:"privateIPAddresses,omitempty" tf:"private_ip_addresses,omitempty" protobuf:"bytes,15,rep,name=privateIPAddresses"`
+	ResourceGroupName  string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,16,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,17,rep,name=tags"`
 	// +optional
-	VirtualMachineID string `json:"virtualMachineID,omitempty" tf:"virtual_machine_id,omitempty"`
+	VirtualMachineID string `json:"virtualMachineID,omitempty" tf:"virtual_machine_id,omitempty" protobuf:"bytes,18,opt,name=virtualMachineID"`
 }
 
 type NetworkInterfaceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NetworkInterfaceSpec `json:"output,omitempty"`
+	Output *NetworkInterfaceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -120,7 +120,7 @@ type NetworkInterfaceStatus struct {
 // NetworkInterfaceList is a list of NetworkInterfaces
 type NetworkInterfaceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NetworkInterface CRD objects
-	Items []NetworkInterface `json:"items,omitempty"`
+	Items []NetworkInterface `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,73 +34,73 @@ import (
 
 type BigqueryDataset struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BigqueryDatasetSpec   `json:"spec,omitempty"`
-	Status            BigqueryDatasetStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BigqueryDatasetSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BigqueryDatasetStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BigqueryDatasetSpecAccessView struct {
-	DatasetID string `json:"datasetID" tf:"dataset_id"`
-	ProjectID string `json:"projectID" tf:"project_id"`
-	TableID   string `json:"tableID" tf:"table_id"`
+	DatasetID string `json:"datasetID" tf:"dataset_id" protobuf:"bytes,1,opt,name=datasetID"`
+	ProjectID string `json:"projectID" tf:"project_id" protobuf:"bytes,2,opt,name=projectID"`
+	TableID   string `json:"tableID" tf:"table_id" protobuf:"bytes,3,opt,name=tableID"`
 }
 
 type BigqueryDatasetSpecAccess struct {
 	// +optional
-	Domain string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain string `json:"domain,omitempty" tf:"domain,omitempty" protobuf:"bytes,1,opt,name=domain"`
 	// +optional
-	GroupByEmail string `json:"groupByEmail,omitempty" tf:"group_by_email,omitempty"`
+	GroupByEmail string `json:"groupByEmail,omitempty" tf:"group_by_email,omitempty" protobuf:"bytes,2,opt,name=groupByEmail"`
 	// +optional
-	Role string `json:"role,omitempty" tf:"role,omitempty"`
+	Role string `json:"role,omitempty" tf:"role,omitempty" protobuf:"bytes,3,opt,name=role"`
 	// +optional
-	SpecialGroup string `json:"specialGroup,omitempty" tf:"special_group,omitempty"`
+	SpecialGroup string `json:"specialGroup,omitempty" tf:"special_group,omitempty" protobuf:"bytes,4,opt,name=specialGroup"`
 	// +optional
-	UserByEmail string `json:"userByEmail,omitempty" tf:"user_by_email,omitempty"`
+	UserByEmail string `json:"userByEmail,omitempty" tf:"user_by_email,omitempty" protobuf:"bytes,5,opt,name=userByEmail"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	View []BigqueryDatasetSpecAccessView `json:"view,omitempty" tf:"view,omitempty"`
+	View []BigqueryDatasetSpecAccessView `json:"view,omitempty" tf:"view,omitempty" protobuf:"bytes,6,rep,name=view"`
 }
 
 type BigqueryDatasetSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Access []BigqueryDatasetSpecAccess `json:"access,omitempty" tf:"access,omitempty"`
+	Access []BigqueryDatasetSpecAccess `json:"access,omitempty" tf:"access,omitempty" protobuf:"bytes,3,rep,name=access"`
 	// +optional
-	CreationTime int64  `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
-	DatasetID    string `json:"datasetID" tf:"dataset_id"`
+	CreationTime int64  `json:"creationTime,omitempty" tf:"creation_time,omitempty" protobuf:"varint,4,opt,name=creationTime"`
+	DatasetID    string `json:"datasetID" tf:"dataset_id" protobuf:"bytes,5,opt,name=datasetID"`
 	// +optional
-	DefaultTableExpirationMs int64 `json:"defaultTableExpirationMs,omitempty" tf:"default_table_expiration_ms,omitempty"`
+	DefaultTableExpirationMs int64 `json:"defaultTableExpirationMs,omitempty" tf:"default_table_expiration_ms,omitempty" protobuf:"varint,6,opt,name=defaultTableExpirationMs"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,7,opt,name=description"`
 	// +optional
-	Etag string `json:"etag,omitempty" tf:"etag,omitempty"`
+	Etag string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,8,opt,name=etag"`
 	// +optional
-	FriendlyName string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
+	FriendlyName string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty" protobuf:"bytes,9,opt,name=friendlyName"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,10,rep,name=labels"`
 	// +optional
-	LastModifiedTime int64 `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty"`
+	LastModifiedTime int64 `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty" protobuf:"varint,11,opt,name=lastModifiedTime"`
 	// +optional
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,12,opt,name=location"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,13,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,14,opt,name=selfLink"`
 }
 
 type BigqueryDatasetStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BigqueryDatasetSpec `json:"output,omitempty"`
+	Output *BigqueryDatasetSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -109,7 +109,7 @@ type BigqueryDatasetStatus struct {
 // BigqueryDatasetList is a list of BigqueryDatasets
 type BigqueryDatasetList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BigqueryDataset CRD objects
-	Items []BigqueryDataset `json:"items,omitempty"`
+	Items []BigqueryDataset `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

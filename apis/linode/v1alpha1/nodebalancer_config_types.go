@@ -34,91 +34,91 @@ import (
 
 type NodebalancerConfig struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodebalancerConfigSpec   `json:"spec,omitempty"`
-	Status            NodebalancerConfigStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NodebalancerConfigSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NodebalancerConfigStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NodebalancerConfigSpecNodeStatus struct {
 	// The number of backends considered to be 'DOWN' and unhealthy. These are not in rotation, and not serving requests.
 	// +optional
-	StatusDown int64 `json:"statusDown,omitempty" tf:"status_down,omitempty"`
+	StatusDown int64 `json:"statusDown,omitempty" tf:"status_down,omitempty" protobuf:"varint,1,opt,name=statusDown"`
 	// The number of backends considered to be 'UP' and healthy, and that are serving requests.
 	// +optional
-	StatusUp int64 `json:"statusUp,omitempty" tf:"status_up,omitempty"`
+	StatusUp int64 `json:"statusUp,omitempty" tf:"status_up,omitempty" protobuf:"varint,2,opt,name=statusUp"`
 }
 
 type NodebalancerConfigSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// What algorithm this NodeBalancer should use for routing traffic to backends: roundrobin, leastconn, source
 	// +optional
-	Algorithm string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+	Algorithm string `json:"algorithm,omitempty" tf:"algorithm,omitempty" protobuf:"bytes,4,opt,name=algorithm"`
 	// The type of check to perform against backends to ensure they are serving requests. This is used to determine if backends are up or down. If none no check is performed. connection requires only a connection to the backend to succeed. http and http_body rely on the backend serving HTTP, and that the response returned matches what is expected.
 	// +optional
-	Check string `json:"check,omitempty" tf:"check,omitempty"`
+	Check string `json:"check,omitempty" tf:"check,omitempty" protobuf:"bytes,5,opt,name=check"`
 	// How many times to attempt a check before considering a backend to be down. (1-30)
 	// +optional
-	CheckAttempts int64 `json:"checkAttempts,omitempty" tf:"check_attempts,omitempty"`
+	CheckAttempts int64 `json:"checkAttempts,omitempty" tf:"check_attempts,omitempty" protobuf:"varint,6,opt,name=checkAttempts"`
 	// This value must be present in the response body of the check in order for it to pass. If this value is not present in the response body of a check request, the backend is considered to be down
 	// +optional
-	CheckBody string `json:"checkBody,omitempty" tf:"check_body,omitempty"`
+	CheckBody string `json:"checkBody,omitempty" tf:"check_body,omitempty" protobuf:"bytes,7,opt,name=checkBody"`
 	// How often, in seconds, to check that backends are up and serving requests.
 	// +optional
-	CheckInterval int64 `json:"checkInterval,omitempty" tf:"check_interval,omitempty"`
+	CheckInterval int64 `json:"checkInterval,omitempty" tf:"check_interval,omitempty" protobuf:"varint,8,opt,name=checkInterval"`
 	// If true, any response from this backend with a 5xx status code will be enough for it to be considered unhealthy and taken out of rotation.
 	// +optional
-	CheckPassive bool `json:"checkPassive,omitempty" tf:"check_passive,omitempty"`
+	CheckPassive bool `json:"checkPassive,omitempty" tf:"check_passive,omitempty" protobuf:"varint,9,opt,name=checkPassive"`
 	// The URL path to check on each backend. If the backend does not respond to this request it is considered to be down.
 	// +optional
-	CheckPath string `json:"checkPath,omitempty" tf:"check_path,omitempty"`
+	CheckPath string `json:"checkPath,omitempty" tf:"check_path,omitempty" protobuf:"bytes,10,opt,name=checkPath"`
 	// How long, in seconds, to wait for a check attempt before considering it failed. (1-30)
 	// +optional
-	CheckTimeout int64 `json:"checkTimeout,omitempty" tf:"check_timeout,omitempty"`
+	CheckTimeout int64 `json:"checkTimeout,omitempty" tf:"check_timeout,omitempty" protobuf:"varint,11,opt,name=checkTimeout"`
 	// What ciphers to use for SSL connections served by this NodeBalancer. `legacy` is considered insecure and should only be used if necessary.
 	// +optional
-	CipherSuite string `json:"cipherSuite,omitempty" tf:"cipher_suite,omitempty"`
+	CipherSuite string `json:"cipherSuite,omitempty" tf:"cipher_suite,omitempty" protobuf:"bytes,12,opt,name=cipherSuite"`
 	// +optional
-	NodeStatus map[string]NodebalancerConfigSpecNodeStatus `json:"nodeStatus,omitempty" tf:"node_status,omitempty"`
+	NodeStatus map[string]NodebalancerConfigSpecNodeStatus `json:"nodeStatus,omitempty" tf:"node_status,omitempty" protobuf:"bytes,13,rep,name=nodeStatus"`
 	// The ID of the NodeBalancer to access.
-	NodebalancerID int64 `json:"nodebalancerID" tf:"nodebalancer_id"`
+	NodebalancerID int64 `json:"nodebalancerID" tf:"nodebalancer_id" protobuf:"varint,14,opt,name=nodebalancerID"`
 	// The TCP port this Config is for. These values must be unique across configs on a single NodeBalancer (you can't have two configs for port 80, for example). While some ports imply some protocols, no enforcement is done and you may configure your NodeBalancer however is useful to you. For example, while port 443 is generally used for HTTPS, you do not need SSL configured to have a NodeBalancer listening on port 443.
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,15,opt,name=port"`
 	// The protocol this port is configured to serve. If this is set to https you must include an ssl_cert and an ssl_key.
 	// +optional
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,16,opt,name=protocol"`
 	// The certificate this port is serving. This is not returned. If set, this field will come back as `<REDACTED>`. Please use the ssl_commonname and ssl_fingerprint to identify the certificate.
 	// +optional
-	SslCert string `json:"sslCert,omitempty" tf:"ssl_cert,omitempty"`
+	SslCert string `json:"sslCert,omitempty" tf:"ssl_cert,omitempty" protobuf:"bytes,17,opt,name=sslCert"`
 	// The common name for the SSL certification this port is serving if this port is not configured to use SSL.
 	// +optional
-	SslCommonname string `json:"sslCommonname,omitempty" tf:"ssl_commonname,omitempty"`
+	SslCommonname string `json:"sslCommonname,omitempty" tf:"ssl_commonname,omitempty" protobuf:"bytes,18,opt,name=sslCommonname"`
 	// The fingerprint for the SSL certification this port is serving if this port is not configured to use SSL.
 	// +optional
-	SslFingerprint string `json:"sslFingerprint,omitempty" tf:"ssl_fingerprint,omitempty"`
+	SslFingerprint string `json:"sslFingerprint,omitempty" tf:"ssl_fingerprint,omitempty" protobuf:"bytes,19,opt,name=sslFingerprint"`
 	// The private key corresponding to this port's certificate. This is not returned. If set, this field will come back as `<REDACTED>`. Please use the ssl_commonname and ssl_fingerprint to identify the certificate.
 	// +optional
 	SslKey string `json:"-" sensitive:"true" tf:"ssl_key,omitempty"`
 	// Controls how session stickiness is handled on this port: 'none', 'table', 'http_cookie'
 	// +optional
-	Stickiness string `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
+	Stickiness string `json:"stickiness,omitempty" tf:"stickiness,omitempty" protobuf:"bytes,20,opt,name=stickiness"`
 }
 
 type NodebalancerConfigStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NodebalancerConfigSpec `json:"output,omitempty"`
+	Output *NodebalancerConfigSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -127,7 +127,7 @@ type NodebalancerConfigStatus struct {
 // NodebalancerConfigList is a list of NodebalancerConfigs
 type NodebalancerConfigList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NodebalancerConfig CRD objects
-	Items []NodebalancerConfig `json:"items,omitempty"`
+	Items []NodebalancerConfig `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

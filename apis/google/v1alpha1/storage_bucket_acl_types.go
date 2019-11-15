@@ -34,35 +34,35 @@ import (
 
 type StorageBucketACL struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageBucketACLSpec   `json:"spec,omitempty"`
-	Status            StorageBucketACLStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageBucketACLSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageBucketACLStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageBucketACLSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Bucket string `json:"bucket" tf:"bucket"`
+	Bucket string `json:"bucket" tf:"bucket" protobuf:"bytes,3,opt,name=bucket"`
 	// +optional
-	DefaultACL string `json:"defaultACL,omitempty" tf:"default_acl,omitempty"`
+	DefaultACL string `json:"defaultACL,omitempty" tf:"default_acl,omitempty" protobuf:"bytes,4,opt,name=defaultACL"`
 	// +optional
-	PredefinedACL string `json:"predefinedACL,omitempty" tf:"predefined_acl,omitempty"`
+	PredefinedACL string `json:"predefinedACL,omitempty" tf:"predefined_acl,omitempty" protobuf:"bytes,5,opt,name=predefinedACL"`
 	// +optional
-	RoleEntity []string `json:"roleEntity,omitempty" tf:"role_entity,omitempty"`
+	RoleEntity []string `json:"roleEntity,omitempty" tf:"role_entity,omitempty" protobuf:"bytes,6,rep,name=roleEntity"`
 }
 
 type StorageBucketACLStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageBucketACLSpec `json:"output,omitempty"`
+	Output *StorageBucketACLSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type StorageBucketACLStatus struct {
 // StorageBucketACLList is a list of StorageBucketACLs
 type StorageBucketACLList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageBucketACL CRD objects
-	Items []StorageBucketACL `json:"items,omitempty"`
+	Items []StorageBucketACL `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

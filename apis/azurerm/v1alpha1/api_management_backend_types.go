@@ -34,101 +34,101 @@ import (
 
 type ApiManagementBackend struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementBackendSpec   `json:"spec,omitempty"`
-	Status            ApiManagementBackendStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementBackendSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementBackendStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementBackendSpecCredentialsAuthorization struct {
 	// +optional
-	Parameter string `json:"parameter,omitempty" tf:"parameter,omitempty"`
+	Parameter string `json:"parameter,omitempty" tf:"parameter,omitempty" protobuf:"bytes,1,opt,name=parameter"`
 	// +optional
-	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty"`
+	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty" protobuf:"bytes,2,opt,name=scheme"`
 }
 
 type ApiManagementBackendSpecCredentials struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Authorization []ApiManagementBackendSpecCredentialsAuthorization `json:"authorization,omitempty" tf:"authorization,omitempty"`
+	Authorization []ApiManagementBackendSpecCredentialsAuthorization `json:"authorization,omitempty" tf:"authorization,omitempty" protobuf:"bytes,1,rep,name=authorization"`
 	// +optional
-	Certificate []string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []string `json:"certificate,omitempty" tf:"certificate,omitempty" protobuf:"bytes,2,rep,name=certificate"`
 	// +optional
-	Header map[string]string `json:"header,omitempty" tf:"header,omitempty"`
+	Header map[string]string `json:"header,omitempty" tf:"header,omitempty" protobuf:"bytes,3,rep,name=header"`
 	// +optional
-	Query map[string]string `json:"query,omitempty" tf:"query,omitempty"`
+	Query map[string]string `json:"query,omitempty" tf:"query,omitempty" protobuf:"bytes,4,rep,name=query"`
 }
 
 type ApiManagementBackendSpecProxy struct {
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
-	Url      string `json:"url" tf:"url"`
-	Username string `json:"username" tf:"username"`
+	Url      string `json:"url" tf:"url" protobuf:"bytes,1,opt,name=url"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,2,opt,name=username"`
 }
 
 type ApiManagementBackendSpecServiceFabricClusterServerX509Name struct {
-	IssuerCertificateThumbprint string `json:"issuerCertificateThumbprint" tf:"issuer_certificate_thumbprint"`
-	Name                        string `json:"name" tf:"name"`
+	IssuerCertificateThumbprint string `json:"issuerCertificateThumbprint" tf:"issuer_certificate_thumbprint" protobuf:"bytes,1,opt,name=issuerCertificateThumbprint"`
+	Name                        string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type ApiManagementBackendSpecServiceFabricCluster struct {
-	ClientCertificateThumbprint   string   `json:"clientCertificateThumbprint" tf:"client_certificate_thumbprint"`
-	ManagementEndpoints           []string `json:"managementEndpoints" tf:"management_endpoints"`
-	MaxPartitionResolutionRetries int64    `json:"maxPartitionResolutionRetries" tf:"max_partition_resolution_retries"`
+	ClientCertificateThumbprint   string   `json:"clientCertificateThumbprint" tf:"client_certificate_thumbprint" protobuf:"bytes,1,opt,name=clientCertificateThumbprint"`
+	ManagementEndpoints           []string `json:"managementEndpoints" tf:"management_endpoints" protobuf:"bytes,2,rep,name=managementEndpoints"`
+	MaxPartitionResolutionRetries int64    `json:"maxPartitionResolutionRetries" tf:"max_partition_resolution_retries" protobuf:"varint,3,opt,name=maxPartitionResolutionRetries"`
 	// +optional
-	ServerCertificateThumbprints []string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
+	ServerCertificateThumbprints []string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty" protobuf:"bytes,4,rep,name=serverCertificateThumbprints"`
 	// +optional
-	ServerX509Name []ApiManagementBackendSpecServiceFabricClusterServerX509Name `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
+	ServerX509Name []ApiManagementBackendSpecServiceFabricClusterServerX509Name `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty" protobuf:"bytes,5,rep,name=serverX509Name"`
 }
 
 type ApiManagementBackendSpecTls struct {
 	// +optional
-	ValidateCertificateChain bool `json:"validateCertificateChain,omitempty" tf:"validate_certificate_chain,omitempty"`
+	ValidateCertificateChain bool `json:"validateCertificateChain,omitempty" tf:"validate_certificate_chain,omitempty" protobuf:"varint,1,opt,name=validateCertificateChain"`
 	// +optional
-	ValidateCertificateName bool `json:"validateCertificateName,omitempty" tf:"validate_certificate_name,omitempty"`
+	ValidateCertificateName bool `json:"validateCertificateName,omitempty" tf:"validate_certificate_name,omitempty" protobuf:"varint,2,opt,name=validateCertificateName"`
 }
 
 type ApiManagementBackendSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,4,opt,name=apiManagementName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Credentials []ApiManagementBackendSpecCredentials `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []ApiManagementBackendSpecCredentials `json:"credentials,omitempty" tf:"credentials,omitempty" protobuf:"bytes,5,rep,name=credentials"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
-	Protocol    string `json:"protocol" tf:"protocol"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Proxy             []ApiManagementBackendSpecProxy `json:"proxy,omitempty" tf:"proxy,omitempty"`
-	ResourceGroupName string                          `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	Protocol    string `json:"protocol" tf:"protocol" protobuf:"bytes,8,opt,name=protocol"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ServiceFabricCluster []ApiManagementBackendSpecServiceFabricCluster `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
+	Proxy             []ApiManagementBackendSpecProxy `json:"proxy,omitempty" tf:"proxy,omitempty" protobuf:"bytes,9,rep,name=proxy"`
+	ResourceGroupName string                          `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +optional
-	Title string `json:"title,omitempty" tf:"title,omitempty"`
+	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty" protobuf:"bytes,11,opt,name=resourceID"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Tls []ApiManagementBackendSpecTls `json:"tls,omitempty" tf:"tls,omitempty"`
-	Url string                        `json:"url" tf:"url"`
+	ServiceFabricCluster []ApiManagementBackendSpecServiceFabricCluster `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty" protobuf:"bytes,12,rep,name=serviceFabricCluster"`
+	// +optional
+	Title string `json:"title,omitempty" tf:"title,omitempty" protobuf:"bytes,13,opt,name=title"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	Tls []ApiManagementBackendSpecTls `json:"tls,omitempty" tf:"tls,omitempty" protobuf:"bytes,14,rep,name=tls"`
+	Url string                        `json:"url" tf:"url" protobuf:"bytes,15,opt,name=url"`
 }
 
 type ApiManagementBackendStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementBackendSpec `json:"output,omitempty"`
+	Output *ApiManagementBackendSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -137,7 +137,7 @@ type ApiManagementBackendStatus struct {
 // ApiManagementBackendList is a list of ApiManagementBackends
 type ApiManagementBackendList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementBackend CRD objects
-	Items []ApiManagementBackend `json:"items,omitempty"`
+	Items []ApiManagementBackend `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

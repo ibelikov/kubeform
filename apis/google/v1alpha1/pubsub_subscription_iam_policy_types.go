@@ -34,34 +34,34 @@ import (
 
 type PubsubSubscriptionIamPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PubsubSubscriptionIamPolicySpec   `json:"spec,omitempty"`
-	Status            PubsubSubscriptionIamPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PubsubSubscriptionIamPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PubsubSubscriptionIamPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PubsubSubscriptionIamPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Etag       string `json:"etag,omitempty" tf:"etag,omitempty"`
-	PolicyData string `json:"policyData" tf:"policy_data"`
+	Etag       string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,3,opt,name=etag"`
+	PolicyData string `json:"policyData" tf:"policy_data" protobuf:"bytes,4,opt,name=policyData"`
 	// +optional
-	Project      string `json:"project,omitempty" tf:"project,omitempty"`
-	Subscription string `json:"subscription" tf:"subscription"`
+	Project      string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,5,opt,name=project"`
+	Subscription string `json:"subscription" tf:"subscription" protobuf:"bytes,6,opt,name=subscription"`
 }
 
 type PubsubSubscriptionIamPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PubsubSubscriptionIamPolicySpec `json:"output,omitempty"`
+	Output *PubsubSubscriptionIamPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -70,7 +70,7 @@ type PubsubSubscriptionIamPolicyStatus struct {
 // PubsubSubscriptionIamPolicyList is a list of PubsubSubscriptionIamPolicys
 type PubsubSubscriptionIamPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PubsubSubscriptionIamPolicy CRD objects
-	Items []PubsubSubscriptionIamPolicy `json:"items,omitempty"`
+	Items []PubsubSubscriptionIamPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

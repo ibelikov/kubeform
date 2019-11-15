@@ -34,45 +34,45 @@ import (
 
 type ComputeTargetHTTPSProxy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeTargetHTTPSProxySpec   `json:"spec,omitempty"`
-	Status            ComputeTargetHTTPSProxyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeTargetHTTPSProxySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeTargetHTTPSProxyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeTargetHTTPSProxySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,3,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
 	// +optional
-	ProxyID int64 `json:"proxyID,omitempty" tf:"proxy_id,omitempty"`
+	ProxyID int64 `json:"proxyID,omitempty" tf:"proxy_id,omitempty" protobuf:"varint,7,opt,name=proxyID"`
 	// +optional
-	QuicOverride string `json:"quicOverride,omitempty" tf:"quic_override,omitempty"`
+	QuicOverride string `json:"quicOverride,omitempty" tf:"quic_override,omitempty" protobuf:"bytes,8,opt,name=quicOverride"`
 	// +optional
-	SelfLink        string   `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	SslCertificates []string `json:"sslCertificates" tf:"ssl_certificates"`
+	SelfLink        string   `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,9,opt,name=selfLink"`
+	SslCertificates []string `json:"sslCertificates" tf:"ssl_certificates" protobuf:"bytes,10,rep,name=sslCertificates"`
 	// +optional
-	SslPolicy string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
-	UrlMap    string `json:"urlMap" tf:"url_map"`
+	SslPolicy string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty" protobuf:"bytes,11,opt,name=sslPolicy"`
+	UrlMap    string `json:"urlMap" tf:"url_map" protobuf:"bytes,12,opt,name=urlMap"`
 }
 
 type ComputeTargetHTTPSProxyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeTargetHTTPSProxySpec `json:"output,omitempty"`
+	Output *ComputeTargetHTTPSProxySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type ComputeTargetHTTPSProxyStatus struct {
 // ComputeTargetHTTPSProxyList is a list of ComputeTargetHTTPSProxys
 type ComputeTargetHTTPSProxyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeTargetHTTPSProxy CRD objects
-	Items []ComputeTargetHTTPSProxy `json:"items,omitempty"`
+	Items []ComputeTargetHTTPSProxy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

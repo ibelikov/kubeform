@@ -34,50 +34,50 @@ import (
 
 type SchedulerJobCollection struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SchedulerJobCollectionSpec   `json:"spec,omitempty"`
-	Status            SchedulerJobCollectionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SchedulerJobCollectionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SchedulerJobCollectionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SchedulerJobCollectionSpecQuota struct {
 	// +optional
-	MaxJobCount            int64  `json:"maxJobCount,omitempty" tf:"max_job_count,omitempty"`
-	MaxRecurrenceFrequency string `json:"maxRecurrenceFrequency" tf:"max_recurrence_frequency"`
+	MaxJobCount            int64  `json:"maxJobCount,omitempty" tf:"max_job_count,omitempty" protobuf:"varint,1,opt,name=maxJobCount"`
+	MaxRecurrenceFrequency string `json:"maxRecurrenceFrequency" tf:"max_recurrence_frequency" protobuf:"bytes,2,opt,name=maxRecurrenceFrequency"`
 	// +optional
-	MaxRecurrenceInterval int64 `json:"maxRecurrenceInterval,omitempty" tf:"max_recurrence_interval,omitempty"`
+	MaxRecurrenceInterval int64 `json:"maxRecurrenceInterval,omitempty" tf:"max_recurrence_interval,omitempty" protobuf:"varint,3,opt,name=maxRecurrenceInterval"`
 	// +optional
 	// Deprecated
-	MaxRetryInterval int64 `json:"maxRetryInterval,omitempty" tf:"max_retry_interval,omitempty"`
+	MaxRetryInterval int64 `json:"maxRetryInterval,omitempty" tf:"max_retry_interval,omitempty" protobuf:"varint,4,opt,name=maxRetryInterval"`
 }
 
 type SchedulerJobCollectionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Quota             []SchedulerJobCollectionSpecQuota `json:"quota,omitempty" tf:"quota,omitempty"`
-	ResourceGroupName string                            `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku               string                            `json:"sku" tf:"sku"`
+	Quota             []SchedulerJobCollectionSpecQuota `json:"quota,omitempty" tf:"quota,omitempty" protobuf:"bytes,5,rep,name=quota"`
+	ResourceGroupName string                            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
+	Sku               string                            `json:"sku" tf:"sku" protobuf:"bytes,7,opt,name=sku"`
 	// +optional
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,8,opt,name=state"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type SchedulerJobCollectionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SchedulerJobCollectionSpec `json:"output,omitempty"`
+	Output *SchedulerJobCollectionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -86,7 +86,7 @@ type SchedulerJobCollectionStatus struct {
 // SchedulerJobCollectionList is a list of SchedulerJobCollections
 type SchedulerJobCollectionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SchedulerJobCollection CRD objects
-	Items []SchedulerJobCollection `json:"items,omitempty"`
+	Items []SchedulerJobCollection `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

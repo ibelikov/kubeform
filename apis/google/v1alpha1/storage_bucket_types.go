@@ -34,121 +34,121 @@ import (
 
 type StorageBucket struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageBucketSpec   `json:"spec,omitempty"`
-	Status            StorageBucketStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageBucketSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageBucketStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageBucketSpecCors struct {
 	// +optional
-	MaxAgeSeconds int64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
+	MaxAgeSeconds int64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty" protobuf:"varint,1,opt,name=maxAgeSeconds"`
 	// +optional
-	Method []string `json:"method,omitempty" tf:"method,omitempty"`
+	Method []string `json:"method,omitempty" tf:"method,omitempty" protobuf:"bytes,2,rep,name=method"`
 	// +optional
-	Origin []string `json:"origin,omitempty" tf:"origin,omitempty"`
+	Origin []string `json:"origin,omitempty" tf:"origin,omitempty" protobuf:"bytes,3,rep,name=origin"`
 	// +optional
-	ResponseHeader []string `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
+	ResponseHeader []string `json:"responseHeader,omitempty" tf:"response_header,omitempty" protobuf:"bytes,4,rep,name=responseHeader"`
 }
 
 type StorageBucketSpecEncryption struct {
-	DefaultKmsKeyName string `json:"defaultKmsKeyName" tf:"default_kms_key_name"`
+	DefaultKmsKeyName string `json:"defaultKmsKeyName" tf:"default_kms_key_name" protobuf:"bytes,1,opt,name=defaultKmsKeyName"`
 }
 
 type StorageBucketSpecLifecycleRuleAction struct {
 	// +optional
-	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
-	Type         string `json:"type" tf:"type"`
+	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty" protobuf:"bytes,1,opt,name=storageClass"`
+	Type         string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type StorageBucketSpecLifecycleRuleCondition struct {
 	// +optional
-	Age int64 `json:"age,omitempty" tf:"age,omitempty"`
+	Age int64 `json:"age,omitempty" tf:"age,omitempty" protobuf:"varint,1,opt,name=age"`
 	// +optional
-	CreatedBefore string `json:"createdBefore,omitempty" tf:"created_before,omitempty"`
+	CreatedBefore string `json:"createdBefore,omitempty" tf:"created_before,omitempty" protobuf:"bytes,2,opt,name=createdBefore"`
 	// +optional
-	IsLive bool `json:"isLive,omitempty" tf:"is_live,omitempty"`
+	IsLive bool `json:"isLive,omitempty" tf:"is_live,omitempty" protobuf:"varint,3,opt,name=isLive"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	MatchesStorageClass []string `json:"matchesStorageClass,omitempty" tf:"matches_storage_class,omitempty"`
+	MatchesStorageClass []string `json:"matchesStorageClass,omitempty" tf:"matches_storage_class,omitempty" protobuf:"bytes,4,rep,name=matchesStorageClass"`
 	// +optional
-	NumNewerVersions int64 `json:"numNewerVersions,omitempty" tf:"num_newer_versions,omitempty"`
+	NumNewerVersions int64 `json:"numNewerVersions,omitempty" tf:"num_newer_versions,omitempty" protobuf:"varint,5,opt,name=numNewerVersions"`
 }
 
 type StorageBucketSpecLifecycleRule struct {
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	Action []StorageBucketSpecLifecycleRuleAction `json:"action" tf:"action"`
+	Action []StorageBucketSpecLifecycleRuleAction `json:"action" tf:"action" protobuf:"bytes,1,rep,name=action"`
 	// +kubebuilder:validation:MaxItems=1
 	// +kubebuilder:validation:MinItems=1
-	Condition []StorageBucketSpecLifecycleRuleCondition `json:"condition" tf:"condition"`
+	Condition []StorageBucketSpecLifecycleRuleCondition `json:"condition" tf:"condition" protobuf:"bytes,2,rep,name=condition"`
 }
 
 type StorageBucketSpecLogging struct {
-	LogBucket string `json:"logBucket" tf:"log_bucket"`
+	LogBucket string `json:"logBucket" tf:"log_bucket" protobuf:"bytes,1,opt,name=logBucket"`
 	// +optional
-	LogObjectPrefix string `json:"logObjectPrefix,omitempty" tf:"log_object_prefix,omitempty"`
+	LogObjectPrefix string `json:"logObjectPrefix,omitempty" tf:"log_object_prefix,omitempty" protobuf:"bytes,2,opt,name=logObjectPrefix"`
 }
 
 type StorageBucketSpecVersioning struct {
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,1,opt,name=enabled"`
 }
 
 type StorageBucketSpecWebsite struct {
 	// +optional
-	MainPageSuffix string `json:"mainPageSuffix,omitempty" tf:"main_page_suffix,omitempty"`
+	MainPageSuffix string `json:"mainPageSuffix,omitempty" tf:"main_page_suffix,omitempty" protobuf:"bytes,1,opt,name=mainPageSuffix"`
 	// +optional
-	NotFoundPage string `json:"notFoundPage,omitempty" tf:"not_found_page,omitempty"`
+	NotFoundPage string `json:"notFoundPage,omitempty" tf:"not_found_page,omitempty" protobuf:"bytes,2,opt,name=notFoundPage"`
 }
 
 type StorageBucketSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Cors []StorageBucketSpecCors `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors []StorageBucketSpecCors `json:"cors,omitempty" tf:"cors,omitempty" protobuf:"bytes,3,rep,name=cors"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Encryption []StorageBucketSpecEncryption `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption []StorageBucketSpecEncryption `json:"encryption,omitempty" tf:"encryption,omitempty" protobuf:"bytes,4,rep,name=encryption"`
 	// +optional
-	ForceDestroy bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+	ForceDestroy bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty" protobuf:"varint,5,opt,name=forceDestroy"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,6,rep,name=labels"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=100
-	LifecycleRule []StorageBucketSpecLifecycleRule `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
+	LifecycleRule []StorageBucketSpecLifecycleRule `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty" protobuf:"bytes,7,rep,name=lifecycleRule"`
 	// +optional
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Logging []StorageBucketSpecLogging `json:"logging,omitempty" tf:"logging,omitempty"`
-	Name    string                     `json:"name" tf:"name"`
-	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	// +optional
-	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
-	// +optional
-	Url string `json:"url,omitempty" tf:"url,omitempty"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,8,opt,name=location"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Versioning []StorageBucketSpecVersioning `json:"versioning,omitempty" tf:"versioning,omitempty"`
+	Logging []StorageBucketSpecLogging `json:"logging,omitempty" tf:"logging,omitempty" protobuf:"bytes,9,rep,name=logging"`
+	Name    string                     `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	Website []StorageBucketSpecWebsite `json:"website,omitempty" tf:"website,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
+	// +optional
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,12,opt,name=selfLink"`
+	// +optional
+	StorageClass string `json:"storageClass,omitempty" tf:"storage_class,omitempty" protobuf:"bytes,13,opt,name=storageClass"`
+	// +optional
+	Url string `json:"url,omitempty" tf:"url,omitempty" protobuf:"bytes,14,opt,name=url"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	Versioning []StorageBucketSpecVersioning `json:"versioning,omitempty" tf:"versioning,omitempty" protobuf:"bytes,15,rep,name=versioning"`
+	// +optional
+	Website []StorageBucketSpecWebsite `json:"website,omitempty" tf:"website,omitempty" protobuf:"bytes,16,rep,name=website"`
 }
 
 type StorageBucketStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageBucketSpec `json:"output,omitempty"`
+	Output *StorageBucketSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -157,7 +157,7 @@ type StorageBucketStatus struct {
 // StorageBucketList is a list of StorageBuckets
 type StorageBucketList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageBucket CRD objects
-	Items []StorageBucket `json:"items,omitempty"`
+	Items []StorageBucket `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

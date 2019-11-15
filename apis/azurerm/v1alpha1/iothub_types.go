@@ -34,73 +34,73 @@ import (
 
 type Iothub struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IothubSpec   `json:"spec,omitempty"`
-	Status            IothubStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              IothubSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            IothubStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type IothubSpecEndpoint struct {
 	// +optional
-	BatchFrequencyInSeconds int64  `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
+	BatchFrequencyInSeconds int64  `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty" protobuf:"varint,1,opt,name=batchFrequencyInSeconds"`
 	ConnectionString        string `json:"-" sensitive:"true" tf:"connection_string"`
 	// +optional
-	ContainerName string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+	ContainerName string `json:"containerName,omitempty" tf:"container_name,omitempty" protobuf:"bytes,2,opt,name=containerName"`
 	// +optional
-	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+	Encoding string `json:"encoding,omitempty" tf:"encoding,omitempty" protobuf:"bytes,3,opt,name=encoding"`
 	// +optional
-	FileNameFormat string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
+	FileNameFormat string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty" protobuf:"bytes,4,opt,name=fileNameFormat"`
 	// +optional
-	MaxChunkSizeInBytes int64  `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
-	Name                string `json:"name" tf:"name"`
-	Type                string `json:"type" tf:"type"`
+	MaxChunkSizeInBytes int64  `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty" protobuf:"varint,5,opt,name=maxChunkSizeInBytes"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	Type                string `json:"type" tf:"type" protobuf:"bytes,7,opt,name=type"`
 }
 
 type IothubSpecFallbackRoute struct {
 	// +optional
-	Condition string `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition string `json:"condition,omitempty" tf:"condition,omitempty" protobuf:"bytes,1,opt,name=condition"`
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,2,opt,name=enabled"`
 	// +optional
-	EndpointNames []string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+	EndpointNames []string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty" protobuf:"bytes,3,rep,name=endpointNames"`
 	// +optional
-	Source string `json:"source,omitempty" tf:"source,omitempty"`
+	Source string `json:"source,omitempty" tf:"source,omitempty" protobuf:"bytes,4,opt,name=source"`
 }
 
 type IothubSpecFileUpload struct {
 	ConnectionString string `json:"-" sensitive:"true" tf:"connection_string"`
-	ContainerName    string `json:"containerName" tf:"container_name"`
+	ContainerName    string `json:"containerName" tf:"container_name" protobuf:"bytes,1,opt,name=containerName"`
 	// +optional
-	DefaultTtl string `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTtl string `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty" protobuf:"bytes,2,opt,name=defaultTtl"`
 	// +optional
-	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
+	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty" protobuf:"bytes,3,opt,name=lockDuration"`
 	// +optional
-	MaxDeliveryCount int64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
+	MaxDeliveryCount int64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty" protobuf:"varint,4,opt,name=maxDeliveryCount"`
 	// +optional
-	Notifications bool `json:"notifications,omitempty" tf:"notifications,omitempty"`
+	Notifications bool `json:"notifications,omitempty" tf:"notifications,omitempty" protobuf:"varint,5,opt,name=notifications"`
 	// +optional
-	SasTtl string `json:"sasTtl,omitempty" tf:"sas_ttl,omitempty"`
+	SasTtl string `json:"sasTtl,omitempty" tf:"sas_ttl,omitempty" protobuf:"bytes,6,opt,name=sasTtl"`
 }
 
 type IothubSpecIpFilterRule struct {
-	Action string `json:"action" tf:"action"`
-	IpMask string `json:"ipMask" tf:"ip_mask"`
-	Name   string `json:"name" tf:"name"`
+	Action string `json:"action" tf:"action" protobuf:"bytes,1,opt,name=action"`
+	IpMask string `json:"ipMask" tf:"ip_mask" protobuf:"bytes,2,opt,name=ipMask"`
+	Name   string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 }
 
 type IothubSpecRoute struct {
 	// +optional
-	Condition     string   `json:"condition,omitempty" tf:"condition,omitempty"`
-	Enabled       bool     `json:"enabled" tf:"enabled"`
-	EndpointNames []string `json:"endpointNames" tf:"endpoint_names"`
-	Name          string   `json:"name" tf:"name"`
-	Source        string   `json:"source" tf:"source"`
+	Condition     string   `json:"condition,omitempty" tf:"condition,omitempty" protobuf:"bytes,1,opt,name=condition"`
+	Enabled       bool     `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
+	EndpointNames []string `json:"endpointNames" tf:"endpoint_names" protobuf:"bytes,3,rep,name=endpointNames"`
+	Name          string   `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	Source        string   `json:"source" tf:"source" protobuf:"bytes,5,opt,name=source"`
 }
 
 type IothubSpecSharedAccessPolicy struct {
 	// +optional
-	KeyName string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+	KeyName string `json:"keyName,omitempty" tf:"key_name,omitempty" protobuf:"bytes,1,opt,name=keyName"`
 	// +optional
-	Permissions string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions string `json:"permissions,omitempty" tf:"permissions,omitempty" protobuf:"bytes,2,opt,name=permissions"`
 	// +optional
 	PrimaryKey string `json:"-" sensitive:"true" tf:"primary_key,omitempty"`
 	// +optional
@@ -108,63 +108,63 @@ type IothubSpecSharedAccessPolicy struct {
 }
 
 type IothubSpecSku struct {
-	Capacity int64  `json:"capacity" tf:"capacity"`
-	Name     string `json:"name" tf:"name"`
-	Tier     string `json:"tier" tf:"tier"`
+	Capacity int64  `json:"capacity" tf:"capacity" protobuf:"varint,1,opt,name=capacity"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	Tier     string `json:"tier" tf:"tier" protobuf:"bytes,3,opt,name=tier"`
 }
 
 type IothubSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Endpoint []IothubSpecEndpoint `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint []IothubSpecEndpoint `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,4,rep,name=endpoint"`
 	// +optional
-	EventHubEventsEndpoint string `json:"eventHubEventsEndpoint,omitempty" tf:"event_hub_events_endpoint,omitempty"`
+	EventHubEventsEndpoint string `json:"eventHubEventsEndpoint,omitempty" tf:"event_hub_events_endpoint,omitempty" protobuf:"bytes,5,opt,name=eventHubEventsEndpoint"`
 	// +optional
-	EventHubEventsPath string `json:"eventHubEventsPath,omitempty" tf:"event_hub_events_path,omitempty"`
+	EventHubEventsPath string `json:"eventHubEventsPath,omitempty" tf:"event_hub_events_path,omitempty" protobuf:"bytes,6,opt,name=eventHubEventsPath"`
 	// +optional
-	EventHubOperationsEndpoint string `json:"eventHubOperationsEndpoint,omitempty" tf:"event_hub_operations_endpoint,omitempty"`
+	EventHubOperationsEndpoint string `json:"eventHubOperationsEndpoint,omitempty" tf:"event_hub_operations_endpoint,omitempty" protobuf:"bytes,7,opt,name=eventHubOperationsEndpoint"`
 	// +optional
-	EventHubOperationsPath string `json:"eventHubOperationsPath,omitempty" tf:"event_hub_operations_path,omitempty"`
+	EventHubOperationsPath string `json:"eventHubOperationsPath,omitempty" tf:"event_hub_operations_path,omitempty" protobuf:"bytes,8,opt,name=eventHubOperationsPath"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FallbackRoute []IothubSpecFallbackRoute `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty"`
+	FallbackRoute []IothubSpecFallbackRoute `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty" protobuf:"bytes,9,rep,name=fallbackRoute"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FileUpload []IothubSpecFileUpload `json:"fileUpload,omitempty" tf:"file_upload,omitempty"`
+	FileUpload []IothubSpecFileUpload `json:"fileUpload,omitempty" tf:"file_upload,omitempty" protobuf:"bytes,10,rep,name=fileUpload"`
 	// +optional
-	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty" protobuf:"bytes,11,opt,name=hostname"`
 	// +optional
-	IpFilterRule      []IothubSpecIpFilterRule `json:"ipFilterRule,omitempty" tf:"ip_filter_rule,omitempty"`
-	Location          string                   `json:"location" tf:"location"`
-	Name              string                   `json:"name" tf:"name"`
-	ResourceGroupName string                   `json:"resourceGroupName" tf:"resource_group_name"`
+	IpFilterRule      []IothubSpecIpFilterRule `json:"ipFilterRule,omitempty" tf:"ip_filter_rule,omitempty" protobuf:"bytes,12,rep,name=ipFilterRule"`
+	Location          string                   `json:"location" tf:"location" protobuf:"bytes,13,opt,name=location"`
+	Name              string                   `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
+	ResourceGroupName string                   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,15,opt,name=resourceGroupName"`
 	// +optional
-	Route []IothubSpecRoute `json:"route,omitempty" tf:"route,omitempty"`
+	Route []IothubSpecRoute `json:"route,omitempty" tf:"route,omitempty" protobuf:"bytes,16,rep,name=route"`
 	// +optional
-	SharedAccessPolicy []IothubSpecSharedAccessPolicy `json:"sharedAccessPolicy,omitempty" tf:"shared_access_policy,omitempty"`
+	SharedAccessPolicy []IothubSpecSharedAccessPolicy `json:"sharedAccessPolicy,omitempty" tf:"shared_access_policy,omitempty" protobuf:"bytes,17,rep,name=sharedAccessPolicy"`
 	// +kubebuilder:validation:MaxItems=1
-	Sku []IothubSpecSku `json:"sku" tf:"sku"`
+	Sku []IothubSpecSku `json:"sku" tf:"sku" protobuf:"bytes,18,rep,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,19,rep,name=tags"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,20,opt,name=type"`
 }
 
 type IothubStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *IothubSpec `json:"output,omitempty"`
+	Output *IothubSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -173,7 +173,7 @@ type IothubStatus struct {
 // IothubList is a list of Iothubs
 type IothubList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Iothub CRD objects
-	Items []Iothub `json:"items,omitempty"`
+	Items []Iothub `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

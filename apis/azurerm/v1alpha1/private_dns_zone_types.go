@@ -34,40 +34,40 @@ import (
 
 type PrivateDNSZone struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSZoneSpec   `json:"spec,omitempty"`
-	Status            PrivateDNSZoneStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PrivateDNSZoneSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PrivateDNSZoneStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PrivateDNSZoneSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	MaxNumberOfRecordSets int64 `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty"`
+	MaxNumberOfRecordSets int64 `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty" protobuf:"varint,3,opt,name=maxNumberOfRecordSets"`
 	// +optional
-	MaxNumberOfVirtualNetworkLinks int64 `json:"maxNumberOfVirtualNetworkLinks,omitempty" tf:"max_number_of_virtual_network_links,omitempty"`
+	MaxNumberOfVirtualNetworkLinks int64 `json:"maxNumberOfVirtualNetworkLinks,omitempty" tf:"max_number_of_virtual_network_links,omitempty" protobuf:"varint,4,opt,name=maxNumberOfVirtualNetworkLinks"`
 	// +optional
-	MaxNumberOfVirtualNetworkLinksWithRegistration int64  `json:"maxNumberOfVirtualNetworkLinksWithRegistration,omitempty" tf:"max_number_of_virtual_network_links_with_registration,omitempty"`
-	Name                                           string `json:"name" tf:"name"`
+	MaxNumberOfVirtualNetworkLinksWithRegistration int64  `json:"maxNumberOfVirtualNetworkLinksWithRegistration,omitempty" tf:"max_number_of_virtual_network_links_with_registration,omitempty" protobuf:"varint,5,opt,name=maxNumberOfVirtualNetworkLinksWithRegistration"`
+	Name                                           string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	NumberOfRecordSets int64  `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	NumberOfRecordSets int64  `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty" protobuf:"varint,7,opt,name=numberOfRecordSets"`
+	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type PrivateDNSZoneStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PrivateDNSZoneSpec `json:"output,omitempty"`
+	Output *PrivateDNSZoneSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -76,7 +76,7 @@ type PrivateDNSZoneStatus struct {
 // PrivateDNSZoneList is a list of PrivateDNSZones
 type PrivateDNSZoneList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PrivateDNSZone CRD objects
-	Items []PrivateDNSZone `json:"items,omitempty"`
+	Items []PrivateDNSZone `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

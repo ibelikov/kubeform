@@ -34,49 +34,49 @@ import (
 
 type ComputeGlobalForwardingRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeGlobalForwardingRuleSpec   `json:"spec,omitempty"`
-	Status            ComputeGlobalForwardingRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeGlobalForwardingRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeGlobalForwardingRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeGlobalForwardingRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,4,opt,name=ipAddress"`
 	// +optional
-	IpProtocol string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
+	IpProtocol string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty" protobuf:"bytes,5,opt,name=ipProtocol"`
 	// +optional
-	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
+	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty" protobuf:"bytes,6,opt,name=ipVersion"`
 	// +optional
-	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty"`
+	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty" protobuf:"bytes,7,opt,name=labelFingerprint"`
 	// +optional
 	// Deprecated
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,8,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty"`
+	PortRange string `json:"portRange,omitempty" tf:"port_range,omitempty" protobuf:"bytes,10,opt,name=portRange"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
-	Target   string `json:"target" tf:"target"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,12,opt,name=selfLink"`
+	Target   string `json:"target" tf:"target" protobuf:"bytes,13,opt,name=target"`
 }
 
 type ComputeGlobalForwardingRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeGlobalForwardingRuleSpec `json:"output,omitempty"`
+	Output *ComputeGlobalForwardingRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -85,7 +85,7 @@ type ComputeGlobalForwardingRuleStatus struct {
 // ComputeGlobalForwardingRuleList is a list of ComputeGlobalForwardingRules
 type ComputeGlobalForwardingRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeGlobalForwardingRule CRD objects
-	Items []ComputeGlobalForwardingRule `json:"items,omitempty"`
+	Items []ComputeGlobalForwardingRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,62 +34,62 @@ import (
 
 type ServicebusQueue struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicebusQueueSpec   `json:"spec,omitempty"`
-	Status            ServicebusQueueStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ServicebusQueueSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ServicebusQueueStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ServicebusQueueSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty" protobuf:"bytes,3,opt,name=autoDeleteOnIdle"`
 	// +optional
-	DeadLetteringOnMessageExpiration bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
+	DeadLetteringOnMessageExpiration bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty" protobuf:"varint,4,opt,name=deadLetteringOnMessageExpiration"`
 	// +optional
-	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
+	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty" protobuf:"bytes,5,opt,name=defaultMessageTtl"`
 	// +optional
-	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
-	// +optional
-	// Deprecated
-	EnableBatchedOperations bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
-	// +optional
-	EnableExpress bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
-	// +optional
-	EnablePartitioning bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty" protobuf:"bytes,6,opt,name=duplicateDetectionHistoryTimeWindow"`
 	// +optional
 	// Deprecated
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	EnableBatchedOperations bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty" protobuf:"varint,7,opt,name=enableBatchedOperations"`
 	// +optional
-	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
+	EnableExpress bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty" protobuf:"varint,8,opt,name=enableExpress"`
 	// +optional
-	MaxDeliveryCount int64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
-	// +optional
-	MaxSizeInMegabytes int64  `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
-	Name               string `json:"name" tf:"name"`
-	NamespaceName      string `json:"namespaceName" tf:"namespace_name"`
-	// +optional
-	RequiresDuplicateDetection bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
-	// +optional
-	RequiresSession   bool   `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	EnablePartitioning bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty" protobuf:"varint,9,opt,name=enablePartitioning"`
 	// +optional
 	// Deprecated
-	SupportOrdering bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,10,opt,name=location"`
+	// +optional
+	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty" protobuf:"bytes,11,opt,name=lockDuration"`
+	// +optional
+	MaxDeliveryCount int64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty" protobuf:"varint,12,opt,name=maxDeliveryCount"`
+	// +optional
+	MaxSizeInMegabytes int64  `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty" protobuf:"varint,13,opt,name=maxSizeInMegabytes"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
+	NamespaceName      string `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,15,opt,name=namespaceName"`
+	// +optional
+	RequiresDuplicateDetection bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty" protobuf:"varint,16,opt,name=requiresDuplicateDetection"`
+	// +optional
+	RequiresSession   bool   `json:"requiresSession,omitempty" tf:"requires_session,omitempty" protobuf:"varint,17,opt,name=requiresSession"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,18,opt,name=resourceGroupName"`
+	// +optional
+	// Deprecated
+	SupportOrdering bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty" protobuf:"varint,19,opt,name=supportOrdering"`
 }
 
 type ServicebusQueueStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ServicebusQueueSpec `json:"output,omitempty"`
+	Output *ServicebusQueueSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -98,7 +98,7 @@ type ServicebusQueueStatus struct {
 // ServicebusQueueList is a list of ServicebusQueues
 type ServicebusQueueList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ServicebusQueue CRD objects
-	Items []ServicebusQueue `json:"items,omitempty"`
+	Items []ServicebusQueue `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

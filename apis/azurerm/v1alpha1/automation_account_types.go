@@ -34,50 +34,50 @@ import (
 
 type AutomationAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutomationAccountSpec   `json:"spec,omitempty"`
-	Status            AutomationAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutomationAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutomationAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutomationAccountSpecSku struct {
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 }
 
 type AutomationAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	DscPrimaryAccessKey string `json:"dscPrimaryAccessKey,omitempty" tf:"dsc_primary_access_key,omitempty"`
+	DscPrimaryAccessKey string `json:"dscPrimaryAccessKey,omitempty" tf:"dsc_primary_access_key,omitempty" protobuf:"bytes,3,opt,name=dscPrimaryAccessKey"`
 	// +optional
-	DscSecondaryAccessKey string `json:"dscSecondaryAccessKey,omitempty" tf:"dsc_secondary_access_key,omitempty"`
+	DscSecondaryAccessKey string `json:"dscSecondaryAccessKey,omitempty" tf:"dsc_secondary_access_key,omitempty" protobuf:"bytes,4,opt,name=dscSecondaryAccessKey"`
 	// +optional
-	DscServerEndpoint string `json:"dscServerEndpoint,omitempty" tf:"dsc_server_endpoint,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	DscServerEndpoint string `json:"dscServerEndpoint,omitempty" tf:"dsc_server_endpoint,omitempty" protobuf:"bytes,5,opt,name=dscServerEndpoint"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	Sku []AutomationAccountSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku []AutomationAccountSpecSku `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,9,rep,name=sku"`
 	// +optional
-	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty" protobuf:"bytes,10,opt,name=skuName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 }
 
 type AutomationAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutomationAccountSpec `json:"output,omitempty"`
+	Output *AutomationAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -86,7 +86,7 @@ type AutomationAccountStatus struct {
 // AutomationAccountList is a list of AutomationAccounts
 type AutomationAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutomationAccount CRD objects
-	Items []AutomationAccount `json:"items,omitempty"`
+	Items []AutomationAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,83 +34,83 @@ import (
 
 type KeyVault struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyVaultSpec   `json:"spec,omitempty"`
-	Status            KeyVaultStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KeyVaultSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KeyVaultStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KeyVaultSpecAccessPolicy struct {
 	// +optional
-	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty"`
+	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty" protobuf:"bytes,1,opt,name=applicationID"`
 	// +optional
-	CertificatePermissions []string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
+	CertificatePermissions []string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty" protobuf:"bytes,2,rep,name=certificatePermissions"`
 	// +optional
-	KeyPermissions []string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
-	ObjectID       string   `json:"objectID" tf:"object_id"`
+	KeyPermissions []string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty" protobuf:"bytes,3,rep,name=keyPermissions"`
+	ObjectID       string   `json:"objectID" tf:"object_id" protobuf:"bytes,4,opt,name=objectID"`
 	// +optional
-	SecretPermissions []string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
+	SecretPermissions []string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty" protobuf:"bytes,5,rep,name=secretPermissions"`
 	// +optional
-	StoragePermissions []string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
-	TenantID           string   `json:"tenantID" tf:"tenant_id"`
+	StoragePermissions []string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty" protobuf:"bytes,6,rep,name=storagePermissions"`
+	TenantID           string   `json:"tenantID" tf:"tenant_id" protobuf:"bytes,7,opt,name=tenantID"`
 }
 
 type KeyVaultSpecNetworkAcls struct {
-	Bypass        string `json:"bypass" tf:"bypass"`
-	DefaultAction string `json:"defaultAction" tf:"default_action"`
+	Bypass        string `json:"bypass" tf:"bypass" protobuf:"bytes,1,opt,name=bypass"`
+	DefaultAction string `json:"defaultAction" tf:"default_action" protobuf:"bytes,2,opt,name=defaultAction"`
 	// +optional
-	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty" protobuf:"bytes,3,rep,name=ipRules"`
 	// +optional
-	VirtualNetworkSubnetIDS []string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+	VirtualNetworkSubnetIDS []string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty" protobuf:"bytes,4,rep,name=virtualNetworkSubnetIDS"`
 }
 
 type KeyVaultSpecSku struct {
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 }
 
 type KeyVaultSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1024
-	AccessPolicy []KeyVaultSpecAccessPolicy `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+	AccessPolicy []KeyVaultSpecAccessPolicy `json:"accessPolicy,omitempty" tf:"access_policy,omitempty" protobuf:"bytes,3,rep,name=accessPolicy"`
 	// +optional
-	EnabledForDeployment bool `json:"enabledForDeployment,omitempty" tf:"enabled_for_deployment,omitempty"`
+	EnabledForDeployment bool `json:"enabledForDeployment,omitempty" tf:"enabled_for_deployment,omitempty" protobuf:"varint,4,opt,name=enabledForDeployment"`
 	// +optional
-	EnabledForDiskEncryption bool `json:"enabledForDiskEncryption,omitempty" tf:"enabled_for_disk_encryption,omitempty"`
+	EnabledForDiskEncryption bool `json:"enabledForDiskEncryption,omitempty" tf:"enabled_for_disk_encryption,omitempty" protobuf:"varint,5,opt,name=enabledForDiskEncryption"`
 	// +optional
-	EnabledForTemplateDeployment bool   `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty"`
-	Location                     string `json:"location" tf:"location"`
-	Name                         string `json:"name" tf:"name"`
+	EnabledForTemplateDeployment bool   `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty" protobuf:"varint,6,opt,name=enabledForTemplateDeployment"`
+	Location                     string `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
+	Name                         string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkAcls       []KeyVaultSpecNetworkAcls `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
-	ResourceGroupName string                    `json:"resourceGroupName" tf:"resource_group_name"`
+	NetworkAcls       []KeyVaultSpecNetworkAcls `json:"networkAcls,omitempty" tf:"network_acls,omitempty" protobuf:"bytes,9,rep,name=networkAcls"`
+	ResourceGroupName string                    `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	Sku []KeyVaultSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku []KeyVaultSpecSku `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,11,rep,name=sku"`
 	// +optional
-	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty" protobuf:"bytes,12,opt,name=skuName"`
 	// +optional
-	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	TenantID string            `json:"tenantID" tf:"tenant_id"`
+	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
+	TenantID string            `json:"tenantID" tf:"tenant_id" protobuf:"bytes,14,opt,name=tenantID"`
 	// +optional
-	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty"`
+	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty" protobuf:"bytes,15,opt,name=vaultURI"`
 }
 
 type KeyVaultStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KeyVaultSpec `json:"output,omitempty"`
+	Output *KeyVaultSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -119,7 +119,7 @@ type KeyVaultStatus struct {
 // KeyVaultList is a list of KeyVaults
 type KeyVaultList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KeyVault CRD objects
-	Items []KeyVault `json:"items,omitempty"`
+	Items []KeyVault `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

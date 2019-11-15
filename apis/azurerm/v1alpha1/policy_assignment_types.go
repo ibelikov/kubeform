@@ -34,53 +34,53 @@ import (
 
 type PolicyAssignment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicyAssignmentSpec   `json:"spec,omitempty"`
-	Status            PolicyAssignmentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PolicyAssignmentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PolicyAssignmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PolicyAssignmentSpecIdentity struct {
 	// +optional
-	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
+	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,1,opt,name=principalID"`
 	// +optional
-	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
+	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty" protobuf:"bytes,2,opt,name=tenantID"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,3,opt,name=type"`
 }
 
 type PolicyAssignmentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
 	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,4,opt,name=displayName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Identity []PolicyAssignmentSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []PolicyAssignmentSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,5,rep,name=identity"`
 	// +optional
-	Location string `json:"location,omitempty" tf:"location,omitempty"`
-	Name     string `json:"name" tf:"name"`
+	Location string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,6,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	NotScopes []string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
+	NotScopes []string `json:"notScopes,omitempty" tf:"not_scopes,omitempty" protobuf:"bytes,8,rep,name=notScopes"`
 	// +optional
-	Parameters         string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-	PolicyDefinitionID string `json:"policyDefinitionID" tf:"policy_definition_id"`
-	Scope              string `json:"scope" tf:"scope"`
+	Parameters         string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,9,opt,name=parameters"`
+	PolicyDefinitionID string `json:"policyDefinitionID" tf:"policy_definition_id" protobuf:"bytes,10,opt,name=policyDefinitionID"`
+	Scope              string `json:"scope" tf:"scope" protobuf:"bytes,11,opt,name=scope"`
 }
 
 type PolicyAssignmentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PolicyAssignmentSpec `json:"output,omitempty"`
+	Output *PolicyAssignmentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -89,7 +89,7 @@ type PolicyAssignmentStatus struct {
 // PolicyAssignmentList is a list of PolicyAssignments
 type PolicyAssignmentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PolicyAssignment CRD objects
-	Items []PolicyAssignment `json:"items,omitempty"`
+	Items []PolicyAssignment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

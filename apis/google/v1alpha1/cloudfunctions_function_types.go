@@ -34,77 +34,77 @@ import (
 
 type CloudfunctionsFunction struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CloudfunctionsFunctionSpec   `json:"spec,omitempty"`
-	Status            CloudfunctionsFunctionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CloudfunctionsFunctionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CloudfunctionsFunctionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CloudfunctionsFunctionSpecEventTriggerFailurePolicy struct {
-	Retry bool `json:"retry" tf:"retry"`
+	Retry bool `json:"retry" tf:"retry" protobuf:"varint,1,opt,name=retry"`
 }
 
 type CloudfunctionsFunctionSpecEventTrigger struct {
-	EventType string `json:"eventType" tf:"event_type"`
+	EventType string `json:"eventType" tf:"event_type" protobuf:"bytes,1,opt,name=eventType"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FailurePolicy []CloudfunctionsFunctionSpecEventTriggerFailurePolicy `json:"failurePolicy,omitempty" tf:"failure_policy,omitempty"`
-	Resource      string                                                `json:"resource" tf:"resource"`
+	FailurePolicy []CloudfunctionsFunctionSpecEventTriggerFailurePolicy `json:"failurePolicy,omitempty" tf:"failure_policy,omitempty" protobuf:"bytes,2,rep,name=failurePolicy"`
+	Resource      string                                                `json:"resource" tf:"resource" protobuf:"bytes,3,opt,name=resource"`
 }
 
 type CloudfunctionsFunctionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AvailableMemoryMb int64 `json:"availableMemoryMb,omitempty" tf:"available_memory_mb,omitempty"`
+	AvailableMemoryMb int64 `json:"availableMemoryMb,omitempty" tf:"available_memory_mb,omitempty" protobuf:"varint,3,opt,name=availableMemoryMb"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	EntryPoint string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
+	EntryPoint string `json:"entryPoint,omitempty" tf:"entry_point,omitempty" protobuf:"bytes,5,opt,name=entryPoint"`
 	// +optional
-	EnvironmentVariables map[string]string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+	EnvironmentVariables map[string]string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty" protobuf:"bytes,6,rep,name=environmentVariables"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	EventTrigger []CloudfunctionsFunctionSpecEventTrigger `json:"eventTrigger,omitempty" tf:"event_trigger,omitempty"`
+	EventTrigger []CloudfunctionsFunctionSpecEventTrigger `json:"eventTrigger,omitempty" tf:"event_trigger,omitempty" protobuf:"bytes,7,rep,name=eventTrigger"`
 	// +optional
-	HttpsTriggerURL string `json:"httpsTriggerURL,omitempty" tf:"https_trigger_url,omitempty"`
+	HttpsTriggerURL string `json:"httpsTriggerURL,omitempty" tf:"https_trigger_url,omitempty" protobuf:"bytes,8,opt,name=httpsTriggerURL"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,9,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
-	// +optional
-	// Deprecated
-	RetryOnFailure bool `json:"retryOnFailure,omitempty" tf:"retry_on_failure,omitempty"`
-	// +optional
-	Runtime             string `json:"runtime,omitempty" tf:"runtime,omitempty"`
-	SourceArchiveBucket string `json:"sourceArchiveBucket" tf:"source_archive_bucket"`
-	SourceArchiveObject string `json:"sourceArchiveObject" tf:"source_archive_object"`
-	// +optional
-	Timeout int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,12,opt,name=region"`
 	// +optional
 	// Deprecated
-	TriggerBucket string `json:"triggerBucket,omitempty" tf:"trigger_bucket,omitempty"`
+	RetryOnFailure bool `json:"retryOnFailure,omitempty" tf:"retry_on_failure,omitempty" protobuf:"varint,13,opt,name=retryOnFailure"`
 	// +optional
-	TriggerHTTP bool `json:"triggerHTTP,omitempty" tf:"trigger_http,omitempty"`
+	Runtime             string `json:"runtime,omitempty" tf:"runtime,omitempty" protobuf:"bytes,14,opt,name=runtime"`
+	SourceArchiveBucket string `json:"sourceArchiveBucket" tf:"source_archive_bucket" protobuf:"bytes,15,opt,name=sourceArchiveBucket"`
+	SourceArchiveObject string `json:"sourceArchiveObject" tf:"source_archive_object" protobuf:"bytes,16,opt,name=sourceArchiveObject"`
+	// +optional
+	Timeout int64 `json:"timeout,omitempty" tf:"timeout,omitempty" protobuf:"varint,17,opt,name=timeout"`
 	// +optional
 	// Deprecated
-	TriggerTopic string `json:"triggerTopic,omitempty" tf:"trigger_topic,omitempty"`
+	TriggerBucket string `json:"triggerBucket,omitempty" tf:"trigger_bucket,omitempty" protobuf:"bytes,18,opt,name=triggerBucket"`
+	// +optional
+	TriggerHTTP bool `json:"triggerHTTP,omitempty" tf:"trigger_http,omitempty" protobuf:"varint,19,opt,name=triggerHTTP"`
+	// +optional
+	// Deprecated
+	TriggerTopic string `json:"triggerTopic,omitempty" tf:"trigger_topic,omitempty" protobuf:"bytes,20,opt,name=triggerTopic"`
 }
 
 type CloudfunctionsFunctionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CloudfunctionsFunctionSpec `json:"output,omitempty"`
+	Output *CloudfunctionsFunctionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -113,7 +113,7 @@ type CloudfunctionsFunctionStatus struct {
 // CloudfunctionsFunctionList is a list of CloudfunctionsFunctions
 type CloudfunctionsFunctionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CloudfunctionsFunction CRD objects
-	Items []CloudfunctionsFunction `json:"items,omitempty"`
+	Items []CloudfunctionsFunction `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,75 +34,75 @@ import (
 
 type ComputeURLMap struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeURLMapSpec   `json:"spec,omitempty"`
-	Status            ComputeURLMapStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeURLMapSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeURLMapStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeURLMapSpecHostRule struct {
 	// +optional
-	Description string   `json:"description,omitempty" tf:"description,omitempty"`
-	Hosts       []string `json:"hosts" tf:"hosts"`
-	PathMatcher string   `json:"pathMatcher" tf:"path_matcher"`
+	Description string   `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
+	Hosts       []string `json:"hosts" tf:"hosts" protobuf:"bytes,2,rep,name=hosts"`
+	PathMatcher string   `json:"pathMatcher" tf:"path_matcher" protobuf:"bytes,3,opt,name=pathMatcher"`
 }
 
 type ComputeURLMapSpecPathMatcherPathRule struct {
-	Paths   []string `json:"paths" tf:"paths"`
-	Service string   `json:"service" tf:"service"`
+	Paths   []string `json:"paths" tf:"paths" protobuf:"bytes,1,rep,name=paths"`
+	Service string   `json:"service" tf:"service" protobuf:"bytes,2,opt,name=service"`
 }
 
 type ComputeURLMapSpecPathMatcher struct {
-	DefaultService string `json:"defaultService" tf:"default_service"`
+	DefaultService string `json:"defaultService" tf:"default_service" protobuf:"bytes,1,opt,name=defaultService"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,2,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 	// +optional
-	PathRule []ComputeURLMapSpecPathMatcherPathRule `json:"pathRule,omitempty" tf:"path_rule,omitempty"`
+	PathRule []ComputeURLMapSpecPathMatcherPathRule `json:"pathRule,omitempty" tf:"path_rule,omitempty" protobuf:"bytes,4,rep,name=pathRule"`
 }
 
 type ComputeURLMapSpecTest struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Host        string `json:"host" tf:"host"`
-	Path        string `json:"path" tf:"path"`
-	Service     string `json:"service" tf:"service"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
+	Host        string `json:"host" tf:"host" protobuf:"bytes,2,opt,name=host"`
+	Path        string `json:"path" tf:"path" protobuf:"bytes,3,opt,name=path"`
+	Service     string `json:"service" tf:"service" protobuf:"bytes,4,opt,name=service"`
 }
 
 type ComputeURLMapSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	DefaultService string `json:"defaultService" tf:"default_service"`
+	DefaultService string `json:"defaultService" tf:"default_service" protobuf:"bytes,3,opt,name=defaultService"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty" protobuf:"bytes,5,opt,name=fingerprint"`
 	// +optional
-	HostRule []ComputeURLMapSpecHostRule `json:"hostRule,omitempty" tf:"host_rule,omitempty"`
+	HostRule []ComputeURLMapSpecHostRule `json:"hostRule,omitempty" tf:"host_rule,omitempty" protobuf:"bytes,6,rep,name=hostRule"`
 	// +optional
-	MapID string `json:"mapID,omitempty" tf:"map_id,omitempty"`
-	Name  string `json:"name" tf:"name"`
+	MapID string `json:"mapID,omitempty" tf:"map_id,omitempty" protobuf:"bytes,7,opt,name=mapID"`
+	Name  string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	PathMatcher []ComputeURLMapSpecPathMatcher `json:"pathMatcher,omitempty" tf:"path_matcher,omitempty"`
+	PathMatcher []ComputeURLMapSpecPathMatcher `json:"pathMatcher,omitempty" tf:"path_matcher,omitempty" protobuf:"bytes,9,rep,name=pathMatcher"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,10,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,11,opt,name=selfLink"`
 	// +optional
-	Test []ComputeURLMapSpecTest `json:"test,omitempty" tf:"test,omitempty"`
+	Test []ComputeURLMapSpecTest `json:"test,omitempty" tf:"test,omitempty" protobuf:"bytes,12,rep,name=test"`
 }
 
 type ComputeURLMapStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeURLMapSpec `json:"output,omitempty"`
+	Output *ComputeURLMapSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -111,7 +111,7 @@ type ComputeURLMapStatus struct {
 // ComputeURLMapList is a list of ComputeURLMaps
 type ComputeURLMapList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeURLMap CRD objects
-	Items []ComputeURLMap `json:"items,omitempty"`
+	Items []ComputeURLMap `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

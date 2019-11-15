@@ -34,141 +34,141 @@ import (
 
 type BatchPool struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BatchPoolSpec   `json:"spec,omitempty"`
-	Status            BatchPoolStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BatchPoolSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BatchPoolStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BatchPoolSpecAutoScale struct {
 	// +optional
-	EvaluationInterval string `json:"evaluationInterval,omitempty" tf:"evaluation_interval,omitempty"`
-	Formula            string `json:"formula" tf:"formula"`
+	EvaluationInterval string `json:"evaluationInterval,omitempty" tf:"evaluation_interval,omitempty" protobuf:"bytes,1,opt,name=evaluationInterval"`
+	Formula            string `json:"formula" tf:"formula" protobuf:"bytes,2,opt,name=formula"`
 }
 
 type BatchPoolSpecCertificate struct {
-	ID            string `json:"ID" tf:"id"`
-	StoreLocation string `json:"storeLocation" tf:"store_location"`
+	ID            string `json:"ID" tf:"id" protobuf:"bytes,1,opt,name=ID"`
+	StoreLocation string `json:"storeLocation" tf:"store_location" protobuf:"bytes,2,opt,name=storeLocation"`
 	// +optional
-	StoreName string `json:"storeName,omitempty" tf:"store_name,omitempty"`
+	StoreName string `json:"storeName,omitempty" tf:"store_name,omitempty" protobuf:"bytes,3,opt,name=storeName"`
 	// +optional
-	Visibility []string `json:"visibility,omitempty" tf:"visibility,omitempty"`
+	Visibility []string `json:"visibility,omitempty" tf:"visibility,omitempty" protobuf:"bytes,4,rep,name=visibility"`
 }
 
 type BatchPoolSpecContainerConfiguration struct {
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,1,opt,name=type"`
 }
 
 type BatchPoolSpecFixedScale struct {
 	// +optional
-	ResizeTimeout string `json:"resizeTimeout,omitempty" tf:"resize_timeout,omitempty"`
+	ResizeTimeout string `json:"resizeTimeout,omitempty" tf:"resize_timeout,omitempty" protobuf:"bytes,1,opt,name=resizeTimeout"`
 	// +optional
-	TargetDedicatedNodes int64 `json:"targetDedicatedNodes,omitempty" tf:"target_dedicated_nodes,omitempty"`
+	TargetDedicatedNodes int64 `json:"targetDedicatedNodes,omitempty" tf:"target_dedicated_nodes,omitempty" protobuf:"varint,2,opt,name=targetDedicatedNodes"`
 	// +optional
-	TargetLowPriorityNodes int64 `json:"targetLowPriorityNodes,omitempty" tf:"target_low_priority_nodes,omitempty"`
+	TargetLowPriorityNodes int64 `json:"targetLowPriorityNodes,omitempty" tf:"target_low_priority_nodes,omitempty" protobuf:"varint,3,opt,name=targetLowPriorityNodes"`
 }
 
 type BatchPoolSpecStartTaskResourceFile struct {
 	// +optional
-	AutoStorageContainerName string `json:"autoStorageContainerName,omitempty" tf:"auto_storage_container_name,omitempty"`
+	AutoStorageContainerName string `json:"autoStorageContainerName,omitempty" tf:"auto_storage_container_name,omitempty" protobuf:"bytes,1,opt,name=autoStorageContainerName"`
 	// +optional
-	BlobPrefix string `json:"blobPrefix,omitempty" tf:"blob_prefix,omitempty"`
+	BlobPrefix string `json:"blobPrefix,omitempty" tf:"blob_prefix,omitempty" protobuf:"bytes,2,opt,name=blobPrefix"`
 	// +optional
-	FileMode string `json:"fileMode,omitempty" tf:"file_mode,omitempty"`
+	FileMode string `json:"fileMode,omitempty" tf:"file_mode,omitempty" protobuf:"bytes,3,opt,name=fileMode"`
 	// +optional
-	FilePath string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+	FilePath string `json:"filePath,omitempty" tf:"file_path,omitempty" protobuf:"bytes,4,opt,name=filePath"`
 	// +optional
-	HttpURL string `json:"httpURL,omitempty" tf:"http_url,omitempty"`
+	HttpURL string `json:"httpURL,omitempty" tf:"http_url,omitempty" protobuf:"bytes,5,opt,name=httpURL"`
 	// +optional
-	StorageContainerURL string `json:"storageContainerURL,omitempty" tf:"storage_container_url,omitempty"`
+	StorageContainerURL string `json:"storageContainerURL,omitempty" tf:"storage_container_url,omitempty" protobuf:"bytes,6,opt,name=storageContainerURL"`
 }
 
 type BatchPoolSpecStartTaskUserIdentityAutoUser struct {
 	// +optional
-	ElevationLevel string `json:"elevationLevel,omitempty" tf:"elevation_level,omitempty"`
+	ElevationLevel string `json:"elevationLevel,omitempty" tf:"elevation_level,omitempty" protobuf:"bytes,1,opt,name=elevationLevel"`
 	// +optional
-	Scope string `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope string `json:"scope,omitempty" tf:"scope,omitempty" protobuf:"bytes,2,opt,name=scope"`
 }
 
 type BatchPoolSpecStartTaskUserIdentity struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AutoUser []BatchPoolSpecStartTaskUserIdentityAutoUser `json:"autoUser,omitempty" tf:"auto_user,omitempty"`
+	AutoUser []BatchPoolSpecStartTaskUserIdentityAutoUser `json:"autoUser,omitempty" tf:"auto_user,omitempty" protobuf:"bytes,1,rep,name=autoUser"`
 	// +optional
-	UserName string `json:"userName,omitempty" tf:"user_name,omitempty"`
+	UserName string `json:"userName,omitempty" tf:"user_name,omitempty" protobuf:"bytes,2,opt,name=userName"`
 }
 
 type BatchPoolSpecStartTask struct {
-	CommandLine string `json:"commandLine" tf:"command_line"`
+	CommandLine string `json:"commandLine" tf:"command_line" protobuf:"bytes,1,opt,name=commandLine"`
 	// +optional
-	Environment map[string]string `json:"environment,omitempty" tf:"environment,omitempty"`
+	Environment map[string]string `json:"environment,omitempty" tf:"environment,omitempty" protobuf:"bytes,2,rep,name=environment"`
 	// +optional
-	MaxTaskRetryCount int64 `json:"maxTaskRetryCount,omitempty" tf:"max_task_retry_count,omitempty"`
+	MaxTaskRetryCount int64 `json:"maxTaskRetryCount,omitempty" tf:"max_task_retry_count,omitempty" protobuf:"varint,3,opt,name=maxTaskRetryCount"`
 	// +optional
-	ResourceFile []BatchPoolSpecStartTaskResourceFile `json:"resourceFile,omitempty" tf:"resource_file,omitempty"`
+	ResourceFile []BatchPoolSpecStartTaskResourceFile `json:"resourceFile,omitempty" tf:"resource_file,omitempty" protobuf:"bytes,4,rep,name=resourceFile"`
 	// +kubebuilder:validation:MaxItems=1
-	UserIdentity []BatchPoolSpecStartTaskUserIdentity `json:"userIdentity" tf:"user_identity"`
+	UserIdentity []BatchPoolSpecStartTaskUserIdentity `json:"userIdentity" tf:"user_identity" protobuf:"bytes,5,rep,name=userIdentity"`
 	// +optional
-	WaitForSuccess bool `json:"waitForSuccess,omitempty" tf:"wait_for_success,omitempty"`
+	WaitForSuccess bool `json:"waitForSuccess,omitempty" tf:"wait_for_success,omitempty" protobuf:"varint,6,opt,name=waitForSuccess"`
 }
 
 type BatchPoolSpecStorageImageReference struct {
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
 	// +optional
-	Offer string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer string `json:"offer,omitempty" tf:"offer,omitempty" protobuf:"bytes,2,opt,name=offer"`
 	// +optional
-	Publisher string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher string `json:"publisher,omitempty" tf:"publisher,omitempty" protobuf:"bytes,3,opt,name=publisher"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,4,opt,name=sku"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,5,opt,name=version"`
 }
 
 type BatchPoolSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AccountName string `json:"accountName" tf:"account_name"`
+	AccountName string `json:"accountName" tf:"account_name" protobuf:"bytes,3,opt,name=accountName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	AutoScale []BatchPoolSpecAutoScale `json:"autoScale,omitempty" tf:"auto_scale,omitempty"`
+	AutoScale []BatchPoolSpecAutoScale `json:"autoScale,omitempty" tf:"auto_scale,omitempty" protobuf:"bytes,4,rep,name=autoScale"`
 	// +optional
-	Certificate []BatchPoolSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	ContainerConfiguration []BatchPoolSpecContainerConfiguration `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
-	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	Certificate []BatchPoolSpecCertificate `json:"certificate,omitempty" tf:"certificate,omitempty" protobuf:"bytes,5,rep,name=certificate"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FixedScale []BatchPoolSpecFixedScale `json:"fixedScale,omitempty" tf:"fixed_scale,omitempty"`
+	ContainerConfiguration []BatchPoolSpecContainerConfiguration `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty" protobuf:"bytes,6,rep,name=containerConfiguration"`
 	// +optional
-	MaxTasksPerNode   int64  `json:"maxTasksPerNode,omitempty" tf:"max_tasks_per_node,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	NodeAgentSkuID    string `json:"nodeAgentSkuID" tf:"node_agent_sku_id"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,7,opt,name=displayName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	StartTask []BatchPoolSpecStartTask `json:"startTask,omitempty" tf:"start_task,omitempty"`
+	FixedScale []BatchPoolSpecFixedScale `json:"fixedScale,omitempty" tf:"fixed_scale,omitempty" protobuf:"bytes,8,rep,name=fixedScale"`
 	// +optional
-	StopPendingResizeOperation bool `json:"stopPendingResizeOperation,omitempty" tf:"stop_pending_resize_operation,omitempty"`
+	MaxTasksPerNode   int64  `json:"maxTasksPerNode,omitempty" tf:"max_tasks_per_node,omitempty" protobuf:"varint,9,opt,name=maxTasksPerNode"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
+	NodeAgentSkuID    string `json:"nodeAgentSkuID" tf:"node_agent_sku_id" protobuf:"bytes,11,opt,name=nodeAgentSkuID"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
+	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	StorageImageReference []BatchPoolSpecStorageImageReference `json:"storageImageReference" tf:"storage_image_reference"`
-	VmSize                string                               `json:"vmSize" tf:"vm_size"`
+	StartTask []BatchPoolSpecStartTask `json:"startTask,omitempty" tf:"start_task,omitempty" protobuf:"bytes,13,rep,name=startTask"`
+	// +optional
+	StopPendingResizeOperation bool `json:"stopPendingResizeOperation,omitempty" tf:"stop_pending_resize_operation,omitempty" protobuf:"varint,14,opt,name=stopPendingResizeOperation"`
+	// +kubebuilder:validation:MaxItems=1
+	StorageImageReference []BatchPoolSpecStorageImageReference `json:"storageImageReference" tf:"storage_image_reference" protobuf:"bytes,15,rep,name=storageImageReference"`
+	VmSize                string                               `json:"vmSize" tf:"vm_size" protobuf:"bytes,16,opt,name=vmSize"`
 }
 
 type BatchPoolStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BatchPoolSpec `json:"output,omitempty"`
+	Output *BatchPoolSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -177,7 +177,7 @@ type BatchPoolStatus struct {
 // BatchPoolList is a list of BatchPools
 type BatchPoolList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BatchPool CRD objects
-	Items []BatchPool `json:"items,omitempty"`
+	Items []BatchPool `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

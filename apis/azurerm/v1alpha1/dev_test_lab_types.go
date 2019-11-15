@@ -34,47 +34,47 @@ import (
 
 type DevTestLab struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DevTestLabSpec   `json:"spec,omitempty"`
-	Status            DevTestLabStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DevTestLabSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DevTestLabStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DevTestLabSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ArtifactsStorageAccountID string `json:"artifactsStorageAccountID,omitempty" tf:"artifacts_storage_account_id,omitempty"`
+	ArtifactsStorageAccountID string `json:"artifactsStorageAccountID,omitempty" tf:"artifacts_storage_account_id,omitempty" protobuf:"bytes,3,opt,name=artifactsStorageAccountID"`
 	// +optional
-	DefaultPremiumStorageAccountID string `json:"defaultPremiumStorageAccountID,omitempty" tf:"default_premium_storage_account_id,omitempty"`
+	DefaultPremiumStorageAccountID string `json:"defaultPremiumStorageAccountID,omitempty" tf:"default_premium_storage_account_id,omitempty" protobuf:"bytes,4,opt,name=defaultPremiumStorageAccountID"`
 	// +optional
-	DefaultStorageAccountID string `json:"defaultStorageAccountID,omitempty" tf:"default_storage_account_id,omitempty"`
+	DefaultStorageAccountID string `json:"defaultStorageAccountID,omitempty" tf:"default_storage_account_id,omitempty" protobuf:"bytes,5,opt,name=defaultStorageAccountID"`
 	// +optional
-	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
-	Location   string `json:"location" tf:"location"`
-	Name       string `json:"name" tf:"name"`
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty" protobuf:"bytes,6,opt,name=keyVaultID"`
+	Location   string `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +optional
-	PremiumDataDiskStorageAccountID string `json:"premiumDataDiskStorageAccountID,omitempty" tf:"premium_data_disk_storage_account_id,omitempty"`
-	ResourceGroupName               string `json:"resourceGroupName" tf:"resource_group_name"`
+	PremiumDataDiskStorageAccountID string `json:"premiumDataDiskStorageAccountID,omitempty" tf:"premium_data_disk_storage_account_id,omitempty" protobuf:"bytes,9,opt,name=premiumDataDiskStorageAccountID"`
+	ResourceGroupName               string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +optional
-	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty" protobuf:"bytes,11,opt,name=storageType"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,12,rep,name=tags"`
 	// +optional
-	UniqueIdentifier string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty"`
+	UniqueIdentifier string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty" protobuf:"bytes,13,opt,name=uniqueIdentifier"`
 }
 
 type DevTestLabStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DevTestLabSpec `json:"output,omitempty"`
+	Output *DevTestLabSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type DevTestLabStatus struct {
 // DevTestLabList is a list of DevTestLabs
 type DevTestLabList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DevTestLab CRD objects
-	Items []DevTestLab `json:"items,omitempty"`
+	Items []DevTestLab `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

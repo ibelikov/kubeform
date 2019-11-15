@@ -34,70 +34,70 @@ import (
 
 type Image struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageSpec   `json:"spec,omitempty"`
-	Status            ImageStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ImageSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ImageStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ImageSpecDataDisk struct {
 	// +optional
-	BlobURI string `json:"blobURI,omitempty" tf:"blob_uri,omitempty"`
+	BlobURI string `json:"blobURI,omitempty" tf:"blob_uri,omitempty" protobuf:"bytes,1,opt,name=blobURI"`
 	// +optional
-	Caching string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching string `json:"caching,omitempty" tf:"caching,omitempty" protobuf:"bytes,2,opt,name=caching"`
 	// +optional
-	Lun int64 `json:"lun,omitempty" tf:"lun,omitempty"`
+	Lun int64 `json:"lun,omitempty" tf:"lun,omitempty" protobuf:"varint,3,opt,name=lun"`
 	// +optional
-	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty"`
+	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty" protobuf:"bytes,4,opt,name=managedDiskID"`
 	// +optional
-	SizeGb int64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+	SizeGb int64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty" protobuf:"varint,5,opt,name=sizeGb"`
 }
 
 type ImageSpecOsDisk struct {
 	// +optional
-	BlobURI string `json:"blobURI,omitempty" tf:"blob_uri,omitempty"`
+	BlobURI string `json:"blobURI,omitempty" tf:"blob_uri,omitempty" protobuf:"bytes,1,opt,name=blobURI"`
 	// +optional
-	Caching string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching string `json:"caching,omitempty" tf:"caching,omitempty" protobuf:"bytes,2,opt,name=caching"`
 	// +optional
-	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty"`
+	ManagedDiskID string `json:"managedDiskID,omitempty" tf:"managed_disk_id,omitempty" protobuf:"bytes,3,opt,name=managedDiskID"`
 	// +optional
-	OsState string `json:"osState,omitempty" tf:"os_state,omitempty"`
+	OsState string `json:"osState,omitempty" tf:"os_state,omitempty" protobuf:"bytes,4,opt,name=osState"`
 	// +optional
-	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
+	OsType string `json:"osType,omitempty" tf:"os_type,omitempty" protobuf:"bytes,5,opt,name=osType"`
 	// +optional
-	SizeGb int64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+	SizeGb int64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty" protobuf:"varint,6,opt,name=sizeGb"`
 }
 
 type ImageSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	DataDisk []ImageSpecDataDisk `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
-	Location string              `json:"location" tf:"location"`
-	Name     string              `json:"name" tf:"name"`
+	DataDisk []ImageSpecDataDisk `json:"dataDisk,omitempty" tf:"data_disk,omitempty" protobuf:"bytes,3,rep,name=dataDisk"`
+	Location string              `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name     string              `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	OsDisk            []ImageSpecOsDisk `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
-	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name"`
+	OsDisk            []ImageSpecOsDisk `json:"osDisk,omitempty" tf:"os_disk,omitempty" protobuf:"bytes,6,rep,name=osDisk"`
+	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	SourceVirtualMachineID string `json:"sourceVirtualMachineID,omitempty" tf:"source_virtual_machine_id,omitempty"`
+	SourceVirtualMachineID string `json:"sourceVirtualMachineID,omitempty" tf:"source_virtual_machine_id,omitempty" protobuf:"bytes,8,opt,name=sourceVirtualMachineID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 	// +optional
-	ZoneResilient bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
+	ZoneResilient bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty" protobuf:"varint,10,opt,name=zoneResilient"`
 }
 
 type ImageStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ImageSpec `json:"output,omitempty"`
+	Output *ImageSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -106,7 +106,7 @@ type ImageStatus struct {
 // ImageList is a list of Images
 type ImageList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Image CRD objects
-	Items []Image `json:"items,omitempty"`
+	Items []Image `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

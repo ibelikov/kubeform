@@ -34,38 +34,38 @@ import (
 
 type VolumeSnapshot struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VolumeSnapshotSpec   `json:"spec,omitempty"`
-	Status            VolumeSnapshotStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VolumeSnapshotSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VolumeSnapshotStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VolumeSnapshotSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,3,opt,name=createdAt"`
 	// +optional
-	MinDiskSize int64  `json:"minDiskSize,omitempty" tf:"min_disk_size,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	MinDiskSize int64  `json:"minDiskSize,omitempty" tf:"min_disk_size,omitempty" protobuf:"varint,4,opt,name=minDiskSize"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Regions []string `json:"regions,omitempty" tf:"regions,omitempty"`
+	Regions []string `json:"regions,omitempty" tf:"regions,omitempty" protobuf:"bytes,6,rep,name=regions"`
 	// +optional
 	Size     float64 `json:"size,omitempty" tf:"size,omitempty"`
-	VolumeID string  `json:"volumeID" tf:"volume_id"`
+	VolumeID string  `json:"volumeID" tf:"volume_id" protobuf:"bytes,8,opt,name=volumeID"`
 }
 
 type VolumeSnapshotStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VolumeSnapshotSpec `json:"output,omitempty"`
+	Output *VolumeSnapshotSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type VolumeSnapshotStatus struct {
 // VolumeSnapshotList is a list of VolumeSnapshots
 type VolumeSnapshotList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VolumeSnapshot CRD objects
-	Items []VolumeSnapshot `json:"items,omitempty"`
+	Items []VolumeSnapshot `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

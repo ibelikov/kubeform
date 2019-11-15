@@ -34,39 +34,39 @@ import (
 
 type TemplateDeployment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TemplateDeploymentSpec   `json:"spec,omitempty"`
-	Status            TemplateDeploymentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              TemplateDeploymentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            TemplateDeploymentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type TemplateDeploymentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	DeploymentMode string `json:"deploymentMode" tf:"deployment_mode"`
-	Name           string `json:"name" tf:"name"`
+	DeploymentMode string `json:"deploymentMode" tf:"deployment_mode" protobuf:"bytes,3,opt,name=deploymentMode"`
+	Name           string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	Outputs map[string]string `json:"outputs,omitempty" tf:"outputs,omitempty"`
+	Outputs map[string]string `json:"outputs,omitempty" tf:"outputs,omitempty" protobuf:"bytes,5,rep,name=outputs"`
 	// +optional
-	Parameters map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,6,rep,name=parameters"`
 	// +optional
-	ParametersBody    string `json:"parametersBody,omitempty" tf:"parameters_body,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ParametersBody    string `json:"parametersBody,omitempty" tf:"parameters_body,omitempty" protobuf:"bytes,7,opt,name=parametersBody"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	TemplateBody string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+	TemplateBody string `json:"templateBody,omitempty" tf:"template_body,omitempty" protobuf:"bytes,9,opt,name=templateBody"`
 }
 
 type TemplateDeploymentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *TemplateDeploymentSpec `json:"output,omitempty"`
+	Output *TemplateDeploymentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -75,7 +75,7 @@ type TemplateDeploymentStatus struct {
 // TemplateDeploymentList is a list of TemplateDeployments
 type TemplateDeploymentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of TemplateDeployment CRD objects
-	Items []TemplateDeployment `json:"items,omitempty"`
+	Items []TemplateDeployment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,72 +34,72 @@ import (
 
 type CdnEndpoint struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CdnEndpointSpec   `json:"spec,omitempty"`
-	Status            CdnEndpointStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CdnEndpointSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CdnEndpointStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CdnEndpointSpecGeoFilter struct {
-	Action       string   `json:"action" tf:"action"`
-	CountryCodes []string `json:"countryCodes" tf:"country_codes"`
-	RelativePath string   `json:"relativePath" tf:"relative_path"`
+	Action       string   `json:"action" tf:"action" protobuf:"bytes,1,opt,name=action"`
+	CountryCodes []string `json:"countryCodes" tf:"country_codes" protobuf:"bytes,2,rep,name=countryCodes"`
+	RelativePath string   `json:"relativePath" tf:"relative_path" protobuf:"bytes,3,opt,name=relativePath"`
 }
 
 type CdnEndpointSpecOrigin struct {
-	HostName string `json:"hostName" tf:"host_name"`
+	HostName string `json:"hostName" tf:"host_name" protobuf:"bytes,1,opt,name=hostName"`
 	// +optional
-	HttpPort int64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HttpPort int64 `json:"httpPort,omitempty" tf:"http_port,omitempty" protobuf:"varint,2,opt,name=httpPort"`
 	// +optional
-	HttpsPort int64  `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
-	Name      string `json:"name" tf:"name"`
+	HttpsPort int64  `json:"httpsPort,omitempty" tf:"https_port,omitempty" protobuf:"varint,3,opt,name=httpsPort"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 }
 
 type CdnEndpointSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ContentTypesToCompress []string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
+	ContentTypesToCompress []string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty" protobuf:"bytes,3,rep,name=contentTypesToCompress"`
 	// +optional
-	GeoFilter []CdnEndpointSpecGeoFilter `json:"geoFilter,omitempty" tf:"geo_filter,omitempty"`
+	GeoFilter []CdnEndpointSpecGeoFilter `json:"geoFilter,omitempty" tf:"geo_filter,omitempty" protobuf:"bytes,4,rep,name=geoFilter"`
 	// +optional
-	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty" protobuf:"bytes,5,opt,name=hostName"`
 	// +optional
-	IsCompressionEnabled bool `json:"isCompressionEnabled,omitempty" tf:"is_compression_enabled,omitempty"`
+	IsCompressionEnabled bool `json:"isCompressionEnabled,omitempty" tf:"is_compression_enabled,omitempty" protobuf:"varint,6,opt,name=isCompressionEnabled"`
 	// +optional
-	IsHTTPAllowed bool `json:"isHTTPAllowed,omitempty" tf:"is_http_allowed,omitempty"`
+	IsHTTPAllowed bool `json:"isHTTPAllowed,omitempty" tf:"is_http_allowed,omitempty" protobuf:"varint,7,opt,name=isHTTPAllowed"`
 	// +optional
-	IsHTTPSAllowed bool   `json:"isHTTPSAllowed,omitempty" tf:"is_https_allowed,omitempty"`
-	Location       string `json:"location" tf:"location"`
-	Name           string `json:"name" tf:"name"`
+	IsHTTPSAllowed bool   `json:"isHTTPSAllowed,omitempty" tf:"is_https_allowed,omitempty" protobuf:"varint,8,opt,name=isHTTPSAllowed"`
+	Location       string `json:"location" tf:"location" protobuf:"bytes,9,opt,name=location"`
+	Name           string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	OptimizationType string                  `json:"optimizationType,omitempty" tf:"optimization_type,omitempty"`
-	Origin           []CdnEndpointSpecOrigin `json:"origin" tf:"origin"`
+	OptimizationType string                  `json:"optimizationType,omitempty" tf:"optimization_type,omitempty" protobuf:"bytes,11,opt,name=optimizationType"`
+	Origin           []CdnEndpointSpecOrigin `json:"origin" tf:"origin" protobuf:"bytes,12,rep,name=origin"`
 	// +optional
-	OriginHostHeader string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty"`
+	OriginHostHeader string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty" protobuf:"bytes,13,opt,name=originHostHeader"`
 	// +optional
-	OriginPath string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
+	OriginPath string `json:"originPath,omitempty" tf:"origin_path,omitempty" protobuf:"bytes,14,opt,name=originPath"`
 	// +optional
-	ProbePath   string `json:"probePath,omitempty" tf:"probe_path,omitempty"`
-	ProfileName string `json:"profileName" tf:"profile_name"`
+	ProbePath   string `json:"probePath,omitempty" tf:"probe_path,omitempty" protobuf:"bytes,15,opt,name=probePath"`
+	ProfileName string `json:"profileName" tf:"profile_name" protobuf:"bytes,16,opt,name=profileName"`
 	// +optional
-	QuerystringCachingBehaviour string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
-	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name"`
+	QuerystringCachingBehaviour string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty" protobuf:"bytes,17,opt,name=querystringCachingBehaviour"`
+	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,18,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,19,rep,name=tags"`
 }
 
 type CdnEndpointStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CdnEndpointSpec `json:"output,omitempty"`
+	Output *CdnEndpointSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -108,7 +108,7 @@ type CdnEndpointStatus struct {
 // CdnEndpointList is a list of CdnEndpoints
 type CdnEndpointList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CdnEndpoint CRD objects
-	Items []CdnEndpoint `json:"items,omitempty"`
+	Items []CdnEndpoint `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

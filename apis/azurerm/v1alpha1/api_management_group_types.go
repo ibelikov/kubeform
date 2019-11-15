@@ -34,38 +34,38 @@ import (
 
 type ApiManagementGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementGroupSpec   `json:"spec,omitempty"`
-	Status            ApiManagementGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,5,opt,name=displayName"`
 	// +optional
-	ExternalID        string `json:"externalID,omitempty" tf:"external_id,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ExternalID        string `json:"externalID,omitempty" tf:"external_id,omitempty" protobuf:"bytes,6,opt,name=externalID"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,9,opt,name=type"`
 }
 
 type ApiManagementGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementGroupSpec `json:"output,omitempty"`
+	Output *ApiManagementGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type ApiManagementGroupStatus struct {
 // ApiManagementGroupList is a list of ApiManagementGroups
 type ApiManagementGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementGroup CRD objects
-	Items []ApiManagementGroup `json:"items,omitempty"`
+	Items []ApiManagementGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

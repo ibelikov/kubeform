@@ -34,55 +34,55 @@ import (
 
 type FirewallApplicationRuleCollection struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallApplicationRuleCollectionSpec   `json:"spec,omitempty"`
-	Status            FirewallApplicationRuleCollectionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FirewallApplicationRuleCollectionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FirewallApplicationRuleCollectionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FirewallApplicationRuleCollectionSpecRuleProtocol struct {
 	// +optional
-	Port int64  `json:"port,omitempty" tf:"port,omitempty"`
-	Type string `json:"type" tf:"type"`
+	Port int64  `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,1,opt,name=port"`
+	Type string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type FirewallApplicationRuleCollectionSpecRule struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
 	// +optional
-	FqdnTags []string `json:"fqdnTags,omitempty" tf:"fqdn_tags,omitempty"`
-	Name     string   `json:"name" tf:"name"`
+	FqdnTags []string `json:"fqdnTags,omitempty" tf:"fqdn_tags,omitempty" protobuf:"bytes,2,rep,name=fqdnTags"`
+	Name     string   `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	Protocol        []FirewallApplicationRuleCollectionSpecRuleProtocol `json:"protocol,omitempty" tf:"protocol,omitempty"`
-	SourceAddresses []string                                            `json:"sourceAddresses" tf:"source_addresses"`
+	Protocol        []FirewallApplicationRuleCollectionSpecRuleProtocol `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,4,rep,name=protocol"`
+	SourceAddresses []string                                            `json:"sourceAddresses" tf:"source_addresses" protobuf:"bytes,5,rep,name=sourceAddresses"`
 	// +optional
-	TargetFqdns []string `json:"targetFqdns,omitempty" tf:"target_fqdns,omitempty"`
+	TargetFqdns []string `json:"targetFqdns,omitempty" tf:"target_fqdns,omitempty" protobuf:"bytes,6,rep,name=targetFqdns"`
 }
 
 type FirewallApplicationRuleCollectionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Action            string `json:"action" tf:"action"`
-	AzureFirewallName string `json:"azureFirewallName" tf:"azure_firewall_name"`
-	Name              string `json:"name" tf:"name"`
-	Priority          int64  `json:"priority" tf:"priority"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Action            string `json:"action" tf:"action" protobuf:"bytes,3,opt,name=action"`
+	AzureFirewallName string `json:"azureFirewallName" tf:"azure_firewall_name" protobuf:"bytes,4,opt,name=azureFirewallName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	Priority          int64  `json:"priority" tf:"priority" protobuf:"varint,6,opt,name=priority"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MinItems=1
-	Rule []FirewallApplicationRuleCollectionSpecRule `json:"rule" tf:"rule"`
+	Rule []FirewallApplicationRuleCollectionSpecRule `json:"rule" tf:"rule" protobuf:"bytes,8,rep,name=rule"`
 }
 
 type FirewallApplicationRuleCollectionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FirewallApplicationRuleCollectionSpec `json:"output,omitempty"`
+	Output *FirewallApplicationRuleCollectionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -91,7 +91,7 @@ type FirewallApplicationRuleCollectionStatus struct {
 // FirewallApplicationRuleCollectionList is a list of FirewallApplicationRuleCollections
 type FirewallApplicationRuleCollectionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of FirewallApplicationRuleCollection CRD objects
-	Items []FirewallApplicationRuleCollection `json:"items,omitempty"`
+	Items []FirewallApplicationRuleCollection `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

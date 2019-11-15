@@ -232,11 +232,31 @@ gen-crd-docs:
 		--shared=false                                      \
 		--skipDir=true
 
+.PHONY: gen-crd-protos
+gen-crd-protos: $(addprefix gen-crd-protos-, $(subst :,_, $(API_GROUPS)))
+
+gen-crd-protos-%:
+	@echo "Generating protobuf for $(subst _,/,$*)"
+	@docker run --rm                                     \
+		-u $$(id -u):$$(id -g)                           \
+		-v /tmp:/.cache                                  \
+		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
+		-w $(DOCKER_REPO_ROOT)                           \
+		--env HTTP_PROXY=$(HTTP_PROXY)                   \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		$(CODE_GENERATOR_IMAGE)                          \
+		go-to-protobuf                                   \
+			--go-header-file "./hack/license/go.txt"     \
+			--proto-import=$(DOCKER_REPO_ROOT)/vendor    \
+			--proto-import=$(DOCKER_REPO_ROOT)/third_party/protobuf \
+			--apimachinery-packages=-k8s.io/apimachinery/pkg/api/resource,-k8s.io/apimachinery/pkg/apis/meta/v1,-k8s.io/apimachinery/pkg/apis/meta/v1beta1,-k8s.io/apimachinery/pkg/runtime,-k8s.io/apimachinery/pkg/runtime/schema,-k8s.io/apimachinery/pkg/util/intstr \
+			--packages=-k8s.io/api/core/v1,-k8s.io/api/apps/v1,kubeform.dev/kubeform/apis/$(subst _,/,$*)
+
 .PHONY: manifests
 manifests: gen-crds label-crds
 
 .PHONY: gen
-gen: gen-types clientset openapi manifests
+gen: gen-types clientset gen-crd-protos openapi manifests
 
 fmt: $(BUILD_DIRS)
 	@docker run                                                 \

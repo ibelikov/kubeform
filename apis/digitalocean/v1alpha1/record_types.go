@@ -34,46 +34,46 @@ import (
 
 type Record struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RecordSpec   `json:"spec,omitempty"`
-	Status            RecordStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RecordSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RecordStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RecordSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Domain string `json:"domain" tf:"domain"`
+	Domain string `json:"domain" tf:"domain" protobuf:"bytes,3,opt,name=domain"`
 	// +optional
-	Flags int64 `json:"flags,omitempty" tf:"flags,omitempty"`
+	Flags int64 `json:"flags,omitempty" tf:"flags,omitempty" protobuf:"varint,4,opt,name=flags"`
 	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-	Name string `json:"name" tf:"name"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,5,opt,name=fqdn"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,7,opt,name=port"`
 	// +optional
-	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty" protobuf:"varint,8,opt,name=priority"`
 	// +optional
-	Tag string `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag string `json:"tag,omitempty" tf:"tag,omitempty" protobuf:"bytes,9,opt,name=tag"`
 	// +optional
-	Ttl   int64  `json:"ttl,omitempty" tf:"ttl,omitempty"`
-	Type  string `json:"type" tf:"type"`
-	Value string `json:"value" tf:"value"`
+	Ttl   int64  `json:"ttl,omitempty" tf:"ttl,omitempty" protobuf:"varint,10,opt,name=ttl"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,11,opt,name=type"`
+	Value string `json:"value" tf:"value" protobuf:"bytes,12,opt,name=value"`
 	// +optional
-	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty" protobuf:"varint,13,opt,name=weight"`
 }
 
 type RecordStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RecordSpec `json:"output,omitempty"`
+	Output *RecordSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type RecordStatus struct {
 // RecordList is a list of Records
 type RecordList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Record CRD objects
-	Items []Record `json:"items,omitempty"`
+	Items []Record `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

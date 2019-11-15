@@ -34,45 +34,45 @@ import (
 
 type NodebalancerNode struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodebalancerNodeSpec   `json:"spec,omitempty"`
-	Status            NodebalancerNodeStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NodebalancerNodeSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NodebalancerNodeStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NodebalancerNodeSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The private IP Address and port (IP:PORT) where this backend can be reached. This must be a private IP address.
-	Address string `json:"address" tf:"address"`
+	Address string `json:"address" tf:"address" protobuf:"bytes,3,opt,name=address"`
 	// The ID of the NodeBalancerConfig to access.
-	ConfigID int64 `json:"configID" tf:"config_id"`
+	ConfigID int64 `json:"configID" tf:"config_id" protobuf:"varint,4,opt,name=configID"`
 	// The label for this node. This is for display purposes only.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,5,opt,name=label"`
 	// The mode this NodeBalancer should use when sending traffic to this backend. If set to `accept` this backend is accepting traffic. If set to `reject` this backend will not receive traffic. If set to `drain` this backend will not receive new traffic, but connections already pinned to it will continue to be routed to it.
 	// +optional
-	Mode string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode string `json:"mode,omitempty" tf:"mode,omitempty" protobuf:"bytes,6,opt,name=mode"`
 	// The ID of the NodeBalancer to access.
-	NodebalancerID int64 `json:"nodebalancerID" tf:"nodebalancer_id"`
+	NodebalancerID int64 `json:"nodebalancerID" tf:"nodebalancer_id" protobuf:"varint,7,opt,name=nodebalancerID"`
 	// The current status of this node, based on the configured checks of its NodeBalancer Config. (unknown, UP, DOWN)
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,8,opt,name=status"`
 	// Used when picking a backend to serve a request and is not pinned to a single backend yet. Nodes with a higher weight will receive more traffic. (1-255)
 	// +optional
-	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty" protobuf:"varint,9,opt,name=weight"`
 }
 
 type NodebalancerNodeStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NodebalancerNodeSpec `json:"output,omitempty"`
+	Output *NodebalancerNodeSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type NodebalancerNodeStatus struct {
 // NodebalancerNodeList is a list of NodebalancerNodes
 type NodebalancerNodeList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NodebalancerNode CRD objects
-	Items []NodebalancerNode `json:"items,omitempty"`
+	Items []NodebalancerNode `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

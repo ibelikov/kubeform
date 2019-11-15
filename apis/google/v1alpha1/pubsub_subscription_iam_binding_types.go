@@ -34,35 +34,35 @@ import (
 
 type PubsubSubscriptionIamBinding struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PubsubSubscriptionIamBindingSpec   `json:"spec,omitempty"`
-	Status            PubsubSubscriptionIamBindingStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PubsubSubscriptionIamBindingSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PubsubSubscriptionIamBindingStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PubsubSubscriptionIamBindingSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Etag    string   `json:"etag,omitempty" tf:"etag,omitempty"`
-	Members []string `json:"members" tf:"members"`
+	Etag    string   `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,3,opt,name=etag"`
+	Members []string `json:"members" tf:"members" protobuf:"bytes,4,rep,name=members"`
 	// +optional
-	Project      string `json:"project,omitempty" tf:"project,omitempty"`
-	Role         string `json:"role" tf:"role"`
-	Subscription string `json:"subscription" tf:"subscription"`
+	Project      string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,5,opt,name=project"`
+	Role         string `json:"role" tf:"role" protobuf:"bytes,6,opt,name=role"`
+	Subscription string `json:"subscription" tf:"subscription" protobuf:"bytes,7,opt,name=subscription"`
 }
 
 type PubsubSubscriptionIamBindingStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PubsubSubscriptionIamBindingSpec `json:"output,omitempty"`
+	Output *PubsubSubscriptionIamBindingSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type PubsubSubscriptionIamBindingStatus struct {
 // PubsubSubscriptionIamBindingList is a list of PubsubSubscriptionIamBindings
 type PubsubSubscriptionIamBindingList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PubsubSubscriptionIamBinding CRD objects
-	Items []PubsubSubscriptionIamBinding `json:"items,omitempty"`
+	Items []PubsubSubscriptionIamBinding `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

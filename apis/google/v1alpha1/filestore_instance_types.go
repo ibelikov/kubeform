@@ -34,59 +34,59 @@ import (
 
 type FilestoreInstance struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FilestoreInstanceSpec   `json:"spec,omitempty"`
-	Status            FilestoreInstanceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              FilestoreInstanceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            FilestoreInstanceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type FilestoreInstanceSpecFileShares struct {
-	CapacityGb int64  `json:"capacityGb" tf:"capacity_gb"`
-	Name       string `json:"name" tf:"name"`
+	CapacityGb int64  `json:"capacityGb" tf:"capacity_gb" protobuf:"varint,1,opt,name=capacityGb"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type FilestoreInstanceSpecNetworks struct {
 	// +optional
-	IpAddresses []string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
-	Modes       []string `json:"modes" tf:"modes"`
-	Network     string   `json:"network" tf:"network"`
+	IpAddresses []string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty" protobuf:"bytes,1,rep,name=ipAddresses"`
+	Modes       []string `json:"modes" tf:"modes" protobuf:"bytes,2,rep,name=modes"`
+	Network     string   `json:"network" tf:"network" protobuf:"bytes,3,opt,name=network"`
 	// +optional
-	ReservedIPRange string `json:"reservedIPRange,omitempty" tf:"reserved_ip_range,omitempty"`
+	ReservedIPRange string `json:"reservedIPRange,omitempty" tf:"reserved_ip_range,omitempty" protobuf:"bytes,4,opt,name=reservedIPRange"`
 }
 
 type FilestoreInstanceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty"`
+	CreateTime string `json:"createTime,omitempty" tf:"create_time,omitempty" protobuf:"bytes,3,opt,name=createTime"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	Etag string `json:"etag,omitempty" tf:"etag,omitempty"`
+	Etag string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,5,opt,name=etag"`
 	// +kubebuilder:validation:MaxItems=1
-	FileShares []FilestoreInstanceSpecFileShares `json:"fileShares" tf:"file_shares"`
+	FileShares []FilestoreInstanceSpecFileShares `json:"fileShares" tf:"file_shares" protobuf:"bytes,6,rep,name=fileShares"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
-	Name   string            `json:"name" tf:"name"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,7,rep,name=labels"`
+	Name   string            `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
 	// +kubebuilder:validation:MinItems=1
-	Networks []FilestoreInstanceSpecNetworks `json:"networks" tf:"networks"`
+	Networks []FilestoreInstanceSpecNetworks `json:"networks" tf:"networks" protobuf:"bytes,9,rep,name=networks"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	Tier    string `json:"tier" tf:"tier"`
-	Zone    string `json:"zone" tf:"zone"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,10,opt,name=project"`
+	Tier    string `json:"tier" tf:"tier" protobuf:"bytes,11,opt,name=tier"`
+	Zone    string `json:"zone" tf:"zone" protobuf:"bytes,12,opt,name=zone"`
 }
 
 type FilestoreInstanceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *FilestoreInstanceSpec `json:"output,omitempty"`
+	Output *FilestoreInstanceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -95,7 +95,7 @@ type FilestoreInstanceStatus struct {
 // FilestoreInstanceList is a list of FilestoreInstances
 type FilestoreInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of FilestoreInstance CRD objects
-	Items []FilestoreInstance `json:"items,omitempty"`
+	Items []FilestoreInstance `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

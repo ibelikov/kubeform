@@ -34,52 +34,52 @@ import (
 
 type KeyVaultKey struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyVaultKeySpec   `json:"spec,omitempty"`
-	Status            KeyVaultKeyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KeyVaultKeySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KeyVaultKeyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KeyVaultKeySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Curve string `json:"curve,omitempty" tf:"curve,omitempty"`
+	Curve string `json:"curve,omitempty" tf:"curve,omitempty" protobuf:"bytes,3,opt,name=curve"`
 	// +optional
-	E       string   `json:"e,omitempty" tf:"e,omitempty"`
-	KeyOpts []string `json:"keyOpts" tf:"key_opts"`
+	E       string   `json:"e,omitempty" tf:"e,omitempty" protobuf:"bytes,4,opt,name=e"`
+	KeyOpts []string `json:"keyOpts" tf:"key_opts" protobuf:"bytes,5,rep,name=keyOpts"`
 	// +optional
-	KeySize int64  `json:"keySize,omitempty" tf:"key_size,omitempty"`
-	KeyType string `json:"keyType" tf:"key_type"`
+	KeySize int64  `json:"keySize,omitempty" tf:"key_size,omitempty" protobuf:"varint,6,opt,name=keySize"`
+	KeyType string `json:"keyType" tf:"key_type" protobuf:"bytes,7,opt,name=keyType"`
 	// +optional
-	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty" protobuf:"bytes,8,opt,name=keyVaultID"`
 	// +optional
-	N    string `json:"n,omitempty" tf:"n,omitempty"`
-	Name string `json:"name" tf:"name"`
+	N    string `json:"n,omitempty" tf:"n,omitempty" protobuf:"bytes,9,opt,name=n"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 	// +optional
 	// Deprecated
-	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty"`
+	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty" protobuf:"bytes,12,opt,name=vaultURI"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,13,opt,name=version"`
 	// +optional
-	X string `json:"x,omitempty" tf:"x,omitempty"`
+	X string `json:"x,omitempty" tf:"x,omitempty" protobuf:"bytes,14,opt,name=x"`
 	// +optional
-	Y string `json:"y,omitempty" tf:"y,omitempty"`
+	Y string `json:"y,omitempty" tf:"y,omitempty" protobuf:"bytes,15,opt,name=y"`
 }
 
 type KeyVaultKeyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KeyVaultKeySpec `json:"output,omitempty"`
+	Output *KeyVaultKeySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type KeyVaultKeyStatus struct {
 // KeyVaultKeyList is a list of KeyVaultKeys
 type KeyVaultKeyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KeyVaultKey CRD objects
-	Items []KeyVaultKey `json:"items,omitempty"`
+	Items []KeyVaultKey `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

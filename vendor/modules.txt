@@ -1218,7 +1218,7 @@ k8s.io/kube-openapi/pkg/schemaconv
 k8s.io/utils/integer
 k8s.io/utils/buffer
 k8s.io/utils/trace
-# kmodules.xyz/client-go v0.0.0-20191106181350-088754189f4e
+# kmodules.xyz/client-go v0.0.0-20191107203555-78563b72c377
 kmodules.xyz/client-go/openapi
 # sigs.k8s.io/structured-merge-diff v0.0.0-20190302045857-e85c7b244fd2 => sigs.k8s.io/structured-merge-diff v0.0.0-20190302045857-e85c7b244fd2
 sigs.k8s.io/structured-merge-diff/fieldpath

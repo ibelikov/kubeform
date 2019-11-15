@@ -34,55 +34,55 @@ import (
 
 type ComputeInterconnectAttachment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeInterconnectAttachmentSpec   `json:"spec,omitempty"`
-	Status            ComputeInterconnectAttachmentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeInterconnectAttachmentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeInterconnectAttachmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeInterconnectAttachmentSpecPrivateInterconnectInfo struct {
 	// +optional
-	Tag8021q int64 `json:"tag8021q,omitempty" tf:"tag8021q,omitempty"`
+	Tag8021q int64 `json:"tag8021q,omitempty" tf:"tag8021q,omitempty" protobuf:"varint,1,opt,name=tag8021q"`
 }
 
 type ComputeInterconnectAttachmentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CloudRouterIPAddress string `json:"cloudRouterIPAddress,omitempty" tf:"cloud_router_ip_address,omitempty"`
+	CloudRouterIPAddress string `json:"cloudRouterIPAddress,omitempty" tf:"cloud_router_ip_address,omitempty" protobuf:"bytes,3,opt,name=cloudRouterIPAddress"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	CustomerRouterIPAddress string `json:"customerRouterIPAddress,omitempty" tf:"customer_router_ip_address,omitempty"`
+	CustomerRouterIPAddress string `json:"customerRouterIPAddress,omitempty" tf:"customer_router_ip_address,omitempty" protobuf:"bytes,5,opt,name=customerRouterIPAddress"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	GoogleReferenceID string `json:"googleReferenceID,omitempty" tf:"google_reference_id,omitempty"`
-	Interconnect      string `json:"interconnect" tf:"interconnect"`
-	Name              string `json:"name" tf:"name"`
+	GoogleReferenceID string `json:"googleReferenceID,omitempty" tf:"google_reference_id,omitempty" protobuf:"bytes,7,opt,name=googleReferenceID"`
+	Interconnect      string `json:"interconnect" tf:"interconnect" protobuf:"bytes,8,opt,name=interconnect"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PrivateInterconnectInfo []ComputeInterconnectAttachmentSpecPrivateInterconnectInfo `json:"privateInterconnectInfo,omitempty" tf:"private_interconnect_info,omitempty"`
+	PrivateInterconnectInfo []ComputeInterconnectAttachmentSpecPrivateInterconnectInfo `json:"privateInterconnectInfo,omitempty" tf:"private_interconnect_info,omitempty" protobuf:"bytes,10,rep,name=privateInterconnectInfo"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
-	Router string `json:"router" tf:"router"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,12,opt,name=region"`
+	Router string `json:"router" tf:"router" protobuf:"bytes,13,opt,name=router"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,14,opt,name=selfLink"`
 }
 
 type ComputeInterconnectAttachmentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeInterconnectAttachmentSpec `json:"output,omitempty"`
+	Output *ComputeInterconnectAttachmentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -91,7 +91,7 @@ type ComputeInterconnectAttachmentStatus struct {
 // ComputeInterconnectAttachmentList is a list of ComputeInterconnectAttachments
 type ComputeInterconnectAttachmentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeInterconnectAttachment CRD objects
-	Items []ComputeInterconnectAttachment `json:"items,omitempty"`
+	Items []ComputeInterconnectAttachment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

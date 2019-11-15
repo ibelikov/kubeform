@@ -34,57 +34,57 @@ import (
 
 type MonitorActionGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorActionGroupSpec   `json:"spec,omitempty"`
-	Status            MonitorActionGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MonitorActionGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MonitorActionGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MonitorActionGroupSpecEmailReceiver struct {
-	EmailAddress string `json:"emailAddress" tf:"email_address"`
-	Name         string `json:"name" tf:"name"`
+	EmailAddress string `json:"emailAddress" tf:"email_address" protobuf:"bytes,1,opt,name=emailAddress"`
+	Name         string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 type MonitorActionGroupSpecSmsReceiver struct {
-	CountryCode string `json:"countryCode" tf:"country_code"`
-	Name        string `json:"name" tf:"name"`
-	PhoneNumber string `json:"phoneNumber" tf:"phone_number"`
+	CountryCode string `json:"countryCode" tf:"country_code" protobuf:"bytes,1,opt,name=countryCode"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
+	PhoneNumber string `json:"phoneNumber" tf:"phone_number" protobuf:"bytes,3,opt,name=phoneNumber"`
 }
 
 type MonitorActionGroupSpecWebhookReceiver struct {
-	Name       string `json:"name" tf:"name"`
-	ServiceURI string `json:"serviceURI" tf:"service_uri"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	ServiceURI string `json:"serviceURI" tf:"service_uri" protobuf:"bytes,2,opt,name=serviceURI"`
 }
 
 type MonitorActionGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	EmailReceiver []MonitorActionGroupSpecEmailReceiver `json:"emailReceiver,omitempty" tf:"email_receiver,omitempty"`
+	EmailReceiver []MonitorActionGroupSpecEmailReceiver `json:"emailReceiver,omitempty" tf:"email_receiver,omitempty" protobuf:"bytes,3,rep,name=emailReceiver"`
 	// +optional
-	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	ShortName         string `json:"shortName" tf:"short_name"`
+	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,4,opt,name=enabled"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
+	ShortName         string `json:"shortName" tf:"short_name" protobuf:"bytes,7,opt,name=shortName"`
 	// +optional
-	SmsReceiver []MonitorActionGroupSpecSmsReceiver `json:"smsReceiver,omitempty" tf:"sms_receiver,omitempty"`
+	SmsReceiver []MonitorActionGroupSpecSmsReceiver `json:"smsReceiver,omitempty" tf:"sms_receiver,omitempty" protobuf:"bytes,8,rep,name=smsReceiver"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 	// +optional
-	WebhookReceiver []MonitorActionGroupSpecWebhookReceiver `json:"webhookReceiver,omitempty" tf:"webhook_receiver,omitempty"`
+	WebhookReceiver []MonitorActionGroupSpecWebhookReceiver `json:"webhookReceiver,omitempty" tf:"webhook_receiver,omitempty" protobuf:"bytes,10,rep,name=webhookReceiver"`
 }
 
 type MonitorActionGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MonitorActionGroupSpec `json:"output,omitempty"`
+	Output *MonitorActionGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -93,7 +93,7 @@ type MonitorActionGroupStatus struct {
 // MonitorActionGroupList is a list of MonitorActionGroups
 type MonitorActionGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MonitorActionGroup CRD objects
-	Items []MonitorActionGroup `json:"items,omitempty"`
+	Items []MonitorActionGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

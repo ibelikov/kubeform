@@ -34,47 +34,47 @@ import (
 
 type Volume struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VolumeSpec   `json:"spec,omitempty"`
-	Status            VolumeStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VolumeSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VolumeStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VolumeSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The full filesystem path for the Volume based on the Volume's label. Path is /dev/disk/by-id/scsi-0Linode_Volume_ + Volume label.
 	// +optional
-	FilesystemPath string `json:"filesystemPath,omitempty" tf:"filesystem_path,omitempty"`
+	FilesystemPath string `json:"filesystemPath,omitempty" tf:"filesystem_path,omitempty" protobuf:"bytes,3,opt,name=filesystemPath"`
 	// The label of the Linode Volume.
-	Label string `json:"label" tf:"label"`
+	Label string `json:"label" tf:"label" protobuf:"bytes,4,opt,name=label"`
 	// The Linode ID where the Volume should be attached.
 	// +optional
-	LinodeID int64 `json:"linodeID,omitempty" tf:"linode_id,omitempty"`
+	LinodeID int64 `json:"linodeID,omitempty" tf:"linode_id,omitempty" protobuf:"varint,5,opt,name=linodeID"`
 	// The region where this volume will be deployed.
-	Region string `json:"region" tf:"region"`
+	Region string `json:"region" tf:"region" protobuf:"bytes,6,opt,name=region"`
 	// Size of the Volume in GB
 	// +optional
 	Size int64 `json:"size,omitempty" tf:"size,omitempty"`
 	// The status of the volume, indicating the current readiness state.
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,8,opt,name=status"`
 	// An array of tags applied to this object. Tags are for organizational purposes only.
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,9,rep,name=tags"`
 }
 
 type VolumeStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VolumeSpec `json:"output,omitempty"`
+	Output *VolumeSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type VolumeStatus struct {
 // VolumeList is a list of Volumes
 type VolumeList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Volume CRD objects
-	Items []Volume `json:"items,omitempty"`
+	Items []Volume `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

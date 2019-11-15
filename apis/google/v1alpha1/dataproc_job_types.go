@@ -34,258 +34,258 @@ import (
 
 type DataprocJob struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataprocJobSpec   `json:"spec,omitempty"`
-	Status            DataprocJobStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataprocJobSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataprocJobStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataprocJobSpecHadoopConfigLoggingConfig struct {
 	// Optional. The per-package log levels for the driver. This may include 'root' package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'.
 	// +optional
-	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty"`
+	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty" protobuf:"bytes,1,rep,name=driverLogLevels"`
 }
 
 type DataprocJobSpecHadoopConfig struct {
 	// +optional
-	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty"`
+	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty" protobuf:"bytes,1,rep,name=archiveUris"`
 	// +optional
-	Args []string `json:"args,omitempty" tf:"args,omitempty"`
+	Args []string `json:"args,omitempty" tf:"args,omitempty" protobuf:"bytes,2,rep,name=args"`
 	// +optional
-	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty"`
+	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty" protobuf:"bytes,3,rep,name=fileUris"`
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,4,rep,name=jarFileUris"`
 	// The runtime logging config of the job
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoggingConfig []DataprocJobSpecHadoopConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+	LoggingConfig []DataprocJobSpecHadoopConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty" protobuf:"bytes,5,rep,name=loggingConfig"`
 	// +optional
-	MainClass string `json:"mainClass,omitempty" tf:"main_class,omitempty"`
+	MainClass string `json:"mainClass,omitempty" tf:"main_class,omitempty" protobuf:"bytes,6,opt,name=mainClass"`
 	// +optional
-	MainJarFileURI string `json:"mainJarFileURI,omitempty" tf:"main_jar_file_uri,omitempty"`
+	MainJarFileURI string `json:"mainJarFileURI,omitempty" tf:"main_jar_file_uri,omitempty" protobuf:"bytes,7,opt,name=mainJarFileURI"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,8,rep,name=properties"`
 }
 
 type DataprocJobSpecHiveConfig struct {
 	// +optional
-	ContinueOnFailure bool `json:"continueOnFailure,omitempty" tf:"continue_on_failure,omitempty"`
+	ContinueOnFailure bool `json:"continueOnFailure,omitempty" tf:"continue_on_failure,omitempty" protobuf:"varint,1,opt,name=continueOnFailure"`
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,2,rep,name=jarFileUris"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,3,rep,name=properties"`
 	// +optional
-	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty"`
+	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty" protobuf:"bytes,4,opt,name=queryFileURI"`
 	// +optional
-	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty"`
+	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty" protobuf:"bytes,5,rep,name=queryList"`
 	// +optional
-	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty"`
+	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty" protobuf:"bytes,6,rep,name=scriptVariables"`
 }
 
 type DataprocJobSpecPigConfigLoggingConfig struct {
 	// Optional. The per-package log levels for the driver. This may include 'root' package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'.
 	// +optional
-	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty"`
+	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty" protobuf:"bytes,1,rep,name=driverLogLevels"`
 }
 
 type DataprocJobSpecPigConfig struct {
 	// +optional
-	ContinueOnFailure bool `json:"continueOnFailure,omitempty" tf:"continue_on_failure,omitempty"`
+	ContinueOnFailure bool `json:"continueOnFailure,omitempty" tf:"continue_on_failure,omitempty" protobuf:"varint,1,opt,name=continueOnFailure"`
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,2,rep,name=jarFileUris"`
 	// The runtime logging config of the job
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoggingConfig []DataprocJobSpecPigConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+	LoggingConfig []DataprocJobSpecPigConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty" protobuf:"bytes,3,rep,name=loggingConfig"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,4,rep,name=properties"`
 	// +optional
-	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty"`
+	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty" protobuf:"bytes,5,opt,name=queryFileURI"`
 	// +optional
-	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty"`
+	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty" protobuf:"bytes,6,rep,name=queryList"`
 	// +optional
-	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty"`
+	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty" protobuf:"bytes,7,rep,name=scriptVariables"`
 }
 
 type DataprocJobSpecPlacement struct {
 	// The name of the cluster where the job will be submitted
-	ClusterName string `json:"clusterName" tf:"cluster_name"`
+	ClusterName string `json:"clusterName" tf:"cluster_name" protobuf:"bytes,1,opt,name=clusterName"`
 	// Output-only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted
 	// +optional
-	ClusterUUID string `json:"clusterUUID,omitempty" tf:"cluster_uuid,omitempty"`
+	ClusterUUID string `json:"clusterUUID,omitempty" tf:"cluster_uuid,omitempty" protobuf:"bytes,2,opt,name=clusterUUID"`
 }
 
 type DataprocJobSpecPysparkConfigLoggingConfig struct {
 	// Optional. The per-package log levels for the driver. This may include 'root' package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'.
 	// +optional
-	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty"`
+	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty" protobuf:"bytes,1,rep,name=driverLogLevels"`
 }
 
 type DataprocJobSpecPysparkConfig struct {
 	// Optional. HCFS URIs of archives to be extracted in the working directory of .jar, .tar, .tar.gz, .tgz, and .zip
 	// +optional
-	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty"`
+	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty" protobuf:"bytes,1,rep,name=archiveUris"`
 	// Optional. The arguments to pass to the driver. Do not include arguments, such as --conf, that can be set as job properties, since a collision may occur that causes an incorrect job submission
 	// +optional
-	Args []string `json:"args,omitempty" tf:"args,omitempty"`
+	Args []string `json:"args,omitempty" tf:"args,omitempty" protobuf:"bytes,2,rep,name=args"`
 	// Optional. HCFS URIs of files to be copied to the working directory of Python drivers and distributed tasks. Useful for naively parallel tasks
 	// +optional
-	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty"`
+	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty" protobuf:"bytes,3,rep,name=fileUris"`
 	// Optional. HCFS URIs of jar files to add to the CLASSPATHs of the Python driver and tasks
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,4,rep,name=jarFileUris"`
 	// The runtime logging config of the job
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoggingConfig []DataprocJobSpecPysparkConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+	LoggingConfig []DataprocJobSpecPysparkConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty" protobuf:"bytes,5,rep,name=loggingConfig"`
 	// Required. The HCFS URI of the main Python file to use as the driver. Must be a .py file
-	MainPythonFileURI string `json:"mainPythonFileURI" tf:"main_python_file_uri"`
+	MainPythonFileURI string `json:"mainPythonFileURI" tf:"main_python_file_uri" protobuf:"bytes,6,opt,name=mainPythonFileURI"`
 	// Optional. A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,7,rep,name=properties"`
 	// Optional. HCFS file URIs of Python files to pass to the PySpark framework. Supported file types: .py, .egg, and .zip
 	// +optional
-	PythonFileUris []string `json:"pythonFileUris,omitempty" tf:"python_file_uris,omitempty"`
+	PythonFileUris []string `json:"pythonFileUris,omitempty" tf:"python_file_uris,omitempty" protobuf:"bytes,8,rep,name=pythonFileUris"`
 }
 
 type DataprocJobSpecReference struct {
 	// The job ID, which must be unique within the project. The job ID is generated by the server upon job submission or provided by the user as a means to perform retries without creating duplicate jobs
 	// +optional
-	JobID string `json:"jobID,omitempty" tf:"job_id,omitempty"`
+	JobID string `json:"jobID,omitempty" tf:"job_id,omitempty" protobuf:"bytes,1,opt,name=jobID"`
 }
 
 type DataprocJobSpecScheduling struct {
 	// Maximum number of times per hour a driver may be restarted as a result of driver terminating with non-zero code before job is reported failed.
 	// +optional
-	MaxFailuresPerHour int64 `json:"maxFailuresPerHour,omitempty" tf:"max_failures_per_hour,omitempty"`
+	MaxFailuresPerHour int64 `json:"maxFailuresPerHour,omitempty" tf:"max_failures_per_hour,omitempty" protobuf:"varint,1,opt,name=maxFailuresPerHour"`
 }
 
 type DataprocJobSpecSparkConfigLoggingConfig struct {
 	// Optional. The per-package log levels for the driver. This may include 'root' package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'.
 	// +optional
-	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty"`
+	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty" protobuf:"bytes,1,rep,name=driverLogLevels"`
 }
 
 type DataprocJobSpecSparkConfig struct {
 	// +optional
-	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty"`
+	ArchiveUris []string `json:"archiveUris,omitempty" tf:"archive_uris,omitempty" protobuf:"bytes,1,rep,name=archiveUris"`
 	// +optional
-	Args []string `json:"args,omitempty" tf:"args,omitempty"`
+	Args []string `json:"args,omitempty" tf:"args,omitempty" protobuf:"bytes,2,rep,name=args"`
 	// +optional
-	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty"`
+	FileUris []string `json:"fileUris,omitempty" tf:"file_uris,omitempty" protobuf:"bytes,3,rep,name=fileUris"`
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,4,rep,name=jarFileUris"`
 	// The runtime logging config of the job
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoggingConfig []DataprocJobSpecSparkConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+	LoggingConfig []DataprocJobSpecSparkConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty" protobuf:"bytes,5,rep,name=loggingConfig"`
 	// +optional
-	MainClass string `json:"mainClass,omitempty" tf:"main_class,omitempty"`
+	MainClass string `json:"mainClass,omitempty" tf:"main_class,omitempty" protobuf:"bytes,6,opt,name=mainClass"`
 	// +optional
-	MainJarFileURI string `json:"mainJarFileURI,omitempty" tf:"main_jar_file_uri,omitempty"`
+	MainJarFileURI string `json:"mainJarFileURI,omitempty" tf:"main_jar_file_uri,omitempty" protobuf:"bytes,7,opt,name=mainJarFileURI"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,8,rep,name=properties"`
 }
 
 type DataprocJobSpecSparksqlConfigLoggingConfig struct {
 	// Optional. The per-package log levels for the driver. This may include 'root' package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'.
 	// +optional
-	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty"`
+	DriverLogLevels map[string]string `json:"driverLogLevels,omitempty" tf:"driver_log_levels,omitempty" protobuf:"bytes,1,rep,name=driverLogLevels"`
 }
 
 type DataprocJobSpecSparksqlConfig struct {
 	// +optional
-	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty"`
+	JarFileUris []string `json:"jarFileUris,omitempty" tf:"jar_file_uris,omitempty" protobuf:"bytes,1,rep,name=jarFileUris"`
 	// The runtime logging config of the job
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LoggingConfig []DataprocJobSpecSparksqlConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+	LoggingConfig []DataprocJobSpecSparksqlConfigLoggingConfig `json:"loggingConfig,omitempty" tf:"logging_config,omitempty" protobuf:"bytes,2,rep,name=loggingConfig"`
 	// +optional
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,3,rep,name=properties"`
 	// +optional
-	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty"`
+	QueryFileURI string `json:"queryFileURI,omitempty" tf:"query_file_uri,omitempty" protobuf:"bytes,4,opt,name=queryFileURI"`
 	// +optional
-	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty"`
+	QueryList []string `json:"queryList,omitempty" tf:"query_list,omitempty" protobuf:"bytes,5,rep,name=queryList"`
 	// +optional
-	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty"`
+	ScriptVariables map[string]string `json:"scriptVariables,omitempty" tf:"script_variables,omitempty" protobuf:"bytes,6,rep,name=scriptVariables"`
 }
 
 type DataprocJobSpecStatus struct {
 	// Output-only. Optional job state details, such as an error description if the state is ERROR
 	// +optional
-	Details string `json:"details,omitempty" tf:"details,omitempty"`
+	Details string `json:"details,omitempty" tf:"details,omitempty" protobuf:"bytes,1,opt,name=details"`
 	// Output-only. A state message specifying the overall job state
 	// +optional
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,2,opt,name=state"`
 	// Output-only. The time when this state was entered
 	// +optional
-	StateStartTime string `json:"stateStartTime,omitempty" tf:"state_start_time,omitempty"`
+	StateStartTime string `json:"stateStartTime,omitempty" tf:"state_start_time,omitempty" protobuf:"bytes,3,opt,name=stateStartTime"`
 	// Output-only. Additional state information, which includes status reported by the agent
 	// +optional
-	Substate string `json:"substate,omitempty" tf:"substate,omitempty"`
+	Substate string `json:"substate,omitempty" tf:"substate,omitempty" protobuf:"bytes,4,opt,name=substate"`
 }
 
 type DataprocJobSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// Output-only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.
 	// +optional
-	DriverControlsFilesURI string `json:"driverControlsFilesURI,omitempty" tf:"driver_controls_files_uri,omitempty"`
+	DriverControlsFilesURI string `json:"driverControlsFilesURI,omitempty" tf:"driver_controls_files_uri,omitempty" protobuf:"bytes,3,opt,name=driverControlsFilesURI"`
 	// Output-only. A URI pointing to the location of the stdout of the job's driver program
 	// +optional
-	DriverOutputResourceURI string `json:"driverOutputResourceURI,omitempty" tf:"driver_output_resource_uri,omitempty"`
+	DriverOutputResourceURI string `json:"driverOutputResourceURI,omitempty" tf:"driver_output_resource_uri,omitempty" protobuf:"bytes,4,opt,name=driverOutputResourceURI"`
 	// +optional
-	ForceDelete bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	HadoopConfig []DataprocJobSpecHadoopConfig `json:"hadoopConfig,omitempty" tf:"hadoop_config,omitempty"`
+	ForceDelete bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty" protobuf:"varint,5,opt,name=forceDelete"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HiveConfig []DataprocJobSpecHiveConfig `json:"hiveConfig,omitempty" tf:"hive_config,omitempty"`
+	HadoopConfig []DataprocJobSpecHadoopConfig `json:"hadoopConfig,omitempty" tf:"hadoop_config,omitempty" protobuf:"bytes,6,rep,name=hadoopConfig"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	HiveConfig []DataprocJobSpecHiveConfig `json:"hiveConfig,omitempty" tf:"hive_config,omitempty" protobuf:"bytes,7,rep,name=hiveConfig"`
 	// Optional. The labels to associate with this job.
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,8,rep,name=labels"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PigConfig []DataprocJobSpecPigConfig `json:"pigConfig,omitempty" tf:"pig_config,omitempty"`
+	PigConfig []DataprocJobSpecPigConfig `json:"pigConfig,omitempty" tf:"pig_config,omitempty" protobuf:"bytes,9,rep,name=pigConfig"`
 	// +kubebuilder:validation:MaxItems=1
-	Placement []DataprocJobSpecPlacement `json:"placement" tf:"placement"`
+	Placement []DataprocJobSpecPlacement `json:"placement" tf:"placement" protobuf:"bytes,10,rep,name=placement"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	PysparkConfig []DataprocJobSpecPysparkConfig `json:"pysparkConfig,omitempty" tf:"pyspark_config,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Reference []DataprocJobSpecReference `json:"reference,omitempty" tf:"reference,omitempty"`
+	PysparkConfig []DataprocJobSpecPysparkConfig `json:"pysparkConfig,omitempty" tf:"pyspark_config,omitempty" protobuf:"bytes,12,rep,name=pysparkConfig"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	Reference []DataprocJobSpecReference `json:"reference,omitempty" tf:"reference,omitempty" protobuf:"bytes,13,rep,name=reference"`
+	// +optional
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,14,opt,name=region"`
 	// Optional. Job scheduling configuration.
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Scheduling []DataprocJobSpecScheduling `json:"scheduling,omitempty" tf:"scheduling,omitempty"`
+	Scheduling []DataprocJobSpecScheduling `json:"scheduling,omitempty" tf:"scheduling,omitempty" protobuf:"bytes,15,rep,name=scheduling"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SparkConfig []DataprocJobSpecSparkConfig `json:"sparkConfig,omitempty" tf:"spark_config,omitempty"`
+	SparkConfig []DataprocJobSpecSparkConfig `json:"sparkConfig,omitempty" tf:"spark_config,omitempty" protobuf:"bytes,16,rep,name=sparkConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SparksqlConfig []DataprocJobSpecSparksqlConfig `json:"sparksqlConfig,omitempty" tf:"sparksql_config,omitempty"`
+	SparksqlConfig []DataprocJobSpecSparksqlConfig `json:"sparksqlConfig,omitempty" tf:"sparksql_config,omitempty" protobuf:"bytes,17,rep,name=sparksqlConfig"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Status []DataprocJobSpecStatus `json:"status,omitempty" tf:"status,omitempty"`
+	Status []DataprocJobSpecStatus `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,18,rep,name=status"`
 }
 
 type DataprocJobStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataprocJobSpec `json:"output,omitempty"`
+	Output *DataprocJobSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -294,7 +294,7 @@ type DataprocJobStatus struct {
 // DataprocJobList is a list of DataprocJobs
 type DataprocJobList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataprocJob CRD objects
-	Items []DataprocJob `json:"items,omitempty"`
+	Items []DataprocJob `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

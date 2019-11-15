@@ -34,123 +34,123 @@ import (
 
 type ContainerNodePool struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerNodePoolSpec   `json:"spec,omitempty"`
-	Status            ContainerNodePoolStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ContainerNodePoolSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ContainerNodePoolStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ContainerNodePoolSpecAutoscaling struct {
-	MaxNodeCount int64 `json:"maxNodeCount" tf:"max_node_count"`
-	MinNodeCount int64 `json:"minNodeCount" tf:"min_node_count"`
+	MaxNodeCount int64 `json:"maxNodeCount" tf:"max_node_count" protobuf:"varint,1,opt,name=maxNodeCount"`
+	MinNodeCount int64 `json:"minNodeCount" tf:"min_node_count" protobuf:"varint,2,opt,name=minNodeCount"`
 }
 
 type ContainerNodePoolSpecManagement struct {
 	// +optional
-	AutoRepair bool `json:"autoRepair,omitempty" tf:"auto_repair,omitempty"`
+	AutoRepair bool `json:"autoRepair,omitempty" tf:"auto_repair,omitempty" protobuf:"varint,1,opt,name=autoRepair"`
 	// +optional
-	AutoUpgrade bool `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty"`
+	AutoUpgrade bool `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty" protobuf:"varint,2,opt,name=autoUpgrade"`
 }
 
 type ContainerNodePoolSpecNodeConfigGuestAccelerator struct {
-	Count int64  `json:"count" tf:"count"`
-	Type  string `json:"type" tf:"type"`
+	Count int64  `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Type  string `json:"type" tf:"type" protobuf:"bytes,2,opt,name=type"`
 }
 
 type ContainerNodePoolSpecNodeConfigTaint struct {
-	Effect string `json:"effect" tf:"effect"`
-	Key    string `json:"key" tf:"key"`
-	Value  string `json:"value" tf:"value"`
+	Effect string `json:"effect" tf:"effect" protobuf:"bytes,1,opt,name=effect"`
+	Key    string `json:"key" tf:"key" protobuf:"bytes,2,opt,name=key"`
+	Value  string `json:"value" tf:"value" protobuf:"bytes,3,opt,name=value"`
 }
 
 type ContainerNodePoolSpecNodeConfigWorkloadMetadataConfig struct {
-	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata"`
+	NodeMetadata string `json:"nodeMetadata" tf:"node_metadata" protobuf:"bytes,1,opt,name=nodeMetadata"`
 }
 
 type ContainerNodePoolSpecNodeConfig struct {
 	// +optional
-	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty" protobuf:"varint,1,opt,name=diskSizeGb"`
 	// +optional
-	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+	DiskType string `json:"diskType,omitempty" tf:"disk_type,omitempty" protobuf:"bytes,2,opt,name=diskType"`
 	// +optional
-	GuestAccelerator []ContainerNodePoolSpecNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty"`
+	GuestAccelerator []ContainerNodePoolSpecNodeConfigGuestAccelerator `json:"guestAccelerator,omitempty" tf:"guest_accelerator,omitempty" protobuf:"bytes,3,rep,name=guestAccelerator"`
 	// +optional
-	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty"`
+	ImageType string `json:"imageType,omitempty" tf:"image_type,omitempty" protobuf:"bytes,4,opt,name=imageType"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,5,rep,name=labels"`
 	// +optional
-	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
+	LocalSsdCount int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty" protobuf:"varint,6,opt,name=localSsdCount"`
 	// +optional
-	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty"`
+	MachineType string `json:"machineType,omitempty" tf:"machine_type,omitempty" protobuf:"bytes,7,opt,name=machineType"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,8,rep,name=metadata"`
 	// +optional
-	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty"`
+	MinCPUPlatform string `json:"minCPUPlatform,omitempty" tf:"min_cpu_platform,omitempty" protobuf:"bytes,9,opt,name=minCPUPlatform"`
 	// +optional
-	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	OauthScopes []string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty" protobuf:"bytes,10,rep,name=oauthScopes"`
 	// +optional
-	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
+	Preemptible bool `json:"preemptible,omitempty" tf:"preemptible,omitempty" protobuf:"varint,11,opt,name=preemptible"`
 	// +optional
-	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty" tf:"service_account,omitempty" protobuf:"bytes,12,opt,name=serviceAccount"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 	// +optional
 	// Deprecated
-	Taint []ContainerNodePoolSpecNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty"`
+	Taint []ContainerNodePoolSpecNodeConfigTaint `json:"taint,omitempty" tf:"taint,omitempty" protobuf:"bytes,14,rep,name=taint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	WorkloadMetadataConfig []ContainerNodePoolSpecNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty"`
+	WorkloadMetadataConfig []ContainerNodePoolSpecNodeConfigWorkloadMetadataConfig `json:"workloadMetadataConfig,omitempty" tf:"workload_metadata_config,omitempty" protobuf:"bytes,15,rep,name=workloadMetadataConfig"`
 }
 
 type ContainerNodePoolSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Autoscaling []ContainerNodePoolSpecAutoscaling `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
-	Cluster     string                             `json:"cluster" tf:"cluster"`
+	Autoscaling []ContainerNodePoolSpecAutoscaling `json:"autoscaling,omitempty" tf:"autoscaling,omitempty" protobuf:"bytes,3,rep,name=autoscaling"`
+	Cluster     string                             `json:"cluster" tf:"cluster" protobuf:"bytes,4,opt,name=cluster"`
 	// +optional
-	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty"`
+	InitialNodeCount int64 `json:"initialNodeCount,omitempty" tf:"initial_node_count,omitempty" protobuf:"varint,5,opt,name=initialNodeCount"`
 	// +optional
-	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty"`
+	InstanceGroupUrls []string `json:"instanceGroupUrls,omitempty" tf:"instance_group_urls,omitempty" protobuf:"bytes,6,rep,name=instanceGroupUrls"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Management []ContainerNodePoolSpecManagement `json:"management,omitempty" tf:"management,omitempty"`
+	Management []ContainerNodePoolSpecManagement `json:"management,omitempty" tf:"management,omitempty" protobuf:"bytes,7,rep,name=management"`
 	// +optional
 	// Deprecated
-	MaxPodsPerNode int64 `json:"maxPodsPerNode,omitempty" tf:"max_pods_per_node,omitempty"`
+	MaxPodsPerNode int64 `json:"maxPodsPerNode,omitempty" tf:"max_pods_per_node,omitempty" protobuf:"varint,8,opt,name=maxPodsPerNode"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,9,opt,name=name"`
 	// +optional
 	// Deprecated
-	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty" protobuf:"bytes,10,opt,name=namePrefix"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NodeConfig []ContainerNodePoolSpecNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+	NodeConfig []ContainerNodePoolSpecNodeConfig `json:"nodeConfig,omitempty" tf:"node_config,omitempty" protobuf:"bytes,11,rep,name=nodeConfig"`
 	// +optional
-	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty" protobuf:"varint,12,opt,name=nodeCount"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,13,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,14,opt,name=region"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,15,opt,name=version"`
 	// +optional
-	Zone string `json:"zone,omitempty" tf:"zone,omitempty"`
+	Zone string `json:"zone,omitempty" tf:"zone,omitempty" protobuf:"bytes,16,opt,name=zone"`
 }
 
 type ContainerNodePoolStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ContainerNodePoolSpec `json:"output,omitempty"`
+	Output *ContainerNodePoolSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -159,7 +159,7 @@ type ContainerNodePoolStatus struct {
 // ContainerNodePoolList is a list of ContainerNodePools
 type ContainerNodePoolList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ContainerNodePool CRD objects
-	Items []ContainerNodePool `json:"items,omitempty"`
+	Items []ContainerNodePool `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

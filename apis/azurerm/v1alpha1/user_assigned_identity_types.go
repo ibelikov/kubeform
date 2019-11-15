@@ -34,37 +34,37 @@ import (
 
 type UserAssignedIdentity struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserAssignedIdentitySpec   `json:"spec,omitempty"`
-	Status            UserAssignedIdentityStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              UserAssignedIdentitySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            UserAssignedIdentityStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type UserAssignedIdentitySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ClientID string `json:"clientID,omitempty" tf:"client_id,omitempty"`
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	ClientID string `json:"clientID,omitempty" tf:"client_id,omitempty" protobuf:"bytes,3,opt,name=clientID"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	PrincipalID       string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	PrincipalID       string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,6,opt,name=principalID"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
 }
 
 type UserAssignedIdentityStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *UserAssignedIdentitySpec `json:"output,omitempty"`
+	Output *UserAssignedIdentitySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type UserAssignedIdentityStatus struct {
 // UserAssignedIdentityList is a list of UserAssignedIdentitys
 type UserAssignedIdentityList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of UserAssignedIdentity CRD objects
-	Items []UserAssignedIdentity `json:"items,omitempty"`
+	Items []UserAssignedIdentity `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

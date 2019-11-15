@@ -34,45 +34,45 @@ import (
 
 type VirtualMachineExtension struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualMachineExtensionSpec   `json:"spec,omitempty"`
-	Status            VirtualMachineExtensionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualMachineExtensionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualMachineExtensionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualMachineExtensionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AutoUpgradeMinorVersion bool   `json:"autoUpgradeMinorVersion,omitempty" tf:"auto_upgrade_minor_version,omitempty"`
-	Location                string `json:"location" tf:"location"`
-	Name                    string `json:"name" tf:"name"`
+	AutoUpgradeMinorVersion bool   `json:"autoUpgradeMinorVersion,omitempty" tf:"auto_upgrade_minor_version,omitempty" protobuf:"varint,4,opt,name=autoUpgradeMinorVersion"`
+	Location                string `json:"location" tf:"location" protobuf:"bytes,5,opt,name=location"`
+	Name                    string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
 	ProtectedSettings string `json:"-" sensitive:"true" tf:"protected_settings,omitempty"`
-	Publisher         string `json:"publisher" tf:"publisher"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Publisher         string `json:"publisher" tf:"publisher" protobuf:"bytes,7,opt,name=publisher"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	Settings string `json:"settings,omitempty" tf:"settings,omitempty"`
+	Settings string `json:"settings,omitempty" tf:"settings,omitempty" protobuf:"bytes,9,opt,name=settings"`
 	// +optional
-	Tags               map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Type               string            `json:"type" tf:"type"`
-	TypeHandlerVersion string            `json:"typeHandlerVersion" tf:"type_handler_version"`
-	VirtualMachineName string            `json:"virtualMachineName" tf:"virtual_machine_name"`
+	Tags               map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
+	Type               string            `json:"type" tf:"type" protobuf:"bytes,11,opt,name=type"`
+	TypeHandlerVersion string            `json:"typeHandlerVersion" tf:"type_handler_version" protobuf:"bytes,12,opt,name=typeHandlerVersion"`
+	VirtualMachineName string            `json:"virtualMachineName" tf:"virtual_machine_name" protobuf:"bytes,13,opt,name=virtualMachineName"`
 }
 
 type VirtualMachineExtensionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualMachineExtensionSpec `json:"output,omitempty"`
+	Output *VirtualMachineExtensionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type VirtualMachineExtensionStatus struct {
 // VirtualMachineExtensionList is a list of VirtualMachineExtensions
 type VirtualMachineExtensionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualMachineExtension CRD objects
-	Items []VirtualMachineExtension `json:"items,omitempty"`
+	Items []VirtualMachineExtension `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

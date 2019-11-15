@@ -34,33 +34,33 @@ import (
 
 type SecurityCenterContact struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterContactSpec   `json:"spec,omitempty"`
-	Status            SecurityCenterContactStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SecurityCenterContactSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SecurityCenterContactStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SecurityCenterContactSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AlertNotifications bool   `json:"alertNotifications" tf:"alert_notifications"`
-	AlertsToAdmins     bool   `json:"alertsToAdmins" tf:"alerts_to_admins"`
-	Email              string `json:"email" tf:"email"`
+	AlertNotifications bool   `json:"alertNotifications" tf:"alert_notifications" protobuf:"varint,3,opt,name=alertNotifications"`
+	AlertsToAdmins     bool   `json:"alertsToAdmins" tf:"alerts_to_admins" protobuf:"varint,4,opt,name=alertsToAdmins"`
+	Email              string `json:"email" tf:"email" protobuf:"bytes,5,opt,name=email"`
 	// +optional
-	Phone string `json:"phone,omitempty" tf:"phone,omitempty"`
+	Phone string `json:"phone,omitempty" tf:"phone,omitempty" protobuf:"bytes,6,opt,name=phone"`
 }
 
 type SecurityCenterContactStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SecurityCenterContactSpec `json:"output,omitempty"`
+	Output *SecurityCenterContactSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -69,7 +69,7 @@ type SecurityCenterContactStatus struct {
 // SecurityCenterContactList is a list of SecurityCenterContacts
 type SecurityCenterContactList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SecurityCenterContact CRD objects
-	Items []SecurityCenterContact `json:"items,omitempty"`
+	Items []SecurityCenterContact `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

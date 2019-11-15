@@ -34,45 +34,45 @@ import (
 
 type AutomationModule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutomationModuleSpec   `json:"spec,omitempty"`
-	Status            AutomationModuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutomationModuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutomationModuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutomationModuleSpecModuleLinkHash struct {
-	Algorithm string `json:"algorithm" tf:"algorithm"`
-	Value     string `json:"value" tf:"value"`
+	Algorithm string `json:"algorithm" tf:"algorithm" protobuf:"bytes,1,opt,name=algorithm"`
+	Value     string `json:"value" tf:"value" protobuf:"bytes,2,opt,name=value"`
 }
 
 type AutomationModuleSpecModuleLink struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Hash []AutomationModuleSpecModuleLinkHash `json:"hash,omitempty" tf:"hash,omitempty"`
-	Uri  string                               `json:"uri" tf:"uri"`
+	Hash []AutomationModuleSpecModuleLinkHash `json:"hash,omitempty" tf:"hash,omitempty" protobuf:"bytes,1,rep,name=hash"`
+	Uri  string                               `json:"uri" tf:"uri" protobuf:"bytes,2,opt,name=uri"`
 }
 
 type AutomationModuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name"`
+	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name" protobuf:"bytes,3,opt,name=automationAccountName"`
 	// +kubebuilder:validation:MaxItems=1
-	ModuleLink        []AutomationModuleSpecModuleLink `json:"moduleLink" tf:"module_link"`
-	Name              string                           `json:"name" tf:"name"`
-	ResourceGroupName string                           `json:"resourceGroupName" tf:"resource_group_name"`
+	ModuleLink        []AutomationModuleSpecModuleLink `json:"moduleLink" tf:"module_link" protobuf:"bytes,4,rep,name=moduleLink"`
+	Name              string                           `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string                           `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 }
 
 type AutomationModuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutomationModuleSpec `json:"output,omitempty"`
+	Output *AutomationModuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type AutomationModuleStatus struct {
 // AutomationModuleList is a list of AutomationModules
 type AutomationModuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutomationModule CRD objects
-	Items []AutomationModule `json:"items,omitempty"`
+	Items []AutomationModule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

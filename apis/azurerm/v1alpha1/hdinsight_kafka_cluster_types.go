@@ -34,116 +34,116 @@ import (
 
 type HdinsightKafkaCluster struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HdinsightKafkaClusterSpec   `json:"spec,omitempty"`
-	Status            HdinsightKafkaClusterStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              HdinsightKafkaClusterSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            HdinsightKafkaClusterStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type HdinsightKafkaClusterSpecComponentVersion struct {
-	Kafka string `json:"kafka" tf:"kafka"`
+	Kafka string `json:"kafka" tf:"kafka" protobuf:"bytes,1,opt,name=kafka"`
 }
 
 type HdinsightKafkaClusterSpecGateway struct {
-	Enabled  bool   `json:"enabled" tf:"enabled"`
+	Enabled  bool   `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 	Password string `json:"-" sensitive:"true" tf:"password"`
-	Username string `json:"username" tf:"username"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,2,opt,name=username"`
 }
 
 type HdinsightKafkaClusterSpecRolesHeadNode struct {
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty" protobuf:"bytes,1,rep,name=sshKeys"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
-	Username string `json:"username" tf:"username"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,2,opt,name=subnetID"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,3,opt,name=username"`
 	// +optional
-	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty"`
-	VmSize           string `json:"vmSize" tf:"vm_size"`
+	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty" protobuf:"bytes,4,opt,name=virtualNetworkID"`
+	VmSize           string `json:"vmSize" tf:"vm_size" protobuf:"bytes,5,opt,name=vmSize"`
 }
 
 type HdinsightKafkaClusterSpecRolesWorkerNode struct {
 	// +optional
-	MinInstanceCount     int64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
-	NumberOfDisksPerNode int64 `json:"numberOfDisksPerNode" tf:"number_of_disks_per_node"`
+	MinInstanceCount     int64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty" protobuf:"varint,1,opt,name=minInstanceCount"`
+	NumberOfDisksPerNode int64 `json:"numberOfDisksPerNode" tf:"number_of_disks_per_node" protobuf:"varint,2,opt,name=numberOfDisksPerNode"`
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty" protobuf:"bytes,3,rep,name=sshKeys"`
 	// +optional
-	SubnetID            string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
-	TargetInstanceCount int64  `json:"targetInstanceCount" tf:"target_instance_count"`
-	Username            string `json:"username" tf:"username"`
+	SubnetID            string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,4,opt,name=subnetID"`
+	TargetInstanceCount int64  `json:"targetInstanceCount" tf:"target_instance_count" protobuf:"varint,5,opt,name=targetInstanceCount"`
+	Username            string `json:"username" tf:"username" protobuf:"bytes,6,opt,name=username"`
 	// +optional
-	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty"`
-	VmSize           string `json:"vmSize" tf:"vm_size"`
+	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty" protobuf:"bytes,7,opt,name=virtualNetworkID"`
+	VmSize           string `json:"vmSize" tf:"vm_size" protobuf:"bytes,8,opt,name=vmSize"`
 }
 
 type HdinsightKafkaClusterSpecRolesZookeeperNode struct {
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty" protobuf:"bytes,1,rep,name=sshKeys"`
 	// +optional
-	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
-	Username string `json:"username" tf:"username"`
+	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty" protobuf:"bytes,2,opt,name=subnetID"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,3,opt,name=username"`
 	// +optional
-	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty"`
-	VmSize           string `json:"vmSize" tf:"vm_size"`
+	VirtualNetworkID string `json:"virtualNetworkID,omitempty" tf:"virtual_network_id,omitempty" protobuf:"bytes,4,opt,name=virtualNetworkID"`
+	VmSize           string `json:"vmSize" tf:"vm_size" protobuf:"bytes,5,opt,name=vmSize"`
 }
 
 type HdinsightKafkaClusterSpecRoles struct {
 	// +kubebuilder:validation:MaxItems=1
-	HeadNode []HdinsightKafkaClusterSpecRolesHeadNode `json:"headNode" tf:"head_node"`
+	HeadNode []HdinsightKafkaClusterSpecRolesHeadNode `json:"headNode" tf:"head_node" protobuf:"bytes,1,rep,name=headNode"`
 	// +kubebuilder:validation:MaxItems=1
-	WorkerNode []HdinsightKafkaClusterSpecRolesWorkerNode `json:"workerNode" tf:"worker_node"`
+	WorkerNode []HdinsightKafkaClusterSpecRolesWorkerNode `json:"workerNode" tf:"worker_node" protobuf:"bytes,2,rep,name=workerNode"`
 	// +kubebuilder:validation:MaxItems=1
-	ZookeeperNode []HdinsightKafkaClusterSpecRolesZookeeperNode `json:"zookeeperNode" tf:"zookeeper_node"`
+	ZookeeperNode []HdinsightKafkaClusterSpecRolesZookeeperNode `json:"zookeeperNode" tf:"zookeeper_node" protobuf:"bytes,3,rep,name=zookeeperNode"`
 }
 
 type HdinsightKafkaClusterSpecStorageAccount struct {
-	IsDefault          bool   `json:"isDefault" tf:"is_default"`
+	IsDefault          bool   `json:"isDefault" tf:"is_default" protobuf:"varint,1,opt,name=isDefault"`
 	StorageAccountKey  string `json:"-" sensitive:"true" tf:"storage_account_key"`
-	StorageContainerID string `json:"storageContainerID" tf:"storage_container_id"`
+	StorageContainerID string `json:"storageContainerID" tf:"storage_container_id" protobuf:"bytes,2,opt,name=storageContainerID"`
 }
 
 type HdinsightKafkaClusterSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	ClusterVersion string `json:"clusterVersion" tf:"cluster_version"`
+	ClusterVersion string `json:"clusterVersion" tf:"cluster_version" protobuf:"bytes,4,opt,name=clusterVersion"`
 	// +kubebuilder:validation:MaxItems=1
-	ComponentVersion []HdinsightKafkaClusterSpecComponentVersion `json:"componentVersion" tf:"component_version"`
+	ComponentVersion []HdinsightKafkaClusterSpecComponentVersion `json:"componentVersion" tf:"component_version" protobuf:"bytes,5,rep,name=componentVersion"`
 	// +kubebuilder:validation:MaxItems=1
-	Gateway []HdinsightKafkaClusterSpecGateway `json:"gateway" tf:"gateway"`
+	Gateway []HdinsightKafkaClusterSpecGateway `json:"gateway" tf:"gateway" protobuf:"bytes,6,rep,name=gateway"`
 	// +optional
-	HttpsEndpoint     string `json:"httpsEndpoint,omitempty" tf:"https_endpoint,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	HttpsEndpoint     string `json:"httpsEndpoint,omitempty" tf:"https_endpoint,omitempty" protobuf:"bytes,7,opt,name=httpsEndpoint"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,8,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	Roles []HdinsightKafkaClusterSpecRoles `json:"roles" tf:"roles"`
+	Roles []HdinsightKafkaClusterSpecRoles `json:"roles" tf:"roles" protobuf:"bytes,11,rep,name=roles"`
 	// +optional
-	SshEndpoint    string                                    `json:"sshEndpoint,omitempty" tf:"ssh_endpoint,omitempty"`
-	StorageAccount []HdinsightKafkaClusterSpecStorageAccount `json:"storageAccount" tf:"storage_account"`
+	SshEndpoint    string                                    `json:"sshEndpoint,omitempty" tf:"ssh_endpoint,omitempty" protobuf:"bytes,12,opt,name=sshEndpoint"`
+	StorageAccount []HdinsightKafkaClusterSpecStorageAccount `json:"storageAccount" tf:"storage_account" protobuf:"bytes,13,rep,name=storageAccount"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Tier string            `json:"tier" tf:"tier"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,14,rep,name=tags"`
+	Tier string            `json:"tier" tf:"tier" protobuf:"bytes,15,opt,name=tier"`
 }
 
 type HdinsightKafkaClusterStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *HdinsightKafkaClusterSpec `json:"output,omitempty"`
+	Output *HdinsightKafkaClusterSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -152,7 +152,7 @@ type HdinsightKafkaClusterStatus struct {
 // HdinsightKafkaClusterList is a list of HdinsightKafkaClusters
 type HdinsightKafkaClusterList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of HdinsightKafkaCluster CRD objects
-	Items []HdinsightKafkaCluster `json:"items,omitempty"`
+	Items []HdinsightKafkaCluster `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

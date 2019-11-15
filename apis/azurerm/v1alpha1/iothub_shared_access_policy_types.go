@@ -34,49 +34,49 @@ import (
 
 type IothubSharedAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IothubSharedAccessPolicySpec   `json:"spec,omitempty"`
-	Status            IothubSharedAccessPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              IothubSharedAccessPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            IothubSharedAccessPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type IothubSharedAccessPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	DeviceConnect bool   `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
-	IothubName    string `json:"iothubName" tf:"iothub_name"`
-	Name          string `json:"name" tf:"name"`
+	DeviceConnect bool   `json:"deviceConnect,omitempty" tf:"device_connect,omitempty" protobuf:"varint,4,opt,name=deviceConnect"`
+	IothubName    string `json:"iothubName" tf:"iothub_name" protobuf:"bytes,5,opt,name=iothubName"`
+	Name          string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
 	PrimaryConnectionString string `json:"-" sensitive:"true" tf:"primary_connection_string,omitempty"`
 	// +optional
 	PrimaryKey string `json:"-" sensitive:"true" tf:"primary_key,omitempty"`
 	// +optional
-	RegistryRead bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`
+	RegistryRead bool `json:"registryRead,omitempty" tf:"registry_read,omitempty" protobuf:"varint,7,opt,name=registryRead"`
 	// +optional
-	RegistryWrite     bool   `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	RegistryWrite     bool   `json:"registryWrite,omitempty" tf:"registry_write,omitempty" protobuf:"varint,8,opt,name=registryWrite"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryConnectionString string `json:"-" sensitive:"true" tf:"secondary_connection_string,omitempty"`
 	// +optional
 	SecondaryKey string `json:"-" sensitive:"true" tf:"secondary_key,omitempty"`
 	// +optional
-	ServiceConnect bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty"`
+	ServiceConnect bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty" protobuf:"varint,10,opt,name=serviceConnect"`
 }
 
 type IothubSharedAccessPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *IothubSharedAccessPolicySpec `json:"output,omitempty"`
+	Output *IothubSharedAccessPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -85,7 +85,7 @@ type IothubSharedAccessPolicyStatus struct {
 // IothubSharedAccessPolicyList is a list of IothubSharedAccessPolicys
 type IothubSharedAccessPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of IothubSharedAccessPolicy CRD objects
-	Items []IothubSharedAccessPolicy `json:"items,omitempty"`
+	Items []IothubSharedAccessPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

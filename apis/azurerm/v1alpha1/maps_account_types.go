@@ -34,41 +34,41 @@ import (
 
 type MapsAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MapsAccountSpec   `json:"spec,omitempty"`
-	Status            MapsAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MapsAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MapsAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MapsAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
 	PrimaryAccessKey  string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
-	SkuName            string `json:"skuName" tf:"sku_name"`
+	SkuName            string `json:"skuName" tf:"sku_name" protobuf:"bytes,6,opt,name=skuName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 	// +optional
-	XMsClientID string `json:"xMsClientID,omitempty" tf:"x_ms_client_id,omitempty"`
+	XMsClientID string `json:"xMsClientID,omitempty" tf:"x_ms_client_id,omitempty" protobuf:"bytes,8,opt,name=xMsClientID"`
 }
 
 type MapsAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MapsAccountSpec `json:"output,omitempty"`
+	Output *MapsAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -77,7 +77,7 @@ type MapsAccountStatus struct {
 // MapsAccountList is a list of MapsAccounts
 type MapsAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MapsAccount CRD objects
-	Items []MapsAccount `json:"items,omitempty"`
+	Items []MapsAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

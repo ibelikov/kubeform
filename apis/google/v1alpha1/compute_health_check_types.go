@@ -34,107 +34,107 @@ import (
 
 type ComputeHealthCheck struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeHealthCheckSpec   `json:"spec,omitempty"`
-	Status            ComputeHealthCheckStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeHealthCheckSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeHealthCheckStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeHealthCheckSpecHttpHealthCheck struct {
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,1,opt,name=host"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,2,opt,name=port"`
 	// +optional
-	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty"`
+	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty" protobuf:"bytes,3,opt,name=proxyHeader"`
 	// +optional
-	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty"`
+	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty" protobuf:"bytes,4,opt,name=requestPath"`
 	// +optional
-	Response string `json:"response,omitempty" tf:"response,omitempty"`
+	Response string `json:"response,omitempty" tf:"response,omitempty" protobuf:"bytes,5,opt,name=response"`
 }
 
 type ComputeHealthCheckSpecHttpsHealthCheck struct {
 	// +optional
-	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	Host string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,1,opt,name=host"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,2,opt,name=port"`
 	// +optional
-	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty"`
+	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty" protobuf:"bytes,3,opt,name=proxyHeader"`
 	// +optional
-	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty"`
+	RequestPath string `json:"requestPath,omitempty" tf:"request_path,omitempty" protobuf:"bytes,4,opt,name=requestPath"`
 	// +optional
-	Response string `json:"response,omitempty" tf:"response,omitempty"`
+	Response string `json:"response,omitempty" tf:"response,omitempty" protobuf:"bytes,5,opt,name=response"`
 }
 
 type ComputeHealthCheckSpecSslHealthCheck struct {
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,1,opt,name=port"`
 	// +optional
-	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty"`
+	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty" protobuf:"bytes,2,opt,name=proxyHeader"`
 	// +optional
-	Request string `json:"request,omitempty" tf:"request,omitempty"`
+	Request string `json:"request,omitempty" tf:"request,omitempty" protobuf:"bytes,3,opt,name=request"`
 	// +optional
-	Response string `json:"response,omitempty" tf:"response,omitempty"`
+	Response string `json:"response,omitempty" tf:"response,omitempty" protobuf:"bytes,4,opt,name=response"`
 }
 
 type ComputeHealthCheckSpecTcpHealthCheck struct {
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,1,opt,name=port"`
 	// +optional
-	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty"`
+	ProxyHeader string `json:"proxyHeader,omitempty" tf:"proxy_header,omitempty" protobuf:"bytes,2,opt,name=proxyHeader"`
 	// +optional
-	Request string `json:"request,omitempty" tf:"request,omitempty"`
+	Request string `json:"request,omitempty" tf:"request,omitempty" protobuf:"bytes,3,opt,name=request"`
 	// +optional
-	Response string `json:"response,omitempty" tf:"response,omitempty"`
+	Response string `json:"response,omitempty" tf:"response,omitempty" protobuf:"bytes,4,opt,name=response"`
 }
 
 type ComputeHealthCheckSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CheckIntervalSec int64 `json:"checkIntervalSec,omitempty" tf:"check_interval_sec,omitempty"`
+	CheckIntervalSec int64 `json:"checkIntervalSec,omitempty" tf:"check_interval_sec,omitempty" protobuf:"varint,3,opt,name=checkIntervalSec"`
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	HttpHealthCheck []ComputeHealthCheckSpecHttpHealthCheck `json:"httpHealthCheck,omitempty" tf:"http_health_check,omitempty"`
+	HealthyThreshold int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty" protobuf:"varint,6,opt,name=healthyThreshold"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HttpsHealthCheck []ComputeHealthCheckSpecHttpsHealthCheck `json:"httpsHealthCheck,omitempty" tf:"https_health_check,omitempty"`
-	Name             string                                   `json:"name" tf:"name"`
-	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
-	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	HttpHealthCheck []ComputeHealthCheckSpecHttpHealthCheck `json:"httpHealthCheck,omitempty" tf:"http_health_check,omitempty" protobuf:"bytes,7,rep,name=httpHealthCheck"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SslHealthCheck []ComputeHealthCheckSpecSslHealthCheck `json:"sslHealthCheck,omitempty" tf:"ssl_health_check,omitempty"`
+	HttpsHealthCheck []ComputeHealthCheckSpecHttpsHealthCheck `json:"httpsHealthCheck,omitempty" tf:"https_health_check,omitempty" protobuf:"bytes,8,rep,name=httpsHealthCheck"`
+	Name             string                                   `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	// +optional
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,10,opt,name=project"`
+	// +optional
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,11,opt,name=selfLink"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	TcpHealthCheck []ComputeHealthCheckSpecTcpHealthCheck `json:"tcpHealthCheck,omitempty" tf:"tcp_health_check,omitempty"`
+	SslHealthCheck []ComputeHealthCheckSpecSslHealthCheck `json:"sslHealthCheck,omitempty" tf:"ssl_health_check,omitempty" protobuf:"bytes,12,rep,name=sslHealthCheck"`
 	// +optional
-	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	TcpHealthCheck []ComputeHealthCheckSpecTcpHealthCheck `json:"tcpHealthCheck,omitempty" tf:"tcp_health_check,omitempty" protobuf:"bytes,13,rep,name=tcpHealthCheck"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	TimeoutSec int64 `json:"timeoutSec,omitempty" tf:"timeout_sec,omitempty" protobuf:"varint,14,opt,name=timeoutSec"`
 	// +optional
-	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,15,opt,name=type"`
+	// +optional
+	UnhealthyThreshold int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty" protobuf:"varint,16,opt,name=unhealthyThreshold"`
 }
 
 type ComputeHealthCheckStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeHealthCheckSpec `json:"output,omitempty"`
+	Output *ComputeHealthCheckSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -143,7 +143,7 @@ type ComputeHealthCheckStatus struct {
 // ComputeHealthCheckList is a list of ComputeHealthChecks
 type ComputeHealthCheckList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeHealthCheck CRD objects
-	Items []ComputeHealthCheck `json:"items,omitempty"`
+	Items []ComputeHealthCheck `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

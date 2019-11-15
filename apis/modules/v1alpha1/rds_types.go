@@ -36,261 +36,261 @@ import (
 
 type RDS struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RDSSpec   `json:"spec,omitempty"`
-	Status            RDSStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RDSSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RDSStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RDSSpec struct {
 	// +optional
-	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
-	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,1,opt,name=secretRef"`
+	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-" protobuf:"bytes,2,opt,name=providerRef"`
 	// +optional
-	Source string `json:"source" tf:"source"`
+	Source string `json:"source" tf:"source" protobuf:"bytes,3,opt,name=source"`
 
 	// +optional
 	// The allocated storage in gigabytes
-	AllocatedStorage string `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+	AllocatedStorage string `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty" protobuf:"bytes,4,opt,name=allocatedStorage"`
 	// +optional
 	// Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible
-	AllowMajorVersionUpgrade bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
+	AllowMajorVersionUpgrade bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty" protobuf:"varint,5,opt,name=allowMajorVersionUpgrade"`
 	// +optional
 	// Specifies whether any database modifications are applied immediately, or during the next maintenance window
-	ApplyImmediately bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+	ApplyImmediately bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty" protobuf:"varint,6,opt,name=applyImmediately"`
 	// +optional
 	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window
-	AutoMinorVersionUpgrade bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+	AutoMinorVersionUpgrade bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty" protobuf:"varint,7,opt,name=autoMinorVersionUpgrade"`
 	// +optional
 	// The Availability Zone of the RDS instance
-	AvailabilityZone string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+	AvailabilityZone string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty" protobuf:"bytes,8,opt,name=availabilityZone"`
 	// +optional
 	// The days to retain backups for
-	BackupRetentionPeriod json.Number `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+	BackupRetentionPeriod json.Number `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty" protobuf:"bytes,9,opt,name=backupRetentionPeriod,casttype=encoding/json.Number"`
 	// +optional
 	// The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window
-	BackupWindow string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
+	BackupWindow string `json:"backupWindow,omitempty" tf:"backup_window,omitempty" protobuf:"bytes,10,opt,name=backupWindow"`
 	// +optional
 	// (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information
-	CharacterSetName string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
+	CharacterSetName string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty" protobuf:"bytes,11,opt,name=characterSetName"`
 	// +optional
 	// On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)
-	CopyTagsToSnapshot bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+	CopyTagsToSnapshot bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty" protobuf:"varint,12,opt,name=copyTagsToSnapshot"`
 	// +optional
 	// Whether to create a database instance
-	CreateDbInstance bool `json:"createDbInstance,omitempty" tf:"create_db_instance,omitempty"`
+	CreateDbInstance bool `json:"createDbInstance,omitempty" tf:"create_db_instance,omitempty" protobuf:"varint,13,opt,name=createDbInstance"`
 	// +optional
 	// Whether to create a database option group
-	CreateDbOptionGroup bool `json:"createDbOptionGroup,omitempty" tf:"create_db_option_group,omitempty"`
+	CreateDbOptionGroup bool `json:"createDbOptionGroup,omitempty" tf:"create_db_option_group,omitempty" protobuf:"varint,14,opt,name=createDbOptionGroup"`
 	// +optional
 	// Whether to create a database parameter group
-	CreateDbParameterGroup bool `json:"createDbParameterGroup,omitempty" tf:"create_db_parameter_group,omitempty"`
+	CreateDbParameterGroup bool `json:"createDbParameterGroup,omitempty" tf:"create_db_parameter_group,omitempty" protobuf:"varint,15,opt,name=createDbParameterGroup"`
 	// +optional
 	// Whether to create a database subnet group
-	CreateDbSubnetGroup bool `json:"createDbSubnetGroup,omitempty" tf:"create_db_subnet_group,omitempty"`
+	CreateDbSubnetGroup bool `json:"createDbSubnetGroup,omitempty" tf:"create_db_subnet_group,omitempty" protobuf:"varint,16,opt,name=createDbSubnetGroup"`
 	// +optional
 	// Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs.
-	CreateMonitoringRole bool `json:"createMonitoringRole,omitempty" tf:"create_monitoring_role,omitempty"`
+	CreateMonitoringRole bool `json:"createMonitoringRole,omitempty" tf:"create_monitoring_role,omitempty" protobuf:"varint,17,opt,name=createMonitoringRole"`
 	// +optional
 	// Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC
-	DbSubnetGroupName string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
+	DbSubnetGroupName string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty" protobuf:"bytes,18,opt,name=dbSubnetGroupName"`
 	// +optional
 	// The database can't be deleted when this value is set to true.
-	DeletionProtection bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+	DeletionProtection bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty" protobuf:"varint,19,opt,name=deletionProtection"`
 	// +optional
 	// List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL).
-	EnabledCloudwatchLogsExports []string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
+	EnabledCloudwatchLogsExports []string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty" protobuf:"bytes,20,rep,name=enabledCloudwatchLogsExports"`
 	// +optional
 	// The database engine to use
-	Engine string `json:"engine,omitempty" tf:"engine,omitempty"`
+	Engine string `json:"engine,omitempty" tf:"engine,omitempty" protobuf:"bytes,21,opt,name=engine"`
 	// +optional
 	// The engine version to use
-	EngineVersion string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+	EngineVersion string `json:"engineVersion,omitempty" tf:"engine_version,omitempty" protobuf:"bytes,22,opt,name=engineVersion"`
 	// +optional
 	// The family of the DB parameter group
-	Family string `json:"family,omitempty" tf:"family,omitempty"`
+	Family string `json:"family,omitempty" tf:"family,omitempty" protobuf:"bytes,23,opt,name=family"`
 	// +optional
 	// The name of your final DB snapshot when this DB instance is deleted.
-	FinalSnapshotIdentifier string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
+	FinalSnapshotIdentifier string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty" protobuf:"bytes,24,opt,name=finalSnapshotIdentifier"`
 	// +optional
 	// Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled
-	IamDatabaseAuthenticationEnabled bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
+	IamDatabaseAuthenticationEnabled bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty" protobuf:"varint,25,opt,name=iamDatabaseAuthenticationEnabled"`
 	// +optional
 	// The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier
-	Identifier string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+	Identifier string `json:"identifier,omitempty" tf:"identifier,omitempty" protobuf:"bytes,26,opt,name=identifier"`
 	// +optional
 	// The instance type of the RDS instance
-	InstanceClass string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
+	InstanceClass string `json:"instanceClass,omitempty" tf:"instance_class,omitempty" protobuf:"bytes,27,opt,name=instanceClass"`
 	// +optional
 	// The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'
-	Iops json.Number `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops json.Number `json:"iops,omitempty" tf:"iops,omitempty" protobuf:"bytes,28,opt,name=iops,casttype=encoding/json.Number"`
 	// +optional
 	// The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used
-	KmsKeyID string `json:"kmsKeyID,omitempty" tf:"kms_key_id,omitempty"`
+	KmsKeyID string `json:"kmsKeyID,omitempty" tf:"kms_key_id,omitempty" protobuf:"bytes,29,opt,name=kmsKeyID"`
 	// +optional
 	// License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1
-	LicenseModel string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
+	LicenseModel string `json:"licenseModel,omitempty" tf:"license_model,omitempty" protobuf:"bytes,30,opt,name=licenseModel"`
 	// +optional
 	// The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00'
-	MaintenanceWindow string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty" protobuf:"bytes,31,opt,name=maintenanceWindow"`
 	// +optional
 	// Specifies the major version of the engine that this option group should be associated with
-	MajorEngineVersion string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
+	MajorEngineVersion string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty" protobuf:"bytes,32,opt,name=majorEngineVersion"`
 	// +optional
 	// Specifies the value for Storage Autoscaling
-	MaxAllocatedStorage json.Number `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
+	MaxAllocatedStorage json.Number `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty" protobuf:"bytes,33,opt,name=maxAllocatedStorage,casttype=encoding/json.Number"`
 	// +optional
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
-	MonitoringInterval json.Number `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+	MonitoringInterval json.Number `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty" protobuf:"bytes,34,opt,name=monitoringInterval,casttype=encoding/json.Number"`
 	// +optional
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero.
-	MonitoringRoleArn string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+	MonitoringRoleArn string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty" protobuf:"bytes,35,opt,name=monitoringRoleArn"`
 	// +optional
 	// Name of the IAM role which will be created when create_monitoring_role is enabled.
-	MonitoringRoleName string `json:"monitoringRoleName,omitempty" tf:"monitoring_role_name,omitempty"`
+	MonitoringRoleName string `json:"monitoringRoleName,omitempty" tf:"monitoring_role_name,omitempty" protobuf:"bytes,36,opt,name=monitoringRoleName"`
 	// +optional
 	// Specifies if the RDS instance is multi-AZ
-	MultiAz bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+	MultiAz bool `json:"multiAz,omitempty" tf:"multi_az,omitempty" protobuf:"varint,37,opt,name=multiAz"`
 	// +optional
 	// The DB name to create. If omitted, no database is created initially
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,38,opt,name=name"`
 	// +optional
 	// The description of the option group
-	OptionGroupDescription string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
+	OptionGroupDescription string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty" protobuf:"bytes,39,opt,name=optionGroupDescription"`
 	// +optional
 	// Name of the DB option group to associate. Setting this automatically disables option_group creation
-	OptionGroupName string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
+	OptionGroupName string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty" protobuf:"bytes,40,opt,name=optionGroupName"`
 	// +optional
 	// A list of Options to apply.
-	Options json.RawMessage `json:"options,omitempty" tf:"options,omitempty"`
+	Options json.RawMessage `json:"options,omitempty" tf:"options,omitempty" protobuf:"bytes,41,opt,name=options,casttype=encoding/json.RawMessage"`
 	// +optional
 	// Description of the DB parameter group to create
-	ParameterGroupDescription string `json:"parameterGroupDescription,omitempty" tf:"parameter_group_description,omitempty"`
+	ParameterGroupDescription string `json:"parameterGroupDescription,omitempty" tf:"parameter_group_description,omitempty" protobuf:"bytes,42,opt,name=parameterGroupDescription"`
 	// +optional
 	// Name of the DB parameter group to associate or create
-	ParameterGroupName string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+	ParameterGroupName string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty" protobuf:"bytes,43,opt,name=parameterGroupName"`
 	// +optional
 	// A list of DB parameters (map) to apply
-	Parameters json.RawMessage `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters json.RawMessage `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,44,opt,name=parameters,casttype=encoding/json.RawMessage"`
 	// +optional
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file
-	Password string `json:"password,omitempty" tf:"password,omitempty"`
+	Password string `json:"password,omitempty" tf:"password,omitempty" protobuf:"bytes,45,opt,name=password"`
 	// +optional
 	// Specifies whether Performance Insights are enabled
-	PerformanceInsightsEnabled bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
+	PerformanceInsightsEnabled bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty" protobuf:"varint,46,opt,name=performanceInsightsEnabled"`
 	// +optional
 	// The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years).
-	PerformanceInsightsRetentionPeriod json.Number `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
+	PerformanceInsightsRetentionPeriod json.Number `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty" protobuf:"bytes,47,opt,name=performanceInsightsRetentionPeriod,casttype=encoding/json.Number"`
 	// +optional
 	// The port on which the DB accepts connections
-	Port string `json:"port,omitempty" tf:"port,omitempty"`
+	Port string `json:"port,omitempty" tf:"port,omitempty" protobuf:"bytes,48,opt,name=port"`
 	// +optional
 	// Bool to control if instance is publicly accessible
-	PubliclyAccessible bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+	PubliclyAccessible bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty" protobuf:"varint,49,opt,name=publiclyAccessible"`
 	// +optional
 	// Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate.
-	ReplicateSourceDb string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
+	ReplicateSourceDb string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty" protobuf:"bytes,50,opt,name=replicateSourceDb"`
 	// +optional
 	// Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier
-	SkipFinalSnapshot bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
+	SkipFinalSnapshot bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty" protobuf:"varint,51,opt,name=skipFinalSnapshot"`
 	// +optional
 	// Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
-	SnapshotIdentifier string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
+	SnapshotIdentifier string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty" protobuf:"bytes,52,opt,name=snapshotIdentifier"`
 	// +optional
 	// Specifies whether the DB instance is encrypted
-	StorageEncrypted bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+	StorageEncrypted bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty" protobuf:"varint,53,opt,name=storageEncrypted"`
 	// +optional
 	// One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'.
-	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+	StorageType string `json:"storageType,omitempty" tf:"storage_type,omitempty" protobuf:"bytes,54,opt,name=storageType"`
 	// +optional
 	// A list of VPC subnet IDs
-	SubnetIDS []string `json:"subnetIDS,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIDS []string `json:"subnetIDS,omitempty" tf:"subnet_ids,omitempty" protobuf:"bytes,55,rep,name=subnetIDS"`
 	// +optional
 	// A mapping of tags to assign to all resources
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,56,rep,name=tags"`
 	// +optional
 	// (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times
-	Timeouts map[string]string `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+	Timeouts map[string]string `json:"timeouts,omitempty" tf:"timeouts,omitempty" protobuf:"bytes,57,rep,name=timeouts"`
 	// +optional
 	// (Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information.
-	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty" protobuf:"bytes,58,opt,name=timezone"`
 	// +optional
 	// Whether to use the parameter group name prefix or not
-	UseParameterGroupNamePrefix bool `json:"useParameterGroupNamePrefix,omitempty" tf:"use_parameter_group_name_prefix,omitempty"`
+	UseParameterGroupNamePrefix bool `json:"useParameterGroupNamePrefix,omitempty" tf:"use_parameter_group_name_prefix,omitempty" protobuf:"varint,59,opt,name=useParameterGroupNamePrefix"`
 	// +optional
 	// Username for the master DB user
-	Username string `json:"username,omitempty" tf:"username,omitempty"`
+	Username string `json:"username,omitempty" tf:"username,omitempty" protobuf:"bytes,60,opt,name=username"`
 	// +optional
 	// List of VPC security groups to associate
-	VpcSecurityGroupIDS []string `json:"vpcSecurityGroupIDS,omitempty" tf:"vpc_security_group_ids,omitempty"`
+	VpcSecurityGroupIDS []string `json:"vpcSecurityGroupIDS,omitempty" tf:"vpc_security_group_ids,omitempty" protobuf:"bytes,61,rep,name=vpcSecurityGroupIDS"`
 }
 
 type RDSOutput struct {
 	// The address of the RDS instance
 	// +optional
-	ThisDbInstanceAddress string `json:"thisDbInstanceAddress" tf:"this_db_instance_address"`
+	ThisDbInstanceAddress string `json:"thisDbInstanceAddress" tf:"this_db_instance_address" protobuf:"bytes,1,opt,name=thisDbInstanceAddress"`
 	// The ARN of the RDS instance
 	// +optional
-	ThisDbInstanceArn string `json:"thisDbInstanceArn" tf:"this_db_instance_arn"`
+	ThisDbInstanceArn string `json:"thisDbInstanceArn" tf:"this_db_instance_arn" protobuf:"bytes,2,opt,name=thisDbInstanceArn"`
 	// The availability zone of the RDS instance
 	// +optional
-	ThisDbInstanceAvailabilityZone string `json:"thisDbInstanceAvailabilityZone" tf:"this_db_instance_availability_zone"`
+	ThisDbInstanceAvailabilityZone string `json:"thisDbInstanceAvailabilityZone" tf:"this_db_instance_availability_zone" protobuf:"bytes,3,opt,name=thisDbInstanceAvailabilityZone"`
 	// The connection endpoint
 	// +optional
-	ThisDbInstanceEndpoint string `json:"thisDbInstanceEndpoint" tf:"this_db_instance_endpoint"`
+	ThisDbInstanceEndpoint string `json:"thisDbInstanceEndpoint" tf:"this_db_instance_endpoint" protobuf:"bytes,4,opt,name=thisDbInstanceEndpoint"`
 	// The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)
 	// +optional
-	ThisDbInstanceHostedZoneID string `json:"thisDbInstanceHostedZoneID" tf:"this_db_instance_hosted_zone_id"`
+	ThisDbInstanceHostedZoneID string `json:"thisDbInstanceHostedZoneID" tf:"this_db_instance_hosted_zone_id" protobuf:"bytes,5,opt,name=thisDbInstanceHostedZoneID"`
 	// The RDS instance ID
 	// +optional
-	ThisDbInstanceID string `json:"thisDbInstanceID" tf:"this_db_instance_id"`
+	ThisDbInstanceID string `json:"thisDbInstanceID" tf:"this_db_instance_id" protobuf:"bytes,6,opt,name=thisDbInstanceID"`
 	// The database name
 	// +optional
-	ThisDbInstanceName string `json:"thisDbInstanceName" tf:"this_db_instance_name"`
+	ThisDbInstanceName string `json:"thisDbInstanceName" tf:"this_db_instance_name" protobuf:"bytes,7,opt,name=thisDbInstanceName"`
 	// The database password (this password may be old, because Terraform doesn't track it after initial creation)
 	// +optional
-	ThisDbInstancePassword string `json:"thisDbInstancePassword" tf:"this_db_instance_password"`
+	ThisDbInstancePassword string `json:"thisDbInstancePassword" tf:"this_db_instance_password" protobuf:"bytes,8,opt,name=thisDbInstancePassword"`
 	// The database port
 	// +optional
-	ThisDbInstancePort string `json:"thisDbInstancePort" tf:"this_db_instance_port"`
+	ThisDbInstancePort string `json:"thisDbInstancePort" tf:"this_db_instance_port" protobuf:"bytes,9,opt,name=thisDbInstancePort"`
 	// The RDS Resource ID of this instance
 	// +optional
-	ThisDbInstanceResourceID string `json:"thisDbInstanceResourceID" tf:"this_db_instance_resource_id"`
+	ThisDbInstanceResourceID string `json:"thisDbInstanceResourceID" tf:"this_db_instance_resource_id" protobuf:"bytes,10,opt,name=thisDbInstanceResourceID"`
 	// The RDS instance status
 	// +optional
-	ThisDbInstanceStatus string `json:"thisDbInstanceStatus" tf:"this_db_instance_status"`
+	ThisDbInstanceStatus string `json:"thisDbInstanceStatus" tf:"this_db_instance_status" protobuf:"bytes,11,opt,name=thisDbInstanceStatus"`
 	// The master username for the database
 	// +optional
-	ThisDbInstanceUsername string `json:"thisDbInstanceUsername" tf:"this_db_instance_username"`
+	ThisDbInstanceUsername string `json:"thisDbInstanceUsername" tf:"this_db_instance_username" protobuf:"bytes,12,opt,name=thisDbInstanceUsername"`
 	// The ARN of the db option group
 	// +optional
-	ThisDbOptionGroupArn string `json:"thisDbOptionGroupArn" tf:"this_db_option_group_arn"`
+	ThisDbOptionGroupArn string `json:"thisDbOptionGroupArn" tf:"this_db_option_group_arn" protobuf:"bytes,13,opt,name=thisDbOptionGroupArn"`
 	// The db option group id
 	// +optional
-	ThisDbOptionGroupID string `json:"thisDbOptionGroupID" tf:"this_db_option_group_id"`
+	ThisDbOptionGroupID string `json:"thisDbOptionGroupID" tf:"this_db_option_group_id" protobuf:"bytes,14,opt,name=thisDbOptionGroupID"`
 	// The ARN of the db parameter group
 	// +optional
-	ThisDbParameterGroupArn string `json:"thisDbParameterGroupArn" tf:"this_db_parameter_group_arn"`
+	ThisDbParameterGroupArn string `json:"thisDbParameterGroupArn" tf:"this_db_parameter_group_arn" protobuf:"bytes,15,opt,name=thisDbParameterGroupArn"`
 	// The db parameter group id
 	// +optional
-	ThisDbParameterGroupID string `json:"thisDbParameterGroupID" tf:"this_db_parameter_group_id"`
+	ThisDbParameterGroupID string `json:"thisDbParameterGroupID" tf:"this_db_parameter_group_id" protobuf:"bytes,16,opt,name=thisDbParameterGroupID"`
 	// The ARN of the db subnet group
 	// +optional
-	ThisDbSubnetGroupArn string `json:"thisDbSubnetGroupArn" tf:"this_db_subnet_group_arn"`
+	ThisDbSubnetGroupArn string `json:"thisDbSubnetGroupArn" tf:"this_db_subnet_group_arn" protobuf:"bytes,17,opt,name=thisDbSubnetGroupArn"`
 	// The db subnet group name
 	// +optional
-	ThisDbSubnetGroupID string `json:"thisDbSubnetGroupID" tf:"this_db_subnet_group_id"`
+	ThisDbSubnetGroupID string `json:"thisDbSubnetGroupID" tf:"this_db_subnet_group_id" protobuf:"bytes,18,opt,name=thisDbSubnetGroupID"`
 }
 
 type RDSStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RDSOutput `json:"output,omitempty"`
+	Output *RDSOutput `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State string `json:"state,omitempty"`
+	State string `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -299,7 +299,7 @@ type RDSStatus struct {
 // RDSList is a list of RDSs
 type RDSList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RDS CRD objects
-	Items []RDS `json:"items,omitempty"`
+	Items []RDS `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

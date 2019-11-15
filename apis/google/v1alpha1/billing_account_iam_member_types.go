@@ -34,33 +34,33 @@ import (
 
 type BillingAccountIamMember struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BillingAccountIamMemberSpec   `json:"spec,omitempty"`
-	Status            BillingAccountIamMemberStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              BillingAccountIamMemberSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            BillingAccountIamMemberStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type BillingAccountIamMemberSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	BillingAccountID string `json:"billingAccountID" tf:"billing_account_id"`
+	BillingAccountID string `json:"billingAccountID" tf:"billing_account_id" protobuf:"bytes,3,opt,name=billingAccountID"`
 	// +optional
-	Etag   string `json:"etag,omitempty" tf:"etag,omitempty"`
-	Member string `json:"member" tf:"member"`
-	Role   string `json:"role" tf:"role"`
+	Etag   string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,4,opt,name=etag"`
+	Member string `json:"member" tf:"member" protobuf:"bytes,5,opt,name=member"`
+	Role   string `json:"role" tf:"role" protobuf:"bytes,6,opt,name=role"`
 }
 
 type BillingAccountIamMemberStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *BillingAccountIamMemberSpec `json:"output,omitempty"`
+	Output *BillingAccountIamMemberSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -69,7 +69,7 @@ type BillingAccountIamMemberStatus struct {
 // BillingAccountIamMemberList is a list of BillingAccountIamMembers
 type BillingAccountIamMemberList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of BillingAccountIamMember CRD objects
-	Items []BillingAccountIamMember `json:"items,omitempty"`
+	Items []BillingAccountIamMember `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

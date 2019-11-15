@@ -34,42 +34,42 @@ import (
 
 type ComputeRouterPeer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeRouterPeerSpec   `json:"spec,omitempty"`
-	Status            ComputeRouterPeerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeRouterPeerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeRouterPeerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeRouterPeerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AdvertisedRoutePriority int64  `json:"advertisedRoutePriority,omitempty" tf:"advertised_route_priority,omitempty"`
-	Interface               string `json:"interface" tf:"interface"`
+	AdvertisedRoutePriority int64  `json:"advertisedRoutePriority,omitempty" tf:"advertised_route_priority,omitempty" protobuf:"varint,3,opt,name=advertisedRoutePriority"`
+	Interface               string `json:"interface" tf:"interface" protobuf:"bytes,4,opt,name=interface"`
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-	Name      string `json:"name" tf:"name"`
-	PeerAsn   int64  `json:"peerAsn" tf:"peer_asn"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,5,opt,name=ipAddress"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	PeerAsn   int64  `json:"peerAsn" tf:"peer_asn" protobuf:"varint,7,opt,name=peerAsn"`
 	// +optional
-	PeerIPAddress string `json:"peerIPAddress,omitempty" tf:"peer_ip_address,omitempty"`
+	PeerIPAddress string `json:"peerIPAddress,omitempty" tf:"peer_ip_address,omitempty" protobuf:"bytes,8,opt,name=peerIPAddress"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,9,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
-	Router string `json:"router" tf:"router"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,10,opt,name=region"`
+	Router string `json:"router" tf:"router" protobuf:"bytes,11,opt,name=router"`
 }
 
 type ComputeRouterPeerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeRouterPeerSpec `json:"output,omitempty"`
+	Output *ComputeRouterPeerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type ComputeRouterPeerStatus struct {
 // ComputeRouterPeerList is a list of ComputeRouterPeers
 type ComputeRouterPeerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeRouterPeer CRD objects
-	Items []ComputeRouterPeer `json:"items,omitempty"`
+	Items []ComputeRouterPeer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,32 +34,32 @@ import (
 
 type KmsKeyRingIamPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KmsKeyRingIamPolicySpec   `json:"spec,omitempty"`
-	Status            KmsKeyRingIamPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KmsKeyRingIamPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KmsKeyRingIamPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KmsKeyRingIamPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Etag       string `json:"etag,omitempty" tf:"etag,omitempty"`
-	KeyRingID  string `json:"keyRingID" tf:"key_ring_id"`
-	PolicyData string `json:"policyData" tf:"policy_data"`
+	Etag       string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,3,opt,name=etag"`
+	KeyRingID  string `json:"keyRingID" tf:"key_ring_id" protobuf:"bytes,4,opt,name=keyRingID"`
+	PolicyData string `json:"policyData" tf:"policy_data" protobuf:"bytes,5,opt,name=policyData"`
 }
 
 type KmsKeyRingIamPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KmsKeyRingIamPolicySpec `json:"output,omitempty"`
+	Output *KmsKeyRingIamPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -68,7 +68,7 @@ type KmsKeyRingIamPolicyStatus struct {
 // KmsKeyRingIamPolicyList is a list of KmsKeyRingIamPolicys
 type KmsKeyRingIamPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KmsKeyRingIamPolicy CRD objects
-	Items []KmsKeyRingIamPolicy `json:"items,omitempty"`
+	Items []KmsKeyRingIamPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

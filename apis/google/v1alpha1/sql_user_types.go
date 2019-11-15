@@ -34,38 +34,38 @@ import (
 
 type SqlUser struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SqlUserSpec   `json:"spec,omitempty"`
-	Status            SqlUserStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SqlUserSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SqlUserStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SqlUserSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Host     string `json:"host,omitempty" tf:"host,omitempty"`
-	Instance string `json:"instance" tf:"instance"`
-	Name     string `json:"name" tf:"name"`
+	Host     string `json:"host,omitempty" tf:"host,omitempty" protobuf:"bytes,4,opt,name=host"`
+	Instance string `json:"instance" tf:"instance" protobuf:"bytes,5,opt,name=instance"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
 	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,7,opt,name=project"`
 }
 
 type SqlUserStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SqlUserSpec `json:"output,omitempty"`
+	Output *SqlUserSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type SqlUserStatus struct {
 // SqlUserList is a list of SqlUsers
 type SqlUserList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SqlUser CRD objects
-	Items []SqlUser `json:"items,omitempty"`
+	Items []SqlUser `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

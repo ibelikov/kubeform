@@ -34,94 +34,94 @@ import (
 
 type VirtualNetworkGateway struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkGatewaySpec   `json:"spec,omitempty"`
-	Status            VirtualNetworkGatewayStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              VirtualNetworkGatewaySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            VirtualNetworkGatewayStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type VirtualNetworkGatewaySpecBgpSettings struct {
 	// +optional
-	Asn int64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	Asn int64 `json:"asn,omitempty" tf:"asn,omitempty" protobuf:"varint,1,opt,name=asn"`
 	// +optional
-	PeerWeight int64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
+	PeerWeight int64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty" protobuf:"varint,2,opt,name=peerWeight"`
 	// +optional
-	PeeringAddress string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty"`
+	PeeringAddress string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty" protobuf:"bytes,3,opt,name=peeringAddress"`
 }
 
 type VirtualNetworkGatewaySpecIpConfiguration struct {
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty" protobuf:"bytes,2,opt,name=privateIPAddressAllocation"`
 	// +optional
-	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
-	SubnetID          string `json:"subnetID" tf:"subnet_id"`
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty" protobuf:"bytes,3,opt,name=publicIPAddressID"`
+	SubnetID          string `json:"subnetID" tf:"subnet_id" protobuf:"bytes,4,opt,name=subnetID"`
 }
 
 type VirtualNetworkGatewaySpecVpnClientConfigurationRevokedCertificate struct {
-	Name       string `json:"name" tf:"name"`
-	Thumbprint string `json:"thumbprint" tf:"thumbprint"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Thumbprint string `json:"thumbprint" tf:"thumbprint" protobuf:"bytes,2,opt,name=thumbprint"`
 }
 
 type VirtualNetworkGatewaySpecVpnClientConfigurationRootCertificate struct {
-	Name           string `json:"name" tf:"name"`
-	PublicCertData string `json:"publicCertData" tf:"public_cert_data"`
+	Name           string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	PublicCertData string `json:"publicCertData" tf:"public_cert_data" protobuf:"bytes,2,opt,name=publicCertData"`
 }
 
 type VirtualNetworkGatewaySpecVpnClientConfiguration struct {
-	AddressSpace []string `json:"addressSpace" tf:"address_space"`
+	AddressSpace []string `json:"addressSpace" tf:"address_space" protobuf:"bytes,1,rep,name=addressSpace"`
 	// +optional
-	RadiusServerAddress string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty"`
+	RadiusServerAddress string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty" protobuf:"bytes,2,opt,name=radiusServerAddress"`
 	// +optional
-	RadiusServerSecret string `json:"radiusServerSecret,omitempty" tf:"radius_server_secret,omitempty"`
+	RadiusServerSecret string `json:"radiusServerSecret,omitempty" tf:"radius_server_secret,omitempty" protobuf:"bytes,3,opt,name=radiusServerSecret"`
 	// +optional
-	RevokedCertificate []VirtualNetworkGatewaySpecVpnClientConfigurationRevokedCertificate `json:"revokedCertificate,omitempty" tf:"revoked_certificate,omitempty"`
+	RevokedCertificate []VirtualNetworkGatewaySpecVpnClientConfigurationRevokedCertificate `json:"revokedCertificate,omitempty" tf:"revoked_certificate,omitempty" protobuf:"bytes,4,rep,name=revokedCertificate"`
 	// +optional
-	RootCertificate []VirtualNetworkGatewaySpecVpnClientConfigurationRootCertificate `json:"rootCertificate,omitempty" tf:"root_certificate,omitempty"`
+	RootCertificate []VirtualNetworkGatewaySpecVpnClientConfigurationRootCertificate `json:"rootCertificate,omitempty" tf:"root_certificate,omitempty" protobuf:"bytes,5,rep,name=rootCertificate"`
 	// +optional
-	VpnClientProtocols []string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
+	VpnClientProtocols []string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty" protobuf:"bytes,6,rep,name=vpnClientProtocols"`
 }
 
 type VirtualNetworkGatewaySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ActiveActive bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
+	ActiveActive bool `json:"activeActive,omitempty" tf:"active_active,omitempty" protobuf:"varint,3,opt,name=activeActive"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	BgpSettings []VirtualNetworkGatewaySpecBgpSettings `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
+	BgpSettings []VirtualNetworkGatewaySpecBgpSettings `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty" protobuf:"bytes,4,rep,name=bgpSettings"`
 	// +optional
-	DefaultLocalNetworkGatewayID string `json:"defaultLocalNetworkGatewayID,omitempty" tf:"default_local_network_gateway_id,omitempty"`
+	DefaultLocalNetworkGatewayID string `json:"defaultLocalNetworkGatewayID,omitempty" tf:"default_local_network_gateway_id,omitempty" protobuf:"bytes,5,opt,name=defaultLocalNetworkGatewayID"`
 	// +optional
-	EnableBGP bool `json:"enableBGP,omitempty" tf:"enable_bgp,omitempty"`
+	EnableBGP bool `json:"enableBGP,omitempty" tf:"enable_bgp,omitempty" protobuf:"varint,6,opt,name=enableBGP"`
 	// +kubebuilder:validation:MaxItems=2
-	IpConfiguration   []VirtualNetworkGatewaySpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
-	Location          string                                     `json:"location" tf:"location"`
-	Name              string                                     `json:"name" tf:"name"`
-	ResourceGroupName string                                     `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku               string                                     `json:"sku" tf:"sku"`
+	IpConfiguration   []VirtualNetworkGatewaySpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration" protobuf:"bytes,7,rep,name=ipConfiguration"`
+	Location          string                                     `json:"location" tf:"location" protobuf:"bytes,8,opt,name=location"`
+	Name              string                                     `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName string                                     `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
+	Sku               string                                     `json:"sku" tf:"sku" protobuf:"bytes,11,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Type string            `json:"type" tf:"type"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,12,rep,name=tags"`
+	Type string            `json:"type" tf:"type" protobuf:"bytes,13,opt,name=type"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	VpnClientConfiguration []VirtualNetworkGatewaySpecVpnClientConfiguration `json:"vpnClientConfiguration,omitempty" tf:"vpn_client_configuration,omitempty"`
+	VpnClientConfiguration []VirtualNetworkGatewaySpecVpnClientConfiguration `json:"vpnClientConfiguration,omitempty" tf:"vpn_client_configuration,omitempty" protobuf:"bytes,14,rep,name=vpnClientConfiguration"`
 	// +optional
-	VpnType string `json:"vpnType,omitempty" tf:"vpn_type,omitempty"`
+	VpnType string `json:"vpnType,omitempty" tf:"vpn_type,omitempty" protobuf:"bytes,15,opt,name=vpnType"`
 }
 
 type VirtualNetworkGatewayStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *VirtualNetworkGatewaySpec `json:"output,omitempty"`
+	Output *VirtualNetworkGatewaySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -130,7 +130,7 @@ type VirtualNetworkGatewayStatus struct {
 // VirtualNetworkGatewayList is a list of VirtualNetworkGateways
 type VirtualNetworkGatewayList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of VirtualNetworkGateway CRD objects
-	Items []VirtualNetworkGateway `json:"items,omitempty"`
+	Items []VirtualNetworkGateway `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

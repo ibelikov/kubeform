@@ -34,41 +34,41 @@ import (
 
 type LogicAppWorkflow struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogicAppWorkflowSpec   `json:"spec,omitempty"`
-	Status            LogicAppWorkflowStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LogicAppWorkflowSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LogicAppWorkflowStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LogicAppWorkflowSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AccessEndpoint string `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty"`
-	Location       string `json:"location" tf:"location"`
-	Name           string `json:"name" tf:"name"`
+	AccessEndpoint string `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty" protobuf:"bytes,3,opt,name=accessEndpoint"`
+	Location       string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name           string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Parameters        map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name"`
+	Parameters        map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,6,rep,name=parameters"`
+	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
 	// +optional
-	WorkflowSchema string `json:"workflowSchema,omitempty" tf:"workflow_schema,omitempty"`
+	WorkflowSchema string `json:"workflowSchema,omitempty" tf:"workflow_schema,omitempty" protobuf:"bytes,9,opt,name=workflowSchema"`
 	// +optional
-	WorkflowVersion string `json:"workflowVersion,omitempty" tf:"workflow_version,omitempty"`
+	WorkflowVersion string `json:"workflowVersion,omitempty" tf:"workflow_version,omitempty" protobuf:"bytes,10,opt,name=workflowVersion"`
 }
 
 type LogicAppWorkflowStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LogicAppWorkflowSpec `json:"output,omitempty"`
+	Output *LogicAppWorkflowSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -77,7 +77,7 @@ type LogicAppWorkflowStatus struct {
 // LogicAppWorkflowList is a list of LogicAppWorkflows
 type LogicAppWorkflowList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LogicAppWorkflow CRD objects
-	Items []LogicAppWorkflow `json:"items,omitempty"`
+	Items []LogicAppWorkflow `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

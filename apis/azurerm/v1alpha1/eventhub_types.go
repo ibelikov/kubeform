@@ -34,61 +34,61 @@ import (
 
 type Eventhub struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventhubSpec   `json:"spec,omitempty"`
-	Status            EventhubStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              EventhubSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            EventhubStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type EventhubSpecCaptureDescriptionDestination struct {
-	ArchiveNameFormat string `json:"archiveNameFormat" tf:"archive_name_format"`
-	BlobContainerName string `json:"blobContainerName" tf:"blob_container_name"`
-	Name              string `json:"name" tf:"name"`
-	StorageAccountID  string `json:"storageAccountID" tf:"storage_account_id"`
+	ArchiveNameFormat string `json:"archiveNameFormat" tf:"archive_name_format" protobuf:"bytes,1,opt,name=archiveNameFormat"`
+	BlobContainerName string `json:"blobContainerName" tf:"blob_container_name" protobuf:"bytes,2,opt,name=blobContainerName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	StorageAccountID  string `json:"storageAccountID" tf:"storage_account_id" protobuf:"bytes,4,opt,name=storageAccountID"`
 }
 
 type EventhubSpecCaptureDescription struct {
 	// +kubebuilder:validation:MaxItems=1
-	Destination []EventhubSpecCaptureDescriptionDestination `json:"destination" tf:"destination"`
-	Enabled     bool                                        `json:"enabled" tf:"enabled"`
-	Encoding    string                                      `json:"encoding" tf:"encoding"`
+	Destination []EventhubSpecCaptureDescriptionDestination `json:"destination" tf:"destination" protobuf:"bytes,1,rep,name=destination"`
+	Enabled     bool                                        `json:"enabled" tf:"enabled" protobuf:"varint,2,opt,name=enabled"`
+	Encoding    string                                      `json:"encoding" tf:"encoding" protobuf:"bytes,3,opt,name=encoding"`
 	// +optional
-	IntervalInSeconds int64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+	IntervalInSeconds int64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty" protobuf:"varint,4,opt,name=intervalInSeconds"`
 	// +optional
-	SizeLimitInBytes int64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty"`
+	SizeLimitInBytes int64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty" protobuf:"varint,5,opt,name=sizeLimitInBytes"`
 	// +optional
-	SkipEmptyArchives bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty"`
+	SkipEmptyArchives bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty" protobuf:"varint,6,opt,name=skipEmptyArchives"`
 }
 
 type EventhubSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CaptureDescription []EventhubSpecCaptureDescription `json:"captureDescription,omitempty" tf:"capture_description,omitempty"`
+	CaptureDescription []EventhubSpecCaptureDescription `json:"captureDescription,omitempty" tf:"capture_description,omitempty" protobuf:"bytes,3,rep,name=captureDescription"`
 	// +optional
 	// Deprecated
-	Location         string `json:"location,omitempty" tf:"location,omitempty"`
-	MessageRetention int64  `json:"messageRetention" tf:"message_retention"`
-	Name             string `json:"name" tf:"name"`
-	NamespaceName    string `json:"namespaceName" tf:"namespace_name"`
-	PartitionCount   int64  `json:"partitionCount" tf:"partition_count"`
+	Location         string `json:"location,omitempty" tf:"location,omitempty" protobuf:"bytes,4,opt,name=location"`
+	MessageRetention int64  `json:"messageRetention" tf:"message_retention" protobuf:"varint,5,opt,name=messageRetention"`
+	Name             string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	NamespaceName    string `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,7,opt,name=namespaceName"`
+	PartitionCount   int64  `json:"partitionCount" tf:"partition_count" protobuf:"varint,8,opt,name=partitionCount"`
 	// +optional
-	PartitionIDS      []string `json:"partitionIDS,omitempty" tf:"partition_ids,omitempty"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	PartitionIDS      []string `json:"partitionIDS,omitempty" tf:"partition_ids,omitempty" protobuf:"bytes,9,rep,name=partitionIDS"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
 }
 
 type EventhubStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *EventhubSpec `json:"output,omitempty"`
+	Output *EventhubSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -97,7 +97,7 @@ type EventhubStatus struct {
 // EventhubList is a list of Eventhubs
 type EventhubList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Eventhub CRD objects
-	Items []Eventhub `json:"items,omitempty"`
+	Items []Eventhub `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

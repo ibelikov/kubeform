@@ -34,59 +34,59 @@ import (
 
 type ComputeRouterNAT struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeRouterNATSpec   `json:"spec,omitempty"`
-	Status            ComputeRouterNATStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeRouterNATSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeRouterNATStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeRouterNATSpecSubnetwork struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	SecondaryIPRangeNames []string `json:"secondaryIPRangeNames,omitempty" tf:"secondary_ip_range_names,omitempty"`
+	SecondaryIPRangeNames []string `json:"secondaryIPRangeNames,omitempty" tf:"secondary_ip_range_names,omitempty" protobuf:"bytes,2,rep,name=secondaryIPRangeNames"`
 	// +optional
-	SourceIPRangesToNAT []string `json:"sourceIPRangesToNAT,omitempty" tf:"source_ip_ranges_to_nat,omitempty"`
+	SourceIPRangesToNAT []string `json:"sourceIPRangesToNAT,omitempty" tf:"source_ip_ranges_to_nat,omitempty" protobuf:"bytes,3,rep,name=sourceIPRangesToNAT"`
 }
 
 type ComputeRouterNATSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	IcmpIdleTimeoutSec int64 `json:"icmpIdleTimeoutSec,omitempty" tf:"icmp_idle_timeout_sec,omitempty"`
+	IcmpIdleTimeoutSec int64 `json:"icmpIdleTimeoutSec,omitempty" tf:"icmp_idle_timeout_sec,omitempty" protobuf:"varint,3,opt,name=icmpIdleTimeoutSec"`
 	// +optional
-	MinPortsPerVm       int64  `json:"minPortsPerVm,omitempty" tf:"min_ports_per_vm,omitempty"`
-	Name                string `json:"name" tf:"name"`
-	NatIPAllocateOption string `json:"natIPAllocateOption" tf:"nat_ip_allocate_option"`
+	MinPortsPerVm       int64  `json:"minPortsPerVm,omitempty" tf:"min_ports_per_vm,omitempty" protobuf:"varint,4,opt,name=minPortsPerVm"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	NatIPAllocateOption string `json:"natIPAllocateOption" tf:"nat_ip_allocate_option" protobuf:"bytes,6,opt,name=natIPAllocateOption"`
 	// +optional
-	NatIPS []string `json:"natIPS,omitempty" tf:"nat_ips,omitempty"`
+	NatIPS []string `json:"natIPS,omitempty" tf:"nat_ips,omitempty" protobuf:"bytes,7,rep,name=natIPS"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,8,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
-	Router string `json:"router" tf:"router"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,9,opt,name=region"`
+	Router string `json:"router" tf:"router" protobuf:"bytes,10,opt,name=router"`
 	// +optional
-	SourceSubnetworkIPRangesToNAT string `json:"sourceSubnetworkIPRangesToNAT,omitempty" tf:"source_subnetwork_ip_ranges_to_nat,omitempty"`
+	SourceSubnetworkIPRangesToNAT string `json:"sourceSubnetworkIPRangesToNAT,omitempty" tf:"source_subnetwork_ip_ranges_to_nat,omitempty" protobuf:"bytes,11,opt,name=sourceSubnetworkIPRangesToNAT"`
 	// +optional
-	Subnetwork []ComputeRouterNATSpecSubnetwork `json:"subnetwork,omitempty" tf:"subnetwork,omitempty"`
+	Subnetwork []ComputeRouterNATSpecSubnetwork `json:"subnetwork,omitempty" tf:"subnetwork,omitempty" protobuf:"bytes,12,rep,name=subnetwork"`
 	// +optional
-	TcpEstablishedIdleTimeoutSec int64 `json:"tcpEstablishedIdleTimeoutSec,omitempty" tf:"tcp_established_idle_timeout_sec,omitempty"`
+	TcpEstablishedIdleTimeoutSec int64 `json:"tcpEstablishedIdleTimeoutSec,omitempty" tf:"tcp_established_idle_timeout_sec,omitempty" protobuf:"varint,13,opt,name=tcpEstablishedIdleTimeoutSec"`
 	// +optional
-	TcpTransitoryIdleTimeoutSec int64 `json:"tcpTransitoryIdleTimeoutSec,omitempty" tf:"tcp_transitory_idle_timeout_sec,omitempty"`
+	TcpTransitoryIdleTimeoutSec int64 `json:"tcpTransitoryIdleTimeoutSec,omitempty" tf:"tcp_transitory_idle_timeout_sec,omitempty" protobuf:"varint,14,opt,name=tcpTransitoryIdleTimeoutSec"`
 	// +optional
-	UdpIdleTimeoutSec int64 `json:"udpIdleTimeoutSec,omitempty" tf:"udp_idle_timeout_sec,omitempty"`
+	UdpIdleTimeoutSec int64 `json:"udpIdleTimeoutSec,omitempty" tf:"udp_idle_timeout_sec,omitempty" protobuf:"varint,15,opt,name=udpIdleTimeoutSec"`
 }
 
 type ComputeRouterNATStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeRouterNATSpec `json:"output,omitempty"`
+	Output *ComputeRouterNATSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -95,7 +95,7 @@ type ComputeRouterNATStatus struct {
 // ComputeRouterNATList is a list of ComputeRouterNATs
 type ComputeRouterNATList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeRouterNAT CRD objects
-	Items []ComputeRouterNAT `json:"items,omitempty"`
+	Items []ComputeRouterNAT `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

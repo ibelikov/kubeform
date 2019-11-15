@@ -34,60 +34,60 @@ import (
 
 type ComputeVPNTunnel struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeVPNTunnelSpec   `json:"spec,omitempty"`
-	Status            ComputeVPNTunnelStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeVPNTunnelSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeVPNTunnelStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeVPNTunnelSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,4,opt,name=creationTimestamp"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	DetailedStatus string `json:"detailedStatus,omitempty" tf:"detailed_status,omitempty"`
+	DetailedStatus string `json:"detailedStatus,omitempty" tf:"detailed_status,omitempty" protobuf:"bytes,6,opt,name=detailedStatus"`
 	// +optional
-	IkeVersion int64 `json:"ikeVersion,omitempty" tf:"ike_version,omitempty"`
+	IkeVersion int64 `json:"ikeVersion,omitempty" tf:"ike_version,omitempty" protobuf:"varint,7,opt,name=ikeVersion"`
 	// +optional
-	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty"`
+	LabelFingerprint string `json:"labelFingerprint,omitempty" tf:"label_fingerprint,omitempty" protobuf:"bytes,8,opt,name=labelFingerprint"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty" protobuf:"bytes,9,rep,name=labels"`
 	// +optional
-	LocalTrafficSelector []string `json:"localTrafficSelector,omitempty" tf:"local_traffic_selector,omitempty"`
-	Name                 string   `json:"name" tf:"name"`
-	PeerIP               string   `json:"peerIP" tf:"peer_ip"`
+	LocalTrafficSelector []string `json:"localTrafficSelector,omitempty" tf:"local_traffic_selector,omitempty" protobuf:"bytes,10,rep,name=localTrafficSelector"`
+	Name                 string   `json:"name" tf:"name" protobuf:"bytes,11,opt,name=name"`
+	PeerIP               string   `json:"peerIP" tf:"peer_ip" protobuf:"bytes,12,opt,name=peerIP"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,13,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,14,opt,name=region"`
 	// +optional
-	RemoteTrafficSelector []string `json:"remoteTrafficSelector,omitempty" tf:"remote_traffic_selector,omitempty"`
+	RemoteTrafficSelector []string `json:"remoteTrafficSelector,omitempty" tf:"remote_traffic_selector,omitempty" protobuf:"bytes,15,rep,name=remoteTrafficSelector"`
 	// +optional
-	Router string `json:"router,omitempty" tf:"router,omitempty"`
+	Router string `json:"router,omitempty" tf:"router,omitempty" protobuf:"bytes,16,opt,name=router"`
 	// +optional
-	SelfLink     string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink     string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,17,opt,name=selfLink"`
 	SharedSecret string `json:"-" sensitive:"true" tf:"shared_secret"`
 	// +optional
-	SharedSecretHash string `json:"sharedSecretHash,omitempty" tf:"shared_secret_hash,omitempty"`
-	TargetVPNGateway string `json:"targetVPNGateway" tf:"target_vpn_gateway"`
+	SharedSecretHash string `json:"sharedSecretHash,omitempty" tf:"shared_secret_hash,omitempty" protobuf:"bytes,18,opt,name=sharedSecretHash"`
+	TargetVPNGateway string `json:"targetVPNGateway" tf:"target_vpn_gateway" protobuf:"bytes,19,opt,name=targetVPNGateway"`
 }
 
 type ComputeVPNTunnelStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeVPNTunnelSpec `json:"output,omitempty"`
+	Output *ComputeVPNTunnelSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -96,7 +96,7 @@ type ComputeVPNTunnelStatus struct {
 // ComputeVPNTunnelList is a list of ComputeVPNTunnels
 type ComputeVPNTunnelList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeVPNTunnel CRD objects
-	Items []ComputeVPNTunnel `json:"items,omitempty"`
+	Items []ComputeVPNTunnel `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

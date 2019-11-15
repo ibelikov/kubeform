@@ -34,57 +34,57 @@ import (
 
 type DomainRecord struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainRecordSpec   `json:"spec,omitempty"`
-	Status            DomainRecordStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DomainRecordSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DomainRecordStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DomainRecordSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// The ID of the Domain to access.
-	DomainID int64 `json:"domainID" tf:"domain_id"`
+	DomainID int64 `json:"domainID" tf:"domain_id" protobuf:"varint,3,opt,name=domainID"`
 	// The name of this Record. This field's actual usage depends on the type of record this represents. For A and AAAA records, this is the subdomain being associated with an IP address.
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// The port this Record points to.
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,5,opt,name=port"`
 	// The priority of the target host. Lower values are preferred.
 	// +optional
-	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty" protobuf:"varint,6,opt,name=priority"`
 	// The protocol this Record's service communicates with. Only valid for SRV records.
 	// +optional
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,7,opt,name=protocol"`
 	// The type of Record this is in the DNS system. For example, A records associate a domain name with an IPv4 address, and AAAA records associate a domain name with an IPv6 address.
-	RecordType string `json:"recordType" tf:"record_type"`
+	RecordType string `json:"recordType" tf:"record_type" protobuf:"bytes,8,opt,name=recordType"`
 	// The service this Record identified. Only valid for SRV records.
 	// +optional
-	Service string `json:"service,omitempty" tf:"service,omitempty"`
+	Service string `json:"service,omitempty" tf:"service,omitempty" protobuf:"bytes,9,opt,name=service"`
 	// The tag portion of a CAA record. It is invalid to set this on other record types.
 	// +optional
-	Tag string `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag string `json:"tag,omitempty" tf:"tag,omitempty" protobuf:"bytes,10,opt,name=tag"`
 	// The target for this Record. This field's actual usage depends on the type of record this represents. For A and AAAA records, this is the address the named Domain should resolve to.
-	Target string `json:"target" tf:"target"`
+	Target string `json:"target" tf:"target" protobuf:"bytes,11,opt,name=target"`
 	// 'Time to Live' - the amount of time in seconds that this Domain's records may be cached by resolvers or other domain servers. Valid values are 0, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, and 2419200 - any other value will be rounded to the nearest valid value.
 	// +optional
-	TtlSec int64 `json:"ttlSec,omitempty" tf:"ttl_sec,omitempty"`
+	TtlSec int64 `json:"ttlSec,omitempty" tf:"ttl_sec,omitempty" protobuf:"varint,12,opt,name=ttlSec"`
 	// The relative weight of this Record. Higher values are preferred.
 	// +optional
-	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty" protobuf:"varint,13,opt,name=weight"`
 }
 
 type DomainRecordStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DomainRecordSpec `json:"output,omitempty"`
+	Output *DomainRecordSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -93,7 +93,7 @@ type DomainRecordStatus struct {
 // DomainRecordList is a list of DomainRecords
 type DomainRecordList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DomainRecord CRD objects
-	Items []DomainRecord `json:"items,omitempty"`
+	Items []DomainRecord `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

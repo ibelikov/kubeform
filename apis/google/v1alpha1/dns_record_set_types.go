@@ -34,35 +34,35 @@ import (
 
 type DnsRecordSet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DnsRecordSetSpec   `json:"spec,omitempty"`
-	Status            DnsRecordSetStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DnsRecordSetSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DnsRecordSetStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DnsRecordSetSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ManagedZone string `json:"managedZone" tf:"managed_zone"`
-	Name        string `json:"name" tf:"name"`
+	ManagedZone string `json:"managedZone" tf:"managed_zone" protobuf:"bytes,3,opt,name=managedZone"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	Project string   `json:"project,omitempty" tf:"project,omitempty"`
-	Rrdatas []string `json:"rrdatas" tf:"rrdatas"`
-	Ttl     int64    `json:"ttl" tf:"ttl"`
-	Type    string   `json:"type" tf:"type"`
+	Project string   `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,5,opt,name=project"`
+	Rrdatas []string `json:"rrdatas" tf:"rrdatas" protobuf:"bytes,6,rep,name=rrdatas"`
+	Ttl     int64    `json:"ttl" tf:"ttl" protobuf:"varint,7,opt,name=ttl"`
+	Type    string   `json:"type" tf:"type" protobuf:"bytes,8,opt,name=type"`
 }
 
 type DnsRecordSetStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DnsRecordSetSpec `json:"output,omitempty"`
+	Output *DnsRecordSetSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type DnsRecordSetStatus struct {
 // DnsRecordSetList is a list of DnsRecordSets
 type DnsRecordSetList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DnsRecordSet CRD objects
-	Items []DnsRecordSet `json:"items,omitempty"`
+	Items []DnsRecordSet `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

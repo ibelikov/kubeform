@@ -34,42 +34,42 @@ import (
 
 type ApiManagementProduct struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementProductSpec   `json:"spec,omitempty"`
-	Status            ApiManagementProductStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementProductSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementProductStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementProductSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
 	// +optional
-	ApprovalRequired bool `json:"approvalRequired,omitempty" tf:"approval_required,omitempty"`
+	ApprovalRequired bool `json:"approvalRequired,omitempty" tf:"approval_required,omitempty" protobuf:"varint,4,opt,name=approvalRequired"`
 	// +optional
-	Description          string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName          string `json:"displayName" tf:"display_name"`
-	ProductID            string `json:"productID" tf:"product_id"`
-	Published            bool   `json:"published" tf:"published"`
-	ResourceGroupName    string `json:"resourceGroupName" tf:"resource_group_name"`
-	SubscriptionRequired bool   `json:"subscriptionRequired" tf:"subscription_required"`
+	Description          string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
+	DisplayName          string `json:"displayName" tf:"display_name" protobuf:"bytes,6,opt,name=displayName"`
+	ProductID            string `json:"productID" tf:"product_id" protobuf:"bytes,7,opt,name=productID"`
+	Published            bool   `json:"published" tf:"published" protobuf:"varint,8,opt,name=published"`
+	ResourceGroupName    string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
+	SubscriptionRequired bool   `json:"subscriptionRequired" tf:"subscription_required" protobuf:"varint,10,opt,name=subscriptionRequired"`
 	// +optional
-	SubscriptionsLimit int64 `json:"subscriptionsLimit,omitempty" tf:"subscriptions_limit,omitempty"`
+	SubscriptionsLimit int64 `json:"subscriptionsLimit,omitempty" tf:"subscriptions_limit,omitempty" protobuf:"varint,11,opt,name=subscriptionsLimit"`
 	// +optional
-	Terms string `json:"terms,omitempty" tf:"terms,omitempty"`
+	Terms string `json:"terms,omitempty" tf:"terms,omitempty" protobuf:"bytes,12,opt,name=terms"`
 }
 
 type ApiManagementProductStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementProductSpec `json:"output,omitempty"`
+	Output *ApiManagementProductSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type ApiManagementProductStatus struct {
 // ApiManagementProductList is a list of ApiManagementProducts
 type ApiManagementProductList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementProduct CRD objects
-	Items []ApiManagementProduct `json:"items,omitempty"`
+	Items []ApiManagementProduct `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

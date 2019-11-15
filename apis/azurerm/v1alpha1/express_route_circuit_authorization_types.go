@@ -34,37 +34,37 @@ import (
 
 type ExpressRouteCircuitAuthorization struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExpressRouteCircuitAuthorizationSpec   `json:"spec,omitempty"`
-	Status            ExpressRouteCircuitAuthorizationStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ExpressRouteCircuitAuthorizationSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ExpressRouteCircuitAuthorizationStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ExpressRouteCircuitAuthorizationSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	AuthorizationKey string `json:"-" sensitive:"true" tf:"authorization_key,omitempty"`
 	// +optional
-	AuthorizationUseStatus  string `json:"authorizationUseStatus,omitempty" tf:"authorization_use_status,omitempty"`
-	ExpressRouteCircuitName string `json:"expressRouteCircuitName" tf:"express_route_circuit_name"`
-	Name                    string `json:"name" tf:"name"`
-	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name"`
+	AuthorizationUseStatus  string `json:"authorizationUseStatus,omitempty" tf:"authorization_use_status,omitempty" protobuf:"bytes,4,opt,name=authorizationUseStatus"`
+	ExpressRouteCircuitName string `json:"expressRouteCircuitName" tf:"express_route_circuit_name" protobuf:"bytes,5,opt,name=expressRouteCircuitName"`
+	Name                    string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	ResourceGroupName       string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 }
 
 type ExpressRouteCircuitAuthorizationStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ExpressRouteCircuitAuthorizationSpec `json:"output,omitempty"`
+	Output *ExpressRouteCircuitAuthorizationSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type ExpressRouteCircuitAuthorizationStatus struct {
 // ExpressRouteCircuitAuthorizationList is a list of ExpressRouteCircuitAuthorizations
 type ExpressRouteCircuitAuthorizationList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ExpressRouteCircuitAuthorization CRD objects
-	Items []ExpressRouteCircuitAuthorization `json:"items,omitempty"`
+	Items []ExpressRouteCircuitAuthorization `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

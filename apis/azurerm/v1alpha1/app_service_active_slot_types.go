@@ -34,31 +34,31 @@ import (
 
 type AppServiceActiveSlot struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppServiceActiveSlotSpec   `json:"spec,omitempty"`
-	Status            AppServiceActiveSlotStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AppServiceActiveSlotSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AppServiceActiveSlotStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AppServiceActiveSlotSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AppServiceName     string `json:"appServiceName" tf:"app_service_name"`
-	AppServiceSlotName string `json:"appServiceSlotName" tf:"app_service_slot_name"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	AppServiceName     string `json:"appServiceName" tf:"app_service_name" protobuf:"bytes,3,opt,name=appServiceName"`
+	AppServiceSlotName string `json:"appServiceSlotName" tf:"app_service_slot_name" protobuf:"bytes,4,opt,name=appServiceSlotName"`
+	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 }
 
 type AppServiceActiveSlotStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AppServiceActiveSlotSpec `json:"output,omitempty"`
+	Output *AppServiceActiveSlotSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -67,7 +67,7 @@ type AppServiceActiveSlotStatus struct {
 // AppServiceActiveSlotList is a list of AppServiceActiveSlots
 type AppServiceActiveSlotList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AppServiceActiveSlot CRD objects
-	Items []AppServiceActiveSlot `json:"items,omitempty"`
+	Items []AppServiceActiveSlot `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

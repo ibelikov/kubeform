@@ -34,53 +34,53 @@ import (
 
 type StorageShare struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageShareSpec   `json:"spec,omitempty"`
-	Status            StorageShareStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageShareSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageShareStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageShareSpecAclAccessPolicy struct {
-	Expiry      string `json:"expiry" tf:"expiry"`
-	Permissions string `json:"permissions" tf:"permissions"`
-	Start       string `json:"start" tf:"start"`
+	Expiry      string `json:"expiry" tf:"expiry" protobuf:"bytes,1,opt,name=expiry"`
+	Permissions string `json:"permissions" tf:"permissions" protobuf:"bytes,2,opt,name=permissions"`
+	Start       string `json:"start" tf:"start" protobuf:"bytes,3,opt,name=start"`
 }
 
 type StorageShareSpecAcl struct {
 	// +optional
-	AccessPolicy []StorageShareSpecAclAccessPolicy `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
-	ID           string                            `json:"ID" tf:"id"`
+	AccessPolicy []StorageShareSpecAclAccessPolicy `json:"accessPolicy,omitempty" tf:"access_policy,omitempty" protobuf:"bytes,1,rep,name=accessPolicy"`
+	ID           string                            `json:"ID" tf:"id" protobuf:"bytes,2,opt,name=ID"`
 }
 
 type StorageShareSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Acl []StorageShareSpecAcl `json:"acl,omitempty" tf:"acl,omitempty"`
+	Acl []StorageShareSpecAcl `json:"acl,omitempty" tf:"acl,omitempty" protobuf:"bytes,3,rep,name=acl"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-	Name     string            `json:"name" tf:"name"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,4,rep,name=metadata"`
+	Name     string            `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	// +optional
-	Quota int64 `json:"quota,omitempty" tf:"quota,omitempty"`
+	Quota int64 `json:"quota,omitempty" tf:"quota,omitempty" protobuf:"varint,6,opt,name=quota"`
 	// +optional
 	// Deprecated
-	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
+	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty" protobuf:"bytes,7,opt,name=resourceGroupName"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,8,opt,name=storageAccountName"`
 	// +optional
-	Url string `json:"url,omitempty" tf:"url,omitempty"`
+	Url string `json:"url,omitempty" tf:"url,omitempty" protobuf:"bytes,9,opt,name=url"`
 }
 
 type StorageShareStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageShareSpec `json:"output,omitempty"`
+	Output *StorageShareSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -89,7 +89,7 @@ type StorageShareStatus struct {
 // StorageShareList is a list of StorageShares
 type StorageShareList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageShare CRD objects
-	Items []StorageShare `json:"items,omitempty"`
+	Items []StorageShare `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

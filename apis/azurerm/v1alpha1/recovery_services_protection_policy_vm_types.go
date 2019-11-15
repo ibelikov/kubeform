@@ -34,78 +34,78 @@ import (
 
 type RecoveryServicesProtectionPolicyVm struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RecoveryServicesProtectionPolicyVmSpec   `json:"spec,omitempty"`
-	Status            RecoveryServicesProtectionPolicyVmStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RecoveryServicesProtectionPolicyVmSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RecoveryServicesProtectionPolicyVmStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpecBackup struct {
-	Frequency string `json:"frequency" tf:"frequency"`
-	Time      string `json:"time" tf:"time"`
+	Frequency string `json:"frequency" tf:"frequency" protobuf:"bytes,1,opt,name=frequency"`
+	Time      string `json:"time" tf:"time" protobuf:"bytes,2,opt,name=time"`
 	// +optional
-	Weekdays []string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	Weekdays []string `json:"weekdays,omitempty" tf:"weekdays,omitempty" protobuf:"bytes,3,rep,name=weekdays"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpecRetentionDaily struct {
-	Count int64 `json:"count" tf:"count"`
+	Count int64 `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpecRetentionMonthly struct {
-	Count    int64    `json:"count" tf:"count"`
-	Weekdays []string `json:"weekdays" tf:"weekdays"`
-	Weeks    []string `json:"weeks" tf:"weeks"`
+	Count    int64    `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Weekdays []string `json:"weekdays" tf:"weekdays" protobuf:"bytes,2,rep,name=weekdays"`
+	Weeks    []string `json:"weeks" tf:"weeks" protobuf:"bytes,3,rep,name=weeks"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpecRetentionWeekly struct {
-	Count    int64    `json:"count" tf:"count"`
-	Weekdays []string `json:"weekdays" tf:"weekdays"`
+	Count    int64    `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Weekdays []string `json:"weekdays" tf:"weekdays" protobuf:"bytes,2,rep,name=weekdays"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpecRetentionYearly struct {
-	Count    int64    `json:"count" tf:"count"`
-	Months   []string `json:"months" tf:"months"`
-	Weekdays []string `json:"weekdays" tf:"weekdays"`
-	Weeks    []string `json:"weeks" tf:"weeks"`
+	Count    int64    `json:"count" tf:"count" protobuf:"varint,1,opt,name=count"`
+	Months   []string `json:"months" tf:"months" protobuf:"bytes,2,rep,name=months"`
+	Weekdays []string `json:"weekdays" tf:"weekdays" protobuf:"bytes,3,rep,name=weekdays"`
+	Weeks    []string `json:"weeks" tf:"weeks" protobuf:"bytes,4,rep,name=weeks"`
 }
 
 type RecoveryServicesProtectionPolicyVmSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MaxItems=1
-	Backup            []RecoveryServicesProtectionPolicyVmSpecBackup `json:"backup" tf:"backup"`
-	Name              string                                         `json:"name" tf:"name"`
-	RecoveryVaultName string                                         `json:"recoveryVaultName" tf:"recovery_vault_name"`
-	ResourceGroupName string                                         `json:"resourceGroupName" tf:"resource_group_name"`
+	Backup            []RecoveryServicesProtectionPolicyVmSpecBackup `json:"backup" tf:"backup" protobuf:"bytes,3,rep,name=backup"`
+	Name              string                                         `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
+	RecoveryVaultName string                                         `json:"recoveryVaultName" tf:"recovery_vault_name" protobuf:"bytes,5,opt,name=recoveryVaultName"`
+	ResourceGroupName string                                         `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionDaily []RecoveryServicesProtectionPolicyVmSpecRetentionDaily `json:"retentionDaily,omitempty" tf:"retention_daily,omitempty"`
+	RetentionDaily []RecoveryServicesProtectionPolicyVmSpecRetentionDaily `json:"retentionDaily,omitempty" tf:"retention_daily,omitempty" protobuf:"bytes,7,rep,name=retentionDaily"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionMonthly []RecoveryServicesProtectionPolicyVmSpecRetentionMonthly `json:"retentionMonthly,omitempty" tf:"retention_monthly,omitempty"`
+	RetentionMonthly []RecoveryServicesProtectionPolicyVmSpecRetentionMonthly `json:"retentionMonthly,omitempty" tf:"retention_monthly,omitempty" protobuf:"bytes,8,rep,name=retentionMonthly"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionWeekly []RecoveryServicesProtectionPolicyVmSpecRetentionWeekly `json:"retentionWeekly,omitempty" tf:"retention_weekly,omitempty"`
+	RetentionWeekly []RecoveryServicesProtectionPolicyVmSpecRetentionWeekly `json:"retentionWeekly,omitempty" tf:"retention_weekly,omitempty" protobuf:"bytes,9,rep,name=retentionWeekly"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionYearly []RecoveryServicesProtectionPolicyVmSpecRetentionYearly `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
+	RetentionYearly []RecoveryServicesProtectionPolicyVmSpecRetentionYearly `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty" protobuf:"bytes,10,rep,name=retentionYearly"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 	// +optional
-	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	Timezone string `json:"timezone,omitempty" tf:"timezone,omitempty" protobuf:"bytes,12,opt,name=timezone"`
 }
 
 type RecoveryServicesProtectionPolicyVmStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RecoveryServicesProtectionPolicyVmSpec `json:"output,omitempty"`
+	Output *RecoveryServicesProtectionPolicyVmSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -114,7 +114,7 @@ type RecoveryServicesProtectionPolicyVmStatus struct {
 // RecoveryServicesProtectionPolicyVmList is a list of RecoveryServicesProtectionPolicyVms
 type RecoveryServicesProtectionPolicyVmList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RecoveryServicesProtectionPolicyVm CRD objects
-	Items []RecoveryServicesProtectionPolicyVm `json:"items,omitempty"`
+	Items []RecoveryServicesProtectionPolicyVm `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

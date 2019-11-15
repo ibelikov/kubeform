@@ -34,67 +34,67 @@ import (
 
 type TrafficManagerEndpoint struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficManagerEndpointSpec   `json:"spec,omitempty"`
-	Status            TrafficManagerEndpointStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              TrafficManagerEndpointSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            TrafficManagerEndpointStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type TrafficManagerEndpointSpecCustomHeader struct {
-	Name  string `json:"name" tf:"name"`
-	Value string `json:"value" tf:"value"`
+	Name  string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Value string `json:"value" tf:"value" protobuf:"bytes,2,opt,name=value"`
 }
 
 type TrafficManagerEndpointSpecSubnet struct {
-	First string `json:"first" tf:"first"`
+	First string `json:"first" tf:"first" protobuf:"bytes,1,opt,name=first"`
 	// +optional
-	Last string `json:"last,omitempty" tf:"last,omitempty"`
+	Last string `json:"last,omitempty" tf:"last,omitempty" protobuf:"bytes,2,opt,name=last"`
 	// +optional
-	Scope int64 `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope int64 `json:"scope,omitempty" tf:"scope,omitempty" protobuf:"varint,3,opt,name=scope"`
 }
 
 type TrafficManagerEndpointSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CustomHeader []TrafficManagerEndpointSpecCustomHeader `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+	CustomHeader []TrafficManagerEndpointSpecCustomHeader `json:"customHeader,omitempty" tf:"custom_header,omitempty" protobuf:"bytes,3,rep,name=customHeader"`
 	// +optional
-	EndpointLocation string `json:"endpointLocation,omitempty" tf:"endpoint_location,omitempty"`
+	EndpointLocation string `json:"endpointLocation,omitempty" tf:"endpoint_location,omitempty" protobuf:"bytes,4,opt,name=endpointLocation"`
 	// +optional
-	EndpointMonitorStatus string `json:"endpointMonitorStatus,omitempty" tf:"endpoint_monitor_status,omitempty"`
+	EndpointMonitorStatus string `json:"endpointMonitorStatus,omitempty" tf:"endpoint_monitor_status,omitempty" protobuf:"bytes,5,opt,name=endpointMonitorStatus"`
 	// +optional
-	EndpointStatus string `json:"endpointStatus,omitempty" tf:"endpoint_status,omitempty"`
+	EndpointStatus string `json:"endpointStatus,omitempty" tf:"endpoint_status,omitempty" protobuf:"bytes,6,opt,name=endpointStatus"`
 	// +optional
-	GeoMappings []string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty"`
+	GeoMappings []string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty" protobuf:"bytes,7,rep,name=geoMappings"`
 	// +optional
-	MinChildEndpoints int64  `json:"minChildEndpoints,omitempty" tf:"min_child_endpoints,omitempty"`
-	Name              string `json:"name" tf:"name"`
+	MinChildEndpoints int64  `json:"minChildEndpoints,omitempty" tf:"min_child_endpoints,omitempty" protobuf:"varint,8,opt,name=minChildEndpoints"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	Priority          int64  `json:"priority,omitempty" tf:"priority,omitempty"`
-	ProfileName       string `json:"profileName" tf:"profile_name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Priority          int64  `json:"priority,omitempty" tf:"priority,omitempty" protobuf:"varint,10,opt,name=priority"`
+	ProfileName       string `json:"profileName" tf:"profile_name" protobuf:"bytes,11,opt,name=profileName"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,12,opt,name=resourceGroupName"`
 	// +optional
-	Subnet []TrafficManagerEndpointSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []TrafficManagerEndpointSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty" protobuf:"bytes,13,rep,name=subnet"`
 	// +optional
-	Target string `json:"target,omitempty" tf:"target,omitempty"`
+	Target string `json:"target,omitempty" tf:"target,omitempty" protobuf:"bytes,14,opt,name=target"`
 	// +optional
-	TargetResourceID string `json:"targetResourceID,omitempty" tf:"target_resource_id,omitempty"`
-	Type             string `json:"type" tf:"type"`
+	TargetResourceID string `json:"targetResourceID,omitempty" tf:"target_resource_id,omitempty" protobuf:"bytes,15,opt,name=targetResourceID"`
+	Type             string `json:"type" tf:"type" protobuf:"bytes,16,opt,name=type"`
 	// +optional
-	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight int64 `json:"weight,omitempty" tf:"weight,omitempty" protobuf:"varint,17,opt,name=weight"`
 }
 
 type TrafficManagerEndpointStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *TrafficManagerEndpointSpec `json:"output,omitempty"`
+	Output *TrafficManagerEndpointSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -103,7 +103,7 @@ type TrafficManagerEndpointStatus struct {
 // TrafficManagerEndpointList is a list of TrafficManagerEndpoints
 type TrafficManagerEndpointList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of TrafficManagerEndpoint CRD objects
-	Items []TrafficManagerEndpoint `json:"items,omitempty"`
+	Items []TrafficManagerEndpoint `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

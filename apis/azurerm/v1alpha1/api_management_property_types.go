@@ -34,37 +34,37 @@ import (
 
 type ApiManagementProperty struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApiManagementPropertySpec   `json:"spec,omitempty"`
-	Status            ApiManagementPropertyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ApiManagementPropertySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ApiManagementPropertyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ApiManagementPropertySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
-	DisplayName       string `json:"displayName" tf:"display_name"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name" protobuf:"bytes,3,opt,name=apiManagementName"`
+	DisplayName       string `json:"displayName" tf:"display_name" protobuf:"bytes,4,opt,name=displayName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
-	Secret bool `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret bool `json:"secret,omitempty" tf:"secret,omitempty" protobuf:"varint,7,opt,name=secret"`
 	// +optional
-	Tags  []string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Value string   `json:"value" tf:"value"`
+	Tags  []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
+	Value string   `json:"value" tf:"value" protobuf:"bytes,9,opt,name=value"`
 }
 
 type ApiManagementPropertyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ApiManagementPropertySpec `json:"output,omitempty"`
+	Output *ApiManagementPropertySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,7 +73,7 @@ type ApiManagementPropertyStatus struct {
 // ApiManagementPropertyList is a list of ApiManagementPropertys
 type ApiManagementPropertyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ApiManagementProperty CRD objects
-	Items []ApiManagementProperty `json:"items,omitempty"`
+	Items []ApiManagementProperty `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,100 +34,100 @@ import (
 
 type SqlDatabase struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SqlDatabaseSpec   `json:"spec,omitempty"`
-	Status            SqlDatabaseStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              SqlDatabaseSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            SqlDatabaseStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type SqlDatabaseSpecImport struct {
-	AdministratorLogin         string `json:"administratorLogin" tf:"administrator_login"`
+	AdministratorLogin         string `json:"administratorLogin" tf:"administrator_login" protobuf:"bytes,1,opt,name=administratorLogin"`
 	AdministratorLoginPassword string `json:"-" sensitive:"true" tf:"administrator_login_password"`
-	AuthenticationType         string `json:"authenticationType" tf:"authentication_type"`
+	AuthenticationType         string `json:"authenticationType" tf:"authentication_type" protobuf:"bytes,2,opt,name=authenticationType"`
 	// +optional
-	OperationMode  string `json:"operationMode,omitempty" tf:"operation_mode,omitempty"`
+	OperationMode  string `json:"operationMode,omitempty" tf:"operation_mode,omitempty" protobuf:"bytes,3,opt,name=operationMode"`
 	StorageKey     string `json:"-" sensitive:"true" tf:"storage_key"`
-	StorageKeyType string `json:"storageKeyType" tf:"storage_key_type"`
-	StorageURI     string `json:"storageURI" tf:"storage_uri"`
+	StorageKeyType string `json:"storageKeyType" tf:"storage_key_type" protobuf:"bytes,4,opt,name=storageKeyType"`
+	StorageURI     string `json:"storageURI" tf:"storage_uri" protobuf:"bytes,5,opt,name=storageURI"`
 }
 
 type SqlDatabaseSpecThreatDetectionPolicy struct {
 	// +optional
-	DisabledAlerts []string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+	DisabledAlerts []string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty" protobuf:"bytes,1,rep,name=disabledAlerts"`
 	// +optional
-	EmailAccountAdmins string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+	EmailAccountAdmins string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty" protobuf:"bytes,2,opt,name=emailAccountAdmins"`
 	// +optional
-	EmailAddresses []string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+	EmailAddresses []string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty" protobuf:"bytes,3,rep,name=emailAddresses"`
 	// +optional
-	RetentionDays int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty" protobuf:"varint,4,opt,name=retentionDays"`
 	// +optional
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,5,opt,name=state"`
 	// +optional
 	StorageAccountAccessKey string `json:"-" sensitive:"true" tf:"storage_account_access_key,omitempty"`
 	// +optional
-	StorageEndpoint string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+	StorageEndpoint string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty" protobuf:"bytes,6,opt,name=storageEndpoint"`
 	// +optional
-	UseServerDefault string `json:"useServerDefault,omitempty" tf:"use_server_default,omitempty"`
+	UseServerDefault string `json:"useServerDefault,omitempty" tf:"use_server_default,omitempty" protobuf:"bytes,7,opt,name=useServerDefault"`
 }
 
 type SqlDatabaseSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Collation string `json:"collation,omitempty" tf:"collation,omitempty"`
+	Collation string `json:"collation,omitempty" tf:"collation,omitempty" protobuf:"bytes,4,opt,name=collation"`
 	// +optional
-	CreateMode string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
+	CreateMode string `json:"createMode,omitempty" tf:"create_mode,omitempty" protobuf:"bytes,5,opt,name=createMode"`
 	// +optional
-	CreationDate string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
+	CreationDate string `json:"creationDate,omitempty" tf:"creation_date,omitempty" protobuf:"bytes,6,opt,name=creationDate"`
 	// +optional
-	DefaultSecondaryLocation string `json:"defaultSecondaryLocation,omitempty" tf:"default_secondary_location,omitempty"`
+	DefaultSecondaryLocation string `json:"defaultSecondaryLocation,omitempty" tf:"default_secondary_location,omitempty" protobuf:"bytes,7,opt,name=defaultSecondaryLocation"`
 	// +optional
-	Edition string `json:"edition,omitempty" tf:"edition,omitempty"`
+	Edition string `json:"edition,omitempty" tf:"edition,omitempty" protobuf:"bytes,8,opt,name=edition"`
 	// +optional
-	ElasticPoolName string `json:"elasticPoolName,omitempty" tf:"elastic_pool_name,omitempty"`
+	ElasticPoolName string `json:"elasticPoolName,omitempty" tf:"elastic_pool_name,omitempty" protobuf:"bytes,9,opt,name=elasticPoolName"`
 	// +optional
-	Encryption string `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption string `json:"encryption,omitempty" tf:"encryption,omitempty" protobuf:"bytes,10,opt,name=encryption"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Import   []SqlDatabaseSpecImport `json:"import,omitempty" tf:"import,omitempty"`
-	Location string                  `json:"location" tf:"location"`
+	Import   []SqlDatabaseSpecImport `json:"import,omitempty" tf:"import,omitempty" protobuf:"bytes,11,rep,name=import"`
+	Location string                  `json:"location" tf:"location" protobuf:"bytes,12,opt,name=location"`
 	// +optional
-	MaxSizeBytes string `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
-	Name         string `json:"name" tf:"name"`
+	MaxSizeBytes string `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty" protobuf:"bytes,13,opt,name=maxSizeBytes"`
+	Name         string `json:"name" tf:"name" protobuf:"bytes,14,opt,name=name"`
 	// +optional
-	ReadScale bool `json:"readScale,omitempty" tf:"read_scale,omitempty"`
+	ReadScale bool `json:"readScale,omitempty" tf:"read_scale,omitempty" protobuf:"varint,15,opt,name=readScale"`
 	// +optional
-	RequestedServiceObjectiveID string `json:"requestedServiceObjectiveID,omitempty" tf:"requested_service_objective_id,omitempty"`
+	RequestedServiceObjectiveID string `json:"requestedServiceObjectiveID,omitempty" tf:"requested_service_objective_id,omitempty" protobuf:"bytes,16,opt,name=requestedServiceObjectiveID"`
 	// +optional
-	RequestedServiceObjectiveName string `json:"requestedServiceObjectiveName,omitempty" tf:"requested_service_objective_name,omitempty"`
-	ResourceGroupName             string `json:"resourceGroupName" tf:"resource_group_name"`
+	RequestedServiceObjectiveName string `json:"requestedServiceObjectiveName,omitempty" tf:"requested_service_objective_name,omitempty" protobuf:"bytes,17,opt,name=requestedServiceObjectiveName"`
+	ResourceGroupName             string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,18,opt,name=resourceGroupName"`
 	// +optional
-	RestorePointInTime string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
-	ServerName         string `json:"serverName" tf:"server_name"`
+	RestorePointInTime string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty" protobuf:"bytes,19,opt,name=restorePointInTime"`
+	ServerName         string `json:"serverName" tf:"server_name" protobuf:"bytes,20,opt,name=serverName"`
 	// +optional
-	SourceDatabaseDeletionDate string `json:"sourceDatabaseDeletionDate,omitempty" tf:"source_database_deletion_date,omitempty"`
+	SourceDatabaseDeletionDate string `json:"sourceDatabaseDeletionDate,omitempty" tf:"source_database_deletion_date,omitempty" protobuf:"bytes,21,opt,name=sourceDatabaseDeletionDate"`
 	// +optional
-	SourceDatabaseID string `json:"sourceDatabaseID,omitempty" tf:"source_database_id,omitempty"`
+	SourceDatabaseID string `json:"sourceDatabaseID,omitempty" tf:"source_database_id,omitempty" protobuf:"bytes,22,opt,name=sourceDatabaseID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,23,rep,name=tags"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ThreatDetectionPolicy []SqlDatabaseSpecThreatDetectionPolicy `json:"threatDetectionPolicy,omitempty" tf:"threat_detection_policy,omitempty"`
+	ThreatDetectionPolicy []SqlDatabaseSpecThreatDetectionPolicy `json:"threatDetectionPolicy,omitempty" tf:"threat_detection_policy,omitempty" protobuf:"bytes,24,rep,name=threatDetectionPolicy"`
 }
 
 type SqlDatabaseStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *SqlDatabaseSpec `json:"output,omitempty"`
+	Output *SqlDatabaseSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -136,7 +136,7 @@ type SqlDatabaseStatus struct {
 // SqlDatabaseList is a list of SqlDatabases
 type SqlDatabaseList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of SqlDatabase CRD objects
-	Items []SqlDatabase `json:"items,omitempty"`
+	Items []SqlDatabase `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

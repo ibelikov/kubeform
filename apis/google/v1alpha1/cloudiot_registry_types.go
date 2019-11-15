@@ -34,70 +34,70 @@ import (
 
 type CloudiotRegistry struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CloudiotRegistrySpec   `json:"spec,omitempty"`
-	Status            CloudiotRegistryStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CloudiotRegistrySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CloudiotRegistryStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CloudiotRegistrySpecCredentialsPublicKeyCertificate struct {
-	Certificate string `json:"certificate" tf:"certificate"`
-	Format      string `json:"format" tf:"format"`
+	Certificate string `json:"certificate" tf:"certificate" protobuf:"bytes,1,opt,name=certificate"`
+	Format      string `json:"format" tf:"format" protobuf:"bytes,2,opt,name=format"`
 }
 
 type CloudiotRegistrySpecCredentials struct {
 	// +optional
-	PublicKeyCertificate map[string]CloudiotRegistrySpecCredentialsPublicKeyCertificate `json:"publicKeyCertificate,omitempty" tf:"public_key_certificate,omitempty"`
+	PublicKeyCertificate map[string]CloudiotRegistrySpecCredentialsPublicKeyCertificate `json:"publicKeyCertificate,omitempty" tf:"public_key_certificate,omitempty" protobuf:"bytes,1,rep,name=publicKeyCertificate"`
 }
 
 type CloudiotRegistrySpecEventNotificationConfig struct {
-	PubsubTopicName string `json:"pubsubTopicName" tf:"pubsub_topic_name"`
+	PubsubTopicName string `json:"pubsubTopicName" tf:"pubsub_topic_name" protobuf:"bytes,1,opt,name=pubsubTopicName"`
 }
 
 type CloudiotRegistrySpecHttpConfig struct {
-	HttpEnabledState string `json:"httpEnabledState" tf:"http_enabled_state"`
+	HttpEnabledState string `json:"httpEnabledState" tf:"http_enabled_state" protobuf:"bytes,1,opt,name=httpEnabledState"`
 }
 
 type CloudiotRegistrySpecMqttConfig struct {
-	MqttEnabledState string `json:"mqttEnabledState" tf:"mqtt_enabled_state"`
+	MqttEnabledState string `json:"mqttEnabledState" tf:"mqtt_enabled_state" protobuf:"bytes,1,opt,name=mqttEnabledState"`
 }
 
 type CloudiotRegistrySpecStateNotificationConfig struct {
-	PubsubTopicName string `json:"pubsubTopicName" tf:"pubsub_topic_name"`
+	PubsubTopicName string `json:"pubsubTopicName" tf:"pubsub_topic_name" protobuf:"bytes,1,opt,name=pubsubTopicName"`
 }
 
 type CloudiotRegistrySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=10
-	Credentials []CloudiotRegistrySpecCredentials `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CloudiotRegistrySpecCredentials `json:"credentials,omitempty" tf:"credentials,omitempty" protobuf:"bytes,3,rep,name=credentials"`
 	// +optional
-	EventNotificationConfig map[string]CloudiotRegistrySpecEventNotificationConfig `json:"eventNotificationConfig,omitempty" tf:"event_notification_config,omitempty"`
+	EventNotificationConfig map[string]CloudiotRegistrySpecEventNotificationConfig `json:"eventNotificationConfig,omitempty" tf:"event_notification_config,omitempty" protobuf:"bytes,4,rep,name=eventNotificationConfig"`
 	// +optional
-	HttpConfig map[string]CloudiotRegistrySpecHttpConfig `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
+	HttpConfig map[string]CloudiotRegistrySpecHttpConfig `json:"httpConfig,omitempty" tf:"http_config,omitempty" protobuf:"bytes,5,rep,name=httpConfig"`
 	// +optional
-	MqttConfig map[string]CloudiotRegistrySpecMqttConfig `json:"mqttConfig,omitempty" tf:"mqtt_config,omitempty"`
-	Name       string                                    `json:"name" tf:"name"`
+	MqttConfig map[string]CloudiotRegistrySpecMqttConfig `json:"mqttConfig,omitempty" tf:"mqtt_config,omitempty" protobuf:"bytes,6,rep,name=mqttConfig"`
+	Name       string                                    `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,8,opt,name=project"`
 	// +optional
-	Region string `json:"region,omitempty" tf:"region,omitempty"`
+	Region string `json:"region,omitempty" tf:"region,omitempty" protobuf:"bytes,9,opt,name=region"`
 	// +optional
-	StateNotificationConfig map[string]CloudiotRegistrySpecStateNotificationConfig `json:"stateNotificationConfig,omitempty" tf:"state_notification_config,omitempty"`
+	StateNotificationConfig map[string]CloudiotRegistrySpecStateNotificationConfig `json:"stateNotificationConfig,omitempty" tf:"state_notification_config,omitempty" protobuf:"bytes,10,rep,name=stateNotificationConfig"`
 }
 
 type CloudiotRegistryStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CloudiotRegistrySpec `json:"output,omitempty"`
+	Output *CloudiotRegistrySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -106,7 +106,7 @@ type CloudiotRegistryStatus struct {
 // CloudiotRegistryList is a list of CloudiotRegistrys
 type CloudiotRegistryList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CloudiotRegistry CRD objects
-	Items []CloudiotRegistry `json:"items,omitempty"`
+	Items []CloudiotRegistry `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

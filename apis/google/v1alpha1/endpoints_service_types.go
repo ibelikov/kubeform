@@ -34,77 +34,77 @@ import (
 
 type EndpointsService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EndpointsServiceSpec   `json:"spec,omitempty"`
-	Status            EndpointsServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              EndpointsServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            EndpointsServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type EndpointsServiceSpecApisMethods struct {
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	RequestType string `json:"requestType,omitempty" tf:"request_type,omitempty"`
+	RequestType string `json:"requestType,omitempty" tf:"request_type,omitempty" protobuf:"bytes,2,opt,name=requestType"`
 	// +optional
-	ResponseType string `json:"responseType,omitempty" tf:"response_type,omitempty"`
+	ResponseType string `json:"responseType,omitempty" tf:"response_type,omitempty" protobuf:"bytes,3,opt,name=responseType"`
 	// +optional
-	Syntax string `json:"syntax,omitempty" tf:"syntax,omitempty"`
+	Syntax string `json:"syntax,omitempty" tf:"syntax,omitempty" protobuf:"bytes,4,opt,name=syntax"`
 }
 
 type EndpointsServiceSpecApis struct {
 	// +optional
-	Methods []EndpointsServiceSpecApisMethods `json:"methods,omitempty" tf:"methods,omitempty"`
+	Methods []EndpointsServiceSpecApisMethods `json:"methods,omitempty" tf:"methods,omitempty" protobuf:"bytes,1,rep,name=methods"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	Syntax string `json:"syntax,omitempty" tf:"syntax,omitempty"`
+	Syntax string `json:"syntax,omitempty" tf:"syntax,omitempty" protobuf:"bytes,3,opt,name=syntax"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,4,opt,name=version"`
 }
 
 type EndpointsServiceSpecEndpoints struct {
 	// +optional
-	Address string `json:"address,omitempty" tf:"address,omitempty"`
+	Address string `json:"address,omitempty" tf:"address,omitempty" protobuf:"bytes,1,opt,name=address"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
 }
 
 type EndpointsServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Apis []EndpointsServiceSpecApis `json:"apis,omitempty" tf:"apis,omitempty"`
+	Apis []EndpointsServiceSpecApis `json:"apis,omitempty" tf:"apis,omitempty" protobuf:"bytes,3,rep,name=apis"`
 	// +optional
-	ConfigID string `json:"configID,omitempty" tf:"config_id,omitempty"`
+	ConfigID string `json:"configID,omitempty" tf:"config_id,omitempty" protobuf:"bytes,4,opt,name=configID"`
 	// +optional
-	DnsAddress string `json:"dnsAddress,omitempty" tf:"dns_address,omitempty"`
+	DnsAddress string `json:"dnsAddress,omitempty" tf:"dns_address,omitempty" protobuf:"bytes,5,opt,name=dnsAddress"`
 	// +optional
-	Endpoints []EndpointsServiceSpecEndpoints `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
+	Endpoints []EndpointsServiceSpecEndpoints `json:"endpoints,omitempty" tf:"endpoints,omitempty" protobuf:"bytes,6,rep,name=endpoints"`
 	// +optional
-	GrpcConfig string `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+	GrpcConfig string `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty" protobuf:"bytes,7,opt,name=grpcConfig"`
 	// +optional
-	OpenapiConfig string `json:"openapiConfig,omitempty" tf:"openapi_config,omitempty"`
+	OpenapiConfig string `json:"openapiConfig,omitempty" tf:"openapi_config,omitempty" protobuf:"bytes,8,opt,name=openapiConfig"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,9,opt,name=project"`
 	// +optional
 	// Deprecated
-	ProtocOutput string `json:"protocOutput,omitempty" tf:"protoc_output,omitempty"`
+	ProtocOutput string `json:"protocOutput,omitempty" tf:"protoc_output,omitempty" protobuf:"bytes,10,opt,name=protocOutput"`
 	// +optional
-	ProtocOutputBase64 string `json:"protocOutputBase64,omitempty" tf:"protoc_output_base64,omitempty"`
-	ServiceName        string `json:"serviceName" tf:"service_name"`
+	ProtocOutputBase64 string `json:"protocOutputBase64,omitempty" tf:"protoc_output_base64,omitempty" protobuf:"bytes,11,opt,name=protocOutputBase64"`
+	ServiceName        string `json:"serviceName" tf:"service_name" protobuf:"bytes,12,opt,name=serviceName"`
 }
 
 type EndpointsServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *EndpointsServiceSpec `json:"output,omitempty"`
+	Output *EndpointsServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -113,7 +113,7 @@ type EndpointsServiceStatus struct {
 // EndpointsServiceList is a list of EndpointsServices
 type EndpointsServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of EndpointsService CRD objects
-	Items []EndpointsService `json:"items,omitempty"`
+	Items []EndpointsService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

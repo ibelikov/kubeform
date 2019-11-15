@@ -34,79 +34,79 @@ import (
 
 type MssqlElasticpool struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MssqlElasticpoolSpec   `json:"spec,omitempty"`
-	Status            MssqlElasticpoolStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              MssqlElasticpoolSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            MssqlElasticpoolStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type MssqlElasticpoolSpecElasticPoolProperties struct {
 	// +optional
 	// Deprecated
-	CreationDate string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
+	CreationDate string `json:"creationDate,omitempty" tf:"creation_date,omitempty" protobuf:"bytes,1,opt,name=creationDate"`
 	// +optional
 	// Deprecated
-	LicenseType string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+	LicenseType string `json:"licenseType,omitempty" tf:"license_type,omitempty" protobuf:"bytes,2,opt,name=licenseType"`
 	// +optional
 	// Deprecated
-	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
+	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty" protobuf:"varint,3,opt,name=maxSizeBytes"`
 	// +optional
 	// Deprecated
-	State string `json:"state,omitempty" tf:"state,omitempty"`
+	State string `json:"state,omitempty" tf:"state,omitempty" protobuf:"bytes,4,opt,name=state"`
 	// +optional
 	// Deprecated
-	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
+	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty" protobuf:"varint,5,opt,name=zoneRedundant"`
 }
 
 type MssqlElasticpoolSpecPerDatabaseSettings struct {
-	MaxCapacity float64 `json:"maxCapacity" tf:"max_capacity"`
-	MinCapacity float64 `json:"minCapacity" tf:"min_capacity"`
+	MaxCapacity float64 `json:"maxCapacity" tf:"max_capacity" protobuf:"fixed64,1,opt,name=maxCapacity"`
+	MinCapacity float64 `json:"minCapacity" tf:"min_capacity" protobuf:"fixed64,2,opt,name=minCapacity"`
 }
 
 type MssqlElasticpoolSpecSku struct {
-	Capacity int64 `json:"capacity" tf:"capacity"`
+	Capacity int64 `json:"capacity" tf:"capacity" protobuf:"varint,1,opt,name=capacity"`
 	// +optional
-	Family string `json:"family,omitempty" tf:"family,omitempty"`
-	Name   string `json:"name" tf:"name"`
-	Tier   string `json:"tier" tf:"tier"`
+	Family string `json:"family,omitempty" tf:"family,omitempty" protobuf:"bytes,2,opt,name=family"`
+	Name   string `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Tier   string `json:"tier" tf:"tier" protobuf:"bytes,4,opt,name=tier"`
 }
 
 type MssqlElasticpoolSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	ElasticPoolProperties []MssqlElasticpoolSpecElasticPoolProperties `json:"elasticPoolProperties,omitempty" tf:"elastic_pool_properties,omitempty"`
-	Location              string                                      `json:"location" tf:"location"`
+	ElasticPoolProperties []MssqlElasticpoolSpecElasticPoolProperties `json:"elasticPoolProperties,omitempty" tf:"elastic_pool_properties,omitempty" protobuf:"bytes,3,rep,name=elasticPoolProperties"`
+	Location              string                                      `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
 	// +optional
-	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
+	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty" protobuf:"varint,5,opt,name=maxSizeBytes"`
 	// +optional
-	MaxSizeGb float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
-	Name      string  `json:"name" tf:"name"`
+	MaxSizeGb float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty" protobuf:"fixed64,6,opt,name=maxSizeGb"`
+	Name      string  `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	PerDatabaseSettings []MssqlElasticpoolSpecPerDatabaseSettings `json:"perDatabaseSettings" tf:"per_database_settings"`
-	ResourceGroupName   string                                    `json:"resourceGroupName" tf:"resource_group_name"`
-	ServerName          string                                    `json:"serverName" tf:"server_name"`
+	PerDatabaseSettings []MssqlElasticpoolSpecPerDatabaseSettings `json:"perDatabaseSettings" tf:"per_database_settings" protobuf:"bytes,8,rep,name=perDatabaseSettings"`
+	ResourceGroupName   string                                    `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
+	ServerName          string                                    `json:"serverName" tf:"server_name" protobuf:"bytes,10,opt,name=serverName"`
 	// +kubebuilder:validation:MaxItems=1
-	Sku []MssqlElasticpoolSpecSku `json:"sku" tf:"sku"`
+	Sku []MssqlElasticpoolSpecSku `json:"sku" tf:"sku" protobuf:"bytes,11,rep,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,12,rep,name=tags"`
 	// +optional
-	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
+	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty" protobuf:"varint,13,opt,name=zoneRedundant"`
 }
 
 type MssqlElasticpoolStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *MssqlElasticpoolSpec `json:"output,omitempty"`
+	Output *MssqlElasticpoolSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -115,7 +115,7 @@ type MssqlElasticpoolStatus struct {
 // MssqlElasticpoolList is a list of MssqlElasticpools
 type MssqlElasticpoolList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of MssqlElasticpool CRD objects
-	Items []MssqlElasticpool `json:"items,omitempty"`
+	Items []MssqlElasticpool `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

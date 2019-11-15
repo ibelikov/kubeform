@@ -34,35 +34,35 @@ import (
 
 type LoggingBillingAccountSink struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoggingBillingAccountSinkSpec   `json:"spec,omitempty"`
-	Status            LoggingBillingAccountSinkStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LoggingBillingAccountSinkSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LoggingBillingAccountSinkStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LoggingBillingAccountSinkSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	BillingAccount string `json:"billingAccount" tf:"billing_account"`
-	Destination    string `json:"destination" tf:"destination"`
+	BillingAccount string `json:"billingAccount" tf:"billing_account" protobuf:"bytes,3,opt,name=billingAccount"`
+	Destination    string `json:"destination" tf:"destination" protobuf:"bytes,4,opt,name=destination"`
 	// +optional
-	Filter string `json:"filter,omitempty" tf:"filter,omitempty"`
-	Name   string `json:"name" tf:"name"`
+	Filter string `json:"filter,omitempty" tf:"filter,omitempty" protobuf:"bytes,5,opt,name=filter"`
+	Name   string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// +optional
-	WriterIdentity string `json:"writerIdentity,omitempty" tf:"writer_identity,omitempty"`
+	WriterIdentity string `json:"writerIdentity,omitempty" tf:"writer_identity,omitempty" protobuf:"bytes,7,opt,name=writerIdentity"`
 }
 
 type LoggingBillingAccountSinkStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LoggingBillingAccountSinkSpec `json:"output,omitempty"`
+	Output *LoggingBillingAccountSinkSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -71,7 +71,7 @@ type LoggingBillingAccountSinkStatus struct {
 // LoggingBillingAccountSinkList is a list of LoggingBillingAccountSinks
 type LoggingBillingAccountSinkList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LoggingBillingAccountSink CRD objects
-	Items []LoggingBillingAccountSink `json:"items,omitempty"`
+	Items []LoggingBillingAccountSink `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

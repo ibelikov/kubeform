@@ -34,42 +34,42 @@ import (
 
 type AzureadApplication struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AzureadApplicationSpec   `json:"spec,omitempty"`
-	Status            AzureadApplicationStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AzureadApplicationSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AzureadApplicationStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AzureadApplicationSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty"`
+	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty" protobuf:"bytes,3,opt,name=applicationID"`
 	// +optional
-	AvailableToOtherTenants bool `json:"availableToOtherTenants,omitempty" tf:"available_to_other_tenants,omitempty"`
+	AvailableToOtherTenants bool `json:"availableToOtherTenants,omitempty" tf:"available_to_other_tenants,omitempty" protobuf:"varint,4,opt,name=availableToOtherTenants"`
 	// +optional
-	Homepage string `json:"homepage,omitempty" tf:"homepage,omitempty"`
+	Homepage string `json:"homepage,omitempty" tf:"homepage,omitempty" protobuf:"bytes,5,opt,name=homepage"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	IdentifierUris []string `json:"identifierUris,omitempty" tf:"identifier_uris,omitempty"`
-	Name           string   `json:"name" tf:"name"`
+	IdentifierUris []string `json:"identifierUris,omitempty" tf:"identifier_uris,omitempty" protobuf:"bytes,6,rep,name=identifierUris"`
+	Name           string   `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Oauth2AllowImplicitFlow bool `json:"oauth2AllowImplicitFlow,omitempty" tf:"oauth2_allow_implicit_flow,omitempty"`
+	Oauth2AllowImplicitFlow bool `json:"oauth2AllowImplicitFlow,omitempty" tf:"oauth2_allow_implicit_flow,omitempty" protobuf:"varint,8,opt,name=oauth2AllowImplicitFlow"`
 	// +optional
-	ReplyUrls []string `json:"replyUrls,omitempty" tf:"reply_urls,omitempty"`
+	ReplyUrls []string `json:"replyUrls,omitempty" tf:"reply_urls,omitempty" protobuf:"bytes,9,rep,name=replyUrls"`
 }
 
 type AzureadApplicationStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AzureadApplicationSpec `json:"output,omitempty"`
+	Output *AzureadApplicationSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type AzureadApplicationStatus struct {
 // AzureadApplicationList is a list of AzureadApplications
 type AzureadApplicationList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AzureadApplication CRD objects
-	Items []AzureadApplication `json:"items,omitempty"`
+	Items []AzureadApplication `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

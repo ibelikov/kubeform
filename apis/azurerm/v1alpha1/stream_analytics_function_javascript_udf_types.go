@@ -34,44 +34,44 @@ import (
 
 type StreamAnalyticsFunctionJavascriptUdf struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamAnalyticsFunctionJavascriptUdfSpec   `json:"spec,omitempty"`
-	Status            StreamAnalyticsFunctionJavascriptUdfStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StreamAnalyticsFunctionJavascriptUdfSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StreamAnalyticsFunctionJavascriptUdfStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StreamAnalyticsFunctionJavascriptUdfSpecInput struct {
-	Type string `json:"type" tf:"type"`
+	Type string `json:"type" tf:"type" protobuf:"bytes,1,opt,name=type"`
 }
 
 type StreamAnalyticsFunctionJavascriptUdfSpecOutput struct {
-	Type string `json:"type" tf:"type"`
+	Type string `json:"type" tf:"type" protobuf:"bytes,1,opt,name=type"`
 }
 
 type StreamAnalyticsFunctionJavascriptUdfSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +kubebuilder:validation:MinItems=1
-	Input []StreamAnalyticsFunctionJavascriptUdfSpecInput `json:"input" tf:"input"`
-	Name  string                                          `json:"name" tf:"name"`
+	Input []StreamAnalyticsFunctionJavascriptUdfSpecInput `json:"input" tf:"input" protobuf:"bytes,3,rep,name=input"`
+	Name  string                                          `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	Output                 []StreamAnalyticsFunctionJavascriptUdfSpecOutput `json:"output" tf:"output"`
-	ResourceGroupName      string                                           `json:"resourceGroupName" tf:"resource_group_name"`
-	Script                 string                                           `json:"script" tf:"script"`
-	StreamAnalyticsJobName string                                           `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name"`
+	Output                 []StreamAnalyticsFunctionJavascriptUdfSpecOutput `json:"output" tf:"output" protobuf:"bytes,5,rep,name=output"`
+	ResourceGroupName      string                                           `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
+	Script                 string                                           `json:"script" tf:"script" protobuf:"bytes,7,opt,name=script"`
+	StreamAnalyticsJobName string                                           `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name" protobuf:"bytes,8,opt,name=streamAnalyticsJobName"`
 }
 
 type StreamAnalyticsFunctionJavascriptUdfStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StreamAnalyticsFunctionJavascriptUdfSpec `json:"output,omitempty"`
+	Output *StreamAnalyticsFunctionJavascriptUdfSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type StreamAnalyticsFunctionJavascriptUdfStatus struct {
 // StreamAnalyticsFunctionJavascriptUdfList is a list of StreamAnalyticsFunctionJavascriptUdfs
 type StreamAnalyticsFunctionJavascriptUdfList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StreamAnalyticsFunctionJavascriptUdf CRD objects
-	Items []StreamAnalyticsFunctionJavascriptUdf `json:"items,omitempty"`
+	Items []StreamAnalyticsFunctionJavascriptUdf `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

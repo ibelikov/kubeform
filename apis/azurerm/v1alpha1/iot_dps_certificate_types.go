@@ -34,34 +34,34 @@ import (
 
 type IotDpsCertificate struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IotDpsCertificateSpec   `json:"spec,omitempty"`
-	Status            IotDpsCertificateStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              IotDpsCertificateSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            IotDpsCertificateStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type IotDpsCertificateSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	CertificateContent string `json:"-" sensitive:"true" tf:"certificate_content"`
-	IotDpsName         string `json:"iotDpsName" tf:"iot_dps_name"`
-	Name               string `json:"name" tf:"name"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	IotDpsName         string `json:"iotDpsName" tf:"iot_dps_name" protobuf:"bytes,4,opt,name=iotDpsName"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 }
 
 type IotDpsCertificateStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *IotDpsCertificateSpec `json:"output,omitempty"`
+	Output *IotDpsCertificateSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -70,7 +70,7 @@ type IotDpsCertificateStatus struct {
 // IotDpsCertificateList is a list of IotDpsCertificates
 type IotDpsCertificateList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of IotDpsCertificate CRD objects
-	Items []IotDpsCertificate `json:"items,omitempty"`
+	Items []IotDpsCertificate `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

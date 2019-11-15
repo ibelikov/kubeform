@@ -34,66 +34,66 @@ import (
 
 type Nodebalancer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodebalancerSpec   `json:"spec,omitempty"`
-	Status            NodebalancerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NodebalancerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NodebalancerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NodebalancerSpecTransfer struct {
 	// The total transfer, in MB, used by this NodeBalancer this month
 	// +optional
-	In float64 `json:"in,omitempty" tf:"in,omitempty"`
+	In float64 `json:"in,omitempty" tf:"in,omitempty" protobuf:"fixed64,1,opt,name=in"`
 	// The total inbound transfer, in MB, used for this NodeBalancer this month
 	// +optional
-	Out float64 `json:"out,omitempty" tf:"out,omitempty"`
+	Out float64 `json:"out,omitempty" tf:"out,omitempty" protobuf:"fixed64,2,opt,name=out"`
 	// The total outbound transfer, in MB, used for this NodeBalancer this month
 	// +optional
-	Total float64 `json:"total,omitempty" tf:"total,omitempty"`
+	Total float64 `json:"total,omitempty" tf:"total,omitempty" protobuf:"fixed64,3,opt,name=total"`
 }
 
 type NodebalancerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// Throttle connections per second (0-20). Set to 0 (zero) to disable throttling.
 	// +optional
-	ClientConnThrottle int64 `json:"clientConnThrottle,omitempty" tf:"client_conn_throttle,omitempty"`
+	ClientConnThrottle int64 `json:"clientConnThrottle,omitempty" tf:"client_conn_throttle,omitempty" protobuf:"varint,3,opt,name=clientConnThrottle"`
 	// +optional
-	Created string `json:"created,omitempty" tf:"created,omitempty"`
+	Created string `json:"created,omitempty" tf:"created,omitempty" protobuf:"bytes,4,opt,name=created"`
 	// This NodeBalancer's hostname, ending with .nodebalancer.linode.com
 	// +optional
-	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+	Hostname string `json:"hostname,omitempty" tf:"hostname,omitempty" protobuf:"bytes,5,opt,name=hostname"`
 	// The Public IPv4 Address of this NodeBalancer
 	// +optional
-	Ipv4 string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
+	Ipv4 string `json:"ipv4,omitempty" tf:"ipv4,omitempty" protobuf:"bytes,6,opt,name=ipv4"`
 	// The Public IPv6 Address of this NodeBalancer
 	// +optional
-	Ipv6 string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+	Ipv6 string `json:"ipv6,omitempty" tf:"ipv6,omitempty" protobuf:"bytes,7,opt,name=ipv6"`
 	// The label of the Linode NodeBalancer.
 	// +optional
-	Label string `json:"label,omitempty" tf:"label,omitempty"`
+	Label string `json:"label,omitempty" tf:"label,omitempty" protobuf:"bytes,8,opt,name=label"`
 	// The region where this NodeBalancer will be deployed.
-	Region string `json:"region" tf:"region"`
+	Region string `json:"region" tf:"region" protobuf:"bytes,9,opt,name=region"`
 	// An array of tags applied to this object. Tags are for organizational purposes only.
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 	// +optional
-	Transfer map[string]NodebalancerSpecTransfer `json:"transfer,omitempty" tf:"transfer,omitempty"`
+	Transfer map[string]NodebalancerSpecTransfer `json:"transfer,omitempty" tf:"transfer,omitempty" protobuf:"bytes,11,rep,name=transfer"`
 	// +optional
-	Updated string `json:"updated,omitempty" tf:"updated,omitempty"`
+	Updated string `json:"updated,omitempty" tf:"updated,omitempty" protobuf:"bytes,12,opt,name=updated"`
 }
 
 type NodebalancerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NodebalancerSpec `json:"output,omitempty"`
+	Output *NodebalancerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -102,7 +102,7 @@ type NodebalancerStatus struct {
 // NodebalancerList is a list of Nodebalancers
 type NodebalancerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Nodebalancer CRD objects
-	Items []Nodebalancer `json:"items,omitempty"`
+	Items []Nodebalancer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

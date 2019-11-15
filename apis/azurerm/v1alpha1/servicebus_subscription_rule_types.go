@@ -34,60 +34,60 @@ import (
 
 type ServicebusSubscriptionRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicebusSubscriptionRuleSpec   `json:"spec,omitempty"`
-	Status            ServicebusSubscriptionRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ServicebusSubscriptionRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ServicebusSubscriptionRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ServicebusSubscriptionRuleSpecCorrelationFilter struct {
 	// +optional
-	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty" protobuf:"bytes,1,opt,name=contentType"`
 	// +optional
-	CorrelationID string `json:"correlationID,omitempty" tf:"correlation_id,omitempty"`
+	CorrelationID string `json:"correlationID,omitempty" tf:"correlation_id,omitempty" protobuf:"bytes,2,opt,name=correlationID"`
 	// +optional
-	Label string `json:"label,omitempty" tf:"label,omitempty"`
+	Label string `json:"label,omitempty" tf:"label,omitempty" protobuf:"bytes,3,opt,name=label"`
 	// +optional
-	MessageID string `json:"messageID,omitempty" tf:"message_id,omitempty"`
+	MessageID string `json:"messageID,omitempty" tf:"message_id,omitempty" protobuf:"bytes,4,opt,name=messageID"`
 	// +optional
-	ReplyTo string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
+	ReplyTo string `json:"replyTo,omitempty" tf:"reply_to,omitempty" protobuf:"bytes,5,opt,name=replyTo"`
 	// +optional
-	ReplyToSessionID string `json:"replyToSessionID,omitempty" tf:"reply_to_session_id,omitempty"`
+	ReplyToSessionID string `json:"replyToSessionID,omitempty" tf:"reply_to_session_id,omitempty" protobuf:"bytes,6,opt,name=replyToSessionID"`
 	// +optional
-	SessionID string `json:"sessionID,omitempty" tf:"session_id,omitempty"`
+	SessionID string `json:"sessionID,omitempty" tf:"session_id,omitempty" protobuf:"bytes,7,opt,name=sessionID"`
 	// +optional
-	To string `json:"to,omitempty" tf:"to,omitempty"`
+	To string `json:"to,omitempty" tf:"to,omitempty" protobuf:"bytes,8,opt,name=to"`
 }
 
 type ServicebusSubscriptionRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Action string `json:"action,omitempty" tf:"action,omitempty"`
+	Action string `json:"action,omitempty" tf:"action,omitempty" protobuf:"bytes,3,opt,name=action"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CorrelationFilter []ServicebusSubscriptionRuleSpecCorrelationFilter `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
-	FilterType        string                                            `json:"filterType" tf:"filter_type"`
-	Name              string                                            `json:"name" tf:"name"`
-	NamespaceName     string                                            `json:"namespaceName" tf:"namespace_name"`
-	ResourceGroupName string                                            `json:"resourceGroupName" tf:"resource_group_name"`
+	CorrelationFilter []ServicebusSubscriptionRuleSpecCorrelationFilter `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty" protobuf:"bytes,4,rep,name=correlationFilter"`
+	FilterType        string                                            `json:"filterType" tf:"filter_type" protobuf:"bytes,5,opt,name=filterType"`
+	Name              string                                            `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
+	NamespaceName     string                                            `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,7,opt,name=namespaceName"`
+	ResourceGroupName string                                            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	SqlFilter        string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
-	SubscriptionName string `json:"subscriptionName" tf:"subscription_name"`
-	TopicName        string `json:"topicName" tf:"topic_name"`
+	SqlFilter        string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty" protobuf:"bytes,9,opt,name=sqlFilter"`
+	SubscriptionName string `json:"subscriptionName" tf:"subscription_name" protobuf:"bytes,10,opt,name=subscriptionName"`
+	TopicName        string `json:"topicName" tf:"topic_name" protobuf:"bytes,11,opt,name=topicName"`
 }
 
 type ServicebusSubscriptionRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ServicebusSubscriptionRuleSpec `json:"output,omitempty"`
+	Output *ServicebusSubscriptionRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -96,7 +96,7 @@ type ServicebusSubscriptionRuleStatus struct {
 // ServicebusSubscriptionRuleList is a list of ServicebusSubscriptionRules
 type ServicebusSubscriptionRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ServicebusSubscriptionRule CRD objects
-	Items []ServicebusSubscriptionRule `json:"items,omitempty"`
+	Items []ServicebusSubscriptionRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

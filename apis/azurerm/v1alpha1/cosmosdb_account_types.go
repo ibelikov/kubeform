@@ -34,104 +34,104 @@ import (
 
 type CosmosdbAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CosmosdbAccountSpec   `json:"spec,omitempty"`
-	Status            CosmosdbAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CosmosdbAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CosmosdbAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CosmosdbAccountSpecCapabilities struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 }
 
 type CosmosdbAccountSpecConsistencyPolicy struct {
-	ConsistencyLevel string `json:"consistencyLevel" tf:"consistency_level"`
+	ConsistencyLevel string `json:"consistencyLevel" tf:"consistency_level" protobuf:"bytes,1,opt,name=consistencyLevel"`
 	// +optional
-	MaxIntervalInSeconds int64 `json:"maxIntervalInSeconds,omitempty" tf:"max_interval_in_seconds,omitempty"`
+	MaxIntervalInSeconds int64 `json:"maxIntervalInSeconds,omitempty" tf:"max_interval_in_seconds,omitempty" protobuf:"varint,2,opt,name=maxIntervalInSeconds"`
 	// +optional
-	MaxStalenessPrefix int64 `json:"maxStalenessPrefix,omitempty" tf:"max_staleness_prefix,omitempty"`
+	MaxStalenessPrefix int64 `json:"maxStalenessPrefix,omitempty" tf:"max_staleness_prefix,omitempty" protobuf:"varint,3,opt,name=maxStalenessPrefix"`
 }
 
 type CosmosdbAccountSpecFailoverPolicy struct {
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Location string `json:"location" tf:"location"`
-	Priority int64  `json:"priority" tf:"priority"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,1,opt,name=ID"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,2,opt,name=location"`
+	Priority int64  `json:"priority" tf:"priority" protobuf:"varint,3,opt,name=priority"`
 }
 
 type CosmosdbAccountSpecGeoLocation struct {
-	FailoverPriority int64 `json:"failoverPriority" tf:"failover_priority"`
+	FailoverPriority int64 `json:"failoverPriority" tf:"failover_priority" protobuf:"varint,1,opt,name=failoverPriority"`
 	// +optional
-	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
-	Location string `json:"location" tf:"location"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=ID"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,3,opt,name=location"`
 	// +optional
-	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty" protobuf:"bytes,4,opt,name=prefix"`
 }
 
 type CosmosdbAccountSpecVirtualNetworkRule struct {
-	ID string `json:"ID" tf:"id"`
+	ID string `json:"ID" tf:"id" protobuf:"bytes,1,opt,name=ID"`
 }
 
 type CosmosdbAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Capabilities []CosmosdbAccountSpecCapabilities `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
+	Capabilities []CosmosdbAccountSpecCapabilities `json:"capabilities,omitempty" tf:"capabilities,omitempty" protobuf:"bytes,4,rep,name=capabilities"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ConsistencyPolicy []CosmosdbAccountSpecConsistencyPolicy `json:"consistencyPolicy" tf:"consistency_policy"`
+	ConsistencyPolicy []CosmosdbAccountSpecConsistencyPolicy `json:"consistencyPolicy" tf:"consistency_policy" protobuf:"bytes,5,rep,name=consistencyPolicy"`
 	// +optional
-	EnableAutomaticFailover bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
+	EnableAutomaticFailover bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty" protobuf:"varint,6,opt,name=enableAutomaticFailover"`
 	// +optional
-	EnableMultipleWriteLocations bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
+	EnableMultipleWriteLocations bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty" protobuf:"varint,7,opt,name=enableMultipleWriteLocations"`
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,8,opt,name=endpoint"`
 	// +optional
 	// Deprecated
-	FailoverPolicy []CosmosdbAccountSpecFailoverPolicy `json:"failoverPolicy,omitempty" tf:"failover_policy,omitempty"`
+	FailoverPolicy []CosmosdbAccountSpecFailoverPolicy `json:"failoverPolicy,omitempty" tf:"failover_policy,omitempty" protobuf:"bytes,9,rep,name=failoverPolicy"`
 	// +optional
-	GeoLocation []CosmosdbAccountSpecGeoLocation `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
+	GeoLocation []CosmosdbAccountSpecGeoLocation `json:"geoLocation,omitempty" tf:"geo_location,omitempty" protobuf:"bytes,10,rep,name=geoLocation"`
 	// +optional
-	IpRangeFilter string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
+	IpRangeFilter string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty" protobuf:"bytes,11,opt,name=ipRangeFilter"`
 	// +optional
-	IsVirtualNetworkFilterEnabled bool `json:"isVirtualNetworkFilterEnabled,omitempty" tf:"is_virtual_network_filter_enabled,omitempty"`
+	IsVirtualNetworkFilterEnabled bool `json:"isVirtualNetworkFilterEnabled,omitempty" tf:"is_virtual_network_filter_enabled,omitempty" protobuf:"varint,12,opt,name=isVirtualNetworkFilterEnabled"`
 	// +optional
-	Kind      string `json:"kind,omitempty" tf:"kind,omitempty"`
-	Location  string `json:"location" tf:"location"`
-	Name      string `json:"name" tf:"name"`
-	OfferType string `json:"offerType" tf:"offer_type"`
+	Kind      string `json:"kind,omitempty" tf:"kind,omitempty" protobuf:"bytes,13,opt,name=kind"`
+	Location  string `json:"location" tf:"location" protobuf:"bytes,14,opt,name=location"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,15,opt,name=name"`
+	OfferType string `json:"offerType" tf:"offer_type" protobuf:"bytes,16,opt,name=offerType"`
 	// +optional
 	PrimaryMasterKey string `json:"-" sensitive:"true" tf:"primary_master_key,omitempty"`
 	// +optional
 	PrimaryReadonlyMasterKey string `json:"-" sensitive:"true" tf:"primary_readonly_master_key,omitempty"`
 	// +optional
-	ReadEndpoints     []string `json:"readEndpoints,omitempty" tf:"read_endpoints,omitempty"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
+	ReadEndpoints     []string `json:"readEndpoints,omitempty" tf:"read_endpoints,omitempty" protobuf:"bytes,17,rep,name=readEndpoints"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,18,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryMasterKey string `json:"-" sensitive:"true" tf:"secondary_master_key,omitempty"`
 	// +optional
 	SecondaryReadonlyMasterKey string `json:"-" sensitive:"true" tf:"secondary_readonly_master_key,omitempty"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,19,rep,name=tags"`
 	// +optional
-	VirtualNetworkRule []CosmosdbAccountSpecVirtualNetworkRule `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
+	VirtualNetworkRule []CosmosdbAccountSpecVirtualNetworkRule `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty" protobuf:"bytes,20,rep,name=virtualNetworkRule"`
 	// +optional
-	WriteEndpoints []string `json:"writeEndpoints,omitempty" tf:"write_endpoints,omitempty"`
+	WriteEndpoints []string `json:"writeEndpoints,omitempty" tf:"write_endpoints,omitempty" protobuf:"bytes,21,rep,name=writeEndpoints"`
 }
 
 type CosmosdbAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CosmosdbAccountSpec `json:"output,omitempty"`
+	Output *CosmosdbAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -140,7 +140,7 @@ type CosmosdbAccountStatus struct {
 // CosmosdbAccountList is a list of CosmosdbAccounts
 type CosmosdbAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CosmosdbAccount CRD objects
-	Items []CosmosdbAccount `json:"items,omitempty"`
+	Items []CosmosdbAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

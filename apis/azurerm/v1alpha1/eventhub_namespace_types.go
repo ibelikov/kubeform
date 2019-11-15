@@ -34,22 +34,22 @@ import (
 
 type EventhubNamespace_ struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventhubNamespace_Spec   `json:"spec,omitempty"`
-	Status            EventhubNamespace_Status `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              EventhubNamespace_Spec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            EventhubNamespace_Status `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type EventhubNamespace_Spec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AutoInflateEnabled bool `json:"autoInflateEnabled,omitempty" tf:"auto_inflate_enabled,omitempty"`
+	AutoInflateEnabled bool `json:"autoInflateEnabled,omitempty" tf:"auto_inflate_enabled,omitempty" protobuf:"varint,4,opt,name=autoInflateEnabled"`
 	// +optional
-	Capacity int64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity int64 `json:"capacity,omitempty" tf:"capacity,omitempty" protobuf:"varint,5,opt,name=capacity"`
 	// +optional
 	DefaultPrimaryConnectionString string `json:"-" sensitive:"true" tf:"default_primary_connection_string,omitempty"`
 	// +optional
@@ -59,27 +59,27 @@ type EventhubNamespace_Spec struct {
 	// +optional
 	DefaultSecondaryKey string `json:"-" sensitive:"true" tf:"default_secondary_key,omitempty"`
 	// +optional
-	KafkaEnabled bool   `json:"kafkaEnabled,omitempty" tf:"kafka_enabled,omitempty"`
-	Location     string `json:"location" tf:"location"`
+	KafkaEnabled bool   `json:"kafkaEnabled,omitempty" tf:"kafka_enabled,omitempty" protobuf:"varint,6,opt,name=kafkaEnabled"`
+	Location     string `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
 	// +optional
-	MaximumThroughputUnits int64  `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
-	Name                   string `json:"name" tf:"name"`
-	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
-	Sku                    string `json:"sku" tf:"sku"`
+	MaximumThroughputUnits int64  `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty" protobuf:"varint,8,opt,name=maximumThroughputUnits"`
+	Name                   string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
+	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,10,opt,name=resourceGroupName"`
+	Sku                    string `json:"sku" tf:"sku" protobuf:"bytes,11,opt,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,12,rep,name=tags"`
 }
 
 type EventhubNamespace_Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *EventhubNamespace_Spec `json:"output,omitempty"`
+	Output *EventhubNamespace_Spec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type EventhubNamespace_Status struct {
 // EventhubNamespace_List is a list of EventhubNamespace_s
 type EventhubNamespace_List struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of EventhubNamespace_ CRD objects
-	Items []EventhubNamespace_ `json:"items,omitempty"`
+	Items []EventhubNamespace_ `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

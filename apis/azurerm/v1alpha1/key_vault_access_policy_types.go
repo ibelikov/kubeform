@@ -34,48 +34,48 @@ import (
 
 type KeyVaultAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyVaultAccessPolicySpec   `json:"spec,omitempty"`
-	Status            KeyVaultAccessPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              KeyVaultAccessPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            KeyVaultAccessPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type KeyVaultAccessPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty"`
+	ApplicationID string `json:"applicationID,omitempty" tf:"application_id,omitempty" protobuf:"bytes,3,opt,name=applicationID"`
 	// +optional
-	CertificatePermissions []string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
+	CertificatePermissions []string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty" protobuf:"bytes,4,rep,name=certificatePermissions"`
 	// +optional
-	KeyPermissions []string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
+	KeyPermissions []string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty" protobuf:"bytes,5,rep,name=keyPermissions"`
 	// +optional
-	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
-	ObjectID   string `json:"objectID" tf:"object_id"`
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty" protobuf:"bytes,6,opt,name=keyVaultID"`
+	ObjectID   string `json:"objectID" tf:"object_id" protobuf:"bytes,7,opt,name=objectID"`
 	// +optional
 	// Deprecated
-	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
-	SecretPermissions []string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
+	SecretPermissions []string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty" protobuf:"bytes,9,rep,name=secretPermissions"`
 	// +optional
-	StoragePermissions []string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
-	TenantID           string   `json:"tenantID" tf:"tenant_id"`
+	StoragePermissions []string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty" protobuf:"bytes,10,rep,name=storagePermissions"`
+	TenantID           string   `json:"tenantID" tf:"tenant_id" protobuf:"bytes,11,opt,name=tenantID"`
 	// +optional
 	// Deprecated
-	VaultName string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
+	VaultName string `json:"vaultName,omitempty" tf:"vault_name,omitempty" protobuf:"bytes,12,opt,name=vaultName"`
 }
 
 type KeyVaultAccessPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *KeyVaultAccessPolicySpec `json:"output,omitempty"`
+	Output *KeyVaultAccessPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -84,7 +84,7 @@ type KeyVaultAccessPolicyStatus struct {
 // KeyVaultAccessPolicyList is a list of KeyVaultAccessPolicys
 type KeyVaultAccessPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of KeyVaultAccessPolicy CRD objects
-	Items []KeyVaultAccessPolicy `json:"items,omitempty"`
+	Items []KeyVaultAccessPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

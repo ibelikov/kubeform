@@ -34,57 +34,57 @@ import (
 
 type AutomationRunbook struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutomationRunbookSpec   `json:"spec,omitempty"`
-	Status            AutomationRunbookStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AutomationRunbookSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AutomationRunbookStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AutomationRunbookSpecPublishContentLinkHash struct {
-	Algorithm string `json:"algorithm" tf:"algorithm"`
-	Value     string `json:"value" tf:"value"`
+	Algorithm string `json:"algorithm" tf:"algorithm" protobuf:"bytes,1,opt,name=algorithm"`
+	Value     string `json:"value" tf:"value" protobuf:"bytes,2,opt,name=value"`
 }
 
 type AutomationRunbookSpecPublishContentLink struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Hash []AutomationRunbookSpecPublishContentLinkHash `json:"hash,omitempty" tf:"hash,omitempty"`
-	Uri  string                                        `json:"uri" tf:"uri"`
+	Hash []AutomationRunbookSpecPublishContentLinkHash `json:"hash,omitempty" tf:"hash,omitempty" protobuf:"bytes,1,rep,name=hash"`
+	Uri  string                                        `json:"uri" tf:"uri" protobuf:"bytes,2,opt,name=uri"`
 	// +optional
-	Version string `json:"version,omitempty" tf:"version,omitempty"`
+	Version string `json:"version,omitempty" tf:"version,omitempty" protobuf:"bytes,3,opt,name=version"`
 }
 
 type AutomationRunbookSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	AccountName string `json:"accountName" tf:"account_name"`
+	AccountName string `json:"accountName" tf:"account_name" protobuf:"bytes,3,opt,name=accountName"`
 	// +optional
-	Content string `json:"content,omitempty" tf:"content,omitempty"`
+	Content string `json:"content,omitempty" tf:"content,omitempty" protobuf:"bytes,4,opt,name=content"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Location    string `json:"location" tf:"location"`
-	LogProgress bool   `json:"logProgress" tf:"log_progress"`
-	LogVerbose  bool   `json:"logVerbose" tf:"log_verbose"`
-	Name        string `json:"name" tf:"name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
+	Location    string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	LogProgress bool   `json:"logProgress" tf:"log_progress" protobuf:"varint,7,opt,name=logProgress"`
+	LogVerbose  bool   `json:"logVerbose" tf:"log_verbose" protobuf:"varint,8,opt,name=logVerbose"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +kubebuilder:validation:MaxItems=1
-	PublishContentLink []AutomationRunbookSpecPublishContentLink `json:"publishContentLink" tf:"publish_content_link"`
-	ResourceGroupName  string                                    `json:"resourceGroupName" tf:"resource_group_name"`
-	RunbookType        string                                    `json:"runbookType" tf:"runbook_type"`
+	PublishContentLink []AutomationRunbookSpecPublishContentLink `json:"publishContentLink" tf:"publish_content_link" protobuf:"bytes,10,rep,name=publishContentLink"`
+	ResourceGroupName  string                                    `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
+	RunbookType        string                                    `json:"runbookType" tf:"runbook_type" protobuf:"bytes,12,opt,name=runbookType"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,13,rep,name=tags"`
 }
 
 type AutomationRunbookStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AutomationRunbookSpec `json:"output,omitempty"`
+	Output *AutomationRunbookSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -93,7 +93,7 @@ type AutomationRunbookStatus struct {
 // AutomationRunbookList is a list of AutomationRunbooks
 type AutomationRunbookList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AutomationRunbook CRD objects
-	Items []AutomationRunbook `json:"items,omitempty"`
+	Items []AutomationRunbook `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

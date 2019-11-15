@@ -34,74 +34,74 @@ import (
 
 type ContainerRegistry struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerRegistrySpec   `json:"spec,omitempty"`
-	Status            ContainerRegistryStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ContainerRegistrySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ContainerRegistryStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ContainerRegistrySpecNetworkRuleSetIpRule struct {
-	Action  string `json:"action" tf:"action"`
-	IpRange string `json:"ipRange" tf:"ip_range"`
+	Action  string `json:"action" tf:"action" protobuf:"bytes,1,opt,name=action"`
+	IpRange string `json:"ipRange" tf:"ip_range" protobuf:"bytes,2,opt,name=ipRange"`
 }
 
 type ContainerRegistrySpecNetworkRuleSet struct {
 	// +optional
-	DefaultAction string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction string `json:"defaultAction,omitempty" tf:"default_action,omitempty" protobuf:"bytes,1,opt,name=defaultAction"`
 	// +optional
-	IpRule []ContainerRegistrySpecNetworkRuleSetIpRule `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
+	IpRule []ContainerRegistrySpecNetworkRuleSetIpRule `json:"ipRule,omitempty" tf:"ip_rule,omitempty" protobuf:"bytes,2,rep,name=ipRule"`
 }
 
 type ContainerRegistrySpecStorageAccount struct {
 	AccessKey string `json:"-" sensitive:"true" tf:"access_key"`
-	Name      string `json:"name" tf:"name"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 }
 
 type ContainerRegistrySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AdminEnabled bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
+	AdminEnabled bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty" protobuf:"varint,4,opt,name=adminEnabled"`
 	// +optional
 	AdminPassword string `json:"-" sensitive:"true" tf:"admin_password,omitempty"`
 	// +optional
-	AdminUsername string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	AdminUsername string `json:"adminUsername,omitempty" tf:"admin_username,omitempty" protobuf:"bytes,5,opt,name=adminUsername"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	GeoreplicationLocations []string `json:"georeplicationLocations,omitempty" tf:"georeplication_locations,omitempty"`
-	Location                string   `json:"location" tf:"location"`
+	GeoreplicationLocations []string `json:"georeplicationLocations,omitempty" tf:"georeplication_locations,omitempty" protobuf:"bytes,6,rep,name=georeplicationLocations"`
+	Location                string   `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
 	// +optional
-	LoginServer string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	LoginServer string `json:"loginServer,omitempty" tf:"login_server,omitempty" protobuf:"bytes,8,opt,name=loginServer"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkRuleSet    []ContainerRegistrySpecNetworkRuleSet `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
-	ResourceGroupName string                                `json:"resourceGroupName" tf:"resource_group_name"`
+	NetworkRuleSet    []ContainerRegistrySpecNetworkRuleSet `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty" protobuf:"bytes,10,rep,name=networkRuleSet"`
+	ResourceGroupName string                                `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,12,opt,name=sku"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	StorageAccount []ContainerRegistrySpecStorageAccount `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+	StorageAccount []ContainerRegistrySpecStorageAccount `json:"storageAccount,omitempty" tf:"storage_account,omitempty" protobuf:"bytes,13,rep,name=storageAccount"`
 	// +optional
-	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty" protobuf:"bytes,14,opt,name=storageAccountID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,15,rep,name=tags"`
 }
 
 type ContainerRegistryStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ContainerRegistrySpec `json:"output,omitempty"`
+	Output *ContainerRegistrySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -110,7 +110,7 @@ type ContainerRegistryStatus struct {
 // ContainerRegistryList is a list of ContainerRegistrys
 type ContainerRegistryList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ContainerRegistry CRD objects
-	Items []ContainerRegistry `json:"items,omitempty"`
+	Items []ContainerRegistry `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,67 +34,67 @@ import (
 
 type EventgridDomain struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventgridDomainSpec   `json:"spec,omitempty"`
-	Status            EventgridDomainStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              EventgridDomainSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            EventgridDomainStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type EventgridDomainSpecInputMappingDefaultValues struct {
 	// +optional
-	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty" protobuf:"bytes,1,opt,name=dataVersion"`
 	// +optional
-	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty" protobuf:"bytes,2,opt,name=eventType"`
 	// +optional
-	Subject string `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject string `json:"subject,omitempty" tf:"subject,omitempty" protobuf:"bytes,3,opt,name=subject"`
 }
 
 type EventgridDomainSpecInputMappingFields struct {
 	// +optional
-	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty" protobuf:"bytes,1,opt,name=dataVersion"`
 	// +optional
-	EventTime string `json:"eventTime,omitempty" tf:"event_time,omitempty"`
+	EventTime string `json:"eventTime,omitempty" tf:"event_time,omitempty" protobuf:"bytes,2,opt,name=eventTime"`
 	// +optional
-	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty" protobuf:"bytes,3,opt,name=eventType"`
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty" protobuf:"bytes,4,opt,name=ID"`
 	// +optional
-	Subject string `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject string `json:"subject,omitempty" tf:"subject,omitempty" protobuf:"bytes,5,opt,name=subject"`
 	// +optional
-	Topic string `json:"topic,omitempty" tf:"topic,omitempty"`
+	Topic string `json:"topic,omitempty" tf:"topic,omitempty" protobuf:"bytes,6,opt,name=topic"`
 }
 
 type EventgridDomainSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,3,opt,name=endpoint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	InputMappingDefaultValues []EventgridDomainSpecInputMappingDefaultValues `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
+	InputMappingDefaultValues []EventgridDomainSpecInputMappingDefaultValues `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty" protobuf:"bytes,4,rep,name=inputMappingDefaultValues"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	InputMappingFields []EventgridDomainSpecInputMappingFields `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
+	InputMappingFields []EventgridDomainSpecInputMappingFields `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty" protobuf:"bytes,5,rep,name=inputMappingFields"`
 	// +optional
-	InputSchema       string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	InputSchema       string `json:"inputSchema,omitempty" tf:"input_schema,omitempty" protobuf:"bytes,6,opt,name=inputSchema"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,7,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,8,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type EventgridDomainStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *EventgridDomainSpec `json:"output,omitempty"`
+	Output *EventgridDomainSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -103,7 +103,7 @@ type EventgridDomainStatus struct {
 // EventgridDomainList is a list of EventgridDomains
 type EventgridDomainList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of EventgridDomain CRD objects
-	Items []EventgridDomain `json:"items,omitempty"`
+	Items []EventgridDomain `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

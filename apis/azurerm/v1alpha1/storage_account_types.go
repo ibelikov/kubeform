@@ -34,211 +34,211 @@ import (
 
 type StorageAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageAccountSpec   `json:"spec,omitempty"`
-	Status            StorageAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageAccountSpecCustomDomain struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 	// +optional
-	UseSubdomain bool `json:"useSubdomain,omitempty" tf:"use_subdomain,omitempty"`
+	UseSubdomain bool `json:"useSubdomain,omitempty" tf:"use_subdomain,omitempty" protobuf:"varint,2,opt,name=useSubdomain"`
 }
 
 type StorageAccountSpecIdentity struct {
 	// +optional
-	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
+	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,1,opt,name=principalID"`
 	// +optional
-	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
-	Type     string `json:"type" tf:"type"`
+	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty" protobuf:"bytes,2,opt,name=tenantID"`
+	Type     string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type StorageAccountSpecNetworkRules struct {
 	// +optional
-	Bypass []string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+	Bypass []string `json:"bypass,omitempty" tf:"bypass,omitempty" protobuf:"bytes,1,rep,name=bypass"`
 	// +optional
-	DefaultAction string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction string `json:"defaultAction,omitempty" tf:"default_action,omitempty" protobuf:"bytes,2,opt,name=defaultAction"`
 	// +optional
-	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty" protobuf:"bytes,3,rep,name=ipRules"`
 	// +optional
-	VirtualNetworkSubnetIDS []string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+	VirtualNetworkSubnetIDS []string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty" protobuf:"bytes,4,rep,name=virtualNetworkSubnetIDS"`
 }
 
 type StorageAccountSpecQueuePropertiesCorsRule struct {
 	// +kubebuilder:validation:MaxItems=64
-	AllowedHeaders []string `json:"allowedHeaders" tf:"allowed_headers"`
+	AllowedHeaders []string `json:"allowedHeaders" tf:"allowed_headers" protobuf:"bytes,1,rep,name=allowedHeaders"`
 	// +kubebuilder:validation:MaxItems=64
-	AllowedMethods []string `json:"allowedMethods" tf:"allowed_methods"`
+	AllowedMethods []string `json:"allowedMethods" tf:"allowed_methods" protobuf:"bytes,2,rep,name=allowedMethods"`
 	// +kubebuilder:validation:MaxItems=64
-	AllowedOrigins []string `json:"allowedOrigins" tf:"allowed_origins"`
+	AllowedOrigins []string `json:"allowedOrigins" tf:"allowed_origins" protobuf:"bytes,3,rep,name=allowedOrigins"`
 	// +kubebuilder:validation:MaxItems=64
-	ExposedHeaders  []string `json:"exposedHeaders" tf:"exposed_headers"`
-	MaxAgeInSeconds int64    `json:"maxAgeInSeconds" tf:"max_age_in_seconds"`
+	ExposedHeaders  []string `json:"exposedHeaders" tf:"exposed_headers" protobuf:"bytes,4,rep,name=exposedHeaders"`
+	MaxAgeInSeconds int64    `json:"maxAgeInSeconds" tf:"max_age_in_seconds" protobuf:"varint,5,opt,name=maxAgeInSeconds"`
 }
 
 type StorageAccountSpecQueuePropertiesHourMetrics struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
+	Enabled bool `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
-	IncludeApis bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
+	IncludeApis bool `json:"includeApis,omitempty" tf:"include_apis,omitempty" protobuf:"varint,2,opt,name=includeApis"`
 	// +optional
-	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
-	Version             string `json:"version" tf:"version"`
+	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty" protobuf:"varint,3,opt,name=retentionPolicyDays"`
+	Version             string `json:"version" tf:"version" protobuf:"bytes,4,opt,name=version"`
 }
 
 type StorageAccountSpecQueuePropertiesLogging struct {
-	Delete bool `json:"delete" tf:"delete"`
-	Read   bool `json:"read" tf:"read"`
+	Delete bool `json:"delete" tf:"delete" protobuf:"varint,1,opt,name=delete"`
+	Read   bool `json:"read" tf:"read" protobuf:"varint,2,opt,name=read"`
 	// +optional
-	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
-	Version             string `json:"version" tf:"version"`
-	Write               bool   `json:"write" tf:"write"`
+	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty" protobuf:"varint,3,opt,name=retentionPolicyDays"`
+	Version             string `json:"version" tf:"version" protobuf:"bytes,4,opt,name=version"`
+	Write               bool   `json:"write" tf:"write" protobuf:"varint,5,opt,name=write"`
 }
 
 type StorageAccountSpecQueuePropertiesMinuteMetrics struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
+	Enabled bool `json:"enabled" tf:"enabled" protobuf:"varint,1,opt,name=enabled"`
 	// +optional
-	IncludeApis bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
+	IncludeApis bool `json:"includeApis,omitempty" tf:"include_apis,omitempty" protobuf:"varint,2,opt,name=includeApis"`
 	// +optional
-	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
-	Version             string `json:"version" tf:"version"`
+	RetentionPolicyDays int64  `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty" protobuf:"varint,3,opt,name=retentionPolicyDays"`
+	Version             string `json:"version" tf:"version" protobuf:"bytes,4,opt,name=version"`
 }
 
 type StorageAccountSpecQueueProperties struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=5
-	CorsRule []StorageAccountSpecQueuePropertiesCorsRule `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+	CorsRule []StorageAccountSpecQueuePropertiesCorsRule `json:"corsRule,omitempty" tf:"cors_rule,omitempty" protobuf:"bytes,1,rep,name=corsRule"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	HourMetrics []StorageAccountSpecQueuePropertiesHourMetrics `json:"hourMetrics,omitempty" tf:"hour_metrics,omitempty"`
+	HourMetrics []StorageAccountSpecQueuePropertiesHourMetrics `json:"hourMetrics,omitempty" tf:"hour_metrics,omitempty" protobuf:"bytes,2,rep,name=hourMetrics"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Logging []StorageAccountSpecQueuePropertiesLogging `json:"logging,omitempty" tf:"logging,omitempty"`
+	Logging []StorageAccountSpecQueuePropertiesLogging `json:"logging,omitempty" tf:"logging,omitempty" protobuf:"bytes,3,rep,name=logging"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	MinuteMetrics []StorageAccountSpecQueuePropertiesMinuteMetrics `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty"`
+	MinuteMetrics []StorageAccountSpecQueuePropertiesMinuteMetrics `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty" protobuf:"bytes,4,rep,name=minuteMetrics"`
 }
 
 type StorageAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	AccessTier string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+	AccessTier string `json:"accessTier,omitempty" tf:"access_tier,omitempty" protobuf:"bytes,4,opt,name=accessTier"`
 	// +optional
-	AccountEncryptionSource string `json:"accountEncryptionSource,omitempty" tf:"account_encryption_source,omitempty"`
+	AccountEncryptionSource string `json:"accountEncryptionSource,omitempty" tf:"account_encryption_source,omitempty" protobuf:"bytes,5,opt,name=accountEncryptionSource"`
 	// +optional
-	AccountKind            string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
-	AccountReplicationType string `json:"accountReplicationType" tf:"account_replication_type"`
-	AccountTier            string `json:"accountTier" tf:"account_tier"`
+	AccountKind            string `json:"accountKind,omitempty" tf:"account_kind,omitempty" protobuf:"bytes,6,opt,name=accountKind"`
+	AccountReplicationType string `json:"accountReplicationType" tf:"account_replication_type" protobuf:"bytes,7,opt,name=accountReplicationType"`
+	AccountTier            string `json:"accountTier" tf:"account_tier" protobuf:"bytes,8,opt,name=accountTier"`
 	// +optional
 	// Deprecated
-	AccountType string `json:"accountType,omitempty" tf:"account_type,omitempty"`
+	AccountType string `json:"accountType,omitempty" tf:"account_type,omitempty" protobuf:"bytes,9,opt,name=accountType"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	CustomDomain []StorageAccountSpecCustomDomain `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	CustomDomain []StorageAccountSpecCustomDomain `json:"customDomain,omitempty" tf:"custom_domain,omitempty" protobuf:"bytes,10,rep,name=customDomain"`
 	// +optional
-	EnableAdvancedThreatProtection bool `json:"enableAdvancedThreatProtection,omitempty" tf:"enable_advanced_threat_protection,omitempty"`
+	EnableAdvancedThreatProtection bool `json:"enableAdvancedThreatProtection,omitempty" tf:"enable_advanced_threat_protection,omitempty" protobuf:"varint,11,opt,name=enableAdvancedThreatProtection"`
 	// +optional
-	EnableBlobEncryption bool `json:"enableBlobEncryption,omitempty" tf:"enable_blob_encryption,omitempty"`
+	EnableBlobEncryption bool `json:"enableBlobEncryption,omitempty" tf:"enable_blob_encryption,omitempty" protobuf:"varint,12,opt,name=enableBlobEncryption"`
 	// +optional
-	EnableFileEncryption bool `json:"enableFileEncryption,omitempty" tf:"enable_file_encryption,omitempty"`
+	EnableFileEncryption bool `json:"enableFileEncryption,omitempty" tf:"enable_file_encryption,omitempty" protobuf:"varint,13,opt,name=enableFileEncryption"`
 	// +optional
-	EnableHTTPSTrafficOnly bool `json:"enableHTTPSTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Identity []StorageAccountSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
-	// +optional
-	IsHnsEnabled bool   `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
-	Location     string `json:"location" tf:"location"`
-	Name         string `json:"name" tf:"name"`
+	EnableHTTPSTrafficOnly bool `json:"enableHTTPSTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty" protobuf:"varint,14,opt,name=enableHTTPSTrafficOnly"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkRules []StorageAccountSpecNetworkRules `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+	Identity []StorageAccountSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,15,rep,name=identity"`
+	// +optional
+	IsHnsEnabled bool   `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty" protobuf:"varint,16,opt,name=isHnsEnabled"`
+	Location     string `json:"location" tf:"location" protobuf:"bytes,17,opt,name=location"`
+	Name         string `json:"name" tf:"name" protobuf:"bytes,18,opt,name=name"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	NetworkRules []StorageAccountSpecNetworkRules `json:"networkRules,omitempty" tf:"network_rules,omitempty" protobuf:"bytes,19,rep,name=networkRules"`
 	// +optional
 	PrimaryAccessKey string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
 	// +optional
 	PrimaryBlobConnectionString string `json:"-" sensitive:"true" tf:"primary_blob_connection_string,omitempty"`
 	// +optional
-	PrimaryBlobEndpoint string `json:"primaryBlobEndpoint,omitempty" tf:"primary_blob_endpoint,omitempty"`
+	PrimaryBlobEndpoint string `json:"primaryBlobEndpoint,omitempty" tf:"primary_blob_endpoint,omitempty" protobuf:"bytes,20,opt,name=primaryBlobEndpoint"`
 	// +optional
-	PrimaryBlobHost string `json:"primaryBlobHost,omitempty" tf:"primary_blob_host,omitempty"`
+	PrimaryBlobHost string `json:"primaryBlobHost,omitempty" tf:"primary_blob_host,omitempty" protobuf:"bytes,21,opt,name=primaryBlobHost"`
 	// +optional
 	PrimaryConnectionString string `json:"-" sensitive:"true" tf:"primary_connection_string,omitempty"`
 	// +optional
-	PrimaryDfsEndpoint string `json:"primaryDfsEndpoint,omitempty" tf:"primary_dfs_endpoint,omitempty"`
+	PrimaryDfsEndpoint string `json:"primaryDfsEndpoint,omitempty" tf:"primary_dfs_endpoint,omitempty" protobuf:"bytes,22,opt,name=primaryDfsEndpoint"`
 	// +optional
-	PrimaryDfsHost string `json:"primaryDfsHost,omitempty" tf:"primary_dfs_host,omitempty"`
+	PrimaryDfsHost string `json:"primaryDfsHost,omitempty" tf:"primary_dfs_host,omitempty" protobuf:"bytes,23,opt,name=primaryDfsHost"`
 	// +optional
-	PrimaryFileEndpoint string `json:"primaryFileEndpoint,omitempty" tf:"primary_file_endpoint,omitempty"`
+	PrimaryFileEndpoint string `json:"primaryFileEndpoint,omitempty" tf:"primary_file_endpoint,omitempty" protobuf:"bytes,24,opt,name=primaryFileEndpoint"`
 	// +optional
-	PrimaryFileHost string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty"`
+	PrimaryFileHost string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty" protobuf:"bytes,25,opt,name=primaryFileHost"`
 	// +optional
-	PrimaryLocation string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty"`
+	PrimaryLocation string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty" protobuf:"bytes,26,opt,name=primaryLocation"`
 	// +optional
-	PrimaryQueueEndpoint string `json:"primaryQueueEndpoint,omitempty" tf:"primary_queue_endpoint,omitempty"`
+	PrimaryQueueEndpoint string `json:"primaryQueueEndpoint,omitempty" tf:"primary_queue_endpoint,omitempty" protobuf:"bytes,27,opt,name=primaryQueueEndpoint"`
 	// +optional
-	PrimaryQueueHost string `json:"primaryQueueHost,omitempty" tf:"primary_queue_host,omitempty"`
+	PrimaryQueueHost string `json:"primaryQueueHost,omitempty" tf:"primary_queue_host,omitempty" protobuf:"bytes,28,opt,name=primaryQueueHost"`
 	// +optional
-	PrimaryTableEndpoint string `json:"primaryTableEndpoint,omitempty" tf:"primary_table_endpoint,omitempty"`
+	PrimaryTableEndpoint string `json:"primaryTableEndpoint,omitempty" tf:"primary_table_endpoint,omitempty" protobuf:"bytes,29,opt,name=primaryTableEndpoint"`
 	// +optional
-	PrimaryTableHost string `json:"primaryTableHost,omitempty" tf:"primary_table_host,omitempty"`
+	PrimaryTableHost string `json:"primaryTableHost,omitempty" tf:"primary_table_host,omitempty" protobuf:"bytes,30,opt,name=primaryTableHost"`
 	// +optional
-	PrimaryWebEndpoint string `json:"primaryWebEndpoint,omitempty" tf:"primary_web_endpoint,omitempty"`
+	PrimaryWebEndpoint string `json:"primaryWebEndpoint,omitempty" tf:"primary_web_endpoint,omitempty" protobuf:"bytes,31,opt,name=primaryWebEndpoint"`
 	// +optional
-	PrimaryWebHost string `json:"primaryWebHost,omitempty" tf:"primary_web_host,omitempty"`
+	PrimaryWebHost string `json:"primaryWebHost,omitempty" tf:"primary_web_host,omitempty" protobuf:"bytes,32,opt,name=primaryWebHost"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	QueueProperties   []StorageAccountSpecQueueProperties `json:"queueProperties,omitempty" tf:"queue_properties,omitempty"`
-	ResourceGroupName string                              `json:"resourceGroupName" tf:"resource_group_name"`
+	QueueProperties   []StorageAccountSpecQueueProperties `json:"queueProperties,omitempty" tf:"queue_properties,omitempty" protobuf:"bytes,33,rep,name=queueProperties"`
+	ResourceGroupName string                              `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,34,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
 	// +optional
 	SecondaryBlobConnectionString string `json:"-" sensitive:"true" tf:"secondary_blob_connection_string,omitempty"`
 	// +optional
-	SecondaryBlobEndpoint string `json:"secondaryBlobEndpoint,omitempty" tf:"secondary_blob_endpoint,omitempty"`
+	SecondaryBlobEndpoint string `json:"secondaryBlobEndpoint,omitempty" tf:"secondary_blob_endpoint,omitempty" protobuf:"bytes,35,opt,name=secondaryBlobEndpoint"`
 	// +optional
-	SecondaryBlobHost string `json:"secondaryBlobHost,omitempty" tf:"secondary_blob_host,omitempty"`
+	SecondaryBlobHost string `json:"secondaryBlobHost,omitempty" tf:"secondary_blob_host,omitempty" protobuf:"bytes,36,opt,name=secondaryBlobHost"`
 	// +optional
 	SecondaryConnectionString string `json:"-" sensitive:"true" tf:"secondary_connection_string,omitempty"`
 	// +optional
-	SecondaryDfsEndpoint string `json:"secondaryDfsEndpoint,omitempty" tf:"secondary_dfs_endpoint,omitempty"`
+	SecondaryDfsEndpoint string `json:"secondaryDfsEndpoint,omitempty" tf:"secondary_dfs_endpoint,omitempty" protobuf:"bytes,37,opt,name=secondaryDfsEndpoint"`
 	// +optional
-	SecondaryDfsHost string `json:"secondaryDfsHost,omitempty" tf:"secondary_dfs_host,omitempty"`
+	SecondaryDfsHost string `json:"secondaryDfsHost,omitempty" tf:"secondary_dfs_host,omitempty" protobuf:"bytes,38,opt,name=secondaryDfsHost"`
 	// +optional
-	SecondaryFileEndpoint string `json:"secondaryFileEndpoint,omitempty" tf:"secondary_file_endpoint,omitempty"`
+	SecondaryFileEndpoint string `json:"secondaryFileEndpoint,omitempty" tf:"secondary_file_endpoint,omitempty" protobuf:"bytes,39,opt,name=secondaryFileEndpoint"`
 	// +optional
-	SecondaryFileHost string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty"`
+	SecondaryFileHost string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty" protobuf:"bytes,40,opt,name=secondaryFileHost"`
 	// +optional
-	SecondaryLocation string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty"`
+	SecondaryLocation string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty" protobuf:"bytes,41,opt,name=secondaryLocation"`
 	// +optional
-	SecondaryQueueEndpoint string `json:"secondaryQueueEndpoint,omitempty" tf:"secondary_queue_endpoint,omitempty"`
+	SecondaryQueueEndpoint string `json:"secondaryQueueEndpoint,omitempty" tf:"secondary_queue_endpoint,omitempty" protobuf:"bytes,42,opt,name=secondaryQueueEndpoint"`
 	// +optional
-	SecondaryQueueHost string `json:"secondaryQueueHost,omitempty" tf:"secondary_queue_host,omitempty"`
+	SecondaryQueueHost string `json:"secondaryQueueHost,omitempty" tf:"secondary_queue_host,omitempty" protobuf:"bytes,43,opt,name=secondaryQueueHost"`
 	// +optional
-	SecondaryTableEndpoint string `json:"secondaryTableEndpoint,omitempty" tf:"secondary_table_endpoint,omitempty"`
+	SecondaryTableEndpoint string `json:"secondaryTableEndpoint,omitempty" tf:"secondary_table_endpoint,omitempty" protobuf:"bytes,44,opt,name=secondaryTableEndpoint"`
 	// +optional
-	SecondaryTableHost string `json:"secondaryTableHost,omitempty" tf:"secondary_table_host,omitempty"`
+	SecondaryTableHost string `json:"secondaryTableHost,omitempty" tf:"secondary_table_host,omitempty" protobuf:"bytes,45,opt,name=secondaryTableHost"`
 	// +optional
-	SecondaryWebEndpoint string `json:"secondaryWebEndpoint,omitempty" tf:"secondary_web_endpoint,omitempty"`
+	SecondaryWebEndpoint string `json:"secondaryWebEndpoint,omitempty" tf:"secondary_web_endpoint,omitempty" protobuf:"bytes,46,opt,name=secondaryWebEndpoint"`
 	// +optional
-	SecondaryWebHost string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty"`
+	SecondaryWebHost string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty" protobuf:"bytes,47,opt,name=secondaryWebHost"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,48,rep,name=tags"`
 }
 
 type StorageAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageAccountSpec `json:"output,omitempty"`
+	Output *StorageAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -247,7 +247,7 @@ type StorageAccountStatus struct {
 // StorageAccountList is a list of StorageAccounts
 type StorageAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageAccount CRD objects
-	Items []StorageAccount `json:"items,omitempty"`
+	Items []StorageAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

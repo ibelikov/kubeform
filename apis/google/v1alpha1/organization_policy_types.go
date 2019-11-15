@@ -34,78 +34,78 @@ import (
 
 type OrganizationPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OrganizationPolicySpec   `json:"spec,omitempty"`
-	Status            OrganizationPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              OrganizationPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            OrganizationPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type OrganizationPolicySpecBooleanPolicy struct {
-	Enforced bool `json:"enforced" tf:"enforced"`
+	Enforced bool `json:"enforced" tf:"enforced" protobuf:"varint,1,opt,name=enforced"`
 }
 
 type OrganizationPolicySpecListPolicyAllow struct {
 	// +optional
-	All bool `json:"all,omitempty" tf:"all,omitempty"`
+	All bool `json:"all,omitempty" tf:"all,omitempty" protobuf:"varint,1,opt,name=all"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,2,rep,name=values"`
 }
 
 type OrganizationPolicySpecListPolicyDeny struct {
 	// +optional
-	All bool `json:"all,omitempty" tf:"all,omitempty"`
+	All bool `json:"all,omitempty" tf:"all,omitempty" protobuf:"varint,1,opt,name=all"`
 	// +optional
-	Values []string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []string `json:"values,omitempty" tf:"values,omitempty" protobuf:"bytes,2,rep,name=values"`
 }
 
 type OrganizationPolicySpecListPolicy struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Allow []OrganizationPolicySpecListPolicyAllow `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow []OrganizationPolicySpecListPolicyAllow `json:"allow,omitempty" tf:"allow,omitempty" protobuf:"bytes,1,rep,name=allow"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Deny []OrganizationPolicySpecListPolicyDeny `json:"deny,omitempty" tf:"deny,omitempty"`
+	Deny []OrganizationPolicySpecListPolicyDeny `json:"deny,omitempty" tf:"deny,omitempty" protobuf:"bytes,2,rep,name=deny"`
 	// +optional
-	SuggestedValue string `json:"suggestedValue,omitempty" tf:"suggested_value,omitempty"`
+	SuggestedValue string `json:"suggestedValue,omitempty" tf:"suggested_value,omitempty" protobuf:"bytes,3,opt,name=suggestedValue"`
 }
 
 type OrganizationPolicySpecRestorePolicy struct {
-	Default bool `json:"default" tf:"default"`
+	Default bool `json:"default" tf:"default" protobuf:"varint,1,opt,name=default"`
 }
 
 type OrganizationPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	BooleanPolicy []OrganizationPolicySpecBooleanPolicy `json:"booleanPolicy,omitempty" tf:"boolean_policy,omitempty"`
-	Constraint    string                                `json:"constraint" tf:"constraint"`
+	BooleanPolicy []OrganizationPolicySpecBooleanPolicy `json:"booleanPolicy,omitempty" tf:"boolean_policy,omitempty" protobuf:"bytes,3,rep,name=booleanPolicy"`
+	Constraint    string                                `json:"constraint" tf:"constraint" protobuf:"bytes,4,opt,name=constraint"`
 	// +optional
-	Etag string `json:"etag,omitempty" tf:"etag,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	ListPolicy []OrganizationPolicySpecListPolicy `json:"listPolicy,omitempty" tf:"list_policy,omitempty"`
-	OrgID      string                             `json:"orgID" tf:"org_id"`
+	Etag string `json:"etag,omitempty" tf:"etag,omitempty" protobuf:"bytes,5,opt,name=etag"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RestorePolicy []OrganizationPolicySpecRestorePolicy `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty"`
+	ListPolicy []OrganizationPolicySpecListPolicy `json:"listPolicy,omitempty" tf:"list_policy,omitempty" protobuf:"bytes,6,rep,name=listPolicy"`
+	OrgID      string                             `json:"orgID" tf:"org_id" protobuf:"bytes,7,opt,name=orgID"`
 	// +optional
-	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	RestorePolicy []OrganizationPolicySpecRestorePolicy `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty" protobuf:"bytes,8,rep,name=restorePolicy"`
 	// +optional
-	Version int64 `json:"version,omitempty" tf:"version,omitempty"`
+	UpdateTime string `json:"updateTime,omitempty" tf:"update_time,omitempty" protobuf:"bytes,9,opt,name=updateTime"`
+	// +optional
+	Version int64 `json:"version,omitempty" tf:"version,omitempty" protobuf:"varint,10,opt,name=version"`
 }
 
 type OrganizationPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *OrganizationPolicySpec `json:"output,omitempty"`
+	Output *OrganizationPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -114,7 +114,7 @@ type OrganizationPolicyStatus struct {
 // OrganizationPolicyList is a list of OrganizationPolicys
 type OrganizationPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of OrganizationPolicy CRD objects
-	Items []OrganizationPolicy `json:"items,omitempty"`
+	Items []OrganizationPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

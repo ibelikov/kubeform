@@ -34,41 +34,41 @@ import (
 
 type PolicySetDefinition struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySetDefinitionSpec   `json:"spec,omitempty"`
-	Status            PolicySetDefinitionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PolicySetDefinitionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PolicySetDefinitionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PolicySetDefinitionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	DisplayName string `json:"displayName" tf:"display_name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,3,opt,name=description"`
+	DisplayName string `json:"displayName" tf:"display_name" protobuf:"bytes,4,opt,name=displayName"`
 	// +optional
-	ManagementGroupID string `json:"managementGroupID,omitempty" tf:"management_group_id,omitempty"`
+	ManagementGroupID string `json:"managementGroupID,omitempty" tf:"management_group_id,omitempty" protobuf:"bytes,5,opt,name=managementGroupID"`
 	// +optional
-	Metadata string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-	Name     string `json:"name" tf:"name"`
+	Metadata string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,6,opt,name=metadata"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Parameters string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,8,opt,name=parameters"`
 	// +optional
-	PolicyDefinitions string `json:"policyDefinitions,omitempty" tf:"policy_definitions,omitempty"`
-	PolicyType        string `json:"policyType" tf:"policy_type"`
+	PolicyDefinitions string `json:"policyDefinitions,omitempty" tf:"policy_definitions,omitempty" protobuf:"bytes,9,opt,name=policyDefinitions"`
+	PolicyType        string `json:"policyType" tf:"policy_type" protobuf:"bytes,10,opt,name=policyType"`
 }
 
 type PolicySetDefinitionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PolicySetDefinitionSpec `json:"output,omitempty"`
+	Output *PolicySetDefinitionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -77,7 +77,7 @@ type PolicySetDefinitionStatus struct {
 // PolicySetDefinitionList is a list of PolicySetDefinitions
 type PolicySetDefinitionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PolicySetDefinition CRD objects
-	Items []PolicySetDefinition `json:"items,omitempty"`
+	Items []PolicySetDefinition `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,16 +34,16 @@ import (
 
 type NotificationHub struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationHubSpec   `json:"spec,omitempty"`
-	Status            NotificationHubStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NotificationHubSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NotificationHubStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NotificationHubSpecApnsCredential struct {
-	ApplicationMode string `json:"applicationMode" tf:"application_mode"`
-	BundleID        string `json:"bundleID" tf:"bundle_id"`
-	KeyID           string `json:"keyID" tf:"key_id"`
-	TeamID          string `json:"teamID" tf:"team_id"`
+	ApplicationMode string `json:"applicationMode" tf:"application_mode" protobuf:"bytes,1,opt,name=applicationMode"`
+	BundleID        string `json:"bundleID" tf:"bundle_id" protobuf:"bytes,2,opt,name=bundleID"`
+	KeyID           string `json:"keyID" tf:"key_id" protobuf:"bytes,3,opt,name=keyID"`
+	TeamID          string `json:"teamID" tf:"team_id" protobuf:"bytes,4,opt,name=teamID"`
 	Token           string `json:"-" sensitive:"true" tf:"token"`
 }
 
@@ -52,34 +52,34 @@ type NotificationHubSpecGcmCredential struct {
 }
 
 type NotificationHubSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ApnsCredential []NotificationHubSpecApnsCredential `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+	ApnsCredential []NotificationHubSpecApnsCredential `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty" protobuf:"bytes,4,rep,name=apnsCredential"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	GcmCredential     []NotificationHubSpecGcmCredential `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
-	Location          string                             `json:"location" tf:"location"`
-	Name              string                             `json:"name" tf:"name"`
-	NamespaceName     string                             `json:"namespaceName" tf:"namespace_name"`
-	ResourceGroupName string                             `json:"resourceGroupName" tf:"resource_group_name"`
+	GcmCredential     []NotificationHubSpecGcmCredential `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty" protobuf:"bytes,5,rep,name=gcmCredential"`
+	Location          string                             `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name              string                             `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	NamespaceName     string                             `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,8,opt,name=namespaceName"`
+	ResourceGroupName string                             `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 }
 
 type NotificationHubStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NotificationHubSpec `json:"output,omitempty"`
+	Output *NotificationHubSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,7 +88,7 @@ type NotificationHubStatus struct {
 // NotificationHubList is a list of NotificationHubs
 type NotificationHubList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NotificationHub CRD objects
-	Items []NotificationHub `json:"items,omitempty"`
+	Items []NotificationHub `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

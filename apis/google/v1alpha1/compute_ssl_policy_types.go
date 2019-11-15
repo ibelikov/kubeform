@@ -34,47 +34,47 @@ import (
 
 type ComputeSSLPolicy struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeSSLPolicySpec   `json:"spec,omitempty"`
-	Status            ComputeSSLPolicyStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeSSLPolicySpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeSSLPolicyStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeSSLPolicySpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
+	CreationTimestamp string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty" protobuf:"bytes,3,opt,name=creationTimestamp"`
 	// +optional
-	CustomFeatures []string `json:"customFeatures,omitempty" tf:"custom_features,omitempty"`
+	CustomFeatures []string `json:"customFeatures,omitempty" tf:"custom_features,omitempty" protobuf:"bytes,4,rep,name=customFeatures"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,5,opt,name=description"`
 	// +optional
-	EnabledFeatures []string `json:"enabledFeatures,omitempty" tf:"enabled_features,omitempty"`
+	EnabledFeatures []string `json:"enabledFeatures,omitempty" tf:"enabled_features,omitempty" protobuf:"bytes,6,rep,name=enabledFeatures"`
 	// +optional
-	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty" protobuf:"bytes,7,opt,name=fingerprint"`
 	// +optional
-	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty"`
-	Name          string `json:"name" tf:"name"`
+	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty" protobuf:"bytes,8,opt,name=minTLSVersion"`
+	Name          string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	Profile string `json:"profile,omitempty" tf:"profile,omitempty"`
+	Profile string `json:"profile,omitempty" tf:"profile,omitempty" protobuf:"bytes,10,opt,name=profile"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,12,opt,name=selfLink"`
 }
 
 type ComputeSSLPolicyStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeSSLPolicySpec `json:"output,omitempty"`
+	Output *ComputeSSLPolicySpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -83,7 +83,7 @@ type ComputeSSLPolicyStatus struct {
 // ComputeSSLPolicyList is a list of ComputeSSLPolicys
 type ComputeSSLPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeSSLPolicy CRD objects
-	Items []ComputeSSLPolicy `json:"items,omitempty"`
+	Items []ComputeSSLPolicy `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

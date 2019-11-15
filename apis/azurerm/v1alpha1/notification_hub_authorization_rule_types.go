@@ -34,42 +34,42 @@ import (
 
 type NotificationHubAuthorizationRule struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationHubAuthorizationRuleSpec   `json:"spec,omitempty"`
-	Status            NotificationHubAuthorizationRuleStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NotificationHubAuthorizationRuleSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NotificationHubAuthorizationRuleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NotificationHubAuthorizationRuleSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Listen bool `json:"listen,omitempty" tf:"listen,omitempty"`
+	Listen bool `json:"listen,omitempty" tf:"listen,omitempty" protobuf:"varint,3,opt,name=listen"`
 	// +optional
-	Manage              bool   `json:"manage,omitempty" tf:"manage,omitempty"`
-	Name                string `json:"name" tf:"name"`
-	NamespaceName       string `json:"namespaceName" tf:"namespace_name"`
-	NotificationHubName string `json:"notificationHubName" tf:"notification_hub_name"`
+	Manage              bool   `json:"manage,omitempty" tf:"manage,omitempty" protobuf:"varint,4,opt,name=manage"`
+	Name                string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	NamespaceName       string `json:"namespaceName" tf:"namespace_name" protobuf:"bytes,6,opt,name=namespaceName"`
+	NotificationHubName string `json:"notificationHubName" tf:"notification_hub_name" protobuf:"bytes,7,opt,name=notificationHubName"`
 	// +optional
-	PrimaryAccessKey  string `json:"primaryAccessKey,omitempty" tf:"primary_access_key,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	PrimaryAccessKey  string `json:"primaryAccessKey,omitempty" tf:"primary_access_key,omitempty" protobuf:"bytes,8,opt,name=primaryAccessKey"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +optional
-	SecondaryAccessKey string `json:"secondaryAccessKey,omitempty" tf:"secondary_access_key,omitempty"`
+	SecondaryAccessKey string `json:"secondaryAccessKey,omitempty" tf:"secondary_access_key,omitempty" protobuf:"bytes,10,opt,name=secondaryAccessKey"`
 	// +optional
-	Send bool `json:"send,omitempty" tf:"send,omitempty"`
+	Send bool `json:"send,omitempty" tf:"send,omitempty" protobuf:"varint,11,opt,name=send"`
 }
 
 type NotificationHubAuthorizationRuleStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NotificationHubAuthorizationRuleSpec `json:"output,omitempty"`
+	Output *NotificationHubAuthorizationRuleSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -78,7 +78,7 @@ type NotificationHubAuthorizationRuleStatus struct {
 // NotificationHubAuthorizationRuleList is a list of NotificationHubAuthorizationRules
 type NotificationHubAuthorizationRuleList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NotificationHubAuthorizationRule CRD objects
-	Items []NotificationHubAuthorizationRule `json:"items,omitempty"`
+	Items []NotificationHubAuthorizationRule `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

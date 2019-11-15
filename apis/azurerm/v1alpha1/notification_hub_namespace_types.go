@@ -34,46 +34,46 @@ import (
 
 type NotificationHubNamespace_ struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationHubNamespace_Spec   `json:"spec,omitempty"`
-	Status            NotificationHubNamespace_Status `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NotificationHubNamespace_Spec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NotificationHubNamespace_Status `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NotificationHubNamespace_SpecSku struct {
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
 }
 
 type NotificationHubNamespace_Spec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	NamespaceType     string `json:"namespaceType" tf:"namespace_type"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty" protobuf:"varint,3,opt,name=enabled"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,4,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
+	NamespaceType     string `json:"namespaceType" tf:"namespace_type" protobuf:"bytes,6,opt,name=namespaceType"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,7,opt,name=resourceGroupName"`
 	// +optional
-	ServicebusEndpoint string `json:"servicebusEndpoint,omitempty" tf:"servicebus_endpoint,omitempty"`
+	ServicebusEndpoint string `json:"servicebusEndpoint,omitempty" tf:"servicebus_endpoint,omitempty" protobuf:"bytes,8,opt,name=servicebusEndpoint"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	Sku []NotificationHubNamespace_SpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku []NotificationHubNamespace_SpecSku `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,9,rep,name=sku"`
 	// +optional
-	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty" protobuf:"bytes,10,opt,name=skuName"`
 }
 
 type NotificationHubNamespace_Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NotificationHubNamespace_Spec `json:"output,omitempty"`
+	Output *NotificationHubNamespace_Spec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +82,7 @@ type NotificationHubNamespace_Status struct {
 // NotificationHubNamespace_List is a list of NotificationHubNamespace_s
 type NotificationHubNamespace_List struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NotificationHubNamespace_ CRD objects
-	Items []NotificationHubNamespace_ `json:"items,omitempty"`
+	Items []NotificationHubNamespace_ `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,36 +34,36 @@ import (
 
 type ManagementGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagementGroupSpec   `json:"spec,omitempty"`
-	Status            ManagementGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ManagementGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ManagementGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ManagementGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty" protobuf:"bytes,3,opt,name=displayName"`
 	// +optional
-	GroupID string `json:"groupID,omitempty" tf:"group_id,omitempty"`
+	GroupID string `json:"groupID,omitempty" tf:"group_id,omitempty" protobuf:"bytes,4,opt,name=groupID"`
 	// +optional
-	ParentManagementGroupID string `json:"parentManagementGroupID,omitempty" tf:"parent_management_group_id,omitempty"`
+	ParentManagementGroupID string `json:"parentManagementGroupID,omitempty" tf:"parent_management_group_id,omitempty" protobuf:"bytes,5,opt,name=parentManagementGroupID"`
 	// +optional
-	SubscriptionIDS []string `json:"subscriptionIDS,omitempty" tf:"subscription_ids,omitempty"`
+	SubscriptionIDS []string `json:"subscriptionIDS,omitempty" tf:"subscription_ids,omitempty" protobuf:"bytes,6,rep,name=subscriptionIDS"`
 }
 
 type ManagementGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ManagementGroupSpec `json:"output,omitempty"`
+	Output *ManagementGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type ManagementGroupStatus struct {
 // ManagementGroupList is a list of ManagementGroups
 type ManagementGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ManagementGroup CRD objects
-	Items []ManagementGroup `json:"items,omitempty"`
+	Items []ManagementGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

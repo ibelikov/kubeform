@@ -34,38 +34,38 @@ import (
 
 type StreamAnalyticsOutputMssql struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamAnalyticsOutputMssqlSpec   `json:"spec,omitempty"`
-	Status            StreamAnalyticsOutputMssqlStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StreamAnalyticsOutputMssqlSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StreamAnalyticsOutputMssqlStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StreamAnalyticsOutputMssqlSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Database               string `json:"database" tf:"database"`
-	Name                   string `json:"name" tf:"name"`
+	Database               string `json:"database" tf:"database" protobuf:"bytes,4,opt,name=database"`
+	Name                   string `json:"name" tf:"name" protobuf:"bytes,5,opt,name=name"`
 	Password               string `json:"-" sensitive:"true" tf:"password"`
-	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
-	Server                 string `json:"server" tf:"server"`
-	StreamAnalyticsJobName string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name"`
-	Table                  string `json:"table" tf:"table"`
-	User                   string `json:"user" tf:"user"`
+	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
+	Server                 string `json:"server" tf:"server" protobuf:"bytes,7,opt,name=server"`
+	StreamAnalyticsJobName string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name" protobuf:"bytes,8,opt,name=streamAnalyticsJobName"`
+	Table                  string `json:"table" tf:"table" protobuf:"bytes,9,opt,name=table"`
+	User                   string `json:"user" tf:"user" protobuf:"bytes,10,opt,name=user"`
 }
 
 type StreamAnalyticsOutputMssqlStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StreamAnalyticsOutputMssqlSpec `json:"output,omitempty"`
+	Output *StreamAnalyticsOutputMssqlSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -74,7 +74,7 @@ type StreamAnalyticsOutputMssqlStatus struct {
 // StreamAnalyticsOutputMssqlList is a list of StreamAnalyticsOutputMssqls
 type StreamAnalyticsOutputMssqlList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StreamAnalyticsOutputMssql CRD objects
-	Items []StreamAnalyticsOutputMssql `json:"items,omitempty"`
+	Items []StreamAnalyticsOutputMssql `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

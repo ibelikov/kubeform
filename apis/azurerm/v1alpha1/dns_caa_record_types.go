@@ -34,41 +34,41 @@ import (
 
 type DnsCaaRecord struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DnsCaaRecordSpec   `json:"spec,omitempty"`
-	Status            DnsCaaRecordStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DnsCaaRecordSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DnsCaaRecordStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DnsCaaRecordSpecRecord struct {
-	Flags int64  `json:"flags" tf:"flags"`
-	Tag   string `json:"tag" tf:"tag"`
-	Value string `json:"value" tf:"value"`
+	Flags int64  `json:"flags" tf:"flags" protobuf:"varint,1,opt,name=flags"`
+	Tag   string `json:"tag" tf:"tag" protobuf:"bytes,2,opt,name=tag"`
+	Value string `json:"value" tf:"value" protobuf:"bytes,3,opt,name=value"`
 }
 
 type DnsCaaRecordSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	Name              string                   `json:"name" tf:"name"`
-	Record            []DnsCaaRecordSpecRecord `json:"record" tf:"record"`
-	ResourceGroupName string                   `json:"resourceGroupName" tf:"resource_group_name"`
+	Name              string                   `json:"name" tf:"name" protobuf:"bytes,3,opt,name=name"`
+	Record            []DnsCaaRecordSpecRecord `json:"record" tf:"record" protobuf:"bytes,4,rep,name=record"`
+	ResourceGroupName string                   `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
 	// +optional
-	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	Ttl      int64             `json:"ttl" tf:"ttl"`
-	ZoneName string            `json:"zoneName" tf:"zone_name"`
+	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,6,rep,name=tags"`
+	Ttl      int64             `json:"ttl" tf:"ttl" protobuf:"varint,7,opt,name=ttl"`
+	ZoneName string            `json:"zoneName" tf:"zone_name" protobuf:"bytes,8,opt,name=zoneName"`
 }
 
 type DnsCaaRecordStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DnsCaaRecordSpec `json:"output,omitempty"`
+	Output *DnsCaaRecordSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -77,7 +77,7 @@ type DnsCaaRecordStatus struct {
 // DnsCaaRecordList is a list of DnsCaaRecords
 type DnsCaaRecordList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DnsCaaRecord CRD objects
-	Items []DnsCaaRecord `json:"items,omitempty"`
+	Items []DnsCaaRecord `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

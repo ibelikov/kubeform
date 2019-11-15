@@ -837,8 +837,8 @@ k8s.io/kube-openapi v0.0.0-20190228160746-b3a7cee44a30/go.mod h1:BXM9ceUBTj2QnfH
 k8s.io/kubernetes v1.14.0/go.mod h1:ocZa8+6APFNC2tX1DZASIbocyYT5jHzqFVsY5aoB7Jk=
 k8s.io/utils v0.0.0-20190514214443-0a167cbac756 h1:2XBbostlqrw13zVYimyqcj/Om2P4B26oMzv+m2cj//k=
 k8s.io/utils v0.0.0-20190514214443-0a167cbac756/go.mod h1:8k8uAuAQ0rXslZKaEWd0c3oVhZz7sSzSiPnVZayjIX0=
-kmodules.xyz/client-go v0.0.0-20191106181350-088754189f4e h1:qtD/OweIyh6cJYz0qBP5JC3J4UY6P9tmQDRabr+h8+s=
-kmodules.xyz/client-go v0.0.0-20191106181350-088754189f4e/go.mod h1:VqLXdVFKtLJu0S8wrDVFGdPuNFUn8rVKETOjwfnRhRE=
+kmodules.xyz/client-go v0.0.0-20191107203555-78563b72c377 h1:75XzDzsDSNKhFIV2nCw6TPzXafOohs9xUzfv2szruXY=
+kmodules.xyz/client-go v0.0.0-20191107203555-78563b72c377/go.mod h1:VqLXdVFKtLJu0S8wrDVFGdPuNFUn8rVKETOjwfnRhRE=
 mvdan.cc/interfacer v0.0.0-20180901003855-c20040233aed/go.mod h1:Xkxe497xwlCKkIaQYRfC7CSLworTXY9RMqwhhCm+8Nc=
 mvdan.cc/lint v0.0.0-20170908181259-adc824a0674b/go.mod h1:2odslEg/xrtNQqCYg2/jCoyKnw3vv5biOc3JnIcYfL4=
 mvdan.cc/unparam v0.0.0-20190124213536-fbb59629db34/go.mod h1:H6SUd1XjIs+qQCyskXg5OFSrilMRUkD8ePJpHKDPaeY=

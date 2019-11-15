@@ -34,44 +34,44 @@ import (
 
 type LogAnalyticsWorkspaceLinkedService struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsWorkspaceLinkedServiceSpec   `json:"spec,omitempty"`
-	Status            LogAnalyticsWorkspaceLinkedServiceStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              LogAnalyticsWorkspaceLinkedServiceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            LogAnalyticsWorkspaceLinkedServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type LogAnalyticsWorkspaceLinkedServiceSpecLinkedServiceProperties struct {
-	ResourceID string `json:"resourceID" tf:"resource_id"`
+	ResourceID string `json:"resourceID" tf:"resource_id" protobuf:"bytes,1,opt,name=resourceID"`
 }
 
 type LogAnalyticsWorkspaceLinkedServiceSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	LinkedServiceName string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty" protobuf:"bytes,3,opt,name=linkedServiceName"`
 	// +optional
-	LinkedServiceProperties []LogAnalyticsWorkspaceLinkedServiceSpecLinkedServiceProperties `json:"linkedServiceProperties,omitempty" tf:"linked_service_properties,omitempty"`
+	LinkedServiceProperties []LogAnalyticsWorkspaceLinkedServiceSpecLinkedServiceProperties `json:"linkedServiceProperties,omitempty" tf:"linked_service_properties,omitempty" protobuf:"bytes,4,rep,name=linkedServiceProperties"`
 	// +optional
-	Name              string `json:"name,omitempty" tf:"name,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	Name              string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,5,opt,name=name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,6,opt,name=resourceGroupName"`
 	// +optional
-	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty"`
+	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty" protobuf:"bytes,7,opt,name=resourceID"`
 	// +optional
-	Tags          map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	WorkspaceName string            `json:"workspaceName" tf:"workspace_name"`
+	Tags          map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,8,rep,name=tags"`
+	WorkspaceName string            `json:"workspaceName" tf:"workspace_name" protobuf:"bytes,9,opt,name=workspaceName"`
 }
 
 type LogAnalyticsWorkspaceLinkedServiceStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *LogAnalyticsWorkspaceLinkedServiceSpec `json:"output,omitempty"`
+	Output *LogAnalyticsWorkspaceLinkedServiceSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type LogAnalyticsWorkspaceLinkedServiceStatus struct {
 // LogAnalyticsWorkspaceLinkedServiceList is a list of LogAnalyticsWorkspaceLinkedServices
 type LogAnalyticsWorkspaceLinkedServiceList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of LogAnalyticsWorkspaceLinkedService CRD objects
-	Items []LogAnalyticsWorkspaceLinkedService `json:"items,omitempty"`
+	Items []LogAnalyticsWorkspaceLinkedService `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

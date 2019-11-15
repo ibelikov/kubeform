@@ -34,194 +34,194 @@ import (
 
 type ContainerGroup struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerGroupSpec   `json:"spec,omitempty"`
-	Status            ContainerGroupStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ContainerGroupSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ContainerGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ContainerGroupSpecContainerGpu struct {
 	// +optional
-	Count int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count int64 `json:"count,omitempty" tf:"count,omitempty" protobuf:"varint,1,opt,name=count"`
 	// +optional
-	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty" protobuf:"bytes,2,opt,name=sku"`
 }
 
 type ContainerGroupSpecContainerLivenessProbeHttpGet struct {
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,1,opt,name=path"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,2,opt,name=port"`
 	// +optional
-	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty"`
+	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty" protobuf:"bytes,3,opt,name=scheme"`
 }
 
 type ContainerGroupSpecContainerLivenessProbe struct {
 	// +optional
-	Exec []string `json:"exec,omitempty" tf:"exec,omitempty"`
+	Exec []string `json:"exec,omitempty" tf:"exec,omitempty" protobuf:"bytes,1,rep,name=exec"`
 	// +optional
-	FailureThreshold int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+	FailureThreshold int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty" protobuf:"varint,2,opt,name=failureThreshold"`
 	// +optional
-	HttpGet []ContainerGroupSpecContainerLivenessProbeHttpGet `json:"httpGet,omitempty" tf:"http_get,omitempty"`
+	HttpGet []ContainerGroupSpecContainerLivenessProbeHttpGet `json:"httpGet,omitempty" tf:"http_get,omitempty" protobuf:"bytes,3,rep,name=httpGet"`
 	// +optional
-	InitialDelaySeconds int64 `json:"initialDelaySeconds,omitempty" tf:"initial_delay_seconds,omitempty"`
+	InitialDelaySeconds int64 `json:"initialDelaySeconds,omitempty" tf:"initial_delay_seconds,omitempty" protobuf:"varint,4,opt,name=initialDelaySeconds"`
 	// +optional
-	PeriodSeconds int64 `json:"periodSeconds,omitempty" tf:"period_seconds,omitempty"`
+	PeriodSeconds int64 `json:"periodSeconds,omitempty" tf:"period_seconds,omitempty" protobuf:"varint,5,opt,name=periodSeconds"`
 	// +optional
-	SuccessThreshold int64 `json:"successThreshold,omitempty" tf:"success_threshold,omitempty"`
+	SuccessThreshold int64 `json:"successThreshold,omitempty" tf:"success_threshold,omitempty" protobuf:"varint,6,opt,name=successThreshold"`
 	// +optional
-	TimeoutSeconds int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty" protobuf:"varint,7,opt,name=timeoutSeconds"`
 }
 
 type ContainerGroupSpecContainerPorts struct {
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,1,opt,name=port"`
 	// +optional
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,2,opt,name=protocol"`
 }
 
 type ContainerGroupSpecContainerReadinessProbeHttpGet struct {
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,1,opt,name=path"`
 	// +optional
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,2,opt,name=port"`
 	// +optional
-	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty"`
+	Scheme string `json:"scheme,omitempty" tf:"scheme,omitempty" protobuf:"bytes,3,opt,name=scheme"`
 }
 
 type ContainerGroupSpecContainerReadinessProbe struct {
 	// +optional
-	Exec []string `json:"exec,omitempty" tf:"exec,omitempty"`
+	Exec []string `json:"exec,omitempty" tf:"exec,omitempty" protobuf:"bytes,1,rep,name=exec"`
 	// +optional
-	FailureThreshold int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+	FailureThreshold int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty" protobuf:"varint,2,opt,name=failureThreshold"`
 	// +optional
-	HttpGet []ContainerGroupSpecContainerReadinessProbeHttpGet `json:"httpGet,omitempty" tf:"http_get,omitempty"`
+	HttpGet []ContainerGroupSpecContainerReadinessProbeHttpGet `json:"httpGet,omitempty" tf:"http_get,omitempty" protobuf:"bytes,3,rep,name=httpGet"`
 	// +optional
-	InitialDelaySeconds int64 `json:"initialDelaySeconds,omitempty" tf:"initial_delay_seconds,omitempty"`
+	InitialDelaySeconds int64 `json:"initialDelaySeconds,omitempty" tf:"initial_delay_seconds,omitempty" protobuf:"varint,4,opt,name=initialDelaySeconds"`
 	// +optional
-	PeriodSeconds int64 `json:"periodSeconds,omitempty" tf:"period_seconds,omitempty"`
+	PeriodSeconds int64 `json:"periodSeconds,omitempty" tf:"period_seconds,omitempty" protobuf:"varint,5,opt,name=periodSeconds"`
 	// +optional
-	SuccessThreshold int64 `json:"successThreshold,omitempty" tf:"success_threshold,omitempty"`
+	SuccessThreshold int64 `json:"successThreshold,omitempty" tf:"success_threshold,omitempty" protobuf:"varint,6,opt,name=successThreshold"`
 	// +optional
-	TimeoutSeconds int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty" protobuf:"varint,7,opt,name=timeoutSeconds"`
 }
 
 type ContainerGroupSpecContainerVolume struct {
-	MountPath string `json:"mountPath" tf:"mount_path"`
-	Name      string `json:"name" tf:"name"`
+	MountPath string `json:"mountPath" tf:"mount_path" protobuf:"bytes,1,opt,name=mountPath"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	ReadOnly           bool   `json:"readOnly,omitempty" tf:"read_only,omitempty"`
-	ShareName          string `json:"shareName" tf:"share_name"`
-	StorageAccountKey  string `json:"storageAccountKey" tf:"storage_account_key"`
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
+	ReadOnly           bool   `json:"readOnly,omitempty" tf:"read_only,omitempty" protobuf:"varint,3,opt,name=readOnly"`
+	ShareName          string `json:"shareName" tf:"share_name" protobuf:"bytes,4,opt,name=shareName"`
+	StorageAccountKey  string `json:"storageAccountKey" tf:"storage_account_key" protobuf:"bytes,5,opt,name=storageAccountKey"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,6,opt,name=storageAccountName"`
 }
 
 type ContainerGroupSpecContainer struct {
 	// +optional
 	// Deprecated
-	Command string `json:"command,omitempty" tf:"command,omitempty"`
+	Command string `json:"command,omitempty" tf:"command,omitempty" protobuf:"bytes,1,opt,name=command"`
 	// +optional
-	Commands []string `json:"commands,omitempty" tf:"commands,omitempty"`
-	Cpu      float64  `json:"cpu" tf:"cpu"`
+	Commands []string `json:"commands,omitempty" tf:"commands,omitempty" protobuf:"bytes,2,rep,name=commands"`
+	Cpu      float64  `json:"cpu" tf:"cpu" protobuf:"fixed64,3,opt,name=cpu"`
 	// +optional
-	EnvironmentVariables map[string]string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Gpu   []ContainerGroupSpecContainerGpu `json:"gpu,omitempty" tf:"gpu,omitempty"`
-	Image string                           `json:"image" tf:"image"`
+	EnvironmentVariables map[string]string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty" protobuf:"bytes,4,rep,name=environmentVariables"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	LivenessProbe []ContainerGroupSpecContainerLivenessProbe `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
-	Memory        float64                                    `json:"memory" tf:"memory"`
-	Name          string                                     `json:"name" tf:"name"`
+	Gpu   []ContainerGroupSpecContainerGpu `json:"gpu,omitempty" tf:"gpu,omitempty" protobuf:"bytes,5,rep,name=gpu"`
+	Image string                           `json:"image" tf:"image" protobuf:"bytes,6,opt,name=image"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	LivenessProbe []ContainerGroupSpecContainerLivenessProbe `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty" protobuf:"bytes,7,rep,name=livenessProbe"`
+	Memory        float64                                    `json:"memory" tf:"memory" protobuf:"fixed64,8,opt,name=memory"`
+	Name          string                                     `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
 	// Deprecated
-	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port int64 `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,10,opt,name=port"`
 	// +optional
-	Ports []ContainerGroupSpecContainerPorts `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []ContainerGroupSpecContainerPorts `json:"ports,omitempty" tf:"ports,omitempty" protobuf:"bytes,11,rep,name=ports"`
 	// +optional
 	// Deprecated
-	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty" protobuf:"bytes,12,opt,name=protocol"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ReadinessProbe []ContainerGroupSpecContainerReadinessProbe `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
+	ReadinessProbe []ContainerGroupSpecContainerReadinessProbe `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty" protobuf:"bytes,13,rep,name=readinessProbe"`
 	// +optional
 	SecureEnvironmentVariables map[string]string `json:"-" sensitive:"true" tf:"secure_environment_variables,omitempty"`
 	// +optional
-	Volume []ContainerGroupSpecContainerVolume `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume []ContainerGroupSpecContainerVolume `json:"volume,omitempty" tf:"volume,omitempty" protobuf:"bytes,14,rep,name=volume"`
 }
 
 type ContainerGroupSpecDiagnosticsLogAnalytics struct {
-	LogType string `json:"logType" tf:"log_type"`
+	LogType string `json:"logType" tf:"log_type" protobuf:"bytes,1,opt,name=logType"`
 	// +optional
-	Metadata     map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-	WorkspaceID  string            `json:"workspaceID" tf:"workspace_id"`
+	Metadata     map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,2,rep,name=metadata"`
+	WorkspaceID  string            `json:"workspaceID" tf:"workspace_id" protobuf:"bytes,3,opt,name=workspaceID"`
 	WorkspaceKey string            `json:"-" sensitive:"true" tf:"workspace_key"`
 }
 
 type ContainerGroupSpecDiagnostics struct {
 	// +kubebuilder:validation:MaxItems=1
-	LogAnalytics []ContainerGroupSpecDiagnosticsLogAnalytics `json:"logAnalytics" tf:"log_analytics"`
+	LogAnalytics []ContainerGroupSpecDiagnosticsLogAnalytics `json:"logAnalytics" tf:"log_analytics" protobuf:"bytes,1,rep,name=logAnalytics"`
 }
 
 type ContainerGroupSpecIdentity struct {
 	// +optional
 	// +kubebuilder:validation:MinItems=1
-	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty" protobuf:"bytes,1,rep,name=identityIDS"`
 	// +optional
-	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
-	Type        string `json:"type" tf:"type"`
+	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty" protobuf:"bytes,2,opt,name=principalID"`
+	Type        string `json:"type" tf:"type" protobuf:"bytes,3,opt,name=type"`
 }
 
 type ContainerGroupSpecImageRegistryCredential struct {
 	Password string `json:"-" sensitive:"true" tf:"password"`
-	Server   string `json:"server" tf:"server"`
-	Username string `json:"username" tf:"username"`
+	Server   string `json:"server" tf:"server" protobuf:"bytes,1,opt,name=server"`
+	Username string `json:"username" tf:"username" protobuf:"bytes,2,opt,name=username"`
 }
 
 type ContainerGroupSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
-	Container []ContainerGroupSpecContainer `json:"container" tf:"container"`
+	Container []ContainerGroupSpecContainer `json:"container" tf:"container" protobuf:"bytes,4,rep,name=container"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Diagnostics []ContainerGroupSpecDiagnostics `json:"diagnostics,omitempty" tf:"diagnostics,omitempty"`
+	Diagnostics []ContainerGroupSpecDiagnostics `json:"diagnostics,omitempty" tf:"diagnostics,omitempty" protobuf:"bytes,5,rep,name=diagnostics"`
 	// +optional
-	DnsNameLabel string `json:"dnsNameLabel,omitempty" tf:"dns_name_label,omitempty"`
+	DnsNameLabel string `json:"dnsNameLabel,omitempty" tf:"dns_name_label,omitempty" protobuf:"bytes,6,opt,name=dnsNameLabel"`
 	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty" protobuf:"bytes,7,opt,name=fqdn"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	Identity []ContainerGroupSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []ContainerGroupSpecIdentity `json:"identity,omitempty" tf:"identity,omitempty" protobuf:"bytes,8,rep,name=identity"`
 	// +optional
-	ImageRegistryCredential []ContainerGroupSpecImageRegistryCredential `json:"imageRegistryCredential,omitempty" tf:"image_registry_credential,omitempty"`
+	ImageRegistryCredential []ContainerGroupSpecImageRegistryCredential `json:"imageRegistryCredential,omitempty" tf:"image_registry_credential,omitempty" protobuf:"bytes,9,rep,name=imageRegistryCredential"`
 	// +optional
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty" protobuf:"bytes,10,opt,name=ipAddress"`
 	// +optional
-	IpAddressType     string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	OsType            string `json:"osType" tf:"os_type"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	IpAddressType     string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty" protobuf:"bytes,11,opt,name=ipAddressType"`
+	Location          string `json:"location" tf:"location" protobuf:"bytes,12,opt,name=location"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,13,opt,name=name"`
+	OsType            string `json:"osType" tf:"os_type" protobuf:"bytes,14,opt,name=osType"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,15,opt,name=resourceGroupName"`
 	// +optional
-	RestartPolicy string `json:"restartPolicy,omitempty" tf:"restart_policy,omitempty"`
+	RestartPolicy string `json:"restartPolicy,omitempty" tf:"restart_policy,omitempty" protobuf:"bytes,16,opt,name=restartPolicy"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,17,rep,name=tags"`
 }
 
 type ContainerGroupStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ContainerGroupSpec `json:"output,omitempty"`
+	Output *ContainerGroupSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -230,7 +230,7 @@ type ContainerGroupStatus struct {
 // ContainerGroupList is a list of ContainerGroups
 type ContainerGroupList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ContainerGroup CRD objects
-	Items []ContainerGroup `json:"items,omitempty"`
+	Items []ContainerGroup `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

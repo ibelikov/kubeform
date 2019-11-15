@@ -20,8 +20,8 @@ package v1alpha1
 // +k8s:openapi-gen=true
 // +k8s:deepcopy-gen:interfaces
 type State struct {
-	Version          int64  `json:"version"`
-	TerraformVersion string `json:"terraform_version"`
-	Serial           uint64 `json:"serial"`
-	Lineage          string `json:"lineage"`
+	Version          int64  `json:"version" protobuf:"varint,1,opt,name=version"`
+	TerraformVersion string `json:"terraform_version" protobuf:"bytes,2,opt,name=terraform_version,json=terraformVersion"`
+	Serial           uint64 `json:"serial" protobuf:"varint,3,opt,name=serial"`
+	Lineage          string `json:"lineage" protobuf:"bytes,4,opt,name=lineage"`
 }

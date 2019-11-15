@@ -34,56 +34,56 @@ import (
 
 type NetworkConnectionMonitor struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkConnectionMonitorSpec   `json:"spec,omitempty"`
-	Status            NetworkConnectionMonitorStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              NetworkConnectionMonitorSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            NetworkConnectionMonitorStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type NetworkConnectionMonitorSpecDestination struct {
 	// +optional
-	Address string `json:"address,omitempty" tf:"address,omitempty"`
-	Port    int64  `json:"port" tf:"port"`
+	Address string `json:"address,omitempty" tf:"address,omitempty" protobuf:"bytes,1,opt,name=address"`
+	Port    int64  `json:"port" tf:"port" protobuf:"varint,2,opt,name=port"`
 	// +optional
-	VirtualMachineID string `json:"virtualMachineID,omitempty" tf:"virtual_machine_id,omitempty"`
+	VirtualMachineID string `json:"virtualMachineID,omitempty" tf:"virtual_machine_id,omitempty" protobuf:"bytes,3,opt,name=virtualMachineID"`
 }
 
 type NetworkConnectionMonitorSpecSource struct {
 	// +optional
-	Port             int64  `json:"port,omitempty" tf:"port,omitempty"`
-	VirtualMachineID string `json:"virtualMachineID" tf:"virtual_machine_id"`
+	Port             int64  `json:"port,omitempty" tf:"port,omitempty" protobuf:"varint,1,opt,name=port"`
+	VirtualMachineID string `json:"virtualMachineID" tf:"virtual_machine_id" protobuf:"bytes,2,opt,name=virtualMachineID"`
 }
 
 type NetworkConnectionMonitorSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AutoStart bool `json:"autoStart,omitempty" tf:"auto_start,omitempty"`
+	AutoStart bool `json:"autoStart,omitempty" tf:"auto_start,omitempty" protobuf:"varint,3,opt,name=autoStart"`
 	// +kubebuilder:validation:MaxItems=1
-	Destination []NetworkConnectionMonitorSpecDestination `json:"destination" tf:"destination"`
+	Destination []NetworkConnectionMonitorSpecDestination `json:"destination" tf:"destination" protobuf:"bytes,4,rep,name=destination"`
 	// +optional
-	IntervalInSeconds  int64  `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
-	Location           string `json:"location" tf:"location"`
-	Name               string `json:"name" tf:"name"`
-	NetworkWatcherName string `json:"networkWatcherName" tf:"network_watcher_name"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	IntervalInSeconds  int64  `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty" protobuf:"varint,5,opt,name=intervalInSeconds"`
+	Location           string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
+	NetworkWatcherName string `json:"networkWatcherName" tf:"network_watcher_name" protobuf:"bytes,8,opt,name=networkWatcherName"`
+	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,9,opt,name=resourceGroupName"`
 	// +kubebuilder:validation:MaxItems=1
-	Source []NetworkConnectionMonitorSpecSource `json:"source" tf:"source"`
+	Source []NetworkConnectionMonitorSpecSource `json:"source" tf:"source" protobuf:"bytes,10,rep,name=source"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,11,rep,name=tags"`
 }
 
 type NetworkConnectionMonitorStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *NetworkConnectionMonitorSpec `json:"output,omitempty"`
+	Output *NetworkConnectionMonitorSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -92,7 +92,7 @@ type NetworkConnectionMonitorStatus struct {
 // NetworkConnectionMonitorList is a list of NetworkConnectionMonitors
 type NetworkConnectionMonitorList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of NetworkConnectionMonitor CRD objects
-	Items []NetworkConnectionMonitor `json:"items,omitempty"`
+	Items []NetworkConnectionMonitor `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

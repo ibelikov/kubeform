@@ -34,36 +34,36 @@ import (
 
 type RoleAssignment struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleAssignmentSpec   `json:"spec,omitempty"`
-	Status            RoleAssignmentStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RoleAssignmentSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RoleAssignmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RoleAssignmentSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Name        string `json:"name,omitempty" tf:"name,omitempty"`
-	PrincipalID string `json:"principalID" tf:"principal_id"`
+	Name        string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,3,opt,name=name"`
+	PrincipalID string `json:"principalID" tf:"principal_id" protobuf:"bytes,4,opt,name=principalID"`
 	// +optional
-	RoleDefinitionID string `json:"roleDefinitionID,omitempty" tf:"role_definition_id,omitempty"`
+	RoleDefinitionID string `json:"roleDefinitionID,omitempty" tf:"role_definition_id,omitempty" protobuf:"bytes,5,opt,name=roleDefinitionID"`
 	// +optional
-	RoleDefinitionName string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
-	Scope              string `json:"scope" tf:"scope"`
+	RoleDefinitionName string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty" protobuf:"bytes,6,opt,name=roleDefinitionName"`
+	Scope              string `json:"scope" tf:"scope" protobuf:"bytes,7,opt,name=scope"`
 }
 
 type RoleAssignmentStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RoleAssignmentSpec `json:"output,omitempty"`
+	Output *RoleAssignmentSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -72,7 +72,7 @@ type RoleAssignmentStatus struct {
 // RoleAssignmentList is a list of RoleAssignments
 type RoleAssignmentList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RoleAssignment CRD objects
-	Items []RoleAssignment `json:"items,omitempty"`
+	Items []RoleAssignment `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

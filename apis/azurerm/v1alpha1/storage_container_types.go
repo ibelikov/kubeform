@@ -34,44 +34,44 @@ import (
 
 type StorageContainer struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageContainerSpec   `json:"spec,omitempty"`
-	Status            StorageContainerStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              StorageContainerSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            StorageContainerStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type StorageContainerSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	ContainerAccessType string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
+	ContainerAccessType string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty" protobuf:"bytes,3,opt,name=containerAccessType"`
 	// +optional
-	HasImmutabilityPolicy bool `json:"hasImmutabilityPolicy,omitempty" tf:"has_immutability_policy,omitempty"`
+	HasImmutabilityPolicy bool `json:"hasImmutabilityPolicy,omitempty" tf:"has_immutability_policy,omitempty" protobuf:"varint,4,opt,name=hasImmutabilityPolicy"`
 	// +optional
-	HasLegalHold bool `json:"hasLegalHold,omitempty" tf:"has_legal_hold,omitempty"`
+	HasLegalHold bool `json:"hasLegalHold,omitempty" tf:"has_legal_hold,omitempty" protobuf:"varint,5,opt,name=hasLegalHold"`
 	// +optional
-	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-	Name     string            `json:"name" tf:"name"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty" protobuf:"bytes,6,rep,name=metadata"`
+	Name     string            `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
 	// Deprecated
-	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty" protobuf:"bytes,8,rep,name=properties"`
 	// +optional
 	// Deprecated
-	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
+	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty" protobuf:"bytes,9,opt,name=resourceGroupName"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name" protobuf:"bytes,10,opt,name=storageAccountName"`
 }
 
 type StorageContainerStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *StorageContainerSpec `json:"output,omitempty"`
+	Output *StorageContainerSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type StorageContainerStatus struct {
 // StorageContainerList is a list of StorageContainers
 type StorageContainerList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of StorageContainer CRD objects
-	Items []StorageContainer `json:"items,omitempty"`
+	Items []StorageContainer `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

@@ -34,34 +34,34 @@ import (
 
 type RecoveryServicesProtectedVm struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RecoveryServicesProtectedVmSpec   `json:"spec,omitempty"`
-	Status            RecoveryServicesProtectedVmStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              RecoveryServicesProtectedVmSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            RecoveryServicesProtectedVmStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type RecoveryServicesProtectedVmSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	BackupPolicyID    string `json:"backupPolicyID" tf:"backup_policy_id"`
-	RecoveryVaultName string `json:"recoveryVaultName" tf:"recovery_vault_name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	SourceVmID        string `json:"sourceVmID" tf:"source_vm_id"`
+	BackupPolicyID    string `json:"backupPolicyID" tf:"backup_policy_id" protobuf:"bytes,3,opt,name=backupPolicyID"`
+	RecoveryVaultName string `json:"recoveryVaultName" tf:"recovery_vault_name" protobuf:"bytes,4,opt,name=recoveryVaultName"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,5,opt,name=resourceGroupName"`
+	SourceVmID        string `json:"sourceVmID" tf:"source_vm_id" protobuf:"bytes,6,opt,name=sourceVmID"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,7,rep,name=tags"`
 }
 
 type RecoveryServicesProtectedVmStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *RecoveryServicesProtectedVmSpec `json:"output,omitempty"`
+	Output *RecoveryServicesProtectedVmSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -70,7 +70,7 @@ type RecoveryServicesProtectedVmStatus struct {
 // RecoveryServicesProtectedVmList is a list of RecoveryServicesProtectedVms
 type RecoveryServicesProtectedVmList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of RecoveryServicesProtectedVm CRD objects
-	Items []RecoveryServicesProtectedVm `json:"items,omitempty"`
+	Items []RecoveryServicesProtectedVm `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

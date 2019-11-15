@@ -34,54 +34,54 @@ import (
 
 type DataFactoryDatasetSQLServerTable struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataFactoryDatasetSQLServerTableSpec   `json:"spec,omitempty"`
-	Status            DataFactoryDatasetSQLServerTableStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DataFactoryDatasetSQLServerTableSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DataFactoryDatasetSQLServerTableStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DataFactoryDatasetSQLServerTableSpecSchemaColumn struct {
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
-	Name        string `json:"name" tf:"name"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
+	Name        string `json:"name" tf:"name" protobuf:"bytes,2,opt,name=name"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type string `json:"type,omitempty" tf:"type,omitempty" protobuf:"bytes,3,opt,name=type"`
 }
 
 type DataFactoryDatasetSQLServerTableSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AdditionalProperties map[string]string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+	AdditionalProperties map[string]string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty" protobuf:"bytes,3,rep,name=additionalProperties"`
 	// +optional
-	Annotations     []string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-	DataFactoryName string   `json:"dataFactoryName" tf:"data_factory_name"`
+	Annotations     []string `json:"annotations,omitempty" tf:"annotations,omitempty" protobuf:"bytes,4,rep,name=annotations"`
+	DataFactoryName string   `json:"dataFactoryName" tf:"data_factory_name" protobuf:"bytes,5,opt,name=dataFactoryName"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,6,opt,name=description"`
 	// +optional
-	Folder            string `json:"folder,omitempty" tf:"folder,omitempty"`
-	LinkedServiceName string `json:"linkedServiceName" tf:"linked_service_name"`
-	Name              string `json:"name" tf:"name"`
+	Folder            string `json:"folder,omitempty" tf:"folder,omitempty" protobuf:"bytes,7,opt,name=folder"`
+	LinkedServiceName string `json:"linkedServiceName" tf:"linked_service_name" protobuf:"bytes,8,opt,name=linkedServiceName"`
+	Name              string `json:"name" tf:"name" protobuf:"bytes,9,opt,name=name"`
 	// +optional
-	Parameters        map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name"`
+	Parameters        map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty" protobuf:"bytes,10,rep,name=parameters"`
+	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,11,opt,name=resourceGroupName"`
 	// +optional
-	SchemaColumn []DataFactoryDatasetSQLServerTableSpecSchemaColumn `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
+	SchemaColumn []DataFactoryDatasetSQLServerTableSpecSchemaColumn `json:"schemaColumn,omitempty" tf:"schema_column,omitempty" protobuf:"bytes,12,rep,name=schemaColumn"`
 	// +optional
-	TableName string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+	TableName string `json:"tableName,omitempty" tf:"table_name,omitempty" protobuf:"bytes,13,opt,name=tableName"`
 }
 
 type DataFactoryDatasetSQLServerTableStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DataFactoryDatasetSQLServerTableSpec `json:"output,omitempty"`
+	Output *DataFactoryDatasetSQLServerTableSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -90,7 +90,7 @@ type DataFactoryDatasetSQLServerTableStatus struct {
 // DataFactoryDatasetSQLServerTableList is a list of DataFactoryDatasetSQLServerTables
 type DataFactoryDatasetSQLServerTableList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of DataFactoryDatasetSQLServerTable CRD objects
-	Items []DataFactoryDatasetSQLServerTable `json:"items,omitempty"`
+	Items []DataFactoryDatasetSQLServerTable `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

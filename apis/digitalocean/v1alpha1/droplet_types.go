@@ -34,72 +34,72 @@ import (
 
 type Droplet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DropletSpec   `json:"spec,omitempty"`
-	Status            DropletStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              DropletSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            DropletStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type DropletSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	Backups bool `json:"backups,omitempty" tf:"backups,omitempty"`
+	Backups bool `json:"backups,omitempty" tf:"backups,omitempty" protobuf:"varint,3,opt,name=backups"`
 	// +optional
-	Disk  int64  `json:"disk,omitempty" tf:"disk,omitempty"`
-	Image string `json:"image" tf:"image"`
+	Disk  int64  `json:"disk,omitempty" tf:"disk,omitempty" protobuf:"varint,4,opt,name=disk"`
+	Image string `json:"image" tf:"image" protobuf:"bytes,5,opt,name=image"`
 	// +optional
-	Ipv4Address string `json:"ipv4Address,omitempty" tf:"ipv4_address,omitempty"`
+	Ipv4Address string `json:"ipv4Address,omitempty" tf:"ipv4_address,omitempty" protobuf:"bytes,6,opt,name=ipv4Address"`
 	// +optional
-	Ipv4AddressPrivate string `json:"ipv4AddressPrivate,omitempty" tf:"ipv4_address_private,omitempty"`
+	Ipv4AddressPrivate string `json:"ipv4AddressPrivate,omitempty" tf:"ipv4_address_private,omitempty" protobuf:"bytes,7,opt,name=ipv4AddressPrivate"`
 	// +optional
-	Ipv6 bool `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+	Ipv6 bool `json:"ipv6,omitempty" tf:"ipv6,omitempty" protobuf:"varint,8,opt,name=ipv6"`
 	// +optional
-	Ipv6Address string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+	Ipv6Address string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty" protobuf:"bytes,9,opt,name=ipv6Address"`
 	// +optional
-	Locked bool `json:"locked,omitempty" tf:"locked,omitempty"`
+	Locked bool `json:"locked,omitempty" tf:"locked,omitempty" protobuf:"varint,10,opt,name=locked"`
 	// +optional
-	Memory int64 `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory int64 `json:"memory,omitempty" tf:"memory,omitempty" protobuf:"varint,11,opt,name=memory"`
 	// +optional
-	Monitoring bool   `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
-	Name       string `json:"name" tf:"name"`
+	Monitoring bool   `json:"monitoring,omitempty" tf:"monitoring,omitempty" protobuf:"varint,12,opt,name=monitoring"`
+	Name       string `json:"name" tf:"name" protobuf:"bytes,13,opt,name=name"`
 	// +optional
-	PriceHourly float64 `json:"priceHourly,omitempty" tf:"price_hourly,omitempty"`
+	PriceHourly float64 `json:"priceHourly,omitempty" tf:"price_hourly,omitempty" protobuf:"fixed64,14,opt,name=priceHourly"`
 	// +optional
-	PriceMonthly float64 `json:"priceMonthly,omitempty" tf:"price_monthly,omitempty"`
+	PriceMonthly float64 `json:"priceMonthly,omitempty" tf:"price_monthly,omitempty" protobuf:"fixed64,15,opt,name=priceMonthly"`
 	// +optional
-	PrivateNetworking bool   `json:"privateNetworking,omitempty" tf:"private_networking,omitempty"`
-	Region            string `json:"region" tf:"region"`
+	PrivateNetworking bool   `json:"privateNetworking,omitempty" tf:"private_networking,omitempty" protobuf:"varint,16,opt,name=privateNetworking"`
+	Region            string `json:"region" tf:"region" protobuf:"bytes,17,opt,name=region"`
 	// +optional
-	ResizeDisk bool   `json:"resizeDisk,omitempty" tf:"resize_disk,omitempty"`
+	ResizeDisk bool   `json:"resizeDisk,omitempty" tf:"resize_disk,omitempty" protobuf:"varint,18,opt,name=resizeDisk"`
 	Size       string `json:"size" tf:"size"`
 	// +optional
-	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+	SshKeys []string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty" protobuf:"bytes,20,rep,name=sshKeys"`
 	// +optional
-	Status string `json:"status,omitempty" tf:"status,omitempty"`
+	Status string `json:"status,omitempty" tf:"status,omitempty" protobuf:"bytes,21,opt,name=status"`
 	// +optional
-	Tags []string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags []string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,22,rep,name=tags"`
 	// +optional
-	Urn string `json:"urn,omitempty" tf:"urn,omitempty"`
+	Urn string `json:"urn,omitempty" tf:"urn,omitempty" protobuf:"bytes,23,opt,name=urn"`
 	// +optional
-	UserData string `json:"userData,omitempty" tf:"user_data,omitempty"`
+	UserData string `json:"userData,omitempty" tf:"user_data,omitempty" protobuf:"bytes,24,opt,name=userData"`
 	// +optional
-	Vcpus int64 `json:"vcpus,omitempty" tf:"vcpus,omitempty"`
+	Vcpus int64 `json:"vcpus,omitempty" tf:"vcpus,omitempty" protobuf:"varint,25,opt,name=vcpus"`
 	// +optional
-	VolumeIDS []string `json:"volumeIDS,omitempty" tf:"volume_ids,omitempty"`
+	VolumeIDS []string `json:"volumeIDS,omitempty" tf:"volume_ids,omitempty" protobuf:"bytes,26,rep,name=volumeIDS"`
 }
 
 type DropletStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *DropletSpec `json:"output,omitempty"`
+	Output *DropletSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -108,7 +108,7 @@ type DropletStatus struct {
 // DropletList is a list of Droplets
 type DropletList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Droplet CRD objects
-	Items []Droplet `json:"items,omitempty"`
+	Items []Droplet `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

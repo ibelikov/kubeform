@@ -34,44 +34,44 @@ import (
 
 type ComputeNetwork struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeNetworkSpec   `json:"spec,omitempty"`
-	Status            ComputeNetworkStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ComputeNetworkSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ComputeNetworkStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ComputeNetworkSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AutoCreateSubnetworks bool `json:"autoCreateSubnetworks,omitempty" tf:"auto_create_subnetworks,omitempty"`
+	AutoCreateSubnetworks bool `json:"autoCreateSubnetworks,omitempty" tf:"auto_create_subnetworks,omitempty" protobuf:"varint,3,opt,name=autoCreateSubnetworks"`
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// +optional
-	GatewayIpv4 string `json:"gatewayIpv4,omitempty" tf:"gateway_ipv4,omitempty"`
+	GatewayIpv4 string `json:"gatewayIpv4,omitempty" tf:"gateway_ipv4,omitempty" protobuf:"bytes,5,opt,name=gatewayIpv4"`
 	// +optional
 	// Deprecated
-	Ipv4Range string `json:"ipv4Range,omitempty" tf:"ipv4_range,omitempty"`
-	Name      string `json:"name" tf:"name"`
+	Ipv4Range string `json:"ipv4Range,omitempty" tf:"ipv4_range,omitempty" protobuf:"bytes,6,opt,name=ipv4Range"`
+	Name      string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,8,opt,name=project"`
 	// +optional
-	RoutingMode string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+	RoutingMode string `json:"routingMode,omitempty" tf:"routing_mode,omitempty" protobuf:"bytes,9,opt,name=routingMode"`
 	// +optional
-	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty"`
+	SelfLink string `json:"selfLink,omitempty" tf:"self_link,omitempty" protobuf:"bytes,10,opt,name=selfLink"`
 }
 
 type ComputeNetworkStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ComputeNetworkSpec `json:"output,omitempty"`
+	Output *ComputeNetworkSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -80,7 +80,7 @@ type ComputeNetworkStatus struct {
 // ComputeNetworkList is a list of ComputeNetworks
 type ComputeNetworkList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of ComputeNetwork CRD objects
-	Items []ComputeNetwork `json:"items,omitempty"`
+	Items []ComputeNetwork `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

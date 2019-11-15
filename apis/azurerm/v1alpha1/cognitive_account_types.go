@@ -34,49 +34,49 @@ import (
 
 type CognitiveAccount struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CognitiveAccountSpec   `json:"spec,omitempty"`
-	Status            CognitiveAccountStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              CognitiveAccountSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            CognitiveAccountStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type CognitiveAccountSpecSku struct {
-	Name string `json:"name" tf:"name"`
-	Tier string `json:"tier" tf:"tier"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,1,opt,name=name"`
+	Tier string `json:"tier" tf:"tier" protobuf:"bytes,2,opt,name=tier"`
 }
 
 type CognitiveAccountSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
-	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-" protobuf:"bytes,3,opt,name=secretRef"`
 
 	// +optional
-	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-	Kind     string `json:"kind" tf:"kind"`
-	Location string `json:"location" tf:"location"`
-	Name     string `json:"name" tf:"name"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty" protobuf:"bytes,4,opt,name=endpoint"`
+	Kind     string `json:"kind" tf:"kind" protobuf:"bytes,5,opt,name=kind"`
+	Location string `json:"location" tf:"location" protobuf:"bytes,6,opt,name=location"`
+	Name     string `json:"name" tf:"name" protobuf:"bytes,7,opt,name=name"`
 	// +optional
 	PrimaryAccessKey  string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name" protobuf:"bytes,8,opt,name=resourceGroupName"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
 	// +kubebuilder:validation:MaxItems=1
-	Sku []CognitiveAccountSpecSku `json:"sku" tf:"sku"`
+	Sku []CognitiveAccountSpecSku `json:"sku" tf:"sku" protobuf:"bytes,9,rep,name=sku"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty" protobuf:"bytes,10,rep,name=tags"`
 }
 
 type CognitiveAccountStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *CognitiveAccountSpec `json:"output,omitempty"`
+	Output *CognitiveAccountSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -85,7 +85,7 @@ type CognitiveAccountStatus struct {
 // CognitiveAccountList is a list of CognitiveAccounts
 type CognitiveAccountList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of CognitiveAccount CRD objects
-	Items []CognitiveAccount `json:"items,omitempty"`
+	Items []CognitiveAccount `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

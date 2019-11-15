@@ -34,45 +34,45 @@ import (
 
 type PubsubSubscription struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PubsubSubscriptionSpec   `json:"spec,omitempty"`
-	Status            PubsubSubscriptionStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              PubsubSubscriptionSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            PubsubSubscriptionStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type PubsubSubscriptionSpecPushConfig struct {
 	// +optional
-	Attributes   map[string]string `json:"attributes,omitempty" tf:"attributes,omitempty"`
-	PushEndpoint string            `json:"pushEndpoint" tf:"push_endpoint"`
+	Attributes   map[string]string `json:"attributes,omitempty" tf:"attributes,omitempty" protobuf:"bytes,1,rep,name=attributes"`
+	PushEndpoint string            `json:"pushEndpoint" tf:"push_endpoint" protobuf:"bytes,2,opt,name=pushEndpoint"`
 }
 
 type PubsubSubscriptionSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AckDeadlineSeconds int64  `json:"ackDeadlineSeconds,omitempty" tf:"ack_deadline_seconds,omitempty"`
-	Name               string `json:"name" tf:"name"`
+	AckDeadlineSeconds int64  `json:"ackDeadlineSeconds,omitempty" tf:"ack_deadline_seconds,omitempty" protobuf:"varint,3,opt,name=ackDeadlineSeconds"`
+	Name               string `json:"name" tf:"name" protobuf:"bytes,4,opt,name=name"`
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,5,opt,name=path"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,6,opt,name=project"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PushConfig []PubsubSubscriptionSpecPushConfig `json:"pushConfig,omitempty" tf:"push_config,omitempty"`
-	Topic      string                             `json:"topic" tf:"topic"`
+	PushConfig []PubsubSubscriptionSpecPushConfig `json:"pushConfig,omitempty" tf:"push_config,omitempty" protobuf:"bytes,7,rep,name=pushConfig"`
+	Topic      string                             `json:"topic" tf:"topic" protobuf:"bytes,8,opt,name=topic"`
 }
 
 type PubsubSubscriptionStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *PubsubSubscriptionSpec `json:"output,omitempty"`
+	Output *PubsubSubscriptionSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -81,7 +81,7 @@ type PubsubSubscriptionStatus struct {
 // PubsubSubscriptionList is a list of PubsubSubscriptions
 type PubsubSubscriptionList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of PubsubSubscription CRD objects
-	Items []PubsubSubscription `json:"items,omitempty"`
+	Items []PubsubSubscription `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

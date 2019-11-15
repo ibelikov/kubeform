@@ -34,54 +34,54 @@ import (
 
 type Project struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProjectSpec   `json:"spec,omitempty"`
-	Status            ProjectStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              ProjectSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ProjectStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type ProjectSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// the date and time when the project was created, (ISO8601)
 	// +optional
-	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty" tf:"created_at,omitempty" protobuf:"bytes,3,opt,name=createdAt"`
 	// the descirption of the project
 	// +optional
-	Description string `json:"description,omitempty" tf:"description,omitempty"`
+	Description string `json:"description,omitempty" tf:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
 	// the environment of the project's resources
 	// +optional
-	Environment string `json:"environment,omitempty" tf:"environment,omitempty"`
+	Environment string `json:"environment,omitempty" tf:"environment,omitempty" protobuf:"bytes,5,opt,name=environment"`
 	// the human-readable name for the project
-	Name string `json:"name" tf:"name"`
+	Name string `json:"name" tf:"name" protobuf:"bytes,6,opt,name=name"`
 	// the id of the project owner.
 	// +optional
-	OwnerID int64 `json:"ownerID,omitempty" tf:"owner_id,omitempty"`
+	OwnerID int64 `json:"ownerID,omitempty" tf:"owner_id,omitempty" protobuf:"varint,7,opt,name=ownerID"`
 	// the unique universal identifier of the project owner.
 	// +optional
-	OwnerUUID string `json:"ownerUUID,omitempty" tf:"owner_uuid,omitempty"`
+	OwnerUUID string `json:"ownerUUID,omitempty" tf:"owner_uuid,omitempty" protobuf:"bytes,8,opt,name=ownerUUID"`
 	// the purpose of the project
 	// +optional
-	Purpose string `json:"purpose,omitempty" tf:"purpose,omitempty"`
+	Purpose string `json:"purpose,omitempty" tf:"purpose,omitempty" protobuf:"bytes,9,opt,name=purpose"`
 	// the resources associated with the project
 	// +optional
-	Resources []string `json:"resources,omitempty" tf:"resources,omitempty"`
+	Resources []string `json:"resources,omitempty" tf:"resources,omitempty" protobuf:"bytes,10,rep,name=resources"`
 	// the date and time when the project was last updated, (ISO8601)
 	// +optional
-	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+	UpdatedAt string `json:"updatedAt,omitempty" tf:"updated_at,omitempty" protobuf:"bytes,11,opt,name=updatedAt"`
 }
 
 type ProjectStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *ProjectSpec `json:"output,omitempty"`
+	Output *ProjectSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -90,7 +90,7 @@ type ProjectStatus struct {
 // ProjectList is a list of Projects
 type ProjectList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of Project CRD objects
-	Items []Project `json:"items,omitempty"`
+	Items []Project `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }

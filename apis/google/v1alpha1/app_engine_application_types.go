@@ -34,64 +34,64 @@ import (
 
 type AppEngineApplication struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppEngineApplicationSpec   `json:"spec,omitempty"`
-	Status            AppEngineApplicationStatus `json:"status,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              AppEngineApplicationSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            AppEngineApplicationStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 type AppEngineApplicationSpecFeatureSettings struct {
 	// +optional
-	SplitHealthChecks bool `json:"splitHealthChecks,omitempty" tf:"split_health_checks,omitempty"`
+	SplitHealthChecks bool `json:"splitHealthChecks,omitempty" tf:"split_health_checks,omitempty" protobuf:"varint,1,opt,name=splitHealthChecks"`
 }
 
 type AppEngineApplicationSpecUrlDispatchRule struct {
 	// +optional
-	Domain string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain string `json:"domain,omitempty" tf:"domain,omitempty" protobuf:"bytes,1,opt,name=domain"`
 	// +optional
-	Path string `json:"path,omitempty" tf:"path,omitempty"`
+	Path string `json:"path,omitempty" tf:"path,omitempty" protobuf:"bytes,2,opt,name=path"`
 	// +optional
-	Service string `json:"service,omitempty" tf:"service,omitempty"`
+	Service string `json:"service,omitempty" tf:"service,omitempty" protobuf:"bytes,3,opt,name=service"`
 }
 
 type AppEngineApplicationSpec struct {
-	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
+	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-" protobuf:"bytes,1,opt,name=providerRef"`
 
-	ID string `json:"id,omitempty" tf:"id,omitempty"`
+	ID string `json:"id,omitempty" tf:"id,omitempty" protobuf:"bytes,2,opt,name=id"`
 
 	// +optional
-	AuthDomain string `json:"authDomain,omitempty" tf:"auth_domain,omitempty"`
+	AuthDomain string `json:"authDomain,omitempty" tf:"auth_domain,omitempty" protobuf:"bytes,3,opt,name=authDomain"`
 	// +optional
-	CodeBucket string `json:"codeBucket,omitempty" tf:"code_bucket,omitempty"`
+	CodeBucket string `json:"codeBucket,omitempty" tf:"code_bucket,omitempty" protobuf:"bytes,4,opt,name=codeBucket"`
 	// +optional
-	DefaultBucket string `json:"defaultBucket,omitempty" tf:"default_bucket,omitempty"`
+	DefaultBucket string `json:"defaultBucket,omitempty" tf:"default_bucket,omitempty" protobuf:"bytes,5,opt,name=defaultBucket"`
 	// +optional
-	DefaultHostname string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
+	DefaultHostname string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty" protobuf:"bytes,6,opt,name=defaultHostname"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	FeatureSettings []AppEngineApplicationSpecFeatureSettings `json:"featureSettings,omitempty" tf:"feature_settings,omitempty"`
+	FeatureSettings []AppEngineApplicationSpecFeatureSettings `json:"featureSettings,omitempty" tf:"feature_settings,omitempty" protobuf:"bytes,7,rep,name=featureSettings"`
 	// +optional
-	GcrDomain  string `json:"gcrDomain,omitempty" tf:"gcr_domain,omitempty"`
-	LocationID string `json:"locationID" tf:"location_id"`
+	GcrDomain  string `json:"gcrDomain,omitempty" tf:"gcr_domain,omitempty" protobuf:"bytes,8,opt,name=gcrDomain"`
+	LocationID string `json:"locationID" tf:"location_id" protobuf:"bytes,9,opt,name=locationID"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name,omitempty" protobuf:"bytes,10,opt,name=name"`
 	// +optional
-	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty" protobuf:"bytes,11,opt,name=project"`
 	// +optional
-	ServingStatus string `json:"servingStatus,omitempty" tf:"serving_status,omitempty"`
+	ServingStatus string `json:"servingStatus,omitempty" tf:"serving_status,omitempty" protobuf:"bytes,12,opt,name=servingStatus"`
 	// +optional
-	UrlDispatchRule []AppEngineApplicationSpecUrlDispatchRule `json:"urlDispatchRule,omitempty" tf:"url_dispatch_rule,omitempty"`
+	UrlDispatchRule []AppEngineApplicationSpecUrlDispatchRule `json:"urlDispatchRule,omitempty" tf:"url_dispatch_rule,omitempty" protobuf:"bytes,13,rep,name=urlDispatchRule"`
 }
 
 type AppEngineApplicationStatus struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" protobuf:"varint,1,opt,name=observedGeneration"`
 	// +optional
-	Output *AppEngineApplicationSpec `json:"output,omitempty"`
+	Output *AppEngineApplicationSpec `json:"output,omitempty" protobuf:"bytes,2,opt,name=output"`
 	// +optional
-	State *base.State `json:"state,omitempty"`
+	State *base.State `json:"state,omitempty" protobuf:"bytes,3,opt,name=state"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase base.Phase `json:"phase,omitempty" protobuf:"bytes,4,opt,name=phase,casttype=kubeform.dev/kubeform/apis/base/v1alpha1.Phase"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -100,7 +100,7 @@ type AppEngineApplicationStatus struct {
 // AppEngineApplicationList is a list of AppEngineApplications
 type AppEngineApplicationList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// Items is a list of AppEngineApplication CRD objects
-	Items []AppEngineApplication `json:"items,omitempty"`
+	Items []AppEngineApplication `json:"items,omitempty" protobuf:"bytes,2,rep,name=items"`
 }
