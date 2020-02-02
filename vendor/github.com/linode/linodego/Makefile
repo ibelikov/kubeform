@@ -1,14 +1,14 @@
 include .env
 BIN_DIR := $(GOPATH)/bin
-GOLANGCILINT := $(BIN_DIR)/golangci-lint
-GOLANGCILINT_ARGS := run --no-config --issues-exit-code=1 --enable-all --disable=vetshadow --disable=gocyclo --disable=unparam --disable=nakedret --disable=lll --disable=dupl --disable=gosec --disable=gochecknoinits --disable=gochecknoglobals --tests=false
-GOLANGCILINT_WARN_ARGS := run --no-config --issues-exit-code=0 --disable-all --enable=vetshadow --enable=gocyclo --enable=unparam --enable=nakedret --enable=lll --enable=dupl --enable=gosec --enable=gochecknoinits --enable=gochecknoglobals --deadline=120s
+GOLANGCILINT := golangci-lint
+GOLANGCILINT_ARGS := run
 
-.PHONY: build vet test example refresh-fixtures clean-fixtures lint lint-warn run_fixtures sanitize fixtures godoc
+.PHONY: build vet test example refresh-fixtures clean-fixtures lint run_fixtures sanitize fixtures godoc
 
 test: build lint
 	@LINODE_FIXTURE_MODE="play" \
 	LINODE_TOKEN="awesometokenawesometokenawesometoken" \
+	LINODE_API_VERSION="v4beta" \
 	GO111MODULE="on" \
 	go test $(ARGS)
 
@@ -21,9 +21,6 @@ vet:
 lint:
 	$(GOLANGCILINT) $(GOLANGCILINT_ARGS)
 
-lint-warn:
-	$(GOLANGCILINT) $(GOLANGCILINT_WARN_ARGS)
-
 clean-fixtures:
 	@-rm fixtures/*.yaml
 
@@ -31,8 +28,11 @@ refresh-fixtures: clean-fixtures fixtures
 
 run_fixtures:
 	@echo "* Running fixtures"
-	@LINODE_TOKEN=$(LINODE_TOKEN) \
-	LINODE_FIXTURE_MODE="record" go test $(ARGS)
+	@LINODE_FIXTURE_MODE="record" \
+	LINODE_TOKEN=$(LINODE_TOKEN) \
+	LINODE_API_VERSION="v4beta" \
+	GO111MODULE="on" \
+	go test -timeout=60m $(ARGS)
 
 sanitize:
 	@echo "* Santizing fixtures"

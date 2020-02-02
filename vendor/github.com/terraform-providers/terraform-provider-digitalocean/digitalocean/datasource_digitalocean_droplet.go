@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/digitalocean/godo"
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 )
 
 func dataSourceDigitalOceanDroplet() *schema.Resource {
@@ -16,13 +16,24 @@ func dataSourceDigitalOceanDroplet() *schema.Resource {
 		Read: dataSourceDigitalOceanDropletRead,
 		Schema: map[string]*schema.Schema{
 
+			"tag": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				Description:  "unique tag of the droplet",
+				ValidateFunc: validation.NoZeroValues,
+			},
 			"name": {
 				Type:         schema.TypeString,
-				Required:     true,
+				Optional:     true,
 				Description:  "name of the droplet",
 				ValidateFunc: validation.NoZeroValues,
 			},
 			// computed attributes
+			"created_at": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "the creation date for the Droplet",
+			},
 			"urn": {
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -133,8 +144,6 @@ func dataSourceDigitalOceanDroplet() *schema.Resource {
 func dataSourceDigitalOceanDropletRead(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*CombinedConfig).godoClient()
 
-	name := d.Get("name").(string)
-
 	opts := &godo.ListOptions{
 		Page:    1,
 		PerPage: 200,
@@ -165,12 +174,63 @@ func dataSourceDigitalOceanDropletRead(d *schema.ResourceData, meta interface{})
 		opts.Page = page + 1
 	}
 
-	droplet, err := findDropletByName(dropletList, name)
+	if v, ok := d.GetOk("tag"); ok {
+		droplet, err := findDropletByTag(dropletList, v.(string))
 
-	if err != nil {
-		return err
+		if err != nil {
+			return err
+		}
+
+		exportDropletProperties(d, droplet)
+	} else if v, ok := d.GetOk("name"); ok {
+		droplet, err := findDropletByName(dropletList, v.(string))
+
+		if err != nil {
+			return err
+		}
+
+		exportDropletProperties(d, droplet)
+	} else {
+		return fmt.Errorf("Error: specify either a name or a tag used to look up the droplet")
 	}
+	return nil
+}
 
+func findDropletByName(droplets []godo.Droplet, name string) (*godo.Droplet, error) {
+	results := make([]godo.Droplet, 0)
+	for _, v := range droplets {
+		if v.Name == name {
+			results = append(results, v)
+		}
+	}
+	if len(results) == 1 {
+		return &results[0], nil
+	}
+	if len(results) == 0 {
+		return nil, fmt.Errorf("no droplet found with name %s", name)
+	}
+	return nil, fmt.Errorf("too many droplets found with name %s (found %d, expected 1)", name, len(results))
+}
+
+func findDropletByTag(droplets []godo.Droplet, tag string) (*godo.Droplet, error) {
+	results := make([]godo.Droplet, 0)
+	for _, d := range droplets {
+		for _, t := range d.Tags {
+			if t == tag {
+				results = append(results, d)
+			}
+		}
+	}
+	if len(results) == 1 {
+		return &results[0], nil
+	}
+	if len(results) == 0 {
+		return nil, fmt.Errorf("no droplet found with tag %s", tag)
+	}
+	return nil, fmt.Errorf("too many droplets found with tag %s (found %d, expected 1)", tag, len(results))
+}
+
+func exportDropletProperties(d *schema.ResourceData, droplet *godo.Droplet) error {
 	d.SetId(strconv.Itoa(droplet.ID))
 	d.Set("name", droplet.Name)
 	d.Set("urn", droplet.URN())
@@ -183,6 +243,7 @@ func dataSourceDigitalOceanDropletRead(d *schema.ResourceData, meta interface{})
 	d.Set("memory", droplet.Memory)
 	d.Set("status", droplet.Status)
 	d.Set("locked", droplet.Locked)
+	d.Set("created_at", droplet.Created)
 
 	if droplet.Image.Slug == "" {
 		d.Set("image", droplet.Image.ID)
@@ -222,20 +283,4 @@ func dataSourceDigitalOceanDropletRead(d *schema.ResourceData, meta interface{})
 	}
 
 	return nil
-}
-
-func findDropletByName(droplets []godo.Droplet, name string) (*godo.Droplet, error) {
-	results := make([]godo.Droplet, 0)
-	for _, v := range droplets {
-		if v.Name == name {
-			results = append(results, v)
-		}
-	}
-	if len(results) == 1 {
-		return &results[0], nil
-	}
-	if len(results) == 0 {
-		return nil, fmt.Errorf("no droplet found with name %s", name)
-	}
-	return nil, fmt.Errorf("too many droplets found with name %s (found %d, expected 1)", name, len(results))
 }

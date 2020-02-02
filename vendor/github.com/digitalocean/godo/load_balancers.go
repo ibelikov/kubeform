@@ -43,6 +43,7 @@ type LoadBalancer struct {
 	Tags                []string         `json:"tags,omitempty"`
 	RedirectHttpToHttps bool             `json:"redirect_http_to_https,omitempty"`
 	EnableProxyProtocol bool             `json:"enable_proxy_protocol,omitempty"`
+	VPCUUID             string           `json:"vpc_uuid,omitempty"`
 }
 
 // String creates a human-readable description of a LoadBalancer.
@@ -66,6 +67,7 @@ func (l LoadBalancer) AsRequest() *LoadBalancerRequest {
 		RedirectHttpToHttps: l.RedirectHttpToHttps,
 		EnableProxyProtocol: l.EnableProxyProtocol,
 		HealthCheck:         l.HealthCheck,
+		VPCUUID:             l.VPCUUID,
 	}
 
 	if l.HealthCheck != nil {
@@ -138,6 +140,7 @@ type LoadBalancerRequest struct {
 	Tags                []string         `json:"tags,omitempty"`
 	RedirectHttpToHttps bool             `json:"redirect_http_to_https,omitempty"`
 	EnableProxyProtocol bool             `json:"enable_proxy_protocol,omitempty"`
+	VPCUUID             string           `json:"vpc_uuid,omitempty"`
 }
 
 // String creates a human-readable description of a LoadBalancerRequest.
@@ -164,6 +167,7 @@ func (l dropletIDsRequest) String() string {
 type loadBalancersRoot struct {
 	LoadBalancers []LoadBalancer `json:"load_balancers"`
 	Links         *Links         `json:"links"`
+	Meta          *Meta          `json:"meta"`
 }
 
 type loadBalancerRoot struct {
@@ -214,6 +218,9 @@ func (l *LoadBalancersServiceOp) List(ctx context.Context, opt *ListOptions) ([]
 	}
 	if l := root.Links; l != nil {
 		resp.Links = l
+	}
+	if m := root.Meta; m != nil {
+		resp.Meta = m
 	}
 
 	return root.LoadBalancers, resp, err

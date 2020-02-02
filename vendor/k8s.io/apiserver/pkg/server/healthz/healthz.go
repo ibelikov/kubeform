@@ -18,41 +18,27 @@ package healthz
 
 import (
 	"bytes"
-	"crypto/sha256"
-	"crypto/x509"
-	"encoding/hex"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"k8s.io/klog"
-
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/wait"
-	"k8s.io/client-go/util/cert"
+	"k8s.io/apiserver/pkg/server/httplog"
+	"k8s.io/klog"
 )
 
-// HealthzChecker is a named healthz checker.
-type HealthzChecker interface {
+// HealthChecker is a named healthz checker.
+type HealthChecker interface {
 	Name() string
 	Check(req *http.Request) error
 }
 
-var defaultHealthz = sync.Once{}
-
-// DefaultHealthz installs the default healthz check to the http.DefaultServeMux.
-func DefaultHealthz(checks ...HealthzChecker) {
-	defaultHealthz.Do(func() {
-		InstallHandler(http.DefaultServeMux, checks...)
-	})
-}
-
 // PingHealthz returns true automatically when checked
-var PingHealthz HealthzChecker = ping{}
+var PingHealthz HealthChecker = ping{}
 
 // ping implements the simplest possible healthz checker.
 type ping struct{}
@@ -67,7 +53,7 @@ func (ping) Check(_ *http.Request) error {
 }
 
 // LogHealthz returns true if logging is not blocked
-var LogHealthz HealthzChecker = &log{}
+var LogHealthz HealthChecker = &log{}
 
 type log struct {
 	startOnce    sync.Once
@@ -95,7 +81,7 @@ func (l *log) Check(_ *http.Request) error {
 }
 
 // NamedCheck returns a healthz checker for the given name and function.
-func NamedCheck(name string, check func(r *http.Request) error) HealthzChecker {
+func NamedCheck(name string, check func(r *http.Request) error) HealthChecker {
 	return &healthzCheck{name, check}
 }
 
@@ -103,8 +89,24 @@ func NamedCheck(name string, check func(r *http.Request) error) HealthzChecker {
 // "/healthz" to mux. *All handlers* for mux must be specified in
 // exactly one call to InstallHandler. Calling InstallHandler more
 // than once for the same mux will result in a panic.
-func InstallHandler(mux mux, checks ...HealthzChecker) {
+func InstallHandler(mux mux, checks ...HealthChecker) {
 	InstallPathHandler(mux, "/healthz", checks...)
+}
+
+// InstallReadyzHandler registers handlers for health checking on the path
+// "/readyz" to mux. *All handlers* for mux must be specified in
+// exactly one call to InstallHandler. Calling InstallHandler more
+// than once for the same mux will result in a panic.
+func InstallReadyzHandler(mux mux, checks ...HealthChecker) {
+	InstallPathHandler(mux, "/readyz", checks...)
+}
+
+// InstallLivezHandler registers handlers for liveness checking on the path
+// "/livez" to mux. *All handlers* for mux must be specified in
+// exactly one call to InstallHandler. Calling InstallHandler more
+// than once for the same mux will result in a panic.
+func InstallLivezHandler(mux mux, checks ...HealthChecker) {
+	InstallPathHandler(mux, "/livez", checks...)
 }
 
 // InstallPathHandler registers handlers for health checking on
@@ -112,13 +114,13 @@ func InstallHandler(mux mux, checks ...HealthzChecker) {
 // specified in exactly one call to InstallPathHandler. Calling
 // InstallPathHandler more than once for the same path and mux will
 // result in a panic.
-func InstallPathHandler(mux mux, path string, checks ...HealthzChecker) {
+func InstallPathHandler(mux mux, path string, checks ...HealthChecker) {
 	if len(checks) == 0 {
 		klog.V(5).Info("No default health checks specified. Installing the ping handler.")
-		checks = []HealthzChecker{PingHealthz}
+		checks = []HealthChecker{PingHealthz}
 	}
 
-	klog.V(5).Info("Installing healthz checkers:", formatQuoted(checkerNames(checks...)...))
+	klog.V(5).Infof("Installing health checkers for (%v): %v", path, formatQuoted(checkerNames(checks...)...))
 
 	mux.Handle(path, handleRootHealthz(checks...))
 	for _, check := range checks {
@@ -131,13 +133,13 @@ type mux interface {
 	Handle(pattern string, handler http.Handler)
 }
 
-// healthzCheck implements HealthzChecker on an arbitrary name and check function.
+// healthzCheck implements HealthChecker on an arbitrary name and check function.
 type healthzCheck struct {
 	name  string
 	check func(r *http.Request) error
 }
 
-var _ HealthzChecker = &healthzCheck{}
+var _ HealthChecker = &healthzCheck{}
 
 func (c *healthzCheck) Name() string {
 	return c.name
@@ -157,7 +159,7 @@ func getExcludedChecks(r *http.Request) sets.String {
 }
 
 // handleRootHealthz returns an http.HandlerFunc that serves the provided checks.
-func handleRootHealthz(checks ...HealthzChecker) http.HandlerFunc {
+func handleRootHealthz(checks ...HealthChecker) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		failed := false
 		excluded := getExcludedChecks(r)
@@ -186,7 +188,8 @@ func handleRootHealthz(checks ...HealthzChecker) http.HandlerFunc {
 		}
 		// always be verbose on failure
 		if failed {
-			http.Error(w, fmt.Sprintf("%vhealthz check failed", verboseOut.String()), http.StatusInternalServerError)
+			klog.V(2).Infof("%vhealthz check failed", verboseOut.String())
+			http.Error(httplog.Unlogged(r, w), fmt.Sprintf("%vhealthz check failed", verboseOut.String()), http.StatusInternalServerError)
 			return
 		}
 
@@ -215,7 +218,7 @@ func adaptCheckToHandler(c func(r *http.Request) error) http.HandlerFunc {
 }
 
 // checkerNames returns the names of the checks in the same order as passed in.
-func checkerNames(checks ...HealthzChecker) []string {
+func checkerNames(checks ...HealthChecker) []string {
 	// accumulate the names of checks for printing them out.
 	checkerNames := make([]string, 0, len(checks))
 	for _, check := range checks {
@@ -232,70 +235,4 @@ func formatQuoted(names ...string) string {
 		quoted = append(quoted, fmt.Sprintf("%q", name))
 	}
 	return strings.Join(quoted, ",")
-}
-
-// CertHealthz returns true if tls.crt is unchanged when checked
-func NewCertHealthz(certFile string) (HealthzChecker, error) {
-	var hash string
-	if certFile != "" {
-		var err error
-		hash, err = calculateHash(certFile)
-		if err != nil {
-			return nil, err
-		}
-	}
-	return &certChecker{certFile: certFile, initialHash: hash}, nil
-}
-
-// certChecker fails health check if server certificate changes.
-type certChecker struct {
-	certFile    string
-	initialHash string
-}
-
-func (certChecker) Name() string {
-	return "cert-checker"
-}
-
-// CertHealthz is a health check that returns true.
-func (c certChecker) Check(_ *http.Request) error {
-	if c.certFile == "" {
-		return nil
-	}
-	hash, err := calculateHash(c.certFile)
-	if err != nil {
-		return err
-	}
-	if c.initialHash != hash {
-		return fmt.Errorf("certificate hash changed from %s to %s", c.initialHash, hash)
-	}
-	return nil
-}
-
-func calculateHash(certFile string) (string, error) {
-	crtBytes, err := ioutil.ReadFile(certFile)
-	if err != nil {
-		return "", fmt.Errorf("failed to read certificate `%s`. Reason: %v", certFile, err)
-	}
-	crt, err := cert.ParseCertsPEM(crtBytes)
-	if err != nil {
-		return "", fmt.Errorf("failed to parse certificate `%s`. Reason: %v", certFile, err)
-	}
-	return Hash(crt[0]), nil
-}
-
-// ref: https://github.com/kubernetes/kubernetes/blob/197fc67693c2391dcbc652fc185ba85b5ef82a8e/cmd/kubeadm/app/util/pubkeypin/pubkeypin.go#L77
-
-const (
-	// formatSHA256 is the prefix for pins that are full-length SHA-256 hashes encoded in base 16 (hex)
-	formatSHA256 = "sha256"
-)
-
-// Hash calculates the SHA-256 hash of the Subject Public Key Information (SPKI)
-// object in an x509 certificate (in DER encoding). It returns the full hash as a
-// hex encoded string (suitable for passing to Set.Allow).
-func Hash(certificate *x509.Certificate) string {
-	// ref: https://tools.ietf.org/html/rfc5280#section-4.1.2.7
-	spkiHash := sha256.Sum256(certificate.RawSubjectPublicKeyInfo)
-	return formatSHA256 + ":" + strings.ToLower(hex.EncodeToString(spkiHash[:]))
 }

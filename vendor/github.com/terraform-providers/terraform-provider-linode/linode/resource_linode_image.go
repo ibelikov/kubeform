@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/linode/linodego"
 )
 
@@ -112,6 +112,9 @@ func resourceLinodeImageRead(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(linodego.Client)
 
 	image, err := client.GetImage(context.Background(), d.Id())
+	if err != nil {
+		return fmt.Errorf("Error retrieving the specified Linode Image: %s", err)
+	}
 
 	found, err := resourceLinodeImageExists(d, meta)
 	if err != nil {

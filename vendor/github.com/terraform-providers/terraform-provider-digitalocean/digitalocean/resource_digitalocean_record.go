@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/digitalocean/godo"
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 )
 
 func resourceDigitalOceanRecord() *schema.Resource {
@@ -185,16 +185,14 @@ func resourceDigitalOceanRecordRead(d *schema.ResourceData, meta interface{}) er
 	}
 
 	rec, resp, err := client.Domains.Record(context.Background(), domain, id)
-	if err != nil && resp != nil {
+	if err != nil {
 		// If the record is somehow already destroyed, mark as
 		// successfully gone
-		if resp.StatusCode == 404 {
+		if resp != nil && resp.StatusCode == 404 {
 			d.SetId("")
 			return nil
 		}
 
-		return err
-	} else if err != nil {
 		return err
 	}
 
@@ -275,7 +273,7 @@ func resourceDigitalOceanRecordDelete(d *schema.ResourceData, meta interface{}) 
 	if delErr != nil {
 		// If the record is somehow already destroyed, mark as
 		// successfully gone
-		if resp.StatusCode == 404 {
+		if resp != nil && resp.StatusCode == 404 {
 			return nil
 		}
 
