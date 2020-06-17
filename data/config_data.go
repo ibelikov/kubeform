@@ -26,6 +26,6 @@ var ModuleConfig = []Config{
 		"GoogleServiceAccount", "terraform-google-modules/service-accounts/google", "google", "", "",
 	},
 	{
-		"AzureAppService", "dfar-io/terraform-azurerm-app-service/azure", "azure", "", "",
+		"AzureAppService", "github.com/dfar-io/terraform-azurerm-app-service?ref=v1.3.0", "azure", "", "",
 	},
 }

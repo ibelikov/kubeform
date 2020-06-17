@@ -15,7 +15,7 @@
   },
   {
     "name": "AzureAppService",
-    "source": "dfar-io/terraform-azurerm-app-service/azure",
+    "source": "github.com/dfar-io/terraform-azurerm-app-service?ref=v1.3.0",
     "provider": "azure",
     "url": "https://github.com/dfar-io/terraform-azurerm-app-service/archive/v1.3.0.zip",
     "subDirectory": ""
