@@ -12335,14 +12335,14 @@ func schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountOutput(ref common
 					},
 					"emails": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Service account emails.",
+							Description: "Service account emails by name.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"emailsList": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Service account emails.",
+							Description: "Service account emails as list.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12356,14 +12356,14 @@ func schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountOutput(ref common
 					},
 					"iamEmails": {
 						SchemaProps: spec.SchemaProps{
-							Description: "IAM-format service account emails.",
+							Description: "IAM-format service account emails by name.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"iamEmailsList": {
 						SchemaProps: spec.SchemaProps{
-							Description: "IAM-format service account emails.",
+							Description: "IAM-format service account emails as list.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12391,7 +12391,14 @@ func schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountOutput(ref common
 					},
 					"serviceAccounts": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Service account resources.",
+							Description: "Service account resources as list.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"serviceAccountsMap": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Service account resources by name.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12427,6 +12434,20 @@ func schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountSpec(ref common.R
 					"billingAccountID": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If assigning billing role, specificy a billing account (default is to assign at the organizational level).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Descriptions of the created service accounts (defaults to no description)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Display names of the created service accounts (defaults to 'Terraform-managed service account')",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12644,6 +12665,20 @@ func schema_kubeform_apis_modules_v1alpha1_RDSOutput(ref common.ReferenceCallbac
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"enhancedMonitoringIamRoleArn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The Amazon Resource Name (ARN) specifying the monitoring role",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"enhancedMonitoringIamRoleName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the monitoring role",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"thisDbInstanceAddress": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The address of the RDS instance",
@@ -12661,6 +12696,13 @@ func schema_kubeform_apis_modules_v1alpha1_RDSOutput(ref common.ReferenceCallbac
 					"thisDbInstanceAvailabilityZone": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The availability zone of the RDS instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"thisDbInstanceCaCertIdentifier": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the identifier of the CA certificate for the DB instance",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12847,6 +12889,13 @@ func schema_kubeform_apis_modules_v1alpha1_RDSSpec(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"caCertIdentifier": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the identifier of the CA certificate for the DB instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"characterSetName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information",
@@ -12870,7 +12919,7 @@ func schema_kubeform_apis_modules_v1alpha1_RDSSpec(ref common.ReferenceCallback)
 					},
 					"createDbOptionGroup": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Whether to create a database option group",
+							Description: "(Optional) Create a database option group",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -12900,6 +12949,13 @@ func schema_kubeform_apis_modules_v1alpha1_RDSSpec(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"deleteAutomatedBackups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies whether to remove automated backups immediately after the DB instance is deleted",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -13059,9 +13115,24 @@ func schema_kubeform_apis_modules_v1alpha1_RDSSpec(ref common.ReferenceCallback)
 					},
 					"optionGroupName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name of the DB option group to associate. Setting this automatically disables option_group creation",
+							Description: "Name of the DB option group to associate",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"optionGroupTimeouts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Define maximum timeout for deletion of `aws_db_option_group` resource",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 					"options": {

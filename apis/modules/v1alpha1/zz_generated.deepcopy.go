@@ -248,6 +248,13 @@ func (in *RDSSpec) DeepCopyInto(out *RDSSpec) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
+	if in.OptionGroupTimeouts != nil {
+		in, out := &in.OptionGroupTimeouts, &out.OptionGroupTimeouts
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	if in.Options != nil {
 		in, out := &in.Options, &out.Options
 		*out = make(json.RawMessage, len(*in))
