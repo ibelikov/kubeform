@@ -1,16 +1,23 @@
 [
-    {
-      "name": "RDS",
-      "source": "terraform-aws-modules/rds/aws",
-      "provider": "aws",
-      "url": "https://github.com/terraform-aws-modules/terraform-aws-rds/archive/master.zip",
-      "subDirectory": ""
-    },
-    {
-      "name": "GoogleServiceAccount",
-      "source": "terraform-google-modules/service-accounts/google",
-      "provider": "google",
-      "url": "https://github.com/terraform-google-modules/terraform-google-service-accounts/archive/master.zip",
-      "subDirectory": ""
-    }
+  {
+    "name": "RDS",
+    "source": "terraform-aws-modules/rds/aws",
+    "provider": "aws",
+    "url": "https://github.com/terraform-aws-modules/terraform-aws-rds/archive/master.zip",
+    "subDirectory": ""
+  },
+  {
+    "name": "GoogleServiceAccount",
+    "source": "terraform-google-modules/service-accounts/google",
+    "provider": "google",
+    "url": "https://github.com/terraform-google-modules/terraform-google-service-accounts/archive/master.zip",
+    "subDirectory": ""
+  },
+  {
+    "name": "AzureAppService",
+    "source": "dfar-io/terraform-azurerm-app-service/azure",
+    "provider": "azure",
+    "url": "https://github.com/dfar-io/terraform-azurerm-app-service/archive/v1.3.0.zip",
+    "subDirectory": ""
+  }
 ]

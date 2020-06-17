@@ -28,6 +28,10 @@ type FakeModulesV1alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeModulesV1alpha1) AzureAppServices(namespace string) v1alpha1.AzureAppServiceInterface {
+	return &FakeAzureAppServices{c, namespace}
+}
+
 func (c *FakeModulesV1alpha1) GoogleServiceAccounts(namespace string) v1alpha1.GoogleServiceAccountInterface {
 	return &FakeGoogleServiceAccounts{c, namespace}
 }
