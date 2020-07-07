@@ -1,0 +1,466 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: eks.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: EKS
+    listKind: EKSList
+    plural: eks
+    singular: eks
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            attachWorkerCniPolicy:
+              description: 'Whether to attach the Amazon managed `AmazonEKS_CNI_Policy`
+                IAM policy to the default worker IAM role. WARNING: If set `false`
+                the permissions must be assigned to the `aws-node` DaemonSet pods
+                via another method or nodes will not be able to join the cluster.'
+              type: boolean
+            clusterCreateSecurityGroup:
+              description: Whether to create a security group for the cluster or attach
+                the cluster to `cluster_security_group_id`.
+              type: boolean
+            clusterCreateTimeout:
+              description: Timeout value when creating the EKS cluster.
+              type: string
+            clusterDeleteTimeout:
+              description: Timeout value when deleting the EKS cluster.
+              type: string
+            clusterEnabledLogTypes:
+              description: A list of the desired control plane logging to enable.
+                For more information, see Amazon EKS Control Plane Logging documentation
+                (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+              items:
+                type: string
+              type: array
+            clusterEncryptionConfig:
+              description: Configuration block with encryption configuration for the
+                cluster. See examples/secrets_encryption/main.tf for example format
+              items:
+                properties:
+                  providerKeyArn:
+                    type: string
+                  resources:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
+            clusterEndpointPrivateAccess:
+              description: Indicates whether or not the Amazon EKS private API server
+                endpoint is enabled.
+              type: boolean
+            clusterEndpointPrivateAccessCidrs:
+              description: List of CIDR blocks which can access the Amazon EKS private
+                API server endpoint, when public access is disabled
+              items:
+                type: string
+              type: array
+            clusterEndpointPublicAccess:
+              description: Indicates whether or not the Amazon EKS public API server
+                endpoint is enabled.
+              type: boolean
+            clusterEndpointPublicAccessCidrs:
+              description: List of CIDR blocks which can access the Amazon EKS public
+                API server endpoint.
+              items:
+                type: string
+              type: array
+            clusterIamRoleName:
+              description: IAM role name for the cluster. Only applicable if manage_cluster_iam_resources
+                is set to false.
+              type: string
+            clusterLogKmsKeyID:
+              description: If a KMS Key ARN is set, this key will be used to encrypt
+                the corresponding log group. Please be sure that the KMS Key has an
+                appropriate key policy (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html)
+              type: string
+            clusterLogRetentionInDays:
+              description: Number of days to retain log events. Default retention
+                - 90 days.
+              type: string
+            clusterName:
+              description: Name of the EKS cluster. Also used as a prefix in names
+                of related resources.
+              type: string
+            clusterSecurityGroupID:
+              description: If provided, the EKS cluster will be attached to this security
+                group. If not given, a security group will be created with necessary
+                ingress/egress to work with the workers
+              type: string
+            clusterVersion:
+              description: Kubernetes version to use for the EKS cluster.
+              type: string
+            configOutputPath:
+              description: Where to save the Kubectl config file (if `write_kubeconfig
+                = true`). Assumed to be a directory if the value ends with a forward
+                slash `/`.
+              type: string
+            createEks:
+              description: Controls if EKS resources should be created (it affects
+                almost all resources)
+              type: boolean
+            eksOidcRootCaThumbprint:
+              description: Thumbprint of Root CA for EKS OIDC, Valid until 2037
+              type: string
+            enableIrsa:
+              description: Whether to create OpenID Connect Provider for EKS to enable
+                IRSA
+              type: boolean
+            iamPath:
+              description: If provided, all IAM roles will be created on this path.
+              type: string
+            kubeconfigAwsAuthenticatorAdditionalArgs:
+              description: Any additional arguments to pass to the authenticator such
+                as the role to assume. e.g. ["-r", "MyEksRole"].
+              items:
+                type: string
+              type: array
+            kubeconfigAwsAuthenticatorCommand:
+              description: Command to use to fetch AWS EKS credentials.
+              type: string
+            kubeconfigAwsAuthenticatorCommandArgs:
+              description: Default arguments passed to the authenticator command.
+                Defaults to [token -i $cluster_name].
+              items:
+                type: string
+              type: array
+            kubeconfigAwsAuthenticatorEnvVariables:
+              additionalProperties:
+                type: string
+              description: Environment variables that should be used when executing
+                the authenticator. e.g. { AWS_PROFILE = "eks"}.
+              type: object
+            kubeconfigName:
+              description: Override the default name used for items kubeconfig.
+              type: string
+            manageAwsAuth:
+              description: Whether to apply the aws-auth configmap file.
+              format: byte
+              type: string
+            manageClusterIamResources:
+              description: Whether to let the module manage cluster IAM resources.
+                If set to false, cluster_iam_role_name must be specified.
+              type: boolean
+            manageWorkerIamResources:
+              description: Whether to let the module manage worker IAM resources.
+                If set to false, iam_instance_profile_name must be specified for workers.
+              type: boolean
+            mapAccounts:
+              description: Additional AWS account numbers to add to the aws-auth configmap.
+                See examples/basic/variables.tf for example format.
+              items:
+                type: string
+              type: array
+            mapRoles:
+              description: Additional IAM roles to add to the aws-auth configmap.
+                See examples/basic/variables.tf for example format.
+              items:
+                properties:
+                  groups:
+                    items:
+                      type: string
+                    type: array
+                  rolearn:
+                    type: string
+                  username:
+                    type: string
+                type: object
+              type: array
+            mapUsers:
+              description: Additional IAM users to add to the aws-auth configmap.
+                See examples/basic/variables.tf for example format.
+              items:
+                properties:
+                  groups:
+                    items:
+                      type: string
+                    type: array
+                  userarn:
+                    type: string
+                  username:
+                    type: string
+                type: object
+              type: array
+            nodeGroups:
+              description: Map of map of node groups to create. See `node_groups`
+                module's documentation for more details
+              format: byte
+              type: string
+            nodeGroupsDefaults:
+              description: Map of values to be applied to all node groups. See `node_groups`
+                module's documentaton for more details
+              format: byte
+              type: string
+            permissionsBoundary:
+              description: If provided, all IAM roles will be created with this permissions
+                boundary attached.
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            source:
+              type: string
+            subnets:
+              description: A list of subnets to place the EKS cluster and workers
+                within.
+              items:
+                type: string
+              type: array
+            tags:
+              additionalProperties:
+                type: string
+              description: A map of tags to add to all resources.
+              type: object
+            vpcID:
+              description: VPC where the cluster and workers will be deployed.
+              type: string
+            waitForClusterCmd:
+              description: Custom local-exec command to execute for determining if
+                the eks cluster is healthy. Cluster endpoint will be available as
+                an environment variable called ENDPOINT
+              type: string
+            waitForClusterInterpreter:
+              description: Custom local-exec command line interpreter for the command
+                to determining if the eks cluster is healthy.
+              items:
+                type: string
+              type: array
+            workerAdditionalSecurityGroupIDS:
+              description: A list of additional security group ids to attach to worker
+                instances
+              items:
+                type: string
+              type: array
+            workerAmiNameFilter:
+              description: Name filter for AWS EKS worker AMI. If not provided, the
+                latest official AMI for the specified 'cluster_version' is used.
+              type: string
+            workerAmiNameFilterWindows:
+              description: Name filter for AWS EKS Windows worker AMI. If not provided,
+                the latest official AMI for the specified 'cluster_version' is used.
+              type: string
+            workerAmiOwnerID:
+              description: The ID of the owner for the AMI to use for the AWS EKS
+                workers. Valid values are an AWS account ID, 'self' (the current account),
+                or an AWS owner alias (e.g. 'amazon', 'aws-marketplace', 'microsoft').
+              type: string
+            workerAmiOwnerIDWindows:
+              description: The ID of the owner for the AMI to use for the AWS EKS
+                Windows workers. Valid values are an AWS account ID, 'self' (the current
+                account), or an AWS owner alias (e.g. 'amazon', 'aws-marketplace',
+                'microsoft').
+              type: string
+            workerCreateClusterPrimarySecurityGroupRules:
+              description: Whether to create security group rules to allow communication
+                between pods on workers and pods using the primary cluster security
+                group.
+              type: boolean
+            workerCreateInitialLifecycleHooks:
+              description: Whether to create initial lifecycle hooks provided in worker
+                groups.
+              type: boolean
+            workerCreateSecurityGroup:
+              description: Whether to create a security group for the workers or attach
+                the workers to `worker_security_group_id`.
+              type: boolean
+            workerGroups:
+              description: A list of maps defining worker group configurations to
+                be defined using AWS Launch Configurations. See workers_group_defaults
+                for valid keys.
+              format: byte
+              type: string
+            workerGroupsLaunchTemplate:
+              description: A list of maps defining worker group configurations to
+                be defined using AWS Launch Templates. See workers_group_defaults
+                for valid keys.
+              format: byte
+              type: string
+            workerSecurityGroupID:
+              description: If provided, all workers will be attached to this security
+                group. If not given, a security group will be created with necessary
+                ingress/egress to work with the EKS cluster.
+              type: string
+            workerSgIngressFromPort:
+              description: Minimum port number from which pods will accept communication.
+                Must be changed to a lower value if some pods in your cluster will
+                expose a port lower than 1025 (e.g. 22, 80, or 443).
+              type: string
+            workersAdditionalPolicies:
+              description: Additional policies to be added to workers
+              items:
+                type: string
+              type: array
+            workersGroupDefaults:
+              description: Override default values for target groups. See workers_group_defaults_defaults
+                in local.tf for valid keys.
+              format: byte
+              type: string
+            workersRoleName:
+              description: User defined workers role name.
+              type: string
+            writeKubeconfig:
+              description: Whether to write a Kubectl config file containing the cluster
+                configuration. Saved to `config_output_path`.
+              type: boolean
+          required:
+          - providerRef
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              properties:
+                cloudwatchLogGroupName:
+                  description: Name of cloudwatch log group created
+                  type: string
+                clusterArn:
+                  description: The Amazon Resource Name (ARN) of the cluster.
+                  type: string
+                clusterCertificateAuthorityData:
+                  description: Nested attribute containing certificate-authority-data
+                    for your cluster. This is the base64 encoded certificate data
+                    required to communicate with your cluster.
+                  type: string
+                clusterEndpoint:
+                  description: The endpoint for your EKS Kubernetes API.
+                  type: string
+                clusterID:
+                  description: The name/id of the EKS cluster.
+                  type: string
+                clusterIamRoleArn:
+                  description: IAM role ARN of the EKS cluster.
+                  type: string
+                clusterIamRoleName:
+                  description: IAM role name of the EKS cluster.
+                  type: string
+                clusterOidcIssuerURL:
+                  description: The URL on the EKS cluster OIDC Issuer
+                  type: string
+                clusterPrimarySecurityGroupID:
+                  description: The cluster primary security group ID created by the
+                    EKS cluster on 1.14 or later. Referred to as 'Cluster security
+                    group' in the EKS console.
+                  type: string
+                clusterSecurityGroupID:
+                  description: Security group ID attached to the EKS cluster. On 1.14
+                    or later, this is the 'Additional security groups' in the EKS
+                    console.
+                  type: string
+                clusterVersion:
+                  description: The Kubernetes server version for the EKS cluster.
+                  type: string
+                configMapAwsAuth:
+                  description: A kubernetes configuration to authenticate to this
+                    EKS cluster.
+                  type: string
+                kubeconfig:
+                  description: kubectl config file contents for this EKS cluster.
+                  type: string
+                kubeconfigFilename:
+                  description: The filename of the generated kubectl config.
+                  type: string
+                nodeGroups:
+                  description: Outputs from EKS node groups. Map of maps, keyed by
+                    var.node_groups keys
+                  type: string
+                oidcProviderArn:
+                  description: The ARN of the OIDC Provider if `enable_irsa = true`.
+                  type: string
+                securityGroupRuleClusterHTTPSWorkerIngress:
+                  description: Security group rule responsible for allowing pods to
+                    communicate with the EKS cluster API.
+                  type: string
+                workerIamInstanceProfileArns:
+                  description: default IAM instance profile ARN for EKS worker groups
+                  type: string
+                workerIamInstanceProfileNames:
+                  description: default IAM instance profile name for EKS worker groups
+                  type: string
+                workerIamRoleArn:
+                  description: default IAM role ARN for EKS worker groups
+                  type: string
+                workerIamRoleName:
+                  description: default IAM role name for EKS worker groups
+                  type: string
+                workerSecurityGroupID:
+                  description: Security group ID attached to the EKS workers.
+                  type: string
+                workersAsgArns:
+                  description: IDs of the autoscaling groups containing workers.
+                  type: string
+                workersAsgNames:
+                  description: Names of the autoscaling groups containing workers.
+                  type: string
+                workersDefaultAmiID:
+                  description: ID of the default worker group AMI
+                  type: string
+                workersLaunchTemplateArns:
+                  description: ARNs of the worker launch templates.
+                  type: string
+                workersLaunchTemplateIDS:
+                  description: IDs of the worker launch templates.
+                  type: string
+                workersLaunchTemplateLatestVersions:
+                  description: Latest versions of the worker launch templates.
+                  type: string
+                workersUserData:
+                  description: User data of worker groups
+                  type: string
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

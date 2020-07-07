@@ -25,4 +25,7 @@ var ModuleConfig = []Config{
 	{
 		"GoogleServiceAccount", "terraform-google-modules/service-accounts/google", "google", "", "",
 	},
+	{
+		"EKS", "terraform-aws-mdules/eks/aws", "aws", "", "",
+	},
 }

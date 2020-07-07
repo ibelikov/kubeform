@@ -24,6 +24,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// EKSs returns a EKSInformer.
+	EKSs() EKSInformer
 	// GoogleServiceAccounts returns a GoogleServiceAccountInformer.
 	GoogleServiceAccounts() GoogleServiceAccountInformer
 	// RDSs returns a RDSInformer.
@@ -39,6 +41,11 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// EKSs returns a EKSInformer.
+func (v *version) EKSs() EKSInformer {
+	return &eKSInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // GoogleServiceAccounts returns a GoogleServiceAccountInformer.

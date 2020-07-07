@@ -18,6 +18,8 @@ limitations under the License.
 
 package v1alpha1
 
+type EKSExpansion interface{}
+
 type GoogleServiceAccountExpansion interface{}
 
 type RDSExpansion interface{}

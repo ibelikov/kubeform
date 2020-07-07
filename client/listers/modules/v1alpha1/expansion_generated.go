@@ -18,6 +18,14 @@ limitations under the License.
 
 package v1alpha1
 
+// EKSListerExpansion allows custom methods to be added to
+// EKSLister.
+type EKSListerExpansion interface{}
+
+// EKSNamespaceListerExpansion allows custom methods to be added to
+// EKSNamespaceLister.
+type EKSNamespaceListerExpansion interface{}
+
 // GoogleServiceAccountListerExpansion allows custom methods to be added to
 // GoogleServiceAccountLister.
 type GoogleServiceAccountListerExpansion interface{}

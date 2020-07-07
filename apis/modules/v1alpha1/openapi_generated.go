@@ -289,6 +289,14 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                               schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
 		"k8s.io/apimachinery/pkg/runtime.Unknown":                                schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
 		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                        schema_apimachinery_pkg_util_intstr_IntOrString(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKS":                        schema_kubeform_apis_modules_v1alpha1_EKS(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSClusterEncryptionConfig": schema_kubeform_apis_modules_v1alpha1_EKSClusterEncryptionConfig(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSList":                    schema_kubeform_apis_modules_v1alpha1_EKSList(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapRoles":                schema_kubeform_apis_modules_v1alpha1_EKSMapRoles(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapUsers":                schema_kubeform_apis_modules_v1alpha1_EKSMapUsers(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSOutput":                  schema_kubeform_apis_modules_v1alpha1_EKSOutput(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSSpec":                    schema_kubeform_apis_modules_v1alpha1_EKSSpec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSStatus":                  schema_kubeform_apis_modules_v1alpha1_EKSStatus(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.GoogleServiceAccount":       schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccount(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.GoogleServiceAccountList":   schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountList(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.GoogleServiceAccountOutput": schema_kubeform_apis_modules_v1alpha1_GoogleServiceAccountOutput(ref),
@@ -13400,6 +13408,981 @@ func schema_apimachinery_pkg_util_intstr_IntOrString(ref common.ReferenceCallbac
 				Format:      intstr.IntOrString{}.OpenAPISchemaFormat(),
 			},
 		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKS(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKSSpec", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKSStatus"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSClusterEncryptionConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"providerKeyArn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EKSList is a list of EKSs",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of EKS CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKS"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKS"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSMapRoles(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"rolearn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSMapUsers(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"userarn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSOutput(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cloudwatchLogGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of cloudwatch log group created",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterArn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The Amazon Resource Name (ARN) of the cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterCertificateAuthorityData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Nested attribute containing certificate-authority-data for your cluster. This is the base64 encoded certificate data required to communicate with your cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The endpoint for your EKS Kubernetes API.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterIamRoleArn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IAM role ARN of the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterIamRoleName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IAM role name of the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name/id of the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterOidcIssuerURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL on the EKS cluster OIDC Issuer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterPrimarySecurityGroupID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The cluster primary security group ID created by the EKS cluster on 1.14 or later. Referred to as 'Cluster security group' in the EKS console.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterSecurityGroupID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Security group ID attached to the EKS cluster. On 1.14 or later, this is the 'Additional security groups' in the EKS console.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The Kubernetes server version for the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"configMapAwsAuth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A kubernetes configuration to authenticate to this EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kubeconfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "kubectl config file contents for this EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kubeconfigFilename": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The filename of the generated kubectl config.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nodeGroups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Outputs from EKS node groups. Map of maps, keyed by var.node_groups keys",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"oidcProviderArn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The ARN of the OIDC Provider if `enable_irsa = true`.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"securityGroupRuleClusterHTTPSWorkerIngress": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Security group rule responsible for allowing pods to communicate with the EKS cluster API.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerIamInstanceProfileArns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "default IAM instance profile ARN for EKS worker groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerIamInstanceProfileNames": {
+						SchemaProps: spec.SchemaProps{
+							Description: "default IAM instance profile name for EKS worker groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerIamRoleArn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "default IAM role ARN for EKS worker groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerIamRoleName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "default IAM role name for EKS worker groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerSecurityGroupID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Security group ID attached to the EKS workers.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersAsgArns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IDs of the autoscaling groups containing workers.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersAsgNames": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Names of the autoscaling groups containing workers.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersDefaultAmiID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID of the default worker group AMI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersLaunchTemplateArns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ARNs of the worker launch templates.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersLaunchTemplateIDS": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IDs of the worker launch templates.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersLaunchTemplateLatestVersions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Latest versions of the worker launch templates.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersUserData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User data of worker groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"attachWorkerCniPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"clusterCreateSecurityGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to create a security group for the cluster or attach the cluster to `cluster_security_group_id`.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"clusterCreateTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeout value when creating the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterDeleteTimeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeout value when deleting the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterEnabledLogTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging documentation (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusterEncryptionConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Configuration block with encryption configuration for the cluster. See examples/secrets_encryption/main.tf for example format",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSClusterEncryptionConfig"),
+									},
+								},
+							},
+						},
+					},
+					"clusterEndpointPrivateAccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Indicates whether or not the Amazon EKS private API server endpoint is enabled.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"clusterEndpointPrivateAccessCidrs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of CIDR blocks which can access the Amazon EKS private API server endpoint, when public access is disabled",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusterEndpointPublicAccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Indicates whether or not the Amazon EKS public API server endpoint is enabled.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"clusterEndpointPublicAccessCidrs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of CIDR blocks which can access the Amazon EKS public API server endpoint.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusterIamRoleName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IAM role name for the cluster. Only applicable if manage_cluster_iam_resources is set to false.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterLogKmsKeyID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If a KMS Key ARN is set, this key will be used to encrypt the corresponding log group. Please be sure that the KMS Key has an appropriate key policy (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterLogRetentionInDays": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Number of days to retain log events. Default retention - 90 days.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the EKS cluster. Also used as a prefix in names of related resources.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterSecurityGroupID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If provided, the EKS cluster will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the workers",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kubernetes version to use for the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"configOutputPath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Where to save the Kubectl config file (if `write_kubeconfig = true`). Assumed to be a directory if the value ends with a forward slash `/`.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"createEks": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Controls if EKS resources should be created (it affects almost all resources)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"eksOidcRootCaThumbprint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Thumbprint of Root CA for EKS OIDC, Valid until 2037",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"enableIrsa": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to create OpenID Connect Provider for EKS to enable IRSA",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"iamPath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If provided, all IAM roles will be created on this path.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kubeconfigAwsAuthenticatorAdditionalArgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Any additional arguments to pass to the authenticator such as the role to assume. e.g. [\"-r\", \"MyEksRole\"].",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"kubeconfigAwsAuthenticatorCommand": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Command to use to fetch AWS EKS credentials.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kubeconfigAwsAuthenticatorCommandArgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Default arguments passed to the authenticator command. Defaults to [token -i $cluster_name].",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"kubeconfigAwsAuthenticatorEnvVariables": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment variables that should be used when executing the authenticator. e.g. { AWS_PROFILE = \"eks\"}.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"kubeconfigName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Override the default name used for items kubeconfig.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"manageAwsAuth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to apply the aws-auth configmap file.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"manageClusterIamResources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to let the module manage cluster IAM resources. If set to false, cluster_iam_role_name must be specified.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"manageWorkerIamResources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to let the module manage worker IAM resources. If set to false, iam_instance_profile_name must be specified for workers.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"mapAccounts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf for example format.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"mapRoles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf for example format.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapRoles"),
+									},
+								},
+							},
+						},
+					},
+					"mapUsers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf for example format.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapUsers"),
+									},
+								},
+							},
+						},
+					},
+					"nodeGroups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map of map of node groups to create. See `node_groups` module's documentation for more details",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"nodeGroupsDefaults": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map of values to be applied to all node groups. See `node_groups` module's documentaton for more details",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"permissionsBoundary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If provided, all IAM roles will be created with this permissions boundary attached.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subnets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of subnets to place the EKS cluster and workers within.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A map of tags to add to all resources.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"vpcID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VPC where the cluster and workers will be deployed.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"waitForClusterCmd": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Custom local-exec command to execute for determining if the eks cluster is healthy. Cluster endpoint will be available as an environment variable called ENDPOINT",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"waitForClusterInterpreter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Custom local-exec command line interpreter for the command to determining if the eks cluster is healthy.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"workerAdditionalSecurityGroupIDS": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of additional security group ids to attach to worker instances",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"workerAmiNameFilter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name filter for AWS EKS worker AMI. If not provided, the latest official AMI for the specified 'cluster_version' is used.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerAmiNameFilterWindows": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name filter for AWS EKS Windows worker AMI. If not provided, the latest official AMI for the specified 'cluster_version' is used.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerAmiOwnerID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The ID of the owner for the AMI to use for the AWS EKS workers. Valid values are an AWS account ID, 'self' (the current account), or an AWS owner alias (e.g. 'amazon', 'aws-marketplace', 'microsoft').",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerAmiOwnerIDWindows": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The ID of the owner for the AMI to use for the AWS EKS Windows workers. Valid values are an AWS account ID, 'self' (the current account), or an AWS owner alias (e.g. 'amazon', 'aws-marketplace', 'microsoft').",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerCreateClusterPrimarySecurityGroupRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to create security group rules to allow communication between pods on workers and pods using the primary cluster security group.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"workerCreateInitialLifecycleHooks": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to create initial lifecycle hooks provided in worker groups.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"workerCreateSecurityGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to create a security group for the workers or attach the workers to `worker_security_group_id`.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"workerGroups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"workerGroupsLaunchTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of maps defining worker group configurations to be defined using AWS Launch Templates. See workers_group_defaults for valid keys.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"workerSecurityGroupID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If provided, all workers will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the EKS cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workerSgIngressFromPort": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Minimum port number from which pods will accept communication. Must be changed to a lower value if some pods in your cluster will expose a port lower than 1025 (e.g. 22, 80, or 443).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workersAdditionalPolicies": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional policies to be added to workers",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"workersGroupDefaults": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Override default values for target groups. See workers_group_defaults_defaults in local.tf for valid keys.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"workersRoleName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User defined workers role name.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"writeKubeconfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether to write a Kubectl config file containing the cluster configuration. Saved to `config_output_path`.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKSClusterEncryptionConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapRoles", "kubeform.dev/kubeform/apis/modules/v1alpha1.EKSMapUsers"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_EKSStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.EKSOutput"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.EKSOutput"},
 	}
 }
 

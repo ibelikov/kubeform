@@ -19,14 +19,14 @@ limitations under the License.
 package v1alpha1
 
 import (
+	rest "k8s.io/client-go/rest"
 	v1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
 	"kubeform.dev/kubeform/client/clientset/versioned/scheme"
-
-	rest "k8s.io/client-go/rest"
 )
 
 type ModulesV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	EKSsGetter
 	GoogleServiceAccountsGetter
 	RDSsGetter
 }
@@ -34,6 +34,10 @@ type ModulesV1alpha1Interface interface {
 // ModulesV1alpha1Client is used to interact with features provided by the modules.kubeform.com group.
 type ModulesV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ModulesV1alpha1Client) EKSs(namespace string) EKSInterface {
+	return newEKSs(c, namespace)
 }
 
 func (c *ModulesV1alpha1Client) GoogleServiceAccounts(namespace string) GoogleServiceAccountInterface {

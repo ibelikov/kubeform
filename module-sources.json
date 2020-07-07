@@ -12,5 +12,12 @@
       "provider": "google",
       "url": "https://github.com/terraform-google-modules/terraform-google-service-accounts/archive/master.zip",
       "subDirectory": ""
+    },
+    {
+      "name": "EKS",
+      "source": "terraform-aws-mdules/eks/aws",
+      "provider": "aws",
+      "url": "https://github.com/terraform-aws-modules/terraform-aws-eks/archive/master.zip",
+      "subDirectory": ""
     }
 ]
